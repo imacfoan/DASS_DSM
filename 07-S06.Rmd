@@ -1,0 +1,459 @@
+# (PART\*) Section 6 {-}
+
+# Overview {-}
+
+<div style="color: #6D009D; font-size: 24px; font-weight: bold;text-align: justify;">
+ Section 6: Working with Special Data Types: Text Data
+</div>
+
+::: ilos
+**Learning Outcomes:**
+
+-   ADD ILOS.
+:::
+
+**In this section, you will practice how to use the following functions:**
+
+|   Function    |               Description               | Package |
+|:-------------:|:---------------------------------------:|:-------:|
+|     `c()`     |          concatenate function           | base R  |
+
+::: attention
+**WARNING 1:** Before proceeding to the exercises, ensure that you create and work in a RStudio project and that you **write** and **save** your answers to the exercises in an R script.
+
+**WARNING 2:** To adequately develop your practical programming skills, it is **essential** that you attempt all exercises by typing out the code rather than simply copy-pasting the answers.
+:::
+
+# 1. Exploring String Objects and Detecting Matches {-}
+
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach(function(block) {
+        // Check if the block's content starts with '##'
+        if (block.textContent.trim().startsWith('##')) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block'; // Ensure button is visible
+            block.style.display = 'none'; // Initially hide the R output
+
+            button.onclick = function() {
+                if (block.style.display === 'none') {
+                    block.style.display = 'block';
+                    button.textContent = 'Hide R Output';
+                } else {
+                    block.style.display = 'none';
+                    button.textContent = 'Show R Output';
+                }
+            };
+
+            block.parentNode.insertBefore(button, block);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var rComments = document.querySelectorAll('.r-comment');
+
+    rComments.forEach(function(comment) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-comment-button';
+        button.textContent = 'Show Explanation';
+        button.style.display = 'block'; // Ensure button is visible
+        comment.style.display = 'none'; // Initially hide the comment
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (comment.style.display === 'none') {
+                comment.style.display = 'block'; // Adjust as needed
+                button.textContent = 'Hide Explanation';
+            } else {
+                comment.style.display = 'none';
+                button.textContent = 'Show Explanation';
+            }
+        };
+
+        // Insert the button before the comment
+        comment.parentNode.insertBefore(button, comment);
+    });
+});
+
+```
+
+## 1.1 Preparation {-}
+
+In this practical, you will need `tidyverse` and `lubridate`. 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, }
+library(tidyverse)
+library(lubridate)
+```
+
+Enter the code below in your R console to create two strings object called **string1** and **string2**. You can copy-paste the code directly into your console.
+
+```{r}
+string1 <- c("Many informal fallacies come out of a feature of human reasoning 
+             which lies so deep in us that,", 
+             "according to the cognitive scientists Dan Sperber and Hugo Mercier,", 
+             "it was a selective pressure that allowed reasoning to evolve.", 
+             "We like to win arguments.", 
+             "In an ideal forum, the winner of an argument is the one with the 
+             most cogent position.")
+
+
+string2 <- c("Rationality:", 
+             "What it is,",
+             "Why it seems Scarce,", 
+             "Why it Matters",
+             "- Steven Pinker")
+```
+
+## 1.2 Task {-}
+
+Join **string1** with **string2** and assign this output to a new object called **string_quote**. The final output should contain 10 separate strings. 
+
+```{r}
+string3 <- c(string1, string2)
+
+print(string3)
+```
+
+## 1.3 Task {-}
+
+Extract characters from each element of the **string1** object based on positions 10 and 15. Start counting from the beginning of the string.
+
+```{r}
+str_sub(string3, 10, 15)
+```
+
+## 1.4 Task {-}
+
+Capitalise all word characters in the entire **string1** data object using the appropriate `stringr()` function (note: do not store these changes in the data object).
+
+```{r}
+str_to_upper(string1)
+```
+
+## 1.5 Task {-}
+
+Apply the wrapper function to **string3** to select only elements that contain the word *reason*. 
+
+```{r}
+string3[str_detect(string3, "reason")]
+```
+
+## 1.6 Task {-}
+
+Calculate the mean of the number of times the following match is encountered in the **string3** object: *reasoning*.
+
+```{r}
+mean(str_detect(string3, "reasoning"))
+```
+
+
+# 2. Subsetting String Data {-}
+
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach(function(block) {
+        // Check if the block's content starts with '##'
+        if (block.textContent.trim().startsWith('##')) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block'; // Ensure button is visible
+            block.style.display = 'none'; // Initially hide the R output
+
+            button.onclick = function() {
+                if (block.style.display === 'none') {
+                    block.style.display = 'block';
+                    button.textContent = 'Hide R Output';
+                } else {
+                    block.style.display = 'none';
+                    button.textContent = 'Show R Output';
+                }
+            };
+
+            block.parentNode.insertBefore(button, block);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var rComments = document.querySelectorAll('.r-comment');
+
+    rComments.forEach(function(comment) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-comment-button';
+        button.textContent = 'Show Explanation';
+        button.style.display = 'block'; // Ensure button is visible
+        comment.style.display = 'none'; // Initially hide the comment
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (comment.style.display === 'none') {
+                comment.style.display = 'block'; // Adjust as needed
+                button.textContent = 'Hide Explanation';
+            } else {
+                comment.style.display = 'none';
+                button.textContent = 'Show Explanation';
+            }
+        };
+
+        // Insert the button before the comment
+        comment.parentNode.insertBefore(button, comment);
+    });
+});
+
+```
+
+## 2.1 Task {-}
+
+Find all elements in the **string3** object that do NOT match the following pattern : *Wh*. (Hint: you need to set the default argument of the function to `TRUE`).
+
+```{r}
+str_subset(string3, "Wh", negate = TRUE)
+```
+
+## 2.2 Task {-}
+
+Extract all matches that correspond to punctuation symbols from **string3**.
+
+```{r}
+str_extract_all(string3, "[:punct:]")
+```
+
+## 2.3 Task {-}
+
+Subset **string3** such that one boundary of the letter *e* is a word character and one boundary is not a word character. Use the function that extracts all matches.
+
+```{r}
+str_extract_all(string3, "e\\b")
+```
+
+
+## 2.4 Task {-}
+
+Subset **string3** such that the following pattern is matched at least once: *ss*. Use the function that extracts all matches. (Hint: you need to use a quantifier).
+
+```{r}
+str_extract_all(string3, "ss+")
+```
+
+## 2.5 Task {-}
+
+Use the correct regular expression to extract all non-word character matches from **string3**. Render the output in vector form.
+
+```{r}
+unlist(str_extract_all(string3, "\\W"))
+```
+
+# 3. Manipulating String Data {-}
+
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach(function(block) {
+        // Check if the block's content starts with '##'
+        if (block.textContent.trim().startsWith('##')) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block'; // Ensure button is visible
+            block.style.display = 'none'; // Initially hide the R output
+
+            button.onclick = function() {
+                if (block.style.display === 'none') {
+                    block.style.display = 'block';
+                    button.textContent = 'Hide R Output';
+                } else {
+                    block.style.display = 'none';
+                    button.textContent = 'Show R Output';
+                }
+            };
+
+            block.parentNode.insertBefore(button, block);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var rComments = document.querySelectorAll('.r-comment');
+
+    rComments.forEach(function(comment) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-comment-button';
+        button.textContent = 'Show Explanation';
+        button.style.display = 'block'; // Ensure button is visible
+        comment.style.display = 'none'; // Initially hide the comment
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (comment.style.display === 'none') {
+                comment.style.display = 'block'; // Adjust as needed
+                button.textContent = 'Hide Explanation';
+            } else {
+                comment.style.display = 'none';
+                button.textContent = 'Show Explanation';
+            }
+        };
+
+        // Insert the button before the comment
+        comment.parentNode.insertBefore(button, comment);
+    });
+});
+
+```
+
+## 3.1 Task {-}
+
+Replace the first match in every string of `string2` object which correspond to "," by " " (i.e. space).
+
+```{r}
+str_replace(string2, ",", " ")
+```
+
+## 3.2 Task {-}
+
+Modify the capitalisation of the letters from `string2` so that they all are lower case.
+
+```{r}
+str_to_lower(string2)
+```
+
+
+## 3.3 Task {-}
+
+Split `string2` object into four 'pieces' at the places where the elements contain spaces. Render the output as a matrix. 
+
+```{r}
+str_split(string2, " ", n = 4, simplify = TRUE)
+```
+
+
+## 3.4 Task {-}
+
+Equalise the widths of the `string1` elements using the width of the longest string. Use a dash pattern "-" to perform the adjustments. (Hint: provide the dash pattern in the `pad` argument of the function).
+
+```{r}
+str_pad(string1, pad = "-", width = max(str_count(string1)))
+```
+
+# 4. Date-Time Data {-}
+
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach(function(block) {
+        // Check if the block's content starts with '##'
+        if (block.textContent.trim().startsWith('##')) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block'; // Ensure button is visible
+            block.style.display = 'none'; // Initially hide the R output
+
+            button.onclick = function() {
+                if (block.style.display === 'none') {
+                    block.style.display = 'block';
+                    button.textContent = 'Hide R Output';
+                } else {
+                    block.style.display = 'none';
+                    button.textContent = 'Show R Output';
+                }
+            };
+
+            block.parentNode.insertBefore(button, block);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var rComments = document.querySelectorAll('.r-comment');
+
+    rComments.forEach(function(comment) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-comment-button';
+        button.textContent = 'Show Explanation';
+        button.style.display = 'block'; // Ensure button is visible
+        comment.style.display = 'none'; // Initially hide the comment
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (comment.style.display === 'none') {
+                comment.style.display = 'block'; // Adjust as needed
+                button.textContent = 'Hide Explanation';
+            } else {
+                comment.style.display = 'none';
+                button.textContent = 'Show Explanation';
+            }
+        };
+
+        // Insert the button before the comment
+        comment.parentNode.insertBefore(button, comment);
+    });
+});
+
+```
+
+## 4.1 Task {-}
+
+Use the appropriate function to obtain today's date, time and time zone. 
+
+```{r}
+today()
+```
+
+
+## 4.2 Task {-}
+
+Display the following sequence of numbers as a date: `20210512`.
+
+```{r}
+ymd(20210512)
+```
+
+## 4.3 Task {-}
+
+Round today's date up to the nearest unit and change the time zone argument to GMT.
+
+```{r}
+ceiling_date(now(tzone = "GMT"), "year")
+```
+
+## 4.4 Task {-}
+
+Calculate the interval between 9 February 1991 to 1 August 2022 in years.
+
+```{r}
+
+# Place the dates in two separate objects first
+
+feb91 <- dmy("9-Feb-1991")
+aug22 <- dmy("1-Aug-2022")
+
+# Then calculate the interval
+feb91 %--% aug22/years(1)
+```

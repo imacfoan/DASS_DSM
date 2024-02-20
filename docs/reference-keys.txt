@@ -1,0 +1,3 @@
+creating-a-special-type-of-r-project-the-version-control-r-project
+adding-new-files-to-your-repository
+summary-statistics-and-plots

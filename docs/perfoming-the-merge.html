@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6. Perfoming the Merge | Data Cleaning and Visualisation using R</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70023." />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6. Perfoming the Merge | Data Cleaning and Visualisation using R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70023." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6. Perfoming the Merge | Data Cleaning and Visualisation using R" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70023." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="keys-and-unique-values.html"/>
+<link rel="next" href="data-transformation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="how-to-use-this-notebook.html"><a href="how-to-use-this-notebook.html"><i class="fa fa-check"></i>How to use this notebook</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html"><i class="fa fa-check"></i>1. Performing Calculations with Vectors</a>
+<ul>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise"><i class="fa fa-check"></i>1.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise-1"><i class="fa fa-check"></i>1.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise-2"><i class="fa fa-check"></i>1.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise-3"><i class="fa fa-check"></i>1.4 Exercise</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise-4"><i class="fa fa-check"></i>1.5 Exercise</a></li>
+<li class="chapter" data-level="" data-path="performing-calculations-with-vectors.html"><a href="performing-calculations-with-vectors.html#exercise-5"><i class="fa fa-check"></i>1.6 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exploring-vectors.html"><a href="exploring-vectors.html"><i class="fa fa-check"></i>2. Exploring Vectors</a>
+<ul>
+<li class="chapter" data-level="" data-path="exploring-vectors.html"><a href="exploring-vectors.html#exercise-6"><i class="fa fa-check"></i>2.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="exploring-vectors.html"><a href="exploring-vectors.html#exercise-7"><i class="fa fa-check"></i>2.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="exploring-vectors.html"><a href="exploring-vectors.html#exercise-8"><i class="fa fa-check"></i>2.3 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i>3. Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-9"><i class="fa fa-check"></i>3.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-10"><i class="fa fa-check"></i>3.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-11"><i class="fa fa-check"></i>3.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-12"><i class="fa fa-check"></i>3.4 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-13"><i class="fa fa-check"></i>3.5 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-14"><i class="fa fa-check"></i>3.6 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-15"><i class="fa fa-check"></i>3.7 Exercise</a></li>
+<li class="chapter" data-level="" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html#exercise-16"><i class="fa fa-check"></i>3.8 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bonus-task-data-on-github.html"><a href="bonus-task-data-on-github.html"><i class="fa fa-check"></i>4. Bonus Task: Data on GitHub</a>
+<ul>
+<li class="chapter" data-level="" data-path="bonus-task-data-on-github.html"><a href="bonus-task-data-on-github.html#exercise-17"><i class="fa fa-check"></i>4.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="bonus-task-data-on-github.html"><a href="bonus-task-data-on-github.html#exercise-18"><i class="fa fa-check"></i>4.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="bonus-task-data-on-github.html"><a href="bonus-task-data-on-github.html#exercise-19"><i class="fa fa-check"></i>4.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="bonus-task-data-on-github.html"><a href="bonus-task-data-on-github.html#exercise-20"><i class="fa fa-check"></i>4.4 Exercise</a></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#vectors-and-factors"><i class="fa fa-check"></i>1.1 Vectors and Factors</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-21"><i class="fa fa-check"></i>1.1.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-22"><i class="fa fa-check"></i>1.1.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-23"><i class="fa fa-check"></i>1.1.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-24"><i class="fa fa-check"></i>1.1.4 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-25"><i class="fa fa-check"></i>1.1.5 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#data-frames-and-lists"><i class="fa fa-check"></i>1.2 Data Frames and Lists</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-26"><i class="fa fa-check"></i>1.2.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-27"><i class="fa fa-check"></i>1.2.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-28"><i class="fa fa-check"></i>1.2.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-29"><i class="fa fa-check"></i>1.2.4 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-30"><i class="fa fa-check"></i>1.2.5 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-31"><i class="fa fa-check"></i>1.2.6 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#matrices-and-arrays"><i class="fa fa-check"></i>1.3 Matrices and Arrays</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-32"><i class="fa fa-check"></i>1.3.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-33"><i class="fa fa-check"></i>1.3.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#exercise-34"><i class="fa fa-check"></i>1.3.3 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#bonus-task"><i class="fa fa-check"></i>1.4 Bonus Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exploring-homogenous-data-structures"><i class="fa fa-check"></i>2.1 Exploring Homogenous Data Structures</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-35"><i class="fa fa-check"></i>2.1.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-36"><i class="fa fa-check"></i>2.1.2 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exploring-heterogenous-data-structures"><i class="fa fa-check"></i>2.2 Exploring Heterogenous Data Structures</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-2.2.1"><i class="fa fa-check"></i>Exercise 2.2.1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-2.2.2"><i class="fa fa-check"></i>Exercise 2.2.2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-2.2.3"><i class="fa fa-check"></i>Exercise 2.2.3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-2.2.4"><i class="fa fa-check"></i>Exercise 2.2.4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#exercise-2.2.5"><i class="fa fa-check"></i>Exercise 2.2.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exploring-data-files"><i class="fa fa-check"></i>3.1 Exploring Data Files</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-37"><i class="fa fa-check"></i>3.1.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-38"><i class="fa fa-check"></i>3.1.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-39"><i class="fa fa-check"></i>3.1.3 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#subsetting"><i class="fa fa-check"></i>3.2 Subsetting</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-40"><i class="fa fa-check"></i>3.2.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-41"><i class="fa fa-check"></i>3.2.2 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#basic-transformations"><i class="fa fa-check"></i>3.3 Basic Transformations</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-42"><i class="fa fa-check"></i>3.3.1 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-43"><i class="fa fa-check"></i>3.3.2 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-44"><i class="fa fa-check"></i>3.3.3 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-45"><i class="fa fa-check"></i>3.3.4 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-46"><i class="fa fa-check"></i>3.3.5 Exercise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#exercise-47"><i class="fa fa-check"></i>3.3.6 Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="download-the-data.html"><a href="download-the-data.html"><i class="fa fa-check"></i>1. Download the Data</a></li>
+<li class="chapter" data-level="" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i>2. Data Import</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-import.html"><a href="data-import.html#task"><i class="fa fa-check"></i>2.1 Task</a></li>
+<li class="chapter" data-level="" data-path="data-import.html"><a href="data-import.html#task-1"><i class="fa fa-check"></i>2.2 Task</a></li>
+<li class="chapter" data-level="" data-path="data-import.html"><a href="data-import.html#task-2"><i class="fa fa-check"></i>2.3 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="subsetting-1.html"><a href="subsetting-1.html"><i class="fa fa-check"></i>3. Subsetting</a>
+<ul>
+<li class="chapter" data-level="" data-path="subsetting-1.html"><a href="subsetting-1.html#task-3"><i class="fa fa-check"></i>3.1 Task</a></li>
+<li class="chapter" data-level="" data-path="subsetting-1.html"><a href="subsetting-1.html#task-4"><i class="fa fa-check"></i>3.2 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="filtering-observations.html"><a href="filtering-observations.html"><i class="fa fa-check"></i>4. Filtering Observations</a>
+<ul>
+<li class="chapter" data-level="" data-path="filtering-observations.html"><a href="filtering-observations.html#task-5"><i class="fa fa-check"></i>4.1 Task</a></li>
+<li class="chapter" data-level="" data-path="filtering-observations.html"><a href="filtering-observations.html#task-6"><i class="fa fa-check"></i>4.2 Task</a></li>
+<li class="chapter" data-level="" data-path="filtering-observations.html"><a href="filtering-observations.html#task-7"><i class="fa fa-check"></i>4.3 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html"><i class="fa fa-check"></i>5. Keys and Unique Values</a>
+<ul>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html#task-8"><i class="fa fa-check"></i>5.1 Task</a></li>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html#task-9"><i class="fa fa-check"></i>5.2 Task</a></li>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html#task-10"><i class="fa fa-check"></i>5.3 Task</a></li>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html#task-11"><i class="fa fa-check"></i>5.4 Task</a></li>
+<li class="chapter" data-level="" data-path="keys-and-unique-values.html"><a href="keys-and-unique-values.html#task-12"><i class="fa fa-check"></i>5.5. Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="perfoming-the-merge.html"><a href="perfoming-the-merge.html"><i class="fa fa-check"></i>6. Perfoming the Merge</a>
+<ul>
+<li class="chapter" data-level="" data-path="perfoming-the-merge.html"><a href="perfoming-the-merge.html#task-13"><i class="fa fa-check"></i>6.1 Task</a></li>
+<li class="chapter" data-level="" data-path="perfoming-the-merge.html"><a href="perfoming-the-merge.html#task-14"><i class="fa fa-check"></i>6.2 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i>7. Data Transformation</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html#task-15"><i class="fa fa-check"></i>7.1 Task</a></li>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html#task-16"><i class="fa fa-check"></i>7.2 Task</a></li>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html#task-17"><i class="fa fa-check"></i>7.3 Task</a></li>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html#task-18"><i class="fa fa-check"></i>7.4 Task</a></li>
+<li class="chapter" data-level="" data-path="data-transformation.html"><a href="data-transformation.html#task-19"><i class="fa fa-check"></i>7.5 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="saving-data-objects.html"><a href="saving-data-objects.html"><i class="fa fa-check"></i>8. Saving Data Objects</a></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#installing-git-and-github-desktop"><i class="fa fa-check"></i>1. Installing Git and GitHub Desktop</a></li>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#connecting-to-github-with-github-desktop"><i class="fa fa-check"></i>2. Connecting to GitHub with GitHub Desktop</a></li>
+<li class="chapter" data-level="0.1" data-path="practical-1-1.html"><a href="practical-1-1.html#creating-a-special-type-of-r-project-the-version-control-r-project"><i class="fa fa-check"></i><b>0.1</b> 3.Creating a Special Type of R project: the Version Control R Project</a></li>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#creating-a-repository-and-connecting-your-version-control-project"><i class="fa fa-check"></i>4. Creating a Repository and Connecting your Version Control Project</a></li>
+<li class="chapter" data-level="0.2" data-path="practical-1-1.html"><a href="practical-1-1.html#adding-new-files-to-your-repository"><i class="fa fa-check"></i><b>0.2</b> 5. Adding New Files to your Repository</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#option-1-with-github-desktop"><i class="fa fa-check"></i>OPTION 1: With GitHub Desktop</a></li>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#option-2-with-rstudio"><i class="fa fa-check"></i>OPTION 2: With RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#modifying-existing-repository-files"><i class="fa fa-check"></i>6. Modifying Existing Repository Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html"><i class="fa fa-check"></i>Practical 2</a></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="the-dataset.html"><a href="the-dataset.html"><i class="fa fa-check"></i>1. The Dataset</a></li>
+<li class="chapter" data-level="" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i>2. Getting Started</a></li>
+<li class="chapter" data-level="" data-path="data-distributions.html"><a href="data-distributions.html"><i class="fa fa-check"></i>3. Data Distributions</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-distributions.html"><a href="data-distributions.html#task-20"><i class="fa fa-check"></i>3.1 Task</a></li>
+<li class="chapter" data-level="" data-path="data-distributions.html"><a href="data-distributions.html#task-21"><i class="fa fa-check"></i>3.2 Task</a></li>
+<li class="chapter" data-level="" data-path="data-distributions.html"><a href="data-distributions.html#task-22"><i class="fa fa-check"></i>3.3. Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bar-charts.html"><a href="bar-charts.html"><i class="fa fa-check"></i>4. Bar Charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="bar-charts.html"><a href="bar-charts.html#task-23"><i class="fa fa-check"></i>4.1 Task</a></li>
+<li class="chapter" data-level="" data-path="bar-charts.html"><a href="bar-charts.html#task-24"><i class="fa fa-check"></i>4.2 Task</a></li>
+<li class="chapter" data-level="" data-path="bar-charts.html"><a href="bar-charts.html#task-25"><i class="fa fa-check"></i>4.3 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="scatterplots.html"><a href="scatterplots.html"><i class="fa fa-check"></i>5. Scatterplots</a>
+<ul>
+<li class="chapter" data-level="" data-path="scatterplots.html"><a href="scatterplots.html#task-26"><i class="fa fa-check"></i>5.1 Task</a></li>
+<li class="chapter" data-level="" data-path="scatterplots.html"><a href="scatterplots.html#task-27"><i class="fa fa-check"></i>5.2 Task</a></li>
+<li class="chapter" data-level="" data-path="scatterplots.html"><a href="scatterplots.html#task-28"><i class="fa fa-check"></i>5.3 Task</a></li>
+</ul></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html"><i class="fa fa-check"></i>1. Exploring String Objects and Detecting Matches</a>
+<ul>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#preparation"><i class="fa fa-check"></i>1.1 Preparation</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#task-29"><i class="fa fa-check"></i>1.2 Task</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#task-30"><i class="fa fa-check"></i>1.3 Task</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#task-31"><i class="fa fa-check"></i>1.4 Task</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#task-32"><i class="fa fa-check"></i>1.5 Task</a></li>
+<li class="chapter" data-level="" data-path="exploring-string-objects-and-detecting-matches.html"><a href="exploring-string-objects-and-detecting-matches.html#task-33"><i class="fa fa-check"></i>1.6 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html"><i class="fa fa-check"></i>2. Subsetting String Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html#task-34"><i class="fa fa-check"></i>2.1 Task</a></li>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html#task-35"><i class="fa fa-check"></i>2.2 Task</a></li>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html#task-36"><i class="fa fa-check"></i>2.3 Task</a></li>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html#task-37"><i class="fa fa-check"></i>2.4 Task</a></li>
+<li class="chapter" data-level="" data-path="subsetting-string-data.html"><a href="subsetting-string-data.html#task-38"><i class="fa fa-check"></i>2.5 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="manipulating-string-data.html"><a href="manipulating-string-data.html"><i class="fa fa-check"></i>3. Manipulating String Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="manipulating-string-data.html"><a href="manipulating-string-data.html#task-39"><i class="fa fa-check"></i>3.1 Task</a></li>
+<li class="chapter" data-level="" data-path="manipulating-string-data.html"><a href="manipulating-string-data.html#task-40"><i class="fa fa-check"></i>3.2 Task</a></li>
+<li class="chapter" data-level="" data-path="manipulating-string-data.html"><a href="manipulating-string-data.html#task-41"><i class="fa fa-check"></i>3.3 Task</a></li>
+<li class="chapter" data-level="" data-path="manipulating-string-data.html"><a href="manipulating-string-data.html#task-42"><i class="fa fa-check"></i>3.4 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="date-time-data.html"><a href="date-time-data.html"><i class="fa fa-check"></i>4. Date-Time Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="date-time-data.html"><a href="date-time-data.html#task-43"><i class="fa fa-check"></i>4.1 Task</a></li>
+<li class="chapter" data-level="" data-path="date-time-data.html"><a href="date-time-data.html#task-44"><i class="fa fa-check"></i>4.2 Task</a></li>
+<li class="chapter" data-level="" data-path="date-time-data.html"><a href="date-time-data.html#task-45"><i class="fa fa-check"></i>4.3 Task</a></li>
+<li class="chapter" data-level="" data-path="date-time-data.html"><a href="date-time-data.html#task-46"><i class="fa fa-check"></i>4.4 Task</a></li>
+</ul></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html"><i class="fa fa-check"></i>1. Basic Functions and Loops</a>
+<ul>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html#task-47"><i class="fa fa-check"></i>1.1 Task</a></li>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html#task-48"><i class="fa fa-check"></i>1.2 Task</a></li>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html#task-49"><i class="fa fa-check"></i>1.3 Task</a></li>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html#task-50"><i class="fa fa-check"></i>1.4 Task</a></li>
+<li class="chapter" data-level="" data-path="basic-functions-and-loops.html"><a href="basic-functions-and-loops.html#task-51"><i class="fa fa-check"></i>1.5 Task</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html"><i class="fa fa-check"></i><b>1</b> 2. Summary Statistics and Plots</a>
+<ul>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-52"><i class="fa fa-check"></i>2.1 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-53"><i class="fa fa-check"></i>2.2 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-54"><i class="fa fa-check"></i>2.3 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-55"><i class="fa fa-check"></i>2.4 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-56"><i class="fa fa-check"></i>2.5 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-57"><i class="fa fa-check"></i>2.6 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-58"><i class="fa fa-check"></i>2.7 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-59"><i class="fa fa-check"></i>2.8 Task</a></li>
+<li class="chapter" data-level="" data-path="summary-statistics-and-plots.html"><a href="summary-statistics-and-plots.html#task-60"><i class="fa fa-check"></i>2.9 Task</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Cleaning and Visualisation using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DCVR_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="perfoming-the-merge" class="section level1 unnumbered hasAnchor">
+<h1>6. Perfoming the Merge<a href="perfoming-the-merge.html#perfoming-the-merge" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var codeBlocks = document.querySelectorAll('pre > code');
+
+    codeBlocks.forEach(function(block) {
+        // Check if the block's content starts with '##'
+        if (block.textContent.trim().startsWith('##')) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block'; // Ensure button is visible
+            block.style.display = 'none'; // Initially hide the R output
+
+            button.onclick = function() {
+                if (block.style.display === 'none') {
+                    block.style.display = 'block';
+                    button.textContent = 'Hide R Output';
+                } else {
+                    block.style.display = 'none';
+                    button.textContent = 'Show R Output';
+                }
+            };
+
+            block.parentNode.insertBefore(button, block);
+        }
+    });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var rComments = document.querySelectorAll('.r-comment');
+
+    rComments.forEach(function(comment) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-comment-button';
+        button.textContent = 'Show Explanation';
+        button.style.display = 'block'; // Ensure button is visible
+        comment.style.display = 'none'; // Initially hide the comment
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (comment.style.display === 'none') {
+                comment.style.display = 'block'; // Adjust as needed
+                button.textContent = 'Hide Explanation';
+            } else {
+                comment.style.display = 'none';
+                button.textContent = 'Show Explanation';
+            }
+        };
+
+        // Insert the button before the comment
+        comment.parentNode.insertBefore(button, comment);
+    });
+});
+
+</script>
+<div id="task-13" class="section level2 unnumbered hasAnchor">
+<h2>6.1 Task<a href="perfoming-the-merge.html#task-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Use the appropriate function to merge <strong>ess</strong> with <strong>ess_cntry18</strong> by <strong>cntry</strong> and name this new data object <strong>ess2</strong>.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="perfoming-the-merge.html#cb145-1" tabindex="-1"></a>ess2 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(ess, ess_cntry18, <span class="at">by =</span> <span class="st">&quot;cntry&quot;</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="task-14" class="section level2 unnumbered hasAnchor">
+<h2>6.2 Task<a href="perfoming-the-merge.html#task-14" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Explore the object using <code>glimpse()</code>. What are the dimensions of this new data object?</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="perfoming-the-merge.html#cb146-1" tabindex="-1"></a><span class="fu">glimpse</span>(ess2)</span></code></pre></div>
+</details>
+<pre><code>## Rows: 35,510
+## Columns: 21
+## $ idno             &lt;dbl&gt; 17, 31, 58, 69, 98, 145, 153, 179, 208, 215, 218, 296…
+## $ cntry            &lt;chr&gt; &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;, &quot;AT&quot;,…
+## $ imbgeco          &lt;dbl+lbl&gt;  5,  6,  5,  2,  5,  3,  5,  6,  6,  2,  2, 10,  …
+## $ imueclt          &lt;dbl+lbl&gt;  6,  5,  6,  1,  4,  7,  3,  7,  4,  2,  7, 10,  …
+## $ imwbcnt          &lt;dbl+lbl&gt;     0,     5,     6,     2,     5,     5,     5, …
+## $ vote             &lt;dbl+lbl&gt;     1,     1,     1,     2,     1,     1,     1, …
+## $ uempla           &lt;dbl+lbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ agea             &lt;dbl+lbl&gt; 43, 85, 31, 49, 67, 63, 71, 64, 56, 74, 28, 48, 5…
+## $ eduyrs           &lt;dbl+lbl&gt; 12,  8, 11, 12, 12, 11,  8, 13, 12, 11, 13, 12, 1…
+## $ gndr             &lt;dbl+lbl&gt; 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1…
+## $ region           &lt;chr&gt; &quot;AT22&quot;, &quot;AT34&quot;, &quot;AT33&quot;, &quot;AT33&quot;, &quot;AT21&quot;, &quot;AT21&quot;, &quot;AT32…
+## $ id               &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16…
+## $ c_medage_2018    &lt;dbl&gt; 43.2, 43.2, 43.2, 43.2, 43.2, 43.2, 43.2, 43.2, 43.2,…
+## $ c_olddeprat_2018 &lt;dbl&gt; 27.9, 27.9, 27.9, 27.9, 27.9, 27.9, 27.9, 27.9, 27.9,…
+## $ c_tpopsz_2018    &lt;dbl&gt; 8822267, 8822267, 8822267, 8822267, 8822267, 8822267,…
+## $ c_fpopsz_2018    &lt;dbl&gt; 4483749, 4483749, 4483749, 4483749, 4483749, 4483749,…
+## $ c_mpopsz_2018    &lt;dbl&gt; 4338518, 4338518, 4338518, 4338518, 4338518, 4338518,…
+## $ c_gini_2018      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ c_ticpi_2018     &lt;dbl&gt; 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 76, 7…
+## $ c_asyl_app_2018  &lt;dbl&gt; 13400, 13400, 13400, 13400, 13400, 13400, 13400, 1340…
+## $ c_popfor_2018    &lt;dbl&gt; 1385823, 1385823, 1385823, 1385823, 1385823, 1385823,…</code></pre>
+<div class="r-comment" style="display: none;">
+<p>This new object has 35,510 observations of 21 variables.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="keys-and-unique-values.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-transformation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

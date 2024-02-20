@@ -1,0 +1,474 @@
+# (PART\*) Section 8 {-}
+
+# Overview {-}
+
+<div style="color: #6D009D; font-size: 24px; font-weight: bold;text-align: justify;">
+ Section 8: Practising Data Cleaning and Visualisation: Formative Peer-Review Case Study
+</div>
+
+::: ilos
+**Learning Outcomes:**
+
+-   ADD ILOS.
+:::
+
+**In this section, you will practice how to use the following functions:**
+
+|   Function    |               Description               | Package |
+|:-------------:|:---------------------------------------:|:-------:|
+|     `c()`     |          concatenate function           | base R  |
+
+::: attention
+**WARNING 1:** Before proceeding to the exercises, ensure that you create and work in a RStudio project and that you **write** and **save** your answers to the exercises in an R script.
+
+**WARNING 2:** To adequately develop your practical programming skills, it is **essential** that you attempt all exercises by typing out the code rather than simply copy-pasting the answers.
+:::
+
+# Practical 1 - Data Preparation {-}
+
+For this practical, you will use data samples from Understanding Society. 
+
+To complete the tasks, download `.RData` file from Blackboard Section 8 learning materials (us_sample.RData). 
+
+You will require `tidyverse` and `haven`. *Hint: In your research notebook, you may want to consider explaining what these packages do and why they need to be loaded.*
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(haven)
+```
+
+Before you begin, load the `.Rdata` file. In your R Environment, you will note four separate data objects: us_a, us_b, us_c, and us_d. Each of these represents a *wave*. 
+
+```{r, eval=FALSE}
+load("data/us_sample.RData")
+```
+
+## 1.1 Data Management, Merging, and Reshaping {-}
+
+To analyse data at longitudinal level and therefore identify and investigate trends over time, all waves must be merged together in a single data frame. However, before any merging is performed, the data in each wave must be adequately prepared. First, we'll rename the variables so that they can be easily handled more easily in later tasks. 
+
+Let's start with a simple example. Have a look at the names of the `us1` object you have imported and then use the `rename()` command to change the `a_dvage` variable to `a_age`. **
+
+```{r, echo = FALSE}
+us1 <- rename(us1, a_age = a_dvage)
+```
+
+**You may have noticed that the variable names follow a pattern. Use `head()` or `glimpse()` to view the variable names in any one of the waves.**
+
+Since there are repetitive patterns in the names of variables in each dataframe, you can use the `rename_all()` function together with `str_remove()` to delete the text that fits that pattern. The `rename_all()` function is designed to rename all variables in a data frame, whilst the `str_remove()` function takes a string (i.e., text) and a pattern argument. Then it goes through the string and deletes the text that fits that pattern. 
+
+You will use these two commands together to delete the wave prefix ("a_") as well as a suffix as the "_dv" suffix present for some variables. We need to delete the wave prefixes so we can put all the waves together in a 'long' format. We eliminate the "_dv" just to make the variable names shorter (and easier to work with). Notice that before the function inside `rename_all()` we need to add "~". Also, inside `str_remove()` we add "." for the string to be changed. `R` will know that it has to go through all the variable names and apply this function.
+
+**Run the code below in your R console to remove the prefix and suffix from the variables in the `us1` object.**
+
+```{r}
+us1 <- rename_all(us1, ~str_remove(., "a_"))
+us1 <- rename_all(us1, ~str_remove(., "_dv"))
+```
+
+**Now check whether the changes have been applied using the `names()` function** 
+
+Now that we did a little bit a cleaning, it is time to add a variable in the dataset as well. When we will reshape the data (after merging the 4 waves) we will have two types of variables: time constant and time varying. At this stage, we need to indicate which ones will be constant and which ones will be varying.  
+
+For the time constant variables we do not need to do anything; these variables are `pidp`, `sex`, `dvage` and `hiqual`. 
+
+This means that we will treat all the other variables as time varying so we will explore how the values of these variables change over time. To be able to distinguish the variables according to which wave they belong, we will add a "_1" suffix; this will represent the wave number so the wave from which the variables originate can be identified.
+
+We can again use a version of the `rename()` command called `rename_at()`. This takes as input a dataset, a set of variables we want to rename (under `vars()`) and a function we want to apply. The function we need to apply is the `str_c()` function. This will concatenate multiple characters. 
+
+Now, how do we rename only specific variables and get R to omit the others? Since the datasets that we are using have a small number of variables, we can use the minus symbol "-" to omit the variables to which we do not want to add the suffix, as shown below.
+
+
+\newpage
+
+**Run the code below to add the suffix to the time-varying variables of Wave 1 (`us1`).**
+
+```{r}
+# rename time varying variables
+us1 <- rename_at(us1, vars(-pidp, -sex, -age, -hiqual), ~str_c(., "_1"))
+```
+
+**Now confirm that the changes have been applied using `glimpse()`.**
+
+You might wonder why is age time constant. This variable can be treated either as constant, for example the age at wave 1 (or the age at entering employment), or as time varying, such as age at each wave or grade. For now we treat it as fixed. 
+
+Next we are going to make a variable `present_1` that takes the value of 1. This will be useful later on to inspect the survey respondents who were present in different waves. It is possible to create variables in multiple ways but here we will use the `mutate()` function. 
+
+**Run the code below to create a variable that takes the value of 1.**
+
+```{r}
+us1 <- mutate(us1, present_1 = 1)
+```
+
+\Large
+
+\textcolor{violet}{Preparation of the Wave 1 data is complete!}  
+
+\textcolor{violet}{Now it is your turn! Perform the same tasks from Section 1.2 for waves 2, 3, and 4.}
+
+Hints: For the most part you can use the same commands as before but you will need to make some changes. For example, these three datasets only have "pidp" as a time constant variable, all the rest are time varying (if they are constant we don't need them from each wave). Also, you need to change the added prefix to fit with the respective wave (e.g., "_2" for wave 2, etc.). Also, the name of the "present" variable should change (i.e., "present_2", "present_3", "present_4") but it should always be equal to 1.
+
+\normalsize
+
+```{r, echo = FALSE, warning = FALSE, message=FALSE}
+#### rename waves 2-4
+
+# wave 2
+us2 <- rename_all(us2, ~str_remove(., "b_"))
+us2 <- rename_all(us2, ~str_remove(., "_dv"))
+us2 <- rename_at(us2, vars(-pidp), ~str_c(., "_2"))
+us2 <- mutate(us2, present_2 = 1)
+
+# wave 3
+us3 <- rename_all(us3, ~str_remove(., "c_"))
+us3 <- rename_all(us3, ~str_remove(., "_dv"))
+us3 <- rename_at(us3, vars(-pidp), ~str_c(., "_3"))
+us3 <- mutate(us3, present_3 = 1)
+
+# wave 4
+us4 <- rename_all(us4, ~str_remove(., "d_"))
+us4 <- rename_all(us4, ~str_remove(., "_dv"))
+us4 <- rename_at(us4, vars(-pidp), ~str_c(., "_4"))
+us4 <- mutate(us4, present_4 = 1)
+```
+
+
+\newpage 
+
+## 1.3 Merging the Four Waves
+
+Now that you have finished preparing the four datasets we can start merging the data. For the merging we will use the `full_join()` command. 
+
+This takes as options the two datasets and the variable(s) by which to merge them. This variable should uniquely identify each case if we want to do a 1:1 merging. In UKHLS, we can use `pidp` as this uniquely identifies people and is constant in time. Furthermore, this command keeps any case that is in either of the datasets. As such, it will not eliminate anyone although some of them may be in one wave but not another (i.e., unbalanced data). 
+
+**Below is the example for merging waves 1 and 2 in a new dataset called "us12":**
+
+```{r}
+# merge waves 1 and 2 based on pidp
+us12 <- full_join(us1, us2, by = "pidp")
+```
+
+**Following the syntax above, make two more mergers: merge `us12` with wave 3 and save it as `us123`, merge this dataset with wave 4 and save it as `us1234`.**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+us123 <- full_join(us12, us3, by = "pidp")
+
+us1234 <- full_join(us123, us4, by = "pidp")
+```
+
+Before we continue, let's investigate whether there are cases where no response was given by the survey respondent. This is referred to as "non-response" or "attrition. To do this, we can use the "present" variables we created. 
+
+**For example, the table below gives the missing patterns for waves 1 and 2:**
+
+```{r}
+# missing patterns waves 1 and 2
+count(us1234, present_1, present_2)
+```
+
+\newpage 
+
+**If we create similar tables to investigate the missing patterns between waves 1 and 3 and 1 and 4, we can see that the patterns of missing data or non-response are quite complex. **
+
+```{r}
+count(us1234, present_1, present_3)
+
+count(us1234, present_1, present_4)
+```
+
+There are quite a lot of people who dropped out and some that were added later on. For now, to make things slightly easier we will keep a **balanced panel** meaning that we will keep only those people that are present in **all four waves**. 
+
+**For this we use the `filter()` command with the rule that they should have been present in all four waves. Note that this commands treats "," as "&".**
+
+```{r}
+# keep balanced panel
+us <- filter(us1234, 
+             present_1 == 1, present_2 == 1, present_3 == 1, present_4 == 1)
+
+```
+
+**Have a look at the `us` object using `glimpse()`. How many cases did we lose compared to the full sample?**  
+
+Now that we have a balanced dataset, we can eliminate the "present" variables we created earlier since they have achieved their purpose. 
+
+We can use the `select()` command together with the helper function `starts_with()`. This looks for all the variables that starts with the pattern we give it. We put "-" in front of it to eliminate these variables once it finds them.
+
+**Run the code below to eliminate all variables that start with the pattern "present"**.
+
+```{r}
+ # eliminate all variables starting with "present"
+us <- select(us, -starts_with("present"))
+```
+
+\newpage
+
+**Check the result using `glimpse().**
+
+Note that making the data balanced on being present in all four waves does not mean that we will not have missing cases. There can still be missing data but this will be at the variable level. For example if someone gives information on their income for one wave but not for the others. So the missing patterns now will depend on the variables we analyze.
+
+\newpage
+
+## 1.4 Reshaping the Data
+
+So far our data is in wide format. That is appropriate for some things, such as investigating correlations in time or doing cross-lagged models, but less appropriate for others, such as plotting or multilevel models for change.
+
+We are now ready to reshape the data. We are going to use the `pivot_longer()` command with the following options:
+
+- the data,
+- the columns that are time varying (notice here that we select the time constant variables and put "!" to take the opposite, i.e., the other variables),
+- the separator that separates the name of the variables from the wave number,
+- the pattern in the name. Here we say that the first part of the name is the variable name (defined as ".value") and that the suffix should be a new variable called "wave".
+
+**Run the code below to reshape the data into "long" format:**
+
+```{r, warning = FALSE, message = FALSE}
+usl <- pivot_longer(
+  us,
+  cols = !c(pidp, sex, age, hiqual),
+  names_sep = "_",
+  names_to = c(".value", "wave")
+  )
+```
+
+**Have a look at the new object contents using `glimpse()`. How many cases and variables do we have in the long data? How does that compare with the wide data?**
+
+To make the structure easier to see, you can restructure the position of the variables. 
+
+**Place the `pidp` and `wave` variables at the start of the data using the `select()` command.**  
+
+**Then use the `arrange()` to reorder the rows of the data by `pidp` and `wave`**.
+
+```{r, echo = FALSE}
+# put pidp and wave at start of the dataset
+usl <- select(usl, pidp, wave, everything())
+
+# arrange rows by individual id and wave
+usl <- arrange(usl, pidp, wave)
+```
+
+**Now use the code below to check to see how many people the `wave` variable has overall and if the data is balanced**.
+
+```{r}
+# check if it's balanced
+count(usl, wave)
+```
+
+\newpage
+
+## 1.5 Cleaning the data
+
+Now that we have the long format data we can look at the variables and try to clean them before the analysis. Typically it is more efficient to do this step in the "long" format because we can do it at once for all the waves. If we want to analyse the data in wide format we can just reshape the cleaned long data.
+
+**Have a look at `sex`, `age` and `single` variables using the `count()` command. Do they look ok? (e.g. are there any missing data?) **
+
+In order to understand how the variable is coded typically we would need to look at the questionnaire (which you can find here https://www.understandingsociety.ac.uk/documentation/mainstage/questionnaires). When importing data using the `haven` package (like we did) we also have saved the labels of the variables (when these are present). 
+
+**Have look at how `sex`, `age` and `single` are coded using the `attributes()` function.**
+
+```{r}
+# table sex
+attributes(usl$sex)
+
+# describe age
+attributes(usl$age)
+
+# describe single
+attributes(usl$single)
+```
+
+To make things easier to use later on we can make a new variable called `single_fct` that is a factor with labels for "in Relationship" and "Single". 
+
+**Run the code below to create a variable called "single_fct" that takes the labels "In relationship" and "Single".**
+
+```{r}
+# make new variable as factor
+usl <- mutate(usl, single_fct = factor(single,
+                                       labels = c("In relationship",
+                                                  "Single")))
+
+# check if the new variable is correct
+count(usl, single, single_fct)
+```
+
+**Do the same for a new variable called `gndr` variable so that the categories are labelled, then check your results with `count()`**.
+
+```{r, echo = FALSE}
+# make new variable as factor
+usl <- mutate(usl, gndr = factor(sex, labels = c("Male", "Female")))
+```
+
+\newpage
+
+If you are satisfied with these three variables we can move to "urban". **Run the below code to create a table of this variable.**
+
+```{r}
+count(usl, urban)
+```
+
+As you can see, there are some negative values. In order to understand what they stand for we can again use the `attribute()` command. You might notice that the negative values are associated with missing data. This is the default in UKHLS.
+
+We can use another useful command for recoding: `case_when()`. For this function we have to give some conditions and then the values that the new variables should have if the condition is true (we put "~" in between the condition and new values). We can have multiple conditions separated by commas. If some values are not included in any conditions they will be coded as missing (which appears as `NA` in `R`).
+
+**Run the code below to make a new variable called `urban_fct` so that the values of 1 are coded as `Urban` and values of `2` are coded as `Rural`. Note how the `as.factor()` command is used to make the variable a factor.**
+
+```{r}
+usl <- mutate(usl,
+       urban_fct = case_when(urban == 1 ~ "Urban",
+                             urban == 2 ~ "Rural"),
+       urban_fct = as.factor(urban_fct))
+```
+
+OK, let's move on to the education variable: "highqual". **Run the code below to create a table of this variable. Also, have a look at the attributes of the variable.**
+
+```{r }
+# look at original variable
+count(usl, hiqual)
+attributes(usl$hiqual)
+```
+
+We want to create a dichotomous variable that codes people that have a degree versus everyone else. We can use a similar strategy as before. 
+
+One difference now is that the condition needs to include multiple values. For this we use the `%in%` command. This checks the values of the object on the right side are present in the object on the left side. If this is true, it will give a `TRUE` value, if it's not it will give a `FALSE`.   
+
+For example, if we want to check if "hiqual" has the values 3 or 9 we can use the following command: `hiqual %in% 3:9` *(`3:9` produces all the numbers between 3 and 9)*. We use this approach together with `case_when()` to make a factor variable that tells us if someone has a degree or not. 
+
+**Run the code below to create the dichotomous variable**.
+
+```{r}
+# make new variable that is factor
+usl <- mutate(usl,
+       degree = case_when(hiqual %in% 1:2 ~ "Degree",
+                          hiqual %in% 3:9 ~ "No degree"),
+       degree = as.factor(degree))
+```
+
+Let's move on to the next variable: "vote6" (how interested you are in politics). **Do a table of this variable. Look at the attributes of the variable.**
+
+```{r}
+# look at original variable
+count(usl, vote6)
+attributes(usl$vote6)
+```
+
+It seems that this variable also needs some of work. We will use a slightly different strategy here to get to the same result. 
+
+We will start by coding first all the negative values as missing. We can use the `ifelse()` command for this. This takes a condition, and then two values: the new value if the condition is true and the new value if the condition is false. We will make a condition that "vote6" is smaller than 0 (that covers all the missing codes). If this is true, we will code it as missing, `NA`, if not we will just copy the original variable. We will then make a factor version of the variable using the `factor()` command and giving it the four labels that we saw in attributes.
+
+**Run the code below to recode the variable**.
+
+```{r}
+# code missing and make politics factor variable
+usl <- mutate(usl,
+       vote6 = ifelse(vote6 < 0, NA, vote6),
+       vote6_fct = factor(vote6,
+                          labels = c("Very", "Fairly",
+                                     "Not very", "Not at all")))
+```
+
+**Now, clean the satisfaction variable ("sclfsato") using a similar approach as above. Save the intermediary variable that has the negative values coded as missing as "sati" (we will use this continuous version of this variable later on). Call the factor version of the variable "sati_fct".**
+
+```{r, echo = FALSE}
+# code missing and make politics factor variable
+usl <- mutate(usl,
+       sati = ifelse(sclfsato < 0, NA, sclfsato),
+       sati_fct = factor(sati,
+                         labels = c("Completely dissatisfied",
+                                    "Mostly dissatisfied",
+                                    "Somewhat dissatisfied",
+                                    "Neither sat nor dissat",
+                                    "Somewhat satisfied",
+                                    "Mostly satisfied",
+                                    "Completely satisfied" )))
+```
+
+Almost finished with the data cleaning. Let's deal now with a continuous variable: monthly income ("fimngrs"). 
+
+**Run the code below to create a histogram.**
+
+```{r}
+hist(usl$fimngrs)
+```
+
+As you can see, there are some negative values. 
+
+**Run the code below to get rid of the negative values by capping the value as 0 using the `ifelse()` command:**
+
+```{r}
+# cap income to 0
+usl <- mutate(usl,
+              fimngrs = ifelse(fimngrs < 0, 0, fimngrs))
+```
+
+**Similarly, run the code below to cap the maximum of this variable at 10.000 and check the result using `hist()`.**
+
+```{r}
+# cap income to 0
+usl <- mutate(usl,
+              fimngrs = ifelse(fimngrs > 10000, 10000, fimngrs))
+```
+
+In the dataset we also have two variables that measure health. `sf12mcs` measures mental health while `sf12pcs` measures physical health. 
+
+\newpage
+
+**Let's see how they look; you can create a very basic scatterplot in `ggplot2` using the `qplot()` function which stands for "quick plot" as follows:**
+
+```{r, warning = FALSE, message = FALSE}
+qplot(usl$sf12pcs)
+```
+
+\newpage
+
+```{r, warning = FALSE, message = FALSE}
+qplot(usl$sf12mcs)
+```
+
+These variables are composites, meaning that they are made by combining multiple related variables into a score and the values should be between 0 and 100 with averages around 50. 
+
+It seems we have negative values which are for missing categories. Let's code them as `NA`. To be more efficient we can use a special version of `mutate()` which can be used to apply a particular function to certain variables in the dataset. The command `mutate_at()` gets three inputs:
+
+- the data
+- the variables we want to apply the function to (`vars()`). Here we use the helper function `matches()` to look up all variables that have "sf12" in the name
+- the function we want to apply to these variables. Here we use `ifelse()` with the condition that the variable is smaller than 0 (`. < 0`) then it should be recoded as `NA`, otherwise it should keep the original values (`.`):
+
+**Run the code below to code all values below zero as missing**
+
+```{r}
+usl <- mutate_at(usl,
+                 vars(matches("sf12")),
+                 ~ifelse(. < 0, NA, .))
+```
+
+
+\newpage
+
+## 1.6 Saving the Data in Long and Wide Format
+
+Now that we have the data cleaned we might also want to save a wide version of it for future use. The command we want to use is `pivot_wider`. We use the following inputs:
+
+- long data
+- time varying variables (`values_from`)
+- how to separate the suffix (`names_sep`)
+- where to take the suffix from (`names_from`)
+
+**Run the code below to restructure the data from "long" to "wide".**
+
+```{r}
+# make wide data
+usw <- pivot_wider(
+  usl,
+  values_from = !c(pidp, sex, age, hiqual, degree, gndr),
+  names_sep = "_",
+  names_from = wave)
+```
+
+**Now, let's save the data for use in Part II. Here we will save as ".RData" the cleaned long and wide data as it makes it possible to keep multiple objects. We will also save the unbalanced data as an `.rds` file.**
+
+```{r}
+# save the balanced and clean data
+save(usl, usw, file = "./data/us_clean.RData")
+
+# save the unbalanced data
+saveRDS(us1234, "./data/us_unbalanced.rds")
+```
+
+
