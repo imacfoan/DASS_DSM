@@ -1,11 +1,11 @@
 --- 
-title: "Data Cleaning and Visualisation using R"
+title: "Data Science Modelling"
 author: "Dr. Ioana Macoveciuc"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 description: |
-  Notebook hosting practical materials for SOST70023.
+  Notebook hosting practical materials for SOST70033.
 link-citations: yes
 ---
 
@@ -14,7 +14,7 @@ link-citations: yes
 
 WORK IN PROGRESS
 
-Welcome to SOST70023 Data Cleaning and Visualisation using R! This notebook will host the materials for all practical exercises and tasks for this course unit. 
+Welcome to SOST70033 Data Science Modelling! This notebook will host the materials for all quizzes and R practical tasks for this course unit. 
 
 
 
