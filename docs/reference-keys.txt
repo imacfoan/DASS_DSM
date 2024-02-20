@@ -1,0 +1,6 @@
+quiz
+question-1-flexible-and-inflexible-methods
+question-2-regression-and-classification-problems
+question-3-flexibility-in-regression-and-classification
+question-4-parametric-and-non-parametric-methods
+practical

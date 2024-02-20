@@ -3,529 +3,117 @@
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 1: Introducing Statistical Programming with R and RStudio
+Section 1: Introduction to Data Science: The Basics of Statistical Learning
 :::
 
-::: ilos
-**Learning Outcomes:**
-
--   Employ the basics of the R language to run simple lines of code;
--   Import different types of data files;
--   Export data in different formats.
-:::
-
-**In this section, you will be introduced to the following functions:**
-
-|   Function    |               Description               | Package |
-|:-------------:|:---------------------------------------:|:-------:|
-|     `c()`     |          concatenate function           | base R  |
-|   `class()`   |             class of object             | base R  |
-|  `length()`   |            length of object             | base R  |
-|   `View()`    | viewing data objects spreadsheet-style  | base R  |
-| `read_spss()` |         reading SPSS data files         | `haven` |
-| `read_dta()`  |        reading Stata data files         | `haven` |
-| `read.csv()`  |          reading `.csv` files           | base R  |
-|  `readRDS()`  |          reading `.RDS` files           | base R  |
-|   `load()`    |         loading `.RData` files          | base R  |
-|   `save()`    | saving multiple files (`.Rdata` format) | base R  |
-|  `saveRDS()`  |   saving single files (`.RDS` format)   | base R  |
-| `write.csv()` |       save a file as `.csv` file        | base R  |
-
-::: attention
-Remember to continue working in the RStudio project you created for this course and typing your answers in separate R scripts.
-:::
-
-# 1. Basics of Vector Structures {.unnumbered}
-
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var codeBlocks = document.querySelectorAll('pre > code');
-
-    codeBlocks.forEach(function(block) {
-        // Check if the block's content starts with '##'
-        if (block.textContent.trim().startsWith('##')) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block'; // Ensure button is visible
-            block.style.display = 'none'; // Initially hide the R output
-
-            button.onclick = function() {
-                if (block.style.display === 'none') {
-                    block.style.display = 'block';
-                    button.textContent = 'Hide R Output';
-                } else {
-                    block.style.display = 'none';
-                    button.textContent = 'Show R Output';
-                }
-            };
-
-            block.parentNode.insertBefore(button, block);
-        }
-    });
-});
-```
-
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var rComments = document.querySelectorAll('.r-comment');
-
-    rComments.forEach(function(comment) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-comment-button';
-        button.textContent = 'Show Explanation';
-        button.style.display = 'block'; // Ensure button is visible
-        comment.style.display = 'none'; // Initially hide the comment
-
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (comment.style.display === 'none') {
-                comment.style.display = 'block'; // Adjust as needed
-                button.textContent = 'Hide Explanation';
-            } else {
-                comment.style.display = 'none';
-                button.textContent = 'Show Explanation';
-            }
-        };
-
-        // Insert the button before the comment
-        comment.parentNode.insertBefore(button, comment);
-    });
-});
+# Quiz 
 
-```
+## Question 1: Flexible and Inflexible Methods
 
-## 1.1 Exercise {.unnumbered}
+For each of parts (a) through (d), indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.
 
-Create a vector object called **num_vct** that contains the following values: 70, 8, 50, 100.  
+(a) The sample size n is extremely large, and the number of predictors p is small.**
 
-Print the contents.
+A: better - a more flexible approach will fit the data closer and with the large sample size a better fit than an inflexible approach would be obtained.
 
-```{r}
+(b) The number of predictors p is extremely large, and the number of observations n is small. 
 
-# Creating the vector.
-num_vct <- c(70, 8, 50, 100) 
+A: worse - a flexible method can cause overfit the small number of observations.So the overfitting model will result in a bigger inflation in variance and a small reduction in bias.
 
-# Now printing the contents.
-num_vct 
-```
+(c) The relationship between the predictors and response is highly non-linear.
 
-## 1.2 Exercise {.unnumbered}
+A: better - with more degrees of freedom, a flexible model would obtain a better fit. A flexible model is better to find the non-linear effect. 
 
-Perform the following tasks with **num_vct**:  
+(d) The variance of the error terms is extremely high.
 
--   Multiply the vector by 2.\
--   Divide the vector by 10.\
--   Subtract 5 from the vector.\
--   Add 8 to the vector.
+A: worse - flexible methods would fit too much of the noise resulting from the large variance of the errors. 
 
-```{r, eval = FALSE}
-num_vct * 2
-num_vct / 10
-num_vct - 5 
-num_vct + 8 
-```
+**Note:** 
+**1.Fitting a more flexible model requires estimating a greater number of parameters.**
 
-::: {.r-comment style="display: none;"}
-When performing operations on single vectors, you will note in the output that the operation is applied to each individual element within the vector.
-:::
+**2.The guideline of using flexible and inflexible model**
 
-## 1.3 Exercise {.unnumbered}
+- Good at finding non-linear (complex) behavior.
 
-Create a new numeric vector that contains the following values: 5, 7, 9, 10. Name it **num_vct2** and print the contents.
+- With large sample sizes, there is less tendency for overfitting however, there is a susceptibility to noise.
 
-```{r}
+- There is tendency for reduced bias.
 
-# Creating the vector.
-num_vct2 <- c(5, 7, 9, 10)
+- Communicating model behavior may be challenging.
 
-#Now printing the contents.
-num_vct2
-```
+## Question 2: Regression and Classification Problems
 
-## 1.4 Exercise {.unnumbered}
+For each one of the scenarios below (a to c): 
 
-Perform the following tasks with **num_vct** and **num_vct2**:  
+- indicate whether the scenario is a *classification* or *regression* problem;  
+- indicate whether we are most interested in inference or prediction;   
+- provide the sample size (n);  
+- list the inputs/independent variables (p).  
 
--   Add **num_vct2** to **num_vct**.\
--   Divide **num_vct** by **num_vct2**.\
--   Multiply **num_vct** by **num_vct2**.
--   Subtract **num_vct** from **num_vct2**.
 
-```{r, eval = FALSE}
-num_vct2 + num_vct
-num_vct / num_vct2
-num_vct * num_vct2
-num_vct2 - num_vct
-```
+(a) We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry and the CEO salary. We are interested in understanding which factors affect CEO salary.  
 
-::: {.r-comment style="display: none;"}
-When performing operations with two vectors, you will note in the output that the operation is being applied to the element of each vector in sequential order, according to the index of each element.
+A: regression. inference. quantitative output of CEO salary based on CEO firm's features.
 
-Let's take the following operation as an example: **num_vct2 - num_vct**.
+n - 500 firms in the US
 
-The elements of **num_vct** are: 70, 8, 50, 100\
-The elements of **num_vct2** are: 5, 7, 9, 10
+p - profit, number of employees, industry
 
-When subtracting **num_vct** from **num_vct2**, R performs the following operations according to the 'position' of each element in the vector.
+(b) We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price,and ten other variables.  
 
-At index [1], we have 70 for **num_vct** and 5 for **num_vct2**\
-At index [2], we have 8 for **num_vct** and 7 for **num_vct2**\
-At index [3], we have 50 for **num_vct** and 9 for **num_vct2**\
-At index [4], we have 100 for **num_vct** and 10 for **num_vct2**\
+A: classification. prediction. predicting new product's success or failure.
 
-Therefore, R will perform the subtraction operation for each element located at a given index.
+n - 20 similar products previously launched
 
-The output for this operation will be: `[1] -65  -1 -41 -90`.
-:::
+p - price charged, marketing budget, comp. price, ten other variables
 
-## 1.5 Exercise {.unnumbered}
 
-Create a character vector object that contains the following: I, love, programming, with, R.  
+(c) We are interest in predicting the % change in the USD/Euro ed exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. Foreach week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market.  
 
-Name this vector **char_vct** and print the contents.
+A: regression. prediction. quantitative output of % change
 
-```{r}
-char_vct <- c("I", "love", "programming", "with", "R")
+n - 52 weeks of 2012 weekly data
 
-char_vct
-```
+p - % change in US market, % change in British market, % change in German market
 
-## 1.6 Exercise {.unnumbered}
 
-Perform calculations on **char_vct**. 
+## Question 3: Flexibility in Regression and Classification
 
-```{r, error = TRUE, results = 'asis'}
-char_vct * 2 
-```
+What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?
 
-::: question
-What results do you obtain after trying to perform mathematical operations on your character vector? Why ?
-:::
+*Flexible approaches*
+**The advantages**:1)obtaining a better fit for non-linear models; 2)decreasing the error (bias).
 
-::: {.r-comment style="display: none;"}
-Let's say we try to multiply the character vector by 2. Note the error message in the console; none of the tasks can be applied to this vector because these are all arithmetic tasks which work only on numeric vectors.
-:::
+**The disadvantages**: 1)requires estimating a greater number of parameters;2)follow the noise too closely (overfit);3)increasing variance.
 
-## 1.7 Exercise {.unnumbered}
+The pros and cons for inflexible approaches are the opposite. 
 
-Create a vector object that contains the following logical and numeric values: TRUE, 6, FALSE, 10, FALSE. Name it **new_vct** and print the contents.
+**When the flexible approach is preferrable**: when we are interested in prediction and not the interpretability of the results. lots of data and many different groups
 
-```{r}
-new_vct <- c(TRUE, 6, FALSE, 10, FALSE)
+**When the inflexible approach is preferrable**: when we are interested in inference and the interpretability of the results.few data points
 
-new_vct
-```
+**Note**
 
-::: question
-Does the output match the contents you entered when you created the vector? Why?
-:::
+1.For classification, an approach can be both flexible and less flexible. 
+highly flexible - Training MSE is low here but test MSE is high, resulting in high variance. 
+less flexible - lower variance but higher bias. 
 
-::: {.r-comment style="display: none;"}
-No, it does not. Since vectors cannot contain different data types, R will force (i.e. coerce) all entered values to match, in an attempt to lose as little information as possible. In this case, the logical values are coerced to 1 and 0, corresponding to True and False respectively. This is one of the several reasons for why data cleaning is important before proceeding with data analysis; such coercion can have a significant impact on the accuracy of our data and implicitly, on your interpretation of the data.
-:::
+2.How to balance the flexibility? 
+Using cross validation methods.
 
-# 2. Importing and Exporting Data {.unnumbered}
 
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var codeBlocks = document.querySelectorAll('pre > code');
+## Question 4: parametric and Non-parametric Methods
 
-    codeBlocks.forEach(function(block) {
-        // Check if the block's content starts with '##'
-        if (block.textContent.trim().startsWith('##')) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block'; // Ensure button is visible
-            block.style.display = 'none'; // Initially hide the R output
+Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a non-parametric approach)? What are its disadvantages?
 
-            button.onclick = function() {
-                if (block.style.display === 'none') {
-                    block.style.display = 'block';
-                    button.textContent = 'Hide R Output';
-                } else {
-                    block.style.display = 'none';
-                    button.textContent = 'Show R Output';
-                }
-            };
+**A parametric approach** reduces the problem of estimating f down to one of estimating a set of parameters because it assumes a form for f.
 
-            block.parentNode.insertBefore(button, block);
-        }
-    });
-});
-```
+**A non-parametric approach** does not assume a functional form for f and so requires a very large number of observations to accurately estimate f.
 
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var rComments = document.querySelectorAll('.r-comment');
+**The advantages of a parametric approach to regression or classification** are the simplifying of modeling f to a few parameters and not as many observations are required compared to a non-parametric approach.
 
-    rComments.forEach(function(comment) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-comment-button';
-        button.textContent = 'Show Explanation';
-        button.style.display = 'block'; // Ensure button is visible
-        comment.style.display = 'none'; // Initially hide the comment
+**The disadvantages of a parametric approach to regression or classification** are a potential to inaccurately estimate f if the form of f assumed is wrong or to overfit the observations if more flexible models are used.
 
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (comment.style.display === 'none') {
-                comment.style.display = 'block'; // Adjust as needed
-                button.textContent = 'Hide Explanation';
-            } else {
-                comment.style.display = 'none';
-                button.textContent = 'Show Explanation';
-            }
-        };
+**Note: f = the population**
 
-        // Insert the button before the comment
-        comment.parentNode.insertBefore(button, comment);
-    });
-});
-
-```
-
-In this exercise, you will practice how to download, access, and import data from the UK Data Service in R. You will use data from the **2019 British Social Attitudes Survey, Poverty and Welfare: Open Access Teaching Dataset**. 
-
-::: reference
-British Social Attitudes Survey, 2019, Poverty and Welfare: Open Access Teaching Dataset
-
-*Reference*  
-
-University of Manchester, Cathie Marsh Institute for Social Research (CMIST), UK Data Service. (2022). British Social Attitudes Survey, 2019, Poverty and Welfare: Open Access Teaching Dataset. [data collection]. NatCen Social Research, [original data producer(s)]. NatCen Social Research. SN: 8850, DOI: http://doi.org/10.5255/UKDA-SN-8850-1  
-
-*Copyright*  
-
-Data download and access under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International </a> licence.
-::: 
-
-1. Navigate to the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8850#!/access-data" target="_blank">British Social Attitudes Survey (2019) webpage</a> on the UK Data Service website.  
-
-2. Scroll down to the end of the webpage and download the dataset in both SPSS and STATA formats on your computer.  
-
-3. To access the SPSS data file, unzip folder and open the folders in the following sequence: *UKDA-8850-spss \> spss \> spss25*
-
-4. Follow the same approach for accessing the STATA file.  
-
-::: folder
-Place the two files you downloaded in your root R project working directory in a subfolder called **data**. The recommended approach for a ‘clean’ working directory is to place all the data files you plan to use in a separate folder within your R project working directory. You should always use simple names that allow you easy access to the contents when you want to either explore the folder on your machine or specify the path to these folders in R.  
-
-You should also keep both folders you downloaded (**UKDA-8850-spss** and **UKDA-8850-stata**) unzipped in your **data** folder. 
-:::
-
-## 2.1 Exercise {.unnumbered}
-
-Import the dataset in SPSS format; name this object **bsas_spss**.
-
-```{r, error = TRUE}
-bsas_spss <- read_spss("data/bsa2019_poverty_open.sav")
-```
-
-::: question
-Did the import function work? Why?
-:::
-
-::: {.r-comment style="display: none;"}
-The `read_spss()` is a function from the `haven` package. If you loaded `haven` before you attempted to import the data file, then you should not have encountered any issue.  
-
-However, if you did not, you would have been prompted by an error (as shown above).  
-
-To load installed packages, use the `library()` function. Remember to always start your work in R by first loading all the packages that you require for your session.
-:::
-
-## 2.2 Exercise {.unnumbered}
-
-Import the dataset in STATA format; name this object **bsas_stata**.
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-library(haven)
-```
-
-```{r echo = FALSE, warning = FALSE, message = FALSE, results= 'hide'}
-bsas_stata <- read_dta("D:/DASS/data/bsa2019_poverty_open.dta")
-```
-
-```{r eval = FALSE}
-bsas_stata <- read_dta("data/bsa2019_poverty_open.dta")
-```
-
-::: question
-How many observations and variables do the **bsas_spss** and **bsas_stata** objects have? Are these identical for both objects?
-:::
-
-::: {.r-comment style="display: none;"}
-There are many different ways to find the number of observations and variables such as looking at the information in the **Environment** tab. Since both data files are identical, both objects contain an identical number of observations and variables.
-:::
-
-## 2.3 Exercise {.unnumbered}
-
-Export  **bsas_spss** and **bsas_stata** in `.RData` format. Name this file **bsas_objects**. 
-
-```{r, eval = FALSE}
-save(bsas_spss, bsas_stata, file = "data/bsas_objects.RData")
-```
-
-::: folder
-Remember to keep your root working directory organised and save/export your data files in your **data** folder.
-:::
-
-## 2.4 Exercise {.unnumbered}
-
-Now export **bsas_spss** in `.RDS` format and name it **bsas_spss_file**. 
-
-```{r, eval = FALSE}
-saveRDS(bsas_spss, "data/bsas_spss_file.RDS")
-```
-
-## 2.5 Exercise {.unnumbered}
-
-Finally, export **bsas_stata** as a `.csv` file and name it **bsas_csv_file**. 
-
-```{r, eval = FALSE}
-write.csv(bsas_stata, "data/bsas_csv_file.csv")
-```
-
-## 2.6 Exercise {.unnumbered}
-
-Import the `.csv` file you have created and name this object **bsas_stata2**. View the contents of the **bsas_stata2** and **bsas_stata** objects. 
-
-```{r, eval = FALSE}
-bsas_stata2 <- read.csv("data/bsas_csv_file.csv")
-```
-
-::: question
-Are there any differences between the two data objects? If so, why?
-:::
-
-::: {.r-comment style="display: none;"}
-You can have a look at the two data objects using `View()`. The **bsas_stata** object imported with the `haven` package has accompanying metadata. When exporting data files with metadata as `.csv` files, this metadata is lost because this type of format does not support metadata in the same way that files such as SPSS and STATA do. Also, you may note that the **bsas_stata2** has 27 rather than 26 variables; by default, the `write.csv()` function will automatically number each row in the data file and therefore, will produce an additional column.
-:::
-
-## 2.7 Exercise {.unnumbered}
-
-Now import the `.RDS` you created earlier (**bsas_spss_file**) and name this object **bsas_spss2**.
-
-```{r, eval=FALSE}
-bsas_spss2 <- readRDS("data/bsas_spss_file.RDS")
-```
-
-## 2.8 Exercise {.unnumbered}
-
-Finally, load the `.Rdata` file you created previously (**bsas_objects**). 
-
-```{r, eval = FALSE}
-load("data/bsas_objects.RData")
-```
-
-::: folder
-You will use some of these data objects in future practicals. Please make sure that you keep all of the data files from this section in your **data** folder.
-:::
-
-# 3. Bonus Task: Data on GitHub {.unnumbered}
-
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var codeBlocks = document.querySelectorAll('pre > code');
-
-    codeBlocks.forEach(function(block) {
-        // Check if the block's content starts with '##'
-        if (block.textContent.trim().startsWith('##')) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block'; // Ensure button is visible
-            block.style.display = 'none'; // Initially hide the R output
-
-            button.onclick = function() {
-                if (block.style.display === 'none') {
-                    block.style.display = 'block';
-                    button.textContent = 'Hide R Output';
-                } else {
-                    block.style.display = 'none';
-                    button.textContent = 'Show R Output';
-                }
-            };
-
-            block.parentNode.insertBefore(button, block);
-        }
-    });
-});
-```
-
-```{js, echo=FALSE}
-document.addEventListener('DOMContentLoaded', function() {
-    var rComments = document.querySelectorAll('.r-comment');
-
-    rComments.forEach(function(comment) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-comment-button';
-        button.textContent = 'Show Explanation';
-        button.style.display = 'block'; // Ensure button is visible
-        comment.style.display = 'none'; // Initially hide the comment
-
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (comment.style.display === 'none') {
-                comment.style.display = 'block'; // Adjust as needed
-                button.textContent = 'Hide Explanation';
-            } else {
-                comment.style.display = 'none';
-                button.textContent = 'Show Explanation';
-            }
-        };
-
-        // Insert the button before the comment
-        comment.parentNode.insertBefore(button, comment);
-    });
-});
-
-```
-
-**Importing Data from Github Repositories**
-
-Many different types of data can be imported in R using either base R functions or functions from packages. However, R is not limited to importing 'hard copy' files from your machine but also supports direct import of data files located on websites for example.
-
-<a href="https://github.com/features" target="_blank">GitHub </a> is a cloud-based, online platform that allows programming users to openly share research projects, associated documentation, data files, and comments with other users and/or the public. You will learn more about GitHub later in the course.
-
-Explore the <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">Johns Hopkins Whiting School of Engineering COVID-19</a> Github Repository.
-
-1.  Open the **csse_covid_19_data** folder found at the beginning of the page.
-2.  Then open **the csse_covid_19_time_series** folder.
-3.  Click on **time_series_covid19_confirmed_global.csv** link.
-4.  Click on the **Raw** button on the right hand side of the screen.\
-5.  The webpage will now show you a long series of numbers. This is the 'data file' that you need to import. Note that this file is a `.csv` file. The same base R function you have previously used will also work in this case.
-
-## 3.1 Exercise {.unnumbered}
-
-To import the data file, create a new object called **covid_johnshop**. Within the base R `.csv` function, paste the full data file web link. Do not forget to enclose this link with quotation marks.
-
-```{r, importing github}
-covid_johnshop <- read.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
-```
-
-## 3.2 Exercise {.unnumbered}
-
-View the contents of this object.
-
-```{r, eval = FALSE}
-View(covid_johnshop)
-```
-
-## 3.3 Exercise {.unnumbered}
-
-Find the class of the object.
-
-```{r, class}
-class(covid_johnshop)
-```
-
-## 3.4 Exercise {.unnumbered}
-
-Export the data as a `.csv` file.
-
-```{r, eval=FALSE}
-write.csv(covid_johnshop, "data/covid_johnshop.csv")
-```
+# Practical 
