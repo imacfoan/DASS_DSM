@@ -1,14 +1,44 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # (PART\*) Section 1 {.unnumbered}
 
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 1: Introduction to Data Science: The Basics of Statistical Learning
+Section 1: Introduction to Data Science: The Basics of Statistical
+Learning
 :::
 
+**In this section, we will cover the following functions:**
 
-# Practical {-}
+|   Function    |               Description               | Package |
+|:-------------:|:---------------------------------------:|:-------:|
+|     `c()`     |               concatenate               | base R  |
+|    `ls()`     | provides names of object in environment | base R  |
+|    `rm()`     |             remove objects              | base R  |
+|   `View()`    | viewing data objects spreadsheet-style  | base R  |
+| `read_spss()` |         reading SPSS data files         | `haven` |
+| `read_dta()`  |        reading Stata data files         | `haven` |
+| `read.csv()`  |          reading `.csv` files           | base R  |
+|  `readRDS()`  |          reading `.RDS` files           | base R  |
+|   `load()`    |         loading `.RData` files          | base R  |
+|   `save()`    | saving multiple files (`.Rdata` format) | base R  |
+|  `saveRDS()`  |   saving single files (`.RDS` format)   | base R  |
+| `write.csv()` |       save a file as `.csv` file        | base R  |
 
+::: ilos
+**Learning Outcomes:**
+
+-   Employ the basics of the R language to run simple lines of code;
+-   Import different types of data files;
+-   Export data in different formats.
+:::
+
+# Practical
 
 ```{js, echo=FALSE}
 document.addEventListener('DOMContentLoaded', function() {
@@ -40,3 +70,154 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
+For this practical, you will use the `college.csv` file to refresh your practical programming skills. This file contains 18 variables for 777 different universities and colleges in the US.  
+
+The variables are:  
+
+-   Private : Public/private indicator
+-   Apps : Number of applications received
+-   Accept : Number of applicants accepted 
+-   Enroll : Number of new students enrolled  
+-   Top10perc : New students from top 10% of high school class
+-   Top25perc : New students from top 25% of high school class
+-   F.Undergrad : Number of full-time undergraduates
+-   P.Undergrad : Number of part-time undergraduates
+-   Outstate : Out-of-state tuition
+-   Room.Board : Room and board costs
+-   Books : Estimated book costs
+-   Personal : Estimated personal spending
+-   PhD : Percent of faculty with Ph.D.’s
+-   Terminal : Percent of faculty with terminal degree
+-   S.F.Ratio: Student/faculty ratio
+-   perc.alumni : Percent of alumni who donate
+-   Expend : Instructional expenditure per student
+-   Grad.Rate : Graduation rate
+
+
+```{r college-solution}
+#a
+college <- read.csv("https://www.statlearning.com/s/College.csv")
+#b
+rownames(college) <- college[, 1]
+college <- college[, -1]
+
+head(college)
+
+#c
+#i)
+summary(college)
+
+#ii)
+pairs(college[,3:12])
+
+# because the first two columns are not numerical vectors
+#Please carefully check the data when you have similar errors
+
+#iii) plot side by side boxplots of Outstate versus Private (Private universities have more out of state students):
+
+class(college$Private)
+#Character vectors cannot be used in most statistical functions in R, since they don't define groups.
+college$Private <- ifelse(college$Private=="Yes", 1, 0)
+#we need to convert the Character vector 'private' to numerical vector.
+plot(college$Private, college$Outstate)
+
+#iv)
+Elite <- rep("No", nrow(college))
+Elite[college$Top10perc > 50] <- "Yes"
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+
+summary(Elite)
+
+# plot side by side boxplots of Outstate versus Elite (Elite universities have more out of state students):
+plot(college$Elite, college$Outstate)
+
+#v)
+
+par(mfrow=c(2,2))
+hist(college$Apps)
+hist(college$perc.alumni, col=2)
+hist(college$S.F.Ratio, col=3, breaks=10)
+hist(college$Expend, breaks=100)
+
+#vi)
+#for example
+
+college[which.max(college$Top10perc), ]  # what is the university with the most students in the top 10% of class
+
+
+acceptance_rate <- college$Accept/college$Apps
+
+college[which.min(acceptance_rate), ]  # what university has the smallest acceptance rate
+
+college[which.max(acceptance_rate), ]  # what university has the most liberal acceptance rate
+
+```
+
+## 2.4 Q10
+
+This exercise involves the Boston housing data set.
+
+```{r boston, exercise=TRUE}
+#Q(a)-(d)
+
+```
+
+```{r boston-solution}
+#a
+library(MASS)
+?Boston
+dim(Boston)
+
+#b
+pairs(Boston)
+
+#c
+plot(Boston$age, Boston$crim)
+# Older homes, more crime
+plot(Boston$dis, Boston$crim)
+# Closer to work-area, more crime
+plot(Boston$rad, Boston$crim)
+# Higher index of accessibility to radial highways, more crime
+plot(Boston$tax, Boston$crim)
+# Higher tax rate, more crime
+plot(Boston$ptratio, Boston$crim)
+
+#d
+par(mfrow=c(1,3))
+hist(Boston$crim[Boston$crim>1], breaks=25)
+# most cities have low crime rates, but there is a long tail: 18 suburbs appear
+# to have a crime rate > 20, reaching to above 80
+hist(Boston$tax, breaks=25)
+# there is a large divide between suburbs with low tax rates and a peak at 660-680
+hist(Boston$ptratio, breaks=25)
+# a skew towards high ratios, but no particularly high ratios
+
+```
+
+```{r boston2, exercise=TRUE}
+#Q(e)-(h)
+
+
+```
+
+```{r boston2-solution}
+# (e)
+dim(subset(Boston, chas == 1))
+
+# (f)
+median(Boston$ptratio)
+
+# (g)
+t(subset(Boston, medv == min(Boston$medv)))
+summary(Boston)
+# Not the best place to live, but certainly not the worst.
+
+# (h)
+dim(subset(Boston, rm > 7))
+dim(subset(Boston, rm > 8))
+summary(subset(Boston, rm > 8))
+summary(Boston)
+# relatively lower crime (comparing range), lower lstat (comparing range)
+
+```
