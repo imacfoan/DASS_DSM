@@ -7,6 +7,9 @@ Section 1: Introduction to Data Science: The Basics of Statistical Learning
 :::
 
 
+# Practical {-}
+
+
 ```{js, echo=FALSE}
 document.addEventListener('DOMContentLoaded', function() {
     var answers = document.querySelectorAll('.answers');
@@ -37,6 +40,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
-
-
-# Practical {-}
