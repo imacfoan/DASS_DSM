@@ -15,6 +15,7 @@ link-citations: yes
 WORK IN PROGRESS
 
 Welcome to SOST70033 Data Science Modelling! This notebook will host the materials for all quizzes and R practical tasks for this course unit. 
+, 
 
 
 

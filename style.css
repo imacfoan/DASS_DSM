@@ -144,6 +144,21 @@ pre {
     box-sizing: border-box; /* Include padding and border in the element's size */ effect */
 }
 
+/* Style for the toggle answers button */
+
+.toggle-answer-button {
+    display: block;
+    width: 100%; /* Full width of the container */
+    margin: 10px 0; /* Margin above and below the button */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9em; /* Font size */
+    font-family: "Open Sans", sans-serif; /* Font family */
+    text-align: center; /* Center-align the text */
+    transition: background-color 0.3s; /* Transition for hover effects */
+    position: relative; /* Relative positioning for the nested element */
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+}
 
 
  /*------------- Body and header text---------------- */
@@ -300,6 +315,18 @@ div.attention {
     border-width: 5px;
     border-color: #EAEAEA; /* This sets the border color to light grey */
     font-size: 12px
+}
+
+  div.answers {
+    padding: 1em;
+    margin: 1em 0;
+    color: black;
+    background-color: white;
+    text-align: justify;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #EAEAEA; /* This sets the border color to light grey */
+    font-size: 15px
 }
 
 
