@@ -21,24 +21,14 @@ Learning
 |    `ls()`     | provides names of object in environment | base R  |
 |    `rm()`     |             remove objects              | base R  |
 |   `View()`    | viewing data objects spreadsheet-style  | base R  |
-| `read_spss()` |         reading SPSS data files         | `haven` |
-| `read_dta()`  |        reading Stata data files         | `haven` |
-| `read.csv()`  |          reading `.csv` files           | base R  |
-|  `readRDS()`  |          reading `.RDS` files           | base R  |
-|   `load()`    |         loading `.RData` files          | base R  |
-|   `save()`    | saving multiple files (`.Rdata` format) | base R  |
-|  `saveRDS()`  |   saving single files (`.RDS` format)   | base R  |
-| `write.csv()` |       save a file as `.csv` file        | base R  |
+
 
 ::: ilos
 **Learning Outcomes:**
-
--   Employ the basics of the R language to run simple lines of code;
--   Import different types of data files;
--   Export data in different formats.
+-   
 :::
 
-# Practical {-}
+# Practical 1 {-}
 
 ```{js, echo=FALSE}
 document.addEventListener('DOMContentLoaded', function() {
@@ -70,9 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
-For this practical, you will use the `college.csv` file to refresh your practical programming skills. This file contains 18 variables for 777 different universities and colleges in the US.  
+In this practical, you will revise and practice your R programming skills using some sample data from universities and colleges in the United States.   
 
-The variables are:  
+Click on the following link to download the file: <a href="data/college.csv" download="college.csv"> college.csv </a>. 
+
+This data file contains 18 variables for 777 different universities and colleges in the United States. The variables are: 
 
 -   Private : Public/private indicator
 -   Apps : Number of applications received
@@ -154,9 +146,41 @@ college[which.max(acceptance_rate), ]  # what university has the most liberal ac
 
 ```
 
-## 2.4 Q10
+# Practical 2 {-}
 
-This exercise involves the Boston housing data set.
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var answers = document.querySelectorAll('.answers');
+
+    answers.forEach(function(answer) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-answer-button';
+        button.textContent = 'Show Answers'; // Updated text content
+        button.style.display = 'block'; // Ensure button is visible
+        answer.style.display = 'none'; // Initially hide the answer
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block'; // Show the answer
+                button.textContent = 'Hide Answers'; // Update button text
+            } else {
+                answer.style.display = 'none'; // Hide the answer
+                button.textContent = 'Show Answers'; // Reset button text
+            }
+        };
+
+        // Insert the button before the answer
+        answer.parentNode.insertBefore(button, answer);
+    });
+});
+
+```
+
+In this practical, you will revise and practice your R programming skills using some sample data from universities and colleges in the United States.   
+
+Click on the following link to download the file: <a href="data/boston.csv" download="boston.csv"> boston.csv </a>. 
 
 ```{r boston, exercise=TRUE}
 #Q(a)-(d)
@@ -166,8 +190,7 @@ This exercise involves the Boston housing data set.
 ```{r boston-solution}
 #a
 library(MASS)
-?Boston
-dim(Boston)
+
 
 #b
 pairs(Boston)
