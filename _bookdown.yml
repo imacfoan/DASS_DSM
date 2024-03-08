@@ -5,6 +5,14 @@ rmd_files:
 - index.Rmd
 - 01-howtouse.Rmd
 - 02-S01.Rmd
+- 03-S02.Rmd
+- 04-S03.Rmd
+- 05-S04.Rmd
+- 06-S05.Rmd
+- 07-S06.Rmd
+- 08-S07.Rmd
+- 09-S08.Rmd
+
 output_dir: docs
 language:
   ui:

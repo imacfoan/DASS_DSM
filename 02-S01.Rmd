@@ -38,7 +38,7 @@ Learning
 -   Export data in different formats.
 :::
 
-# Practical
+# Practical {-}
 
 ```{js, echo=FALSE}
 document.addEventListener('DOMContentLoaded', function() {
