@@ -370,7 +370,7 @@ Click here to download the file:
 <a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.
 
 *Remember to place your data file in a separate subfolder within your R
-project working directory.*
+project working directory.  *
 :::
 
 ```{r boston-solution}
@@ -378,7 +378,9 @@ project working directory.*
 Boston <- read_csv("data/Boston.csv")
 #b
 pairs(Boston)
+```
 
+```{r}
 #c
 plot(Boston$age, Boston$crim)
 # Older homes, more crime
