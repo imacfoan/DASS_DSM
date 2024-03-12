@@ -206,6 +206,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Practical 1<a href="practical-1.html#practical-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Find all <details> elements as potential containers of R input
+    var detailElements = document.querySelectorAll('details.chunk-details');
+
+    detailElements.forEach(function(details) {
+        var nextElement = details.nextElementSibling;
+        var elementToToggle = null;
+
+        // Check if the nextElement is a textual R output
+        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
+            elementToToggle = nextElement;
+        }
+        // Alternatively, check if the nextElement contains a graphical R output (plot)
+        else if (nextElement && nextElement.querySelector('img')) {
+            elementToToggle = nextElement;
+        }
+
+        // Proceed to create a toggle button only if a matching element is found
+        if (elementToToggle) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block';
+
+            // Initially hide the R output/plot
+            elementToToggle.style.display = 'none';
+
+            button.onclick = function() {
+                var isHidden = elementToToggle.style.display === 'none';
+                elementToToggle.style.display = isHidden ? 'block' : 'none';
+                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
+            };
+
+            // Insert the toggle button immediately after the <details>
+            details.parentNode.insertBefore(button, details.nextSibling);
+        }
+    });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
     var answers = document.querySelectorAll('.answers');
 
     answers.forEach(function(answer) {
@@ -233,77 +273,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var codeBlocks = document.querySelectorAll('pre > code');
-
-    codeBlocks.forEach(function(block) {
-        // Check if the block's content starts with '##'
-        if (block.textContent.trim().startsWith('##')) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block'; // Ensure button is visible
-            block.style.display = 'none'; // Initially hide the R output
-
-            button.onclick = function() {
-                if (block.style.display === 'none') {
-                    block.style.display = 'block';
-                    button.textContent = 'Hide R Output';
-                } else {
-                    block.style.display = 'none';
-                    button.textContent = 'Show R Output';
-                }
-            };
-
-            block.parentNode.insertBefore(button, block);
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var rComments = document.querySelectorAll('.r-comment');
-
-    rComments.forEach(function(comment) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-comment-button';
-        button.textContent = 'Show Explanation';
-        button.style.display = 'block'; // Ensure button is visible
-        comment.style.display = 'none'; // Initially hide the comment
-
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (comment.style.display === 'none') {
-                comment.style.display = 'block'; // Adjust as needed
-                button.textContent = 'Hide Explanation';
-            } else {
-                comment.style.display = 'none';
-                button.textContent = 'Show Explanation';
-            }
-        };
-
-        // Insert the button before the comment
-        comment.parentNode.insertBefore(button, comment);
-    });
-});
-
-</script>
 <p>This practical consists of two parts, both of which will use datasets and exercises adapted from the core textbook for this course.</p>
 <div class="reference">
 <p><em>Reference</em><br />
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction to Statistical Learning with Applications in R</em>. 2nd ed. New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
 </div>
-<div class="attention">
-<p>Remember to work through the practical in the RStudio project you created for this course and to type your answers in separate R scripts.</p>
-</div>
 <div id="part-i" class="section level2 unnumbered hasAnchor">
 <h2>PART I<a href="practical-1.html#part-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="file">
 <p>For the tasks below, you will require the <strong>College</strong> dataset.</p>
 <p>Click here to download the file: <a href="data/College.csv" download="College.csv"> College.csv </a>.</p>
-<div class="folder">
-<p>Remember to place your data file in a separate subfolder within your R project working directory.</p>
+<p><em>Remember to place your data file in a separate subfolder within your R project working directory.</em></p>
 </div>
 <p>This data file contains 18 variables for 777 different universities and colleges in the United States. The variables are:</p>
 <ul>
@@ -338,15 +318,16 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <span id="cb1-5"><a href="practical-1.html#cb1-5" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/College.csv&quot;</span>)</span></code></pre></div>
 </details>
 <p>If you have a look at the contents of the data object using <code>View()</code>, you will notice that the first column contains the names of all of the universities in the dataset. You will also notice that it has a strange name.</p>
+<div class="image">
 <p><img src="images/snips/college-view.png" /></p>
+</div>
 <p>Actually, these data should not be treated as a variable (column) since it is just a list of university names.</p>
 </div>
 <div id="task-2" class="section level3 unnumbered hasAnchor">
 <h3>TASK 2<a href="practical-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Keeping the list of names in the data object, transform this column such that the university names in the column become row names. Hint: use the <code>column_to_rownames()</code> function from <code>dplyr</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="practical-1.html#cb2-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="practical-1.html#cb2-2" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;...1&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="practical-1.html#cb2-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;...1&quot;</span>) </span></code></pre></div>
 </details>
 <div class="question">
 <p>How would have your approach to this task differed if you would have imported the dataset using base R? Try it!</p>
@@ -357,19 +338,20 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <p>Using the base R approach, the first column containing the university names would have been named “X”, as shown below using <code>View()</code>.</p>
 <p><img src="images/snips/college-base-view.png" /></p>
 <p>Now, how would be go about transforming the contents of the first column into row names?</p>
-<p>This would require two steps. First, we assign the column contents to rows names but using only this command would not also ‘delete’ the first column.</p>
+<p>This would require two steps.</p>
+<p>First, we assign the column contents to rows names.</p>
 <p><code>rownames(college) &lt;- college[, 1]</code></p>
-<p>We then need to specifically address this.</p>
+<p>If you have another look at the data object, you will see that the rows have now been renamed using the university names in the “X” column, but the column is still part of the dataset. We therefore need to tell R to delete the column.</p>
 <p><code>college &lt;- college[, -1]</code></p>
 </div>
 </div>
 <div id="task-3" class="section level3 unnumbered hasAnchor">
 <h3>TASK 3<a href="practical-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Create a scatterplot matrix of the first 5 numeric variables.</p>
+<p>Create a scatterplot matrix of the first three numeric variables.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-1.html#cb3-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-1.html#cb3-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="practical-1.html#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(college)</span></code></pre></div>
 </details>
@@ -420,7 +402,7 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <span id="cb8-3"><a href="practical-1.html#cb8-3" tabindex="-1"></a><span class="co">#we need to convert the Character vector &#39;private&#39; to numerical vector.</span></span>
 <span id="cb8-4"><a href="practical-1.html#cb8-4" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Private, college<span class="sc">$</span>Outstate)</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/college-solution-1.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="practical-1.html#cb9-1" tabindex="-1"></a><span class="co">#iv)</span></span>
 <span id="cb9-2"><a href="practical-1.html#cb9-2" tabindex="-1"></a>Elite <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;No&quot;</span>, <span class="fu">nrow</span>(college))</span>
@@ -436,7 +418,7 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="practical-1.html#cb11-1" tabindex="-1"></a><span class="co"># plot side by side boxplots of Outstate versus Elite (Elite universities have more out of state students):</span></span>
 <span id="cb11-2"><a href="practical-1.html#cb11-2" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Elite, college<span class="sc">$</span>Outstate)</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/college-solution-2.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="practical-1.html#cb12-1" tabindex="-1"></a><span class="co">#v)</span></span>
 <span id="cb12-2"><a href="practical-1.html#cb12-2" tabindex="-1"></a></span>
@@ -446,7 +428,7 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <span id="cb12-6"><a href="practical-1.html#cb12-6" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>S.F.Ratio, <span class="at">col=</span><span class="dv">3</span>, <span class="at">breaks=</span><span class="dv">10</span>)</span>
 <span id="cb12-7"><a href="practical-1.html#cb12-7" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Expend, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/college-solution-3.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="practical-1.html#cb13-1" tabindex="-1"></a><span class="co">#vi)</span></span>
 <span id="cb13-2"><a href="practical-1.html#cb13-2" tabindex="-1"></a><span class="co">#for example</span></span>

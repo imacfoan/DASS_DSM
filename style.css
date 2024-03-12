@@ -281,6 +281,24 @@ div.folder {
   background-image: url("images/boxes/folder.png");
 }
 
+
+
+
+div.file {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: black;
+  background-color: white;
+  border: 5px solid black; /* Changed to solid border */
+  text-align: left;
+  background-image: url("images/boxes/file.png");
+}
+
 /* -----------Sidebar div tips------------- */
 /* from r-pkgs.org*/
 
