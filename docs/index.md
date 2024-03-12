@@ -31,5 +31,5 @@ This notebook is also designed to work well on tablet and mobile devices; to enh
 
 **3:** The recommended approach for a ‘clean’ working directory is to place all the data files you plan to use in a separate folder (e.g. a folder called *data*) within your R project working directory. You should always use simple names that allow you easy access to the contents when you want to either explore the folder on your machine or specify the path to these folders in R. 
 
-**4:** The answers to all tasks are also provided in this notebook. To build a robust knowledge basis and adequately develop your practical programming skills, it is absolutely **essential** that you first attempt all tasks and exercises on your own before comparing your answers with those provided in this notebook. To facilitate this, the R code, R output, and explanations are 'hidden', but these can be individually revealed by clicking on their respective toggle buttons.  
+**4:** The answers to all tasks are also provided in this notebook. To build a robust knowledge basis and adequately develop your practical programming skills, it is absolutely **essential** that you first attempt all tasks and exercises on your own before comparing your answers with those provided in this notebook.  
 :::

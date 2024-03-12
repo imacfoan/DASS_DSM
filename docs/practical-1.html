@@ -151,8 +151,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#part-i"><i class="fa fa-check"></i>PART I</a>
 <ul>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>TASK 2</a></li>
-<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>TASK 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#part-ii"><i class="fa fa-check"></i>PART II</a></li>
 </ul></li>
@@ -324,7 +324,7 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <p>Actually, these data should not be treated as a variable (column) since it is just a list of university names.</p>
 </div>
 <div id="task-2" class="section level3 unnumbered hasAnchor">
-<h3>TASK 2<a href="practical-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Task 2<a href="practical-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Keeping the list of names in the data object, transform this column such that the university names in the column become row names. Hint: use the <code>column_to_rownames()</code> function from <code>dplyr</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="practical-1.html#cb2-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;...1&quot;</span>) </span></code></pre></div>
@@ -346,7 +346,7 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 </div>
 </div>
 <div id="task-3" class="section level3 unnumbered hasAnchor">
-<h3>TASK 3<a href="practical-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Task 3<a href="practical-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Create a scatterplot matrix of the first three numeric variables.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-1.html#cb3-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
