@@ -153,6 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#part-ii"><i class="fa fa-check"></i>PART II</a></li>
 </ul></li>
@@ -273,19 +281,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-<p>This practical consists of two parts, both of which will use datasets and exercises adapted from the core textbook for this course.</p>
-<div class="reference">
-<p><em>Reference</em><br />
-James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction to Statistical Learning with Applications in R</em>. 2nd ed. New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
-</div>
+<p>This practical consists of two parts, both of which will use datasets
+and exercises adapted from the core textbook for this course:</p>
+<p>James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An
+Introduction to Statistical Learning with Applications in R</em>. 2nd ed.
+New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
 <div id="part-i" class="section level2 unnumbered hasAnchor">
 <h2>PART I<a href="practical-1.html#part-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="file">
 <p>For the tasks below, you will require the <strong>College</strong> dataset.</p>
-<p>Click here to download the file: <a href="data/College.csv" download="College.csv"> College.csv </a>.</p>
-<p><em>Remember to place your data file in a separate subfolder within your R project working directory.</em></p>
+<p>Click here to download the file:
+<a href="data/College.csv" download="College.csv"> College.csv </a>.</p>
+<p><em>Remember to place your data file in a separate subfolder within your R
+project working directory.</em></p>
 </div>
-<p>This data file contains 18 variables for 777 different universities and colleges in the United States. The variables are:</p>
+<p>This data file contains 18 variables for 777 different universities and
+colleges in the United States. The variables are:</p>
 <ul>
 <li>Private : Public/private indicator</li>
 <li>Apps : Number of applications received</li>
@@ -309,7 +320,8 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 </ul>
 <div id="task-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 1<a href="practical-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Import the dataset using a suitable tidyverse function and name this object <code>college</code>.</p>
+<p>Import the dataset using a suitable tidyverse function and name this
+object <code>college</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="practical-1.html#cb1-1" tabindex="-1"></a><span class="co"># Remember to load tidyverse first</span></span>
 <span id="cb1-2"><a href="practical-1.html#cb1-2" tabindex="-1"></a></span>
@@ -317,43 +329,49 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 <span id="cb1-4"><a href="practical-1.html#cb1-4" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="practical-1.html#cb1-5" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/College.csv&quot;</span>)</span></code></pre></div>
 </details>
-<p>If you have a look at the contents of the data object using <code>View()</code>, you will notice that the first column contains the names of all of the universities in the dataset. You will also notice that it has a strange name.</p>
-<div class="image">
-<p><img src="images/snips/college-view.png" /></p>
-</div>
-<p>Actually, these data should not be treated as a variable (column) since it is just a list of university names.</p>
+<p>If you have a look at the contents of the data object using <code>View()</code>,
+you will notice that the first column contains the names of all of the
+universities in the dataset. You will also notice that it has a strange
+name.</p>
+<p><img src="images/snips/college-view.png"/></p>
+<p>Actually, these data should not be treated as a variable (column) since
+it is just a list of university names.</p>
 </div>
 <div id="task-2" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="practical-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Keeping the list of names in the data object, transform this column such that the university names in the column become row names. Hint: use the <code>column_to_rownames()</code> function from <code>dplyr</code>.</p>
+<p>Keeping the list of names in the data object, transform this column such
+that the university names in the column become row names. Hint: use the
+<code>column_to_rownames()</code> function from <code>dplyr</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="practical-1.html#cb2-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;...1&quot;</span>) </span></code></pre></div>
 </details>
 <div class="question">
-<p>How would have your approach to this task differed if you would have imported the dataset using base R? Try it!</p>
+<p>How would have your approach to this task differed if you would have
+imported the dataset using base R? Try it!</p>
 </div>
 <div class="answers">
 <p>The data file could have instead been imported using <code>read.csv()</code>:</p>
 <p><code>college &lt;- read.csv("data/College.csv")</code></p>
-<p>Using the base R approach, the first column containing the university names would have been named “X”, as shown below using <code>View()</code>.</p>
-<p><img src="images/snips/college-base-view.png" /></p>
-<p>Now, how would be go about transforming the contents of the first column into row names?</p>
+<p>Using the base R approach, the first column containing the university
+names would have been named “X”, as shown below using <code>View()</code>.</p>
+<p><img src="images/snips/college-base-view.png" style="width: 60%;"/></p>
+<p>Now, how would be go about transforming the contents of the first column
+into row names?</p>
 <p>This would require two steps.</p>
 <p>First, we assign the column contents to rows names.</p>
 <p><code>rownames(college) &lt;- college[, 1]</code></p>
-<p>If you have another look at the data object, you will see that the rows have now been renamed using the university names in the “X” column, but the column is still part of the dataset. We therefore need to tell R to delete the column.</p>
+<p>If you have another look at the data object, you will see that the rows
+have now been renamed using the university names in the “X” column, but
+the column is still part of the dataset. We therefore need to tell R to
+delete the column.</p>
 <p><code>college &lt;- college[, -1]</code></p>
 </div>
 </div>
 <div id="task-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="practical-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Create a scatterplot matrix of the first three numeric variables.</p>
+<p>Produce summary statistics for all variables in the data object.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-1.html#cb3-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
-</details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="practical-1.html#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(college)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-1.html#cb3-1" tabindex="-1"></a><span class="fu">summary</span>(college)</span></code></pre></div>
 </details>
 <pre><code>##    Private               Apps           Accept          Enroll    
 ##  Length:777         Min.   :   81   Min.   :   72   Min.   :  35  
@@ -390,97 +408,176 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction
 ##  Mean   : 9660   Mean   : 65.46  
 ##  3rd Qu.:10830   3rd Qu.: 78.00  
 ##  Max.   :56233   Max.   :118.00</code></pre>
+</div>
+<div id="task-4" class="section level3 unnumbered hasAnchor">
+<h3>Task 4<a href="practical-1.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a scatterplot matrix of the first three numeric variables.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="practical-1.html#cb6-1" tabindex="-1"></a><span class="co">#iii) plot side by side boxplots of Outstate versus Private (Private universities have more out of state students):</span></span>
-<span id="cb6-2"><a href="practical-1.html#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="practical-1.html#cb6-3" tabindex="-1"></a><span class="fu">class</span>(college<span class="sc">$</span>Private)</span></code></pre></div>
-</details>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="practical-1.html#cb8-1" tabindex="-1"></a><span class="co">#Character vectors cannot be used in most statistical functions in R, since they don&#39;t define groups.</span></span>
-<span id="cb8-2"><a href="practical-1.html#cb8-2" tabindex="-1"></a>college<span class="sc">$</span>Private <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(college<span class="sc">$</span>Private<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb8-3"><a href="practical-1.html#cb8-3" tabindex="-1"></a><span class="co">#we need to convert the Character vector &#39;private&#39; to numerical vector.</span></span>
-<span id="cb8-4"><a href="practical-1.html#cb8-4" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Private, college<span class="sc">$</span>Outstate)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="practical-1.html#cb5-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="task-5" class="section level3 unnumbered hasAnchor">
+<h3>Task 5<a href="practical-1.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Produce side by side box plots of <code>Outstate</code> versus <code>Private</code> using base
+R.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="practical-1.html#cb9-1" tabindex="-1"></a><span class="co">#iv)</span></span>
-<span id="cb9-2"><a href="practical-1.html#cb9-2" tabindex="-1"></a>Elite <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;No&quot;</span>, <span class="fu">nrow</span>(college))</span>
-<span id="cb9-3"><a href="practical-1.html#cb9-3" tabindex="-1"></a>Elite[college<span class="sc">$</span>Top10perc <span class="sc">&gt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Yes&quot;</span></span>
-<span id="cb9-4"><a href="practical-1.html#cb9-4" tabindex="-1"></a>Elite <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Elite)</span>
-<span id="cb9-5"><a href="practical-1.html#cb9-5" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(college, Elite)</span>
-<span id="cb9-6"><a href="practical-1.html#cb9-6" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="practical-1.html#cb9-7" tabindex="-1"></a><span class="fu">summary</span>(Elite)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="practical-1.html#cb6-1" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Private, college<span class="sc">$</span>Outstate, <span class="at">xlab =</span> <span class="st">&quot;Private&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
 </details>
-<pre><code>##  No Yes 
-## 699  78</code></pre>
+<div class="question">
+<p>Did this work? Why?</p>
+</div>
+<div class="answers">
+<p>Using the <code>plot()</code> base R function to produce a box plot would produce
+an error since the <code>Private</code> variable is of class character. Most
+statistical functions will not work with character vectors.</p>
+<p><code>Error in plot.window(...) : need finite 'xlim' values</code><br />
+<code>In addition: Warning messages:</code><br />
+<code>1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion</code><br />
+<code>2: In min(x) : no non-missing arguments to min; returning Inf</code><br />
+<code>3: In max(x) : no non-missing arguments to max; returning -Inf</code></p>
+<p>Creating a box plot with <code>tidyverse</code> would work.</p>
+<p><code>college %&gt;%       ggplot(aes(x = Private, y = Outstate)) +        geom_boxplot()</code></p>
+<p><img src="images/snips/private.png" style="width: 60%;"/></p>
+<p>However, it is important to note that if a variable is not of the right
+class, then this might have unintended consequences for example, when
+building models. In this case, the <code>Private</code> variable must be
+transformed into a factor.</p>
+</div>
+</div>
+<div id="task-6" class="section level3 unnumbered hasAnchor">
+<h3>Task 6<a href="practical-1.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>Top10perc</code> variable, create a new categorical variable called
+<code>Elite</code> such that universities are divided into two groups based on
+whether or not the proportion of students coming from the top 10% of
+their high school classes exceeds 50%. Hint: use a combination of
+<code>mutate()</code> and <code>if_else()</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="practical-1.html#cb11-1" tabindex="-1"></a><span class="co"># plot side by side boxplots of Outstate versus Elite (Elite universities have more out of state students):</span></span>
-<span id="cb11-2"><a href="practical-1.html#cb11-2" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Elite, college<span class="sc">$</span>Outstate)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="practical-1.html#cb7-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="practical-1.html#cb7-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Elite =</span> <span class="fu">if_else</span>(Top10perc <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>),</span>
+<span id="cb7-3"><a href="practical-1.html#cb7-3" tabindex="-1"></a>         <span class="at">Elite =</span> <span class="fu">as_factor</span>(Elite))</span>
+<span id="cb7-4"><a href="practical-1.html#cb7-4" tabindex="-1"></a><span class="co">#do not forget the factor transformation step (categorical variables are factors in R)</span></span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+</div>
+<div id="task-7" class="section level3 unnumbered hasAnchor">
+<h3>Task 7<a href="practical-1.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Produce side by side box plots of the new <code>Elite</code> variable and
+<code>Outstate</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="practical-1.html#cb12-1" tabindex="-1"></a><span class="co">#v)</span></span>
-<span id="cb12-2"><a href="practical-1.html#cb12-2" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="practical-1.html#cb12-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb12-4"><a href="practical-1.html#cb12-4" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Apps)</span>
-<span id="cb12-5"><a href="practical-1.html#cb12-5" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>perc.alumni, <span class="at">col=</span><span class="dv">2</span>)</span>
-<span id="cb12-6"><a href="practical-1.html#cb12-6" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>S.F.Ratio, <span class="at">col=</span><span class="dv">3</span>, <span class="at">breaks=</span><span class="dv">10</span>)</span>
-<span id="cb12-7"><a href="practical-1.html#cb12-7" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Expend, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="practical-1.html#cb8-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span>  </span>
+<span id="cb8-2"><a href="practical-1.html#cb8-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Elite, <span class="at">y =</span> Outstate)) <span class="sc">+</span>   </span>
+<span id="cb8-3"><a href="practical-1.html#cb8-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="question">
+<p>How would you produce a similar plot using base R?</p>
+</div>
+<div class="answers">
+<p><code>plot(college$Elite, college$Outstate,  xlab = "Elite", ylab = "Outstate")</code></p>
+</div>
+</div>
+<div id="task-8" class="section level3 unnumbered hasAnchor">
+<h3>Task 8<a href="practical-1.html#task-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use base R to produce a multipanel plot that displays histograms of the
+following variables: <code>Apps</code>, <code>perc.alumni</code>, <code>S.F.Ratio</code>, <code>Expend</code>. Hint:
+use <code>par(mfrow=c(2,2))</code> to set up a 2x2 panel. Try to adjust the
+specifications (e.g. breaks).</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="practical-1.html#cb13-1" tabindex="-1"></a><span class="co">#vi)</span></span>
-<span id="cb13-2"><a href="practical-1.html#cb13-2" tabindex="-1"></a><span class="co">#for example</span></span>
-<span id="cb13-3"><a href="practical-1.html#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="practical-1.html#cb13-4" tabindex="-1"></a>college[<span class="fu">which.max</span>(college<span class="sc">$</span>Top10perc), ]  <span class="co"># what is the university with the most students in the top 10% of class</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="practical-1.html#cb9-1" tabindex="-1"></a><span class="co"># An example is shown below. Note that the purpose of the mfrow parameter is to change the default way in which R displays plots which is in a single panel display. Once applied, all plots you create later will also be displayed in a 2x2 grid. To revert back, you need to enter par(mfrow=c(1,1)) into the console.</span></span>
+<span id="cb9-2"><a href="practical-1.html#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="practical-1.html#cb9-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb9-4"><a href="practical-1.html#cb9-4" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Apps)</span>
+<span id="cb9-5"><a href="practical-1.html#cb9-5" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>perc.alumni, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb9-6"><a href="practical-1.html#cb9-6" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>S.F.Ratio, <span class="at">col=</span><span class="dv">3</span>, <span class="at">breaks=</span><span class="dv">10</span>)</span>
+<span id="cb9-7"><a href="practical-1.html#cb9-7" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Expend, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div>
 </details>
-<pre><code>##                                       Private Apps Accept Enroll Top10perc
-## Massachusetts Institute of Technology       1 6411   2140   1078        96
-##                                       Top25perc F.Undergrad P.Undergrad
-## Massachusetts Institute of Technology        99        4481          28
-##                                       Outstate Room.Board Books Personal PhD
-## Massachusetts Institute of Technology    20100       5975   725     1600  99
-##                                       Terminal S.F.Ratio perc.alumni Expend
-## Massachusetts Institute of Technology       99      10.1          35  33541
-##                                       Grad.Rate Elite
-## Massachusetts Institute of Technology        94   Yes</code></pre>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="task-9" class="section level3 unnumbered hasAnchor">
+<h3>Task 9<a href="practical-1.html#task-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using <code>Accept</code> and <code>Apps</code>, create a new variable that describes
+acceptance rate. Name this variable <code>acceptance_rate</code>. Hint: use
+<code>mutate()</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="practical-1.html#cb15-1" tabindex="-1"></a>acceptance_rate <span class="ot">&lt;-</span> college<span class="sc">$</span>Accept<span class="sc">/</span>college<span class="sc">$</span>Apps</span>
-<span id="cb15-2"><a href="practical-1.html#cb15-2" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="practical-1.html#cb15-3" tabindex="-1"></a>college[<span class="fu">which.min</span>(acceptance_rate), ]  <span class="co"># what university has the smallest acceptance rate</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="practical-1.html#cb10-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="practical-1.html#cb10-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">acceptance_rate =</span> Accept <span class="sc">/</span> Apps)</span></code></pre></div>
+</details>
+</div>
+<div id="task-10" class="section level3 unnumbered hasAnchor">
+<h3>Task 10<a href="practical-1.html#task-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>acceptance_rate</code> variable, find out which university has the
+lowest acceptance rate. Hint: for a <code>tidyverse</code> approach, you can use
+<code>slice_min()</code>.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="practical-1.html#cb11-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="practical-1.html#cb11-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> acceptance_rate, <span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
 </details>
 <pre><code>##                      Private  Apps Accept Enroll Top10perc Top25perc
-## Princeton University       1 13218   2042   1153        90        98
+## Princeton University     Yes 13218   2042   1153        90        98
 ##                      F.Undergrad P.Undergrad Outstate Room.Board Books Personal
 ## Princeton University        4540         146    19900       5910   675     1575
 ##                      PhD Terminal S.F.Ratio perc.alumni Expend Grad.Rate Elite
-## Princeton University  91       96       8.4          54  28320        99   Yes</code></pre>
+## Princeton University  91       96       8.4          54  28320        99   Yes
+##                      acceptance_rate
+## Princeton University       0.1544863</code></pre>
+</div>
+<div id="task-11" class="section level3 unnumbered hasAnchor">
+<h3>Task 11<a href="practical-1.html#task-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>acceptance_rate</code> variable, find out which university has the
+highest acceptance rate.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="practical-1.html#cb17-1" tabindex="-1"></a>college[<span class="fu">which.max</span>(acceptance_rate), ]  <span class="co"># what university has the most liberal acceptance rate</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="practical-1.html#cb13-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="practical-1.html#cb13-2" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> acceptance_rate, <span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
 </details>
-<pre><code>##                          Private Apps Accept Enroll Top10perc Top25perc
-## Emporia State University       0 1256   1256    853        43        79
-##                          F.Undergrad P.Undergrad Outstate Room.Board Books
-## Emporia State University        3957         588     5401       3144   450
-##                          Personal PhD Terminal S.F.Ratio perc.alumni Expend
-## Emporia State University     1888  72       75      19.3           4   5527
-##                          Grad.Rate Elite
-## Emporia State University        50    No</code></pre>
+<pre><code>##                                  Private Apps Accept Enroll Top10perc Top25perc
+## Emporia State University              No 1256   1256    853        43        79
+## Mayville State University             No  233    233    153         5        12
+## MidAmerica Nazarene College          Yes  331    331    225        15        36
+## Southwest Baptist University         Yes 1093   1093    642        12        32
+## University of Wisconsin-Superior      No  910    910    342        14        53
+## Wayne State College                   No 1373   1373    724         6        21
+##                                  F.Undergrad P.Undergrad Outstate Room.Board
+## Emporia State University                3957         588     5401       3144
+## Mayville State University                658          58     4486       2516
+## MidAmerica Nazarene College             1100         166     6840       3720
+## Southwest Baptist University            1770         967     7070       2500
+## University of Wisconsin-Superior        1434         417     7032       2780
+## Wayne State College                     2754         474     2700       2660
+##                                  Books Personal PhD Terminal S.F.Ratio
+## Emporia State University           450     1888  72       75      19.3
+## Mayville State University          600     1900  68       68      15.7
+## MidAmerica Nazarene College       1100     4913  33       33      15.4
+## Southwest Baptist University       400     1000  52       54      15.9
+## University of Wisconsin-Superior   550     1960  75       81      15.2
+## Wayne State College                540     1660  60       68      20.3
+##                                  perc.alumni Expend Grad.Rate Elite
+## Emporia State University                   4   5527        50    No
+## Mayville State University                 11   6971        51    No
+## MidAmerica Nazarene College               20   5524        49    No
+## Southwest Baptist University              13   4718        71    No
+## University of Wisconsin-Superior          15   6490        36    No
+## Wayne State College                       29   4550        52    No
+##                                  acceptance_rate
+## Emporia State University                       1
+## Mayville State University                      1
+## MidAmerica Nazarene College                    1
+## Southwest Baptist University                   1
+## University of Wisconsin-Superior               1
+## Wayne State College                            1</code></pre>
 </div>
 </div>
 <div id="part-ii" class="section level2 unnumbered hasAnchor">
 <h2>PART II<a href="practical-1.html#part-ii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For the exercises below, you will require the <strong>Boston</strong> dataset.</p>
-<p>Click here to download the file: <a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.<br />
-In this practical, you will revise and practice your R programming skills using some sample data from universities and colleges in the United States.</p>
-<p>Click on the following link to download the file: <a href="data/boston.csv" download="boston.csv"> boston.csv </a>.</p>
+<div class="file">
+<p>For the tasks below, you will require the <strong>Boston</strong> dataset.</p>
+<p>Click here to download the file:
+<a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.</p>
+<p><em>Remember to place your data file in a separate subfolder within your R
+project working directory.</em></p>
+</div>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="practical-1.html#cb19-1" tabindex="-1"></a><span class="co">#Q(a)-(d)</span></span></code></pre></div>
-</details>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practical-1.html#cb20-1" tabindex="-1"></a><span class="co">#a</span></span>
-<span id="cb20-2"><a href="practical-1.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="practical-1.html#cb15-1" tabindex="-1"></a><span class="co">#a</span></span>
+<span id="cb15-2"><a href="practical-1.html#cb15-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
 </details>
 <pre><code>## Warning: package &#39;MASS&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## 
@@ -489,65 +586,65 @@ In this practical, you will revise and practice your R programming skills using 
 ## 
 ##     select</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practical-1.html#cb24-1" tabindex="-1"></a><span class="co">#b</span></span>
-<span id="cb24-2"><a href="practical-1.html#cb24-2" tabindex="-1"></a><span class="fu">pairs</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="practical-1.html#cb19-1" tabindex="-1"></a><span class="co">#b</span></span>
+<span id="cb19-2"><a href="practical-1.html#cb19-2" tabindex="-1"></a><span class="fu">pairs</span>(Boston)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-1.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="practical-1.html#cb25-1" tabindex="-1"></a><span class="co">#c</span></span>
-<span id="cb25-2"><a href="practical-1.html#cb25-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>age, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practical-1.html#cb20-1" tabindex="-1"></a><span class="co">#c</span></span>
+<span id="cb20-2"><a href="practical-1.html#cb20-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>age, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-2.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="practical-1.html#cb26-1" tabindex="-1"></a><span class="co"># Older homes, more crime</span></span>
-<span id="cb26-2"><a href="practical-1.html#cb26-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>dis, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="practical-1.html#cb21-1" tabindex="-1"></a><span class="co"># Older homes, more crime</span></span>
+<span id="cb21-2"><a href="practical-1.html#cb21-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>dis, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-3.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="practical-1.html#cb27-1" tabindex="-1"></a><span class="co"># Closer to work-area, more crime</span></span>
-<span id="cb27-2"><a href="practical-1.html#cb27-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>rad, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="practical-1.html#cb22-1" tabindex="-1"></a><span class="co"># Closer to work-area, more crime</span></span>
+<span id="cb22-2"><a href="practical-1.html#cb22-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>rad, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-4.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="practical-1.html#cb28-1" tabindex="-1"></a><span class="co"># Higher index of accessibility to radial highways, more crime</span></span>
-<span id="cb28-2"><a href="practical-1.html#cb28-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>tax, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practical-1.html#cb23-1" tabindex="-1"></a><span class="co"># Higher index of accessibility to radial highways, more crime</span></span>
+<span id="cb23-2"><a href="practical-1.html#cb23-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>tax, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-5.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="practical-1.html#cb29-1" tabindex="-1"></a><span class="co"># Higher tax rate, more crime</span></span>
-<span id="cb29-2"><a href="practical-1.html#cb29-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>ptratio, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practical-1.html#cb24-1" tabindex="-1"></a><span class="co"># Higher tax rate, more crime</span></span>
+<span id="cb24-2"><a href="practical-1.html#cb24-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>ptratio, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-6.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="practical-1.html#cb30-1" tabindex="-1"></a><span class="co">#d</span></span>
-<span id="cb30-2"><a href="practical-1.html#cb30-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb30-3"><a href="practical-1.html#cb30-3" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>crim[Boston<span class="sc">$</span>crim<span class="sc">&gt;</span><span class="dv">1</span>], <span class="at">breaks=</span><span class="dv">25</span>)</span>
-<span id="cb30-4"><a href="practical-1.html#cb30-4" tabindex="-1"></a><span class="co"># most cities have low crime rates, but there is a long tail: 18 suburbs appear</span></span>
-<span id="cb30-5"><a href="practical-1.html#cb30-5" tabindex="-1"></a><span class="co"># to have a crime rate &gt; 20, reaching to above 80</span></span>
-<span id="cb30-6"><a href="practical-1.html#cb30-6" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>tax, <span class="at">breaks=</span><span class="dv">25</span>)</span>
-<span id="cb30-7"><a href="practical-1.html#cb30-7" tabindex="-1"></a><span class="co"># there is a large divide between suburbs with low tax rates and a peak at 660-680</span></span>
-<span id="cb30-8"><a href="practical-1.html#cb30-8" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>ptratio, <span class="at">breaks=</span><span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="practical-1.html#cb25-1" tabindex="-1"></a><span class="co">#d</span></span>
+<span id="cb25-2"><a href="practical-1.html#cb25-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb25-3"><a href="practical-1.html#cb25-3" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>crim[Boston<span class="sc">$</span>crim<span class="sc">&gt;</span><span class="dv">1</span>], <span class="at">breaks=</span><span class="dv">25</span>)</span>
+<span id="cb25-4"><a href="practical-1.html#cb25-4" tabindex="-1"></a><span class="co"># most cities have low crime rates, but there is a long tail: 18 suburbs appear</span></span>
+<span id="cb25-5"><a href="practical-1.html#cb25-5" tabindex="-1"></a><span class="co"># to have a crime rate &gt; 20, reaching to above 80</span></span>
+<span id="cb25-6"><a href="practical-1.html#cb25-6" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>tax, <span class="at">breaks=</span><span class="dv">25</span>)</span>
+<span id="cb25-7"><a href="practical-1.html#cb25-7" tabindex="-1"></a><span class="co"># there is a large divide between suburbs with low tax rates and a peak at 660-680</span></span>
+<span id="cb25-8"><a href="practical-1.html#cb25-8" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>ptratio, <span class="at">breaks=</span><span class="dv">25</span>)</span></code></pre></div>
 </details>
 <p><img src="01-S01_files/figure-html/boston-solution-7.png" width="672" /></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="practical-1.html#cb31-1" tabindex="-1"></a><span class="co"># a skew towards high ratios, but no particularly high ratios</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="practical-1.html#cb26-1" tabindex="-1"></a><span class="co"># a skew towards high ratios, but no particularly high ratios</span></span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="practical-1.html#cb32-1" tabindex="-1"></a><span class="co">#Q(e)-(h)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="practical-1.html#cb27-1" tabindex="-1"></a><span class="co">#Q(e)-(h)</span></span></code></pre></div>
 </details>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="practical-1.html#cb33-1" tabindex="-1"></a><span class="co"># (e)</span></span>
-<span id="cb33-2"><a href="practical-1.html#cb33-2" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, chas <span class="sc">==</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="practical-1.html#cb28-1" tabindex="-1"></a><span class="co"># (e)</span></span>
+<span id="cb28-2"><a href="practical-1.html#cb28-2" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, chas <span class="sc">==</span> <span class="dv">1</span>))</span></code></pre></div>
 </details>
 <pre><code>## [1] 35 14</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="practical-1.html#cb35-1" tabindex="-1"></a><span class="co"># (f)</span></span>
-<span id="cb35-2"><a href="practical-1.html#cb35-2" tabindex="-1"></a><span class="fu">median</span>(Boston<span class="sc">$</span>ptratio)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="practical-1.html#cb30-1" tabindex="-1"></a><span class="co"># (f)</span></span>
+<span id="cb30-2"><a href="practical-1.html#cb30-2" tabindex="-1"></a><span class="fu">median</span>(Boston<span class="sc">$</span>ptratio)</span></code></pre></div>
 </details>
 <pre><code>## [1] 19.05</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="practical-1.html#cb37-1" tabindex="-1"></a><span class="co"># (g)</span></span>
-<span id="cb37-2"><a href="practical-1.html#cb37-2" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">subset</span>(Boston, medv <span class="sc">==</span> <span class="fu">min</span>(Boston<span class="sc">$</span>medv)))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="practical-1.html#cb32-1" tabindex="-1"></a><span class="co"># (g)</span></span>
+<span id="cb32-2"><a href="practical-1.html#cb32-2" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">subset</span>(Boston, medv <span class="sc">==</span> <span class="fu">min</span>(Boston<span class="sc">$</span>medv)))</span></code></pre></div>
 </details>
 <pre><code>##              399      406
 ## crim     38.3518  67.9208
@@ -565,7 +662,7 @@ In this practical, you will revise and practice your R programming skills using 
 ## lstat    30.5900  22.9800
 ## medv      5.0000   5.0000</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="practical-1.html#cb39-1" tabindex="-1"></a><span class="fu">summary</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="practical-1.html#cb34-1" tabindex="-1"></a><span class="fu">summary</span>(Boston)</span></code></pre></div>
 </details>
 <pre><code>##       crim                zn             indus            chas        
 ##  Min.   : 0.00632   Min.   :  0.00   Min.   : 0.46   Min.   :0.00000  
@@ -596,18 +693,18 @@ In this practical, you will revise and practice your R programming skills using 
 ##  3rd Qu.:16.95   3rd Qu.:25.00  
 ##  Max.   :37.97   Max.   :50.00</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="practical-1.html#cb41-1" tabindex="-1"></a><span class="co"># Not the best place to live, but certainly not the worst.</span></span>
-<span id="cb41-2"><a href="practical-1.html#cb41-2" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="practical-1.html#cb41-3" tabindex="-1"></a><span class="co"># (h)</span></span>
-<span id="cb41-4"><a href="practical-1.html#cb41-4" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">7</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="practical-1.html#cb36-1" tabindex="-1"></a><span class="co"># Not the best place to live, but certainly not the worst.</span></span>
+<span id="cb36-2"><a href="practical-1.html#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="practical-1.html#cb36-3" tabindex="-1"></a><span class="co"># (h)</span></span>
+<span id="cb36-4"><a href="practical-1.html#cb36-4" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">7</span>))</span></code></pre></div>
 </details>
 <pre><code>## [1] 64 14</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="practical-1.html#cb43-1" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="practical-1.html#cb38-1" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">8</span>))</span></code></pre></div>
 </details>
 <pre><code>## [1] 13 14</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="practical-1.html#cb45-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="practical-1.html#cb40-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">subset</span>(Boston, rm <span class="sc">&gt;</span> <span class="dv">8</span>))</span></code></pre></div>
 </details>
 <pre><code>##       crim               zn            indus             chas       
 ##  Min.   :0.02009   Min.   : 0.00   Min.   : 2.680   Min.   :0.0000  
@@ -638,7 +735,7 @@ In this practical, you will revise and practice your R programming skills using 
 ##  3rd Qu.:5.12   3rd Qu.:50.0  
 ##  Max.   :7.44   Max.   :50.0</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="practical-1.html#cb47-1" tabindex="-1"></a><span class="fu">summary</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="practical-1.html#cb42-1" tabindex="-1"></a><span class="fu">summary</span>(Boston)</span></code></pre></div>
 </details>
 <pre><code>##       crim                zn             indus            chas        
 ##  Min.   : 0.00632   Min.   :  0.00   Min.   : 0.46   Min.   :0.00000  
@@ -669,7 +766,7 @@ In this practical, you will revise and practice your R programming skills using 
 ##  3rd Qu.:16.95   3rd Qu.:25.00  
 ##  Max.   :37.97   Max.   :50.00</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="practical-1.html#cb49-1" tabindex="-1"></a><span class="co"># relatively lower crime (comparing range), lower lstat (comparing range)</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="practical-1.html#cb44-1" tabindex="-1"></a><span class="co"># relatively lower crime (comparing range), lower lstat (comparing range)</span></span></code></pre></div>
 </details>
 
 </div>

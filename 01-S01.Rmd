@@ -9,25 +9,43 @@ editor_options:
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 1: Introduction to Data Science: The Basics of Statistical Learning
+Section 1: Introduction to Data Science: The Basics of Statistical
+Learning
 :::
 
-**In this section, we will cover the following functions:**
+**In this section, you will practice using the functions below. It is
+highly recommended that you explore these functions further using the
+Help tab in your RStudio console. You can access the R documentation in
+the Help tab using ? (e.g. `?read.csv`)**
 
-|   Function    |               Description               | Package |
-|:-------------:|:---------------------------------------:|:-------:|
-|     `c()`     |               concatenate               | base R  |
-|    `ls()`     | provides names of object in environment | base R  |
-|    `rm()`     |             remove objects              | base R  |
-|   `View()`    | viewing data objects spreadsheet-style  | base R  |
-
+|            Function             |                                   Description                                   |       Package       |
+|:----------------------:|:----------------------:|:----------------------:|
+|          `read.csv()`           |                                 read csv files                                  |       base R        |
+|          `read_csv()`           |                                 read csv files                                  |      tidyverse      |
+|     `column_to_rownames()`      |                           convert column to row names                           |      tidyverse      |
+|          `rownames()`           |                              obtain names of rows                               |       base R        |
+|           `summary()`           |                            obtain summary statistics                            |       base R        |
+|            `pairs()`            |                        produce a matrix of scatterplots                         |       base R        |
+|            `plot()`             |                                  create a plot                                  |       base R        |
+|           `ggplot()`            |                      generic function for creating a plot                       | tidyverse (ggplot2) |
+|           `mutate()`            |                       create, modify, and delete columns                        |  tidyverse (dplyr)  |
+|           `if_else()`           |                            condition-based function                             |  tidyverse (dplyr)  |
+|          `as_factor()`          |                       create factor using existing levels                       | tidyverse (forcats) |
+|             `par()`             |                            set graphical parameters                             |       base R        |
+|            `mfrow()`            |                                `par()` parameter                                |       base R        |
+| `slice_min()` and `slice_max()` | index rows by location (smallest and largest values of a variable respectively) |  tidyverse (dplyr)  |
 
 ::: ilos
-**Learning Outcomes:**  
--   
+**Learning Outcomes:**
+
+-   indexing using base R;
+-   create scatterplot matrices;
+-   create new variables;
+-   transform existing variables;
+-   translate base R code to `tidyverse` and vice versa.
 :::
 
-# Practical 1 {-}
+# Practical 1 {.unnumbered}
 
 ```{js, echo=FALSE}
 document.addEventListener('DOMContentLoaded', function() {
@@ -100,31 +118,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
+This practical consists of two parts, both of which will use datasets
+and exercises adapted from the core textbook for this course:
 
+James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
+Introduction to Statistical Learning with Applications in R*. 2nd ed.
+New York: Springer. <https://www.statlearning.com/>
 
-This practical consists of two parts, both of which will use datasets and exercises adapted from the core textbook for this course.   
-
-::: reference
-*Reference*  
-James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to Statistical Learning with Applications in R*. 2nd ed. New York: Springer.  https://www.statlearning.com/      
-::: 
-
-## PART I {-}
+## PART I {.unnumbered}
 
 ::: file
-For the tasks below, you will require the **College** dataset.  
+For the tasks below, you will require the **College** dataset.
 
-Click here to download the file: <a href="data/College.csv" download="College.csv"> College.csv </a>.    
+Click here to download the file:
+<a href="data/College.csv" download="College.csv"> College.csv </a>.
 
-*Remember to place your data file in a separate subfolder within your R project working directory.*
+*Remember to place your data file in a separate subfolder within your R
+project working directory.*
 :::
 
-This data file contains 18 variables for 777 different universities and colleges in the United States. The variables are: 
+This data file contains 18 variables for 777 different universities and
+colleges in the United States. The variables are:
 
 -   Private : Public/private indicator
 -   Apps : Number of applications received
--   Accept : Number of applicants accepted 
--   Enroll : Number of new students enrolled  
+-   Accept : Number of applicants accepted
+-   Enroll : Number of new students enrolled\
 -   Top10perc : New students from top 10% of high school class
 -   Top25perc : New students from top 25% of high school class
 -   F.Undergrad : Number of full-time undergraduates
@@ -140,10 +159,10 @@ This data file contains 18 variables for 777 different universities and colleges
 -   Expend : Instructional expenditure per student
 -   Grad.Rate : Graduation rate
 
+### Task 1 {.unnumbered}
 
-### Task 1 {-}
-
-Import the dataset using a suitable tidyverse function and name this object `college`.
+Import the dataset using a suitable tidyverse function and name this
+object `college`.
 
 ```{r warning = FALSE, message = FALSE}
 # Remember to load tidyverse first
@@ -153,125 +172,208 @@ library(tidyverse)
 college <- read_csv("data/College.csv")
 ```
 
-If you have a look at the contents of the data object using `View()`, you will notice that the first column contains the names of all of the universities in the dataset. You will also notice that it has a strange name.
+If you have a look at the contents of the data object using `View()`,
+you will notice that the first column contains the names of all of the
+universities in the dataset. You will also notice that it has a strange
+name.
 
-::: image
-<img src="images/snips/college-view.png" />
-:::
+<img src="images/snips/college-view.png"/>
 
+Actually, these data should not be treated as a variable (column) since
+it is just a list of university names.
 
-Actually, these data should not be treated as a variable (column) since it is just a list of university names. 
+### Task 2 {.unnumbered}
 
-### Task 2 {-}
-
-Keeping the list of names in the data object, transform this column such that the university names in the column become row names. Hint: use the  `column_to_rownames()` function from `dplyr`.
+Keeping the list of names in the data object, transform this column such
+that the university names in the column become row names. Hint: use the
+`column_to_rownames()` function from `dplyr`.
 
 ```{r warning = FALSE, message = FALSE}
 college <- college %>% column_to_rownames(var = "...1") 
 ```
 
 ::: question
-How would have your approach to this task differed if you would have imported the dataset using base R? Try it!
+How would have your approach to this task differed if you would have
+imported the dataset using base R? Try it!
 :::
 
 ::: answers
-The data file could have instead been imported using `read.csv()`:  
- 
-`college <- read.csv("data/College.csv")`   
+The data file could have instead been imported using `read.csv()`:
 
+`college <- read.csv("data/College.csv")`
 
-Using the base R approach, the first column containing the university names would have been named "X", as shown below using `View()`.
+Using the base R approach, the first column containing the university
+names would have been named "X", as shown below using `View()`.
 
-<img src="images/snips/college-base-view.png" />   
+<img src="images/snips/college-base-view.png" style="width: 60%;"/>
 
-Now, how would be go about transforming the contents of the first column into row names?
+Now, how would be go about transforming the contents of the first column
+into row names?
 
-This would require two steps.   
+This would require two steps.
 
-First, we assign the column contents to rows names. 
+First, we assign the column contents to rows names.
 
-`rownames(college) <- college[, 1]`     
+`rownames(college) <- college[, 1]`
 
-If you have another look at the data object, you will see that the rows have now been renamed using the university names in the "X" column, but the column is still part of the dataset. We therefore need to tell R to delete the column. 
+If you have another look at the data object, you will see that the rows
+have now been renamed using the university names in the "X" column, but
+the column is still part of the dataset. We therefore need to tell R to
+delete the column.
 
 `college <- college[, -1]`
 :::
 
+### Task 3 {.unnumbered}
 
-### Task 3 {-}
+Produce summary statistics for all variables in the data object.
 
-Create a scatterplot matrix of the first three numeric variables. 
-
-```{r}
-pairs(college[,2:4])
-```
-
-
-```{r college-solution}
+```{r warning = FALSE, message = FALSE}
 summary(college)
 ```
 
+### Task 4 {.unnumbered}
 
-```{r }
-#iii) plot side by side boxplots of Outstate versus Private (Private universities have more out of state students):
+Create a scatterplot matrix of the first three numeric variables.
 
-class(college$Private)
-#Character vectors cannot be used in most statistical functions in R, since they don't define groups.
-college$Private <- ifelse(college$Private=="Yes", 1, 0)
-#we need to convert the Character vector 'private' to numerical vector.
-plot(college$Private, college$Outstate)
+```{r warning = FALSE, message = FALSE}
+pairs(college[,2:4])
+```
 
-#iv)
-Elite <- rep("No", nrow(college))
-Elite[college$Top10perc > 50] <- "Yes"
-Elite <- as.factor(Elite)
-college <- data.frame(college, Elite)
+### Task 5 {.unnumbered}
 
-summary(Elite)
+Produce side by side box plots of `Outstate` versus `Private` using base
+R.
 
-# plot side by side boxplots of Outstate versus Elite (Elite universities have more out of state students):
-plot(college$Elite, college$Outstate)
+```{r eval = FALSE}
+plot(college$Private, college$Outstate, xlab = "Private", ylab = "Outstate")
+```
 
-#v)
+::: question
+Did this work? Why?
+:::
+
+::: answers
+Using the `plot()` base R function to produce a box plot would produce
+an error since the `Private` variable is of class character. Most
+statistical functions will not work with character vectors.
+
+`Error in plot.window(...) : need finite 'xlim' values`\
+`In addition: Warning messages:`\
+`1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion`\
+`2: In min(x) : no non-missing arguments to min; returning Inf`\
+`3: In max(x) : no non-missing arguments to max; returning -Inf`
+
+Creating a box plot with `tidyverse` would work.
+
+`college %>%       ggplot(aes(x = Private, y = Outstate)) +        geom_boxplot()`
+
+<img src="images/snips/private.png" style="width: 60%;"/>
+
+However, it is important to note that if a variable is not of the right
+class, then this might have unintended consequences for example, when
+building models. In this case, the `Private` variable must be
+transformed into a factor.
+:::
+
+### Task 6 {.unnumbered}
+
+Using the `Top10perc` variable, create a new categorical variable called
+`Elite` such that universities are divided into two groups based on
+whether or not the proportion of students coming from the top 10% of
+their high school classes exceeds 50%. Hint: use a combination of
+`mutate()` and `if_else()`.
+
+```{r warning = FALSE, message = FALSE}
+college <- college %>%
+  mutate(Elite = if_else(Top10perc > 50, "Yes", "No"),
+         Elite = as_factor(Elite))
+#do not forget the factor transformation step (categorical variables are factors in R)
+```
+
+### Task 7 {.unnumbered}
+
+Produce side by side box plots of the new `Elite` variable and
+`Outstate`.
+
+```{r}
+college %>%  
+  ggplot(aes(x = Elite, y = Outstate)) +   
+  geom_boxplot()
+```
+
+::: question
+How would you produce a similar plot using base R?
+:::
+
+::: answers
+`plot(college$Elite, college$Outstate,  xlab = "Elite", ylab = "Outstate")`
+:::
+
+### Task 8 {.unnumbered}
+
+Use base R to produce a multipanel plot that displays histograms of the
+following variables: `Apps`, `perc.alumni`, `S.F.Ratio`, `Expend`. Hint:
+use `par(mfrow=c(2,2))` to set up a 2x2 panel. Try to adjust the
+specifications (e.g. breaks).
+
+```{r}
+
+# An example is shown below. Note that the purpose of the mfrow parameter is to change the default way in which R displays plots which is in a single panel display. Once applied, all plots you create later will also be displayed in a 2x2 grid. To revert back, you need to enter par(mfrow=c(1,1)) into the console.
 
 par(mfrow=c(2,2))
 hist(college$Apps)
 hist(college$perc.alumni, col=2)
 hist(college$S.F.Ratio, col=3, breaks=10)
 hist(college$Expend, breaks=100)
-
-#vi)
-#for example
-
-college[which.max(college$Top10perc), ]  # what is the university with the most students in the top 10% of class
-
-
-acceptance_rate <- college$Accept/college$Apps
-
-college[which.min(acceptance_rate), ]  # what university has the smallest acceptance rate
-
-college[which.max(acceptance_rate), ]  # what university has the most liberal acceptance rate
-
+  
 ```
 
-## PART II {-}
+### Task 9 {.unnumbered}
 
+Using `Accept` and `Apps`, create a new variable that describes
+acceptance rate. Name this variable `acceptance_rate`. Hint: use
+`mutate()`.
 
-For the exercises below, you will require the **Boston** dataset. 
-
-Click here to download the file: <a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.   
-In this practical, you will revise and practice your R programming skills using some sample data from universities and colleges in the United States.   
-
-Click on the following link to download the file: <a href="data/boston.csv" download="boston.csv"> boston.csv </a>. 
-
-```{r boston, exercise=TRUE}
-#Q(a)-(d)
-
+```{r}
+college <- college %>%
+  mutate(acceptance_rate = Accept / Apps)
 ```
+
+### Task 10 {.unnumbered}
+
+Using the `acceptance_rate` variable, find out which university has the
+lowest acceptance rate. Hint: for a `tidyverse` approach, you can use
+`slice_min()`.
+
+```{r}
+college %>%
+  slice_min(order_by = acceptance_rate, n = 1)
+```
+
+### Task 11 {.unnumbered}
+
+Using the `acceptance_rate` variable, find out which university has the
+highest acceptance rate.
+
+```{r}
+college %>%
+  slice_max(order_by = acceptance_rate, n = 1)
+```
+
+## PART II {.unnumbered}
+
+::: file
+For the tasks below, you will require the **Boston** dataset.
+
+Click here to download the file:
+<a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.
+
+*Remember to place your data file in a separate subfolder within your R
+project working directory.*
+:::
 
 ```{r boston-solution}
-#a
-library(MASS)
 
 
 #b
