@@ -554,11 +554,7 @@ Documentation.
 ?Boston
 ```
 
-To access the `Boston` dataset, simply type the name of the data object into the console or use `View()`
-
-```{r}
-View(Boston)
-```
+To explore the `Boston` dataset, simply type the name of the data object into the console or use `View()`
 
 ::: question
 What type of data structure is the `Boston` dataset? What are its
