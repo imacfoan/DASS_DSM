@@ -120,15 +120,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
-
-
-## PART I {.unnumbered}
-
 This practical consists of two parts, both of which will use exercises adapted from the core textbook for this course:
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
 Introduction to Statistical Learning with Applications in R*. 2nd ed.
 New York: Springer. <https://www.statlearning.com/>
+
+## PART I {.unnumbered}
 
 ::: file
 For the tasks below, you will require the **College** dataset from the core textbook (James et. al 2021). 
