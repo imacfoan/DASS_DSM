@@ -23,6 +23,9 @@ This notebook is also designed to work well on tablet and mobile devices; to enh
 
 <img src="images/gifs/other_options.gif" style="width: 50%; border: 4px solid #6D009D;" />
 
+The code, as well as the output and answers, have interactive buttons which can reveal or hide the content. One additional feature of the R code is that it can be copied and pasted directly in your R console or script by clicking on the following icon: 
+
+<img src="images/snips/copy.png" style="width: 30%;" />  
 
 ::: attention
 **1:** Before beginning, it is recommended that you create a RStudio project for this course and work through the exercises and tasks in each section using this project. 
