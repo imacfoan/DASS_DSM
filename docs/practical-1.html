@@ -286,14 +286,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-<div id="part-i" class="section level2 unnumbered hasAnchor">
-<h2>PART I<a href="practical-1.html#part-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This practical consists of two parts, both of which will use exercises adapted from the core textbook for this course:</p>
+<p>This practical consists of two parts, both of which will use exercises
+adapted from the core textbook for this course:</p>
 <p>James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An
 Introduction to Statistical Learning with Applications in R</em>. 2nd ed.
 New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
+<div id="part-i" class="section level2 unnumbered hasAnchor">
+<h2>PART I<a href="practical-1.html#part-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="file">
-<p>For the tasks below, you will require the <strong>College</strong> dataset from the core textbook (James et. al 2021).</p>
+<p>For the tasks below, you will require the <strong>College</strong> dataset from the
+core textbook (James et. al 2021).</p>
 <p>Click here to download the file:
 <a href="data/College.csv" download="College.csv"> College.csv </a>.</p>
 <p><em>Remember to place your data file in a separate subfolder within your R
@@ -324,7 +326,8 @@ colleges in the United States. The variables are:</p>
 </ul>
 <div id="task-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 1<a href="practical-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Import the dataset in an object called <code>college</code> using a suitable tidyverse function.</p>
+<p>Import the dataset in an object called <code>college</code> using a suitable
+tidyverse function.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="practical-1.html#cb1-1" tabindex="-1"></a><span class="co"># Remember to load tidyverse first</span></span>
 <span id="cb1-2"><a href="practical-1.html#cb1-2" tabindex="-1"></a></span>
@@ -572,8 +575,10 @@ highest acceptance rate.</p>
 <div id="part-ii" class="section level2 unnumbered hasAnchor">
 <h2>PART II<a href="practical-1.html#part-ii" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="file">
-<p>For the tasks below, you will require the <strong>Boston</strong> dataset. This dataset is part of the <code>MASS</code> R package.</p>
-<p>To access the dataset, load the <code>MASS</code> package (install the package first, if you have not done so previously).</p>
+<p>For the tasks below, you will require the <strong>Boston</strong> dataset. This
+dataset is part of the <code>MASS</code> R package.</p>
+<p>To access the dataset, load the <code>MASS</code> package (install the package
+first, if you have not done so previously).</p>
 </div>
 <div id="task-1-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 1<a href="practical-1.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -588,26 +593,40 @@ highest acceptance rate.</p>
 <p>Does R provide any message when loading <code>MASS</code>? Why does this matter?</p>
 </div>
 <div class="answers">
-<p>One important message that R provides when loading <code>MASS</code> is that this package masks the <code>select()</code> function from <code>tidyverse</code>.</p>
+<p>One important message that R provides when loading <code>MASS</code> is that this
+package masks the <code>select()</code> function from <code>tidyverse</code>.</p>
 <p><code>Attaching package: ‘MASS’</code></p>
 <p><code>The following object is masked from ‘package:dplyr’:</code></p>
 <pre><code>`select`  </code></pre>
-<p>When masking occurs, this means that both packages contain the same function. If you were to use the <code>select()</code> function, R will call the function from the <code>MASS</code> package, rather than from <code>tidyverse (dplyr)</code> package. This is because the <code>MASS</code> package is the one masking the function. If you intend to use the <code>select()</code> function as defined by the <code>tidyverse</code> package, it may not work as intended and/or you may be prompted by an error message such as:</p>
+<p>When masking occurs, this means that both packages contain the same
+function. If you were to use the <code>select()</code> function, R will call the
+function from the <code>MASS</code> package, rather than from <code>tidyverse (dplyr)</code>
+package. This is because the <code>MASS</code> package is the one masking the
+function. If you intend to use the <code>select()</code> function as defined by the
+<code>tidyverse</code> package, it may not work as intended and/or you may be
+prompted by an error message such as:</p>
 <p><code>Error in select(...): unused argument (...)</code></p>
-<p>To avoid such issues, you must ‘call’ on the package from which you want R to use the masked function (e.g. <code>dplyr::select()</code>). This is why it is important to read through all warnings and messages provided in the console.</p>
+<p>To avoid such issues, you must ‘call’ on the package from which you want
+R to use the masked function (e.g. <code>dplyr::select()</code>). This is why it is
+important to read through all warnings and messages provided in the
+console.</p>
 </div>
 </div>
 <div id="task-2-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="practical-1.html#task-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Find out more about the <code>Boston</code> dataset variables by accessing the R Documentation.</p>
+<p>Find out more about the <code>Boston</code> dataset variables by accessing the R
+Documentation.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="practical-1.html#cb17-1" tabindex="-1"></a>?Boston</span></code></pre></div>
 </details>
 <div class="question">
-<p>What type of data structure is the <code>Boston</code> dataset? What are its dimensions? How many categorical and quantitative variables are there?</p>
+<p>What type of data structure is the <code>Boston</code> dataset? What are its
+dimensions? How many categorical and quantitative variables are there?</p>
 </div>
 <div class="answers">
-<p>The <code>Boston</code> dataset is a data frame with 506 rows (observations) and 14 columns (variables). There is one categorical variable (<code>chas</code>), and 13 quantitative variables.</p>
+<p>The <code>Boston</code> dataset is a data frame with 506 rows (observations) and 14
+columns (variables). There is one categorical variable (<code>chas</code>), and 13
+quantitative variables.</p>
 </div>
 </div>
 <div id="task-3-1" class="section level3 unnumbered hasAnchor">
@@ -623,7 +642,8 @@ highest acceptance rate.</p>
 </div>
 <div id="task-4-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="practical-1.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using a <code>tidyverse</code> approach, calculate the mean, median, and standard deviation of all variables of class <em>numeric</em>.</p>
+<p>Using a <code>tidyverse</code> approach, calculate the mean, median, and standard
+deviation of all variables of class <em>numeric</em>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practical-1.html#cb20-1" tabindex="-1"></a>Boston <span class="sc">%&gt;%</span></span>
 <span id="cb20-2"><a href="practical-1.html#cb20-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
@@ -651,15 +671,22 @@ highest acceptance rate.</p>
 ## 13 tax     408.     169.    330    
 ## 14 zn       11.4     23.3     0</code></pre>
 <div class="question">
-<p>What is the mean pupil-teacher ratio? What is the median and mean per capita crime rate? Which value do you think is more suitable to describe per capita crime rate?</p>
+<p>What is the mean pupil-teacher ratio? What is the median and mean per
+capita crime rate? Which value do you think is more suitable to describe
+per capita crime rate?</p>
 </div>
 <div class="answers">
-<p>The mean pupil-teacher ratio is about 19. The median crime rate is 0.257 whilst the mean is larger at 3.61. Given the difference between the median and the mean, a skewed distribution is expected, therefore, the median may be a more a suitable summary statistic to describe crime rate (a histogram would be needed)</p>
+<p>The mean pupil-teacher ratio is about 19. The median crime rate is 0.257
+whilst the mean is larger at 3.61. Given the difference between the
+median and the mean, a skewed distribution is expected, therefore, the
+median may be a more a suitable summary statistic to describe crime rate
+(a histogram would be needed)</p>
 </div>
 </div>
 <div id="task-5-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="practical-1.html#task-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using a base R approach, create a 2x2 multipanel plot of <code>crim</code> versus <code>age</code>, <code>dis</code>, <code>rad</code>, <code>tax</code> and <code>ptratio</code>.</p>
+<p>Using a base R approach, create a 2x2 multipanel plot of <code>crim</code> versus
+<code>age</code>, <code>dis</code>, <code>rad</code>, <code>tax</code> and <code>ptratio</code>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="practical-1.html#cb22-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb22-2"><a href="practical-1.html#cb22-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>age, Boston<span class="sc">$</span>crim)</span>
@@ -669,15 +696,21 @@ highest acceptance rate.</p>
 </details>
 <p><img src="01-S01_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="question">
-<p>What can you say about the relationships between <code>age</code>, <code>dis</code>, <code>rad</code>, <code>tax</code>, and <code>crim</code>?</p>
+<p>What can you say about the relationships between <code>age</code>, <code>dis</code>, <code>rad</code>,
+<code>tax</code>, and <code>crim</code>?</p>
 </div>
 <div class="answers">
-<p>As the age of the home increases (<code>age</code>), crime also increases. There is also higher crime around employment centers (<code>dis</code>). With very high index of accessibility to radial highways (<code>rad</code>), and tax rates (<code>tax</code>) there also appears to be high crime rates.</p>
+<p>As the age of the home increases (<code>age</code>), crime also increases. There is
+also higher crime around employment centers (<code>dis</code>). With very high
+index of accessibility to radial highways (<code>rad</code>), and tax rates (<code>tax</code>)
+there also appears to be high crime rates.</p>
 </div>
 </div>
 <div id="task-6-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 6<a href="practical-1.html#task-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using a base R approach, create and display histograms of <code>crim</code>, <code>tax</code> and <code>ptratio</code> in a 1x2 multipanel plot. Set the <code>breaks</code> argument to <strong>25</strong> .</p>
+<p>Using a base R approach, create and display histograms of <code>crim</code>, <code>tax</code>
+and <code>ptratio</code> in a 1x2 multipanel plot. Set the <code>breaks</code> argument to
+<strong>25</strong> .</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practical-1.html#cb23-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb23-2"><a href="practical-1.html#cb23-2" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>crim, <span class="at">breaks=</span><span class="dv">25</span>)</span>
@@ -688,7 +721,12 @@ highest acceptance rate.</p>
 <p>What do these histograms indicate?</p>
 </div>
 <div class="answers">
-<p>Most areas have low crime rates, but there is a rather long tail showing high crime rates (although the frequency seems to be very low). Given the degree of skew, the mean would not be a good measure of central tendency. With respect to tax rates, there appears to be a large divide between low taxation and high taxation, with the highest peak at around 670.</p>
+<p>Most areas have low crime rates, but there is a rather long tail showing
+high crime rates (although the frequency seems to be very low). Given
+the degree of skew, the mean would not be a good measure of central
+tendency. With respect to tax rates, there appears to be a large divide
+between low taxation and high taxation, with the highest peak at around
+670.</p>
 <p><em>Remember to revert back to single panel display.</em></p>
 </div>
 
