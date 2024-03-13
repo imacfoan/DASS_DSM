@@ -39,10 +39,12 @@ the Help tab using ? (e.g. `?read.csv`)**
 **Learning Outcomes:**
 
 -   indexing using base R;
--   create scatterplot matrices;
--   create new variables;
--   transform existing variables;
--   translate base R code to `tidyverse` and vice versa.
+-   creating scatterplot matrices;
+-   creating new variables;
+-   transforming existing variables;
+-   using functionals;
+-   'calling' on masked functions from specific packages;
+-   translating base R code to `tidyverse` and vice versa.
 :::
 
 # Practical 1 {.unnumbered}
@@ -118,17 +120,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ```
 
-This practical consists of two parts, both of which will use datasets
-and exercises adapted from the core textbook for this course:
+
+
+## PART I {.unnumbered}
+
+This practical consists of two parts, both of which will use exercises adapted from the core textbook for this course:
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
 Introduction to Statistical Learning with Applications in R*. 2nd ed.
 New York: Springer. <https://www.statlearning.com/>
 
-## PART I {.unnumbered}
-
 ::: file
-For the tasks below, you will require the **College** dataset.
+For the tasks below, you will require the **College** dataset from the core textbook (James et. al 2021). 
 
 Click here to download the file:
 <a href="data/College.csv" download="College.csv"> College.csv </a>.
@@ -161,8 +164,7 @@ colleges in the United States. The variables are:
 
 ### Task 1 {.unnumbered}
 
-Import the dataset using a suitable tidyverse function and name this
-object `college`.
+Import the dataset in an object called `college` using a suitable tidyverse function.
 
 ```{r warning = FALSE, message = FALSE}
 # Remember to load tidyverse first
@@ -364,69 +366,132 @@ college %>%
 ## PART II {.unnumbered}
 
 ::: file
-For the tasks below, you will require the **Boston** dataset.
+For the tasks below, you will require the **Boston** dataset. This dataset is part of the `MASS` R package. 
 
-Click here to download the file:
-<a href="data/Boston.csv" download="Boston.csv"> Boston.csv </a>.
-
-*Remember to place your data file in a separate subfolder within your R
-project working directory.  *
+To access the dataset, load the `MASS` package (install the package first, if you have not done so previously).
 :::
 
-```{r boston-solution}
+### Task 1 {-}
 
-Boston <- read_csv("data/Boston.csv")
-#b
-pairs(Boston)
+Install and load the `MASS` package. You will also require `tidyverse`. 
+
+```{r eval = FALSE}
+
+# if you haven't already, install the MASS package before loading
+install.packages("MASS")
+library(MASS)
+library(tidyverse)
 ```
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+library(MASS)
+library(tidyverse)
+```
+
+:::question
+Does R provide any message when loading `MASS`? Why does this matter?
+:::
+
+::: answers
+One important message that R provides when loading `MASS` is that this package masks the `select()` function from `tidyverse`. 
+
+
+`Attaching package: ‘MASS’`  
+
+`The following object is masked from ‘package:dplyr’:`  
+
+    `select`  
+    
+When masking occurs, this means that both packages contain the same function. If you were to use the `select()` function, R will call the function from the `MASS` package, rather than from `tidyverse (dplyr)` package. This is because the `MASS` package is the one masking the function. If you intend to use the `select()` function as defined by the `tidyverse` package, it may not work as intended and/or you may be prompted by an error message such as:  
+
+`Error in select(...): unused argument (...)`  
+  
+To avoid such issues, you must 'call' on the package from which you want R to use the masked function (e.g. `dplyr::select()`). This is why it is important to read through all warnings and messages provided in the console.
+:::
+
+### Task 2 {-}
+
+Find out more about the `Boston` dataset variables by accessing the R Documentation. 
+
+```{r eval = FALSE}
+?Boston
+```
+
+::: question 
+What type of data structure is the `Boston` dataset? What are its dimensions? How many categorical and quantitative variables are there? 
+:::
+
+::: answers
+The `Boston` dataset is a data frame with 506 rows (observations) and 14 columns (variables). There is one categorical variable (`chas`), and 13 quantitative variables.
+:::
+
+### Task 3 {-}
+
+Find the class of all 14 variables. Hint: use `sapply`.
 
 ```{r}
-#c
+sapply(Boston, class)
+```
+
+### Task 4 {-}
+
+Using a `tidyverse` approach, calculate the mean, median, and standard deviation of all variables of class *numeric*. 
+
+```{r}
+Boston %>%
+  dplyr::select(dplyr::where(is.numeric)) %>%
+  pivot_longer(everything()) %>%
+  group_by(name) %>%
+  summarise(Mean = mean(value, na.rm = TRUE),
+            SD = sd(value, na.rm = TRUE), 
+            Median = median(value, na.rm = TRUE))
+```
+
+::: question
+What is the mean pupil-teacher ratio? What is the median and mean per capita crime rate? Which value do you think is more suitable to describe per capita crime rate?
+:::
+
+::: answers
+The mean pupil-teacher ratio is about 19. The median crime rate is 0.257 whilst the mean is larger at 3.61. Given the difference between the median and the mean, a skewed distribution is expected, therefore, the median may be a more a suitable summary statistic to describe crime rate (a histogram would be needed)
+:::
+
+### Task 5 {-}
+
+Using a base R approach, create a 2x2 multipanel plot of `crim` versus `age`, `dis`, `rad`, `tax` and `ptratio`.
+
+```{r}
+par(mfrow = c(2,2))
 plot(Boston$age, Boston$crim)
-# Older homes, more crime
 plot(Boston$dis, Boston$crim)
-# Closer to work-area, more crime
 plot(Boston$rad, Boston$crim)
-# Higher index of accessibility to radial highways, more crime
 plot(Boston$tax, Boston$crim)
-# Higher tax rate, more crime
-plot(Boston$ptratio, Boston$crim)
+```
 
-#d
-par(mfrow=c(1,3))
-hist(Boston$crim[Boston$crim>1], breaks=25)
-# most cities have low crime rates, but there is a long tail: 18 suburbs appear
-# to have a crime rate > 20, reaching to above 80
+::: question
+What can you say about the relationships between `age`, `dis`, `rad`, `tax`, and `crim`?
+:::
+
+:::answer 
+As the age of the home increases (`age`), crime also increases. There is also higher crime around employment centers (`dis`). With very high index of accessibility to radial highways (`rad`), and tax rates (`tax`) there also appears to be high crime rates. 
+:::
+
+### Task 6 {-}
+
+Using a base R approach, create and display histograms of `crim`, `tax` and `ptratio` in a 1x2 multipanel plot. Set the `breaks` argument to **25** .  
+
+```{r}
+par(mfrow=c(1,2))
+hist(Boston$crim, breaks=25)
 hist(Boston$tax, breaks=25)
-# there is a large divide between suburbs with low tax rates and a peak at 660-680
-hist(Boston$ptratio, breaks=25)
-# a skew towards high ratios, but no particularly high ratios
-
 ```
 
-```{r boston2, exercise=TRUE}
-#Q(e)-(h)
+::: question
+What do these histograms indicate?
+:::
 
+::: answers
+Most areas have low crime rates, but there is a rather long tail showing high crime rates (although the frequency seems to be very low). Given the degree of skew, the mean would not be a good measure of central tendency. With respect to tax rates, there appears to be a large divide between low taxation and high taxation, with the highest peak at around 670.    
 
-```
+*Remember to revert back to single panel display.*
+:::
 
-```{r boston2-solution}
-# (e)
-dim(subset(Boston, chas == 1))
-
-# (f)
-median(Boston$ptratio)
-
-# (g)
-t(subset(Boston, medv == min(Boston$medv)))
-summary(Boston)
-# Not the best place to live, but certainly not the worst.
-
-# (h)
-dim(subset(Boston, rm > 7))
-dim(subset(Boston, rm > 8))
-summary(subset(Boston, rm > 8))
-summary(Boston)
-# relatively lower crime (comparing range), lower lstat (comparing range)
-
-```
