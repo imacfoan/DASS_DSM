@@ -1,0 +1,12 @@
+name: S2_simplereg
+title: S2_simplereg
+username: ioanamacoveciuc
+account: ioanamacoveciuc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11503966
+bundleId: 8377717
+url: https://ioanamacoveciuc.shinyapps.io/S2_simplereg/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
