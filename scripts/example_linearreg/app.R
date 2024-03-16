@@ -31,7 +31,8 @@ server <- function(input, output, session) {
   output$plot <- renderPlotly({
     user_line <- input$intercept + input$slope * c(min(data$hours_worked), max(data$hours_worked))
     
-    plot_ly(data, x = ~hours_worked, y = ~annual_income, type = 'scatter', mode = 'markers') %>%
+    plot_ly(data, x = ~hours_worked, y = ~annual_income, type = 'scatter', mode = 'markers', 
+            marker = list(size = 5, color = 'black')) %>%
       add_lines(x = c(min(data$hours_worked), max(data$hours_worked)), 
                 y = predict(fit, newdata = data.frame(hours_worked = c(min(data$hours_worked), max(data$hours_worked)))),
                 name = "Best Fit Line", line = list(color = 'red')) %>%
