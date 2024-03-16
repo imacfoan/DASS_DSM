@@ -11,7 +11,7 @@ link-citations: yes
 
 # About {-}
 
-Welcome to **SOST70033 Data Science Modelling**! This notebook will host the materials for all R practical tasks for this course unit as well as different interactive activities. The notebook follows the same section-based structure as the learning materials on Blackboard. To access this notebook, you can bookmark it like any other website in your favourite web browser.    
+Welcome to **SOST70033 Data Science Modelling**! This notebook will host the materials for all R practical tasks for this course unit. The notebook follows the same section-based structure as the learning materials on Blackboard. To access this notebook, you can bookmark it like any other website in your favourite web browser.    
 
 For each section, you will have at least one practical to complete and each of these can be accessed by using the sidebar menu on the left hand side of your screen. Clicking on the headings in each section will expand the menu and each task can be accessed individually.  
 
