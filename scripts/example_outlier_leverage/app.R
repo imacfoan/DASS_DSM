@@ -34,7 +34,7 @@ ui <- navbarPage(
       sidebarPanel(
         checkboxInput("includeOutlier", "Include Outlier", FALSE),
         checkboxInput("includeLeverage", "Include High Leverage Point", FALSE),
-        checkboxInput("showResiduals", "Show Standardized Residuals", FALSE)
+        checkboxInput("showResiduals", "Show Studentised Residuals", FALSE)
       ),
       mainPanel(
         plotlyOutput("plot"),
@@ -161,7 +161,7 @@ server <- function(input, output, session) {
       p <- ggplot(df_augmented, aes(x = leverage, y = studentized_res)) +
         geom_point() +
         geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
-        labs(x = "Leverage", y = "Studentised Residuals", title = "Studentized Residuals vs. Leverage") +
+        labs(x = "Leverage", y = "Studentised Residuals", title = "Studentised Residuals vs. Leverage") +
         theme_minimal()
     } else {
       p <- ggplot(df_base, aes(x = x, y = y)) +
