@@ -55,7 +55,8 @@ ui <- navbarPage(
                     selected = "scatterOriginal")
       ),
       mainPanel(
-        plotlyOutput("heteroskedasticityPlot")
+        plotlyOutput("heteroskedasticityPlot"),
+        verbatimTextOutput("modelStats") 
       )
     )
   )
@@ -140,27 +141,27 @@ server <- function(input, output, session) {
     
     # Add outlier and leverage points to the augmented data
     if(input$includeOutlier) {
-      outlier_x <- median(x) + 3
+      outlier_x <- median(x) + 5
       outlier_y <- max(base_y) + 300
       df_augmented <- rbind(df_augmented, data.frame(x = outlier_x, y = outlier_y))
     }
     
     if(input$includeLeverage) {
-      leverage_x <- max(x) * 1.2
-      leverage_y <- median(base_y) - 50
+      leverage_x <- max(x) * 1.5
+      leverage_y <- median(base_y) + 40
       df_augmented <- rbind(df_augmented, data.frame(x = leverage_x, y = leverage_y))
     }
     
     fit_augmented <- lm(y ~ x, data = df_augmented)
     
     if(input$showResiduals) {
-      df_augmented$residuals <- rstandard(fit_augmented)
-      df_augmented$fitted <- predict(fit_augmented)
+      df_augmented$studentized_res <- rstudent(fit_augmented)
+      df_augmented$leverage <- hatvalues(fit_augmented)
       
-      p <- ggplot(df_augmented, aes(x = fitted, y = residuals)) +
+      p <- ggplot(df_augmented, aes(x = leverage, y = studentized_res)) +
         geom_point() +
         geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
-        labs(x = "Fitted Values", y = "Standardized Residuals", title = "Standardized Residuals vs. Fitted Values") +
+        labs(x = "Leverage", y = "Studentised Residuals", title = "Studentized Residuals vs. Leverage") +
         theme_minimal()
     } else {
       p <- ggplot(df_base, aes(x = x, y = y)) +
@@ -206,11 +207,62 @@ server <- function(input, output, session) {
         cat(sprintf("R-squared: %.2f\n", summary(fit)$r.squared))
         cat(sprintf("Residual Standard Error (RSE): %.2f\n", summary(fit)$sigma))
       } else {
-        cat("Standardized residuals are being shown. Model statistics are not displayed.")
+        cat("Model statistics are displayed only for the scatter plots.")
       }
     })
 
-  output$heteroskedasticityPlot <- renderPlotly({
+    output$heteroskedasticityPlot <- renderPlotly({
+      set.seed(42)
+      n <- 1000  # Number of data points
+      x <- runif(n, 1, 10)
+      y <- exp(1 + 0.5 * x) * rnorm(n, mean = 1, sd = 0.5)
+      
+      # Apply log transformation conditionally and handle potential NAs
+      df_original <- data.frame(x = x, y = y)
+      df_transformed <- data.frame(x = x, y = log(y))
+      
+      # Ensure NA values are handled properly
+      df_transformed <- na.omit(df_transformed)
+      
+      # Choose the appropriate data frame based on user selection
+      df_use <- switch(input$plotType,
+                       scatterOriginal = df_original,
+                       residualsBefore = df_original,
+                       scatterLogTransform = df_transformed,
+                       residualsAfter = df_transformed)
+      
+      # Fit the model to the selected data frame
+      fit <- lm(y ~ x, data = df_use)
+      
+      if(input$plotType %in% c("scatterOriginal", "scatterLogTransform")) {
+        y_axis_label <- ifelse(input$plotType == "scatterLogTransform", "Log(y)", "Response (Y)")
+        
+        # Scatter plot
+        p <- ggplot(df_use, aes(x = x, y = y)) +
+          geom_point() +
+          geom_smooth(method = "lm", se = FALSE, color = "red") +
+          labs(x = "Predictor (X)", y = y_axis_label, 
+               title = ifelse(input$plotType == "scatterOriginal", "Original Scatter Plot", "Scatter Plot After Log Transform")) +
+          theme_minimal()
+      } else {
+        # Calculate regular residuals instead of standardized residuals
+        df_use$fitted <- predict(fit)
+        df_use$residuals <- residuals(fit)  # Use residuals instead of rstandard
+        
+        # Residuals plot
+        p <- ggplot(df_use, aes(x = fitted, y = residuals)) +
+          geom_point() +
+          geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+          labs(x = "Fitted Values", y = "Residuals", 
+               title = ifelse(input$plotType == "residualsBefore", "Residuals vs. Fitted Values (Before Log Transform)", "Residuals vs. Fitted Values (After Log Transform)")) +
+          theme_minimal()
+      }
+      
+      ggplotly(p)
+    })
+    
+  
+  output$modelStats <- renderPrint({
     set.seed(42)
     n <- 1000  # Number of data points
     x <- runif(n, 1, 10)
@@ -233,26 +285,22 @@ server <- function(input, output, session) {
     # Fit the model to the selected data frame
     fit <- lm(y ~ x, data = df_use)
     
-    # Calculate fitted values and standardized residuals for residuals plots
-    if(input$plotType %in% c("residualsBefore", "residualsAfter")) {
-      df_use$fitted <- predict(fit)
-      df_use$std_residuals <- rstandard(fit)
+    if(input$plotType %in% c("scatterOriginal", "scatterLogTransform")) {
+      # Display the model equation for the scatter plots
+      coefs <- coef(fit)
+      equation <- ifelse(input$plotType == "scatterLogTransform", 
+                         sprintf("Model Equation: log(y) = %.2f + %.2f(x)", coefs[1], coefs[2]),
+                         sprintf("Model Equation: y = %.2f + %.2f(x)", coefs[1], coefs[2]))
+      cat(equation, "\n")
       
-      p <- ggplot(df_use, aes(x = fitted, y = std_residuals)) +
-        geom_point() +
-        geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
-        labs(x = "Fitted Values", y = "Standardized Residuals", title = ifelse(input$plotType == "residualsBefore", "Residuals vs. Fitted Values (Before Log Transform)", "Residuals vs. Fitted Values (After Log Transform)")) +
-        theme_minimal()
+      # Also display R-squared and Residual Standard Error
+      summaryStats <- summary(fit)
+      cat(sprintf("R-squared: %.2f\n", summaryStats$r.squared))
+      cat(sprintf("Residual Standard Error: %.2f\n", summaryStats$sigma))
     } else {
-      # Plot the original or log-transformed scatter plot
-      p <- ggplot(df_use, aes(x = x, y = y)) +
-        geom_point() +
-        geom_smooth(method = "lm", se = FALSE, color = "red") +
-        labs(x = "Predictor (X)", y = "Response (Y)", title = ifelse(input$plotType == "scatterOriginal", "Original Scatter Plot", "Scatter Plot After Log Transform")) +
-        theme_minimal()
+      # If the plot type is for residuals, inform that model statistics are shown only for scatter plots
+      cat("Model statistics are displayed only for the scatter plots.")
     }
-    
-    ggplotly(p)
   })
 }
 
