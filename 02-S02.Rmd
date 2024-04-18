@@ -1,6 +1,6 @@
 ---
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -12,19 +12,490 @@ editor_options:
 Section 2: Linear Regression and Prediction
 :::
 
+The practical in this section will make use of exercises adapted from
+the core textbook for this course:
+
+James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
+Introduction to Statistical Learning with Applications in R*. 2nd ed.
+New York: Springer. <https://www.statlearning.com/>
+
 ::: ilos
-**Learning Outcomes:**
+**Learning Outcomes:** - indexing using base R;
 :::
 
-**In this section, you will practice using the functions below:**
+**You will practice using the functions below. It is highly recommended
+that you explore these functions further using the Help tab in your
+RStudio console.**
+
+|  Function   |                                       Description                                       | Package |
+|:-------------------:|:-------------------------------:|:----------------:|
+| `predict()` | generic function for predictions from results of different models (e.g. `predict.lm()`) | base R  |
+|  `plot()`   |                              generic function for plotting                              | base R  |
+| `abline()`  |                        adding one or more straight lines to plot                        | base R  |
+|   `cor()`   |                         computes correlation between variables                          | base R  |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+|             |                                                                                         |         |
+
+# Practical 1 {.unnumbered}
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all <details> elements as potential containers of R input
+    var detailElements = document.querySelectorAll('details.chunk-details');
+
+    detailElements.forEach(function(details) {
+        var nextElement = details.nextElementSibling;
+        var elementToToggle = null;
+
+        // Check if the nextElement is a textual R output
+        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
+            elementToToggle = nextElement;
+        }
+        // Alternatively, check if the nextElement contains a graphical R output (plot)
+        else if (nextElement && nextElement.querySelector('img')) {
+            elementToToggle = nextElement;
+        }
+
+        // Proceed to create a toggle button only if a matching element is found
+        if (elementToToggle) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block';
+
+            // Initially hide the R output/plot
+            elementToToggle.style.display = 'none';
+
+            button.onclick = function() {
+                var isHidden = elementToToggle.style.display === 'none';
+                elementToToggle.style.display = isHidden ? 'block' : 'none';
+                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
+            };
+
+            // Insert the toggle button immediately after the <details>
+            details.parentNode.insertBefore(button, details.nextSibling);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var answers = document.querySelectorAll('.answers');
+
+    answers.forEach(function(answer) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-answer-button';
+        button.textContent = 'Show Answer'; // Updated text content
+        button.style.display = 'block'; // Ensure button is visible
+        answer.style.display = 'none'; // Initially hide the answer
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block'; // Show the answer
+                button.textContent = 'Hide Answer'; // Update button text
+            } else {
+                answer.style.display = 'none'; // Hide the answer
+                button.textContent = 'Show Answer'; // Reset button text
+            }
+        };
+
+        // Insert the button before the answer
+        answer.parentNode.insertBefore(button, answer);
+    });
+});
+
+```
+
+::: file
+For the tasks below, you will require the **Auto** dataset from the core
+textbook (James et. al 2021).
+
+This dataset is part of the `ISRL2` package. By loading the package, the
+**Auto** dataset loads automatically:
+
+`library(ISLR2)`
+
+Remember to install it first
+
+`install.packages("ISLR2")`
+:::
+
+This data file (text format) contains 398 observations of 9 variables.
+The variables are:
+
+-   mpg: miles per gallon
+-   cylinders: Number of cylinders between 4 and 8
+-   displacement: Engine displacement (cu. inches)
+-   horsepower: Engine horsepower
+-   weight: Vehicle weight (lbs.)
+-   acceleration: Time to accelerate from 0 to 60 mph (sec.)
+-   year: Model year
+-   origin: Origin of car (1. American, 2. European, 3. Japanese)
+-   name: Vehicle name
+
+## Task 1 {.unnumbered}
+
+Use the `lm()` function to perform simple linear regression with **mpg**
+as the response and **horsepower** as the predictor. Store the output in
+an object called **fit**.
+
+```{r}
+fit <- lm(mpg ~ horsepower, data = Auto)
+```
+
+## Task 2 {.unnumbered}
+
+Have a look at the results of the model.
+
+```{r}
+summary(fit)
+```
+
+::: question
+Is there a relationship between the predictor and the response?
+:::
+
+::: answers
+The slope coefficient (`-0.157845`) is statistically significant
+(`<2e-16 ***`). We can conclude that there is evidence to suggest a
+negative relationship between miles per gallon and engine horsepower.
+For a one-unit increase in engine horsepower, miles per gallon are
+reduced by 0.16.
+:::
+
+## Task 3 {.unnumbered}
+
+What is the associated 95% confidence intervals for predicted miles per
+gallon associated with an engine horsepower of 98? Hint: use the
+`predict()` function. For confidence intervals, set the `interval`
+argument to `confidence`.
+
+```{r}
+predict(fit, data.frame(horsepower = 98), interval = "confidence")
+```
+
+## Task 4 {.unnumbered}
+
+How about the prediction interval for the same value?
+
+```{r}
+predict(fit, data.frame(horsepower = 98), interval = "prediction")
+```
+
+::: question
+Are the two intervals different? Why?
+:::
+
+::: answers
+The prediction interval (lower limit 14.8094 and upper limit 34.12476)
+is wider (and therefore less precise) than the confidence interval
+(lower limit 23.97308 and upper limit 24.96108). The confidence interval
+measures the uncertainty around the estimate of the conditional mean
+whilst the prediction interval takes into account not only uncertainty
+but also the variability of the conditional distribution.
+:::
+
+## Task 5 {.unnumbered}
+
+Using base R, plot the response and the predictor as well as the least
+squares regression line. Add suitable labels to the X and Y axes.
+
+```{r warning = FALSE, message = FALSE}
+plot(Auto$horsepower, Auto$mpg, xlab = "horsepower", ylab = "mpg")
+abline(fit)
+```
+
+## Task 6 {.unnumbered}
+
+Use base R to produce diagnostic plots of the least squares regression
+fit. Display these in a 2X2 grid.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit, cex = 0.2)
+```
+
+## Task 7 {.unnumbered}
+
+Subset the **Auto** dataset such that it excludes the **name** and **origin** variables and store this subsetted dataset in a new object called **quant_vars**. 
+
+```{r}
+quant_vars <- subset(Auto, select = -c(name, origin))
+```
+
+## Task 8 {.unnumbered}
+
+Compute a correlation matrix of all variables.  
+
+```{r}
+cor(quant_vars)
+```
+
+:::question
+Did you use the **Auto** dataset or the **quant_vars** object? Why does it matter which data object you use?
+:::
+
+:::answers
+To compute the correlation matrix using all variables of a data object, these variables must all be numeric. In the **Auto** data object, the **name** variable is coded as a factor.  
+
+`class(Auto$name)`  
+`[1] "factor"`  
+
+Therefore, if you try to use the `cor()` function with **Auto** dataset without excluding the **name** variable, you will get an error.  
+
+`cor(Auto)`  
+`Error in cor(Auto) : 'x' must be numeric`.    
+
+Also, whilst the **origin** variable is of class integer and will not pose a problem when you apply the `cor()` function, you'll remember from the variable description list that this is a nominal variable with its categories numerically labelled.  
+
+Compute the correlation matrix using **quant_vars**.
+:::
+
+## Task 9 {-}
+
+Using the **quant_vars** object, perform multiple linear regression with miles per gallon as the response and all other variables as the predictors. 
+
+Store the results in an object called **fit2**.
+
+```{r}
+fit2 <- lm(mpg ~ ., data = quant_vars)
+```
+
+## Task 10 {-}
+
+Have a look at the results of the multiple regression model.
+
+```{r}
+summary(fit2)
+```
+
+:::question 
+Is there a relationship between the predictors and the response? Which predictors appear to have a statistically significant relationship to the response? What does the coefficient for the year variable suggest?
+:::
+
+:::answers
+Two of the predictors are statistically significant: **weight** and **year**. The relationship between **weight** and **mpg** is negative which suggests that for a one pound increase in weight of vehicle, the number of miles per gallon the vehicle can travel decreases, whilst that of **mpg** and **year** is positive which suggests that the more recent the vehicle is, the higher the number of miles per gallon it can travel.
+:::
+
+## Task 11 {-}
+
+Produce diagnostic plots of the multiple linear regression fit in a 2x2 grid.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit2, cex = 0.2)
+```
+
+:::question
+Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high leverage?
+:::
+
+:::answers
+One point has high leverage, the residuals also show a trend with fitted values.
+:::
+
+## Task 11 {-}
+
+Fit separate linear regression models with interaction effect terms for: weight and horsepower, acceleration and horsepower, and cylinders and weight.
+
+```{r eval = FALSE}
+summary(lm(mpg ~ . + weight:horsepower, data = quant_vars))
+summary(lm(mpg ~ . + acceleration:horsepower, data = quant_vars))
+summary(lm(mpg ~ . + cylinders:weight, data = quant_vars))
+```
+
+:::question 
+Are any of the interaction terms statistically significant? 
+:::
+
+:::answer
+For each model, the interaction term is statistically significant. 
+:::
+
+## Task 12 {-}
+
+Using the **Auto** data object, apply transformations for the **horsepower** variable and plot the relationship between **horsepower** and **mpg** in a 2x2 grid.   
+
+- First plot: use the original variable;   
+- Second plot: apply log transform;  
+- Third plot: raise it to the power of two. 
+
+```{r eval = FALSE}
+par(mfrow = c(2, 2))
+plot(Auto$horsepower, Auto$mpg, cex = 0.2)
+plot(log(Auto$horsepower), Auto$mpg, cex = 0.2)
+plot(Auto$horsepower ^ 2, Auto$mpg, cex = 0.2)
+```
+
+:::question
+Which of these transformations is most suitable?
+:::
+
+:::answers
+The relationship between horsepower and miles per gallon is clearly non-linear (plot 1). The log transform seems to address this best.
+:::
+
+## Task 13 {-}
+
+Now run a multiple regression model with all variables as before but this time, apply a log transformation of the **horsepower** variable.
+
+```{r}
+quant_vars$horsepower <- log(quant_vars$horsepower)
+fit3 <- lm(mpg ~ ., data = quant_vars)
+```
+
+## Task 14 {-}
+
+Have a look at the results. 
+
+```{r}
+summary(fit3)
+```
+
+:::question
+How do the results of model **fit3** differ from those of model **fit2**?
+:::
+
+:::answer
+The **fit2** model results showed that only two predictors were statistically significant: **weight** and **year**. The **fit3** model has two additional predictors that are statistically significant: **acceleration** as well as **horsepower**.Also, the coefficient values can now be interpreted more easily.
+:::
+
+## Task 15 {-}
+
+Produce diagnostic plots for the **fit3** object and display them in a 2x2 grid.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit3, cex = 0.2)
+```
+
+:::question 
+How do the diagnostic plots differ?
+:::
+
+:::answers
+A log transformation of **horsepower** appears to give a more linear relationship with **mpg** but this difference does not seem to be substantial.
+:::
 
 
-# Practical 1 {-}
 
-# Practical 2 {-}
 
-# Practical 3 {-}
 
-# Practical 4 {-}
+# Practical 2 {.unnumbered}
 
-# Practical 5 {-}
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all <details> elements as potential containers of R input
+    var detailElements = document.querySelectorAll('details.chunk-details');
+
+    detailElements.forEach(function(details) {
+        var nextElement = details.nextElementSibling;
+        var elementToToggle = null;
+
+        // Check if the nextElement is a textual R output
+        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
+            elementToToggle = nextElement;
+        }
+        // Alternatively, check if the nextElement contains a graphical R output (plot)
+        else if (nextElement && nextElement.querySelector('img')) {
+            elementToToggle = nextElement;
+        }
+
+        // Proceed to create a toggle button only if a matching element is found
+        if (elementToToggle) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block';
+
+            // Initially hide the R output/plot
+            elementToToggle.style.display = 'none';
+
+            button.onclick = function() {
+                var isHidden = elementToToggle.style.display === 'none';
+                elementToToggle.style.display = isHidden ? 'block' : 'none';
+                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
+            };
+
+            // Insert the toggle button immediately after the <details>
+            details.parentNode.insertBefore(button, details.nextSibling);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var answers = document.querySelectorAll('.answers');
+
+    answers.forEach(function(answer) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-answer-button';
+        button.textContent = 'Show Answer'; // Updated text content
+        button.style.display = 'block'; // Ensure button is visible
+        answer.style.display = 'none'; // Initially hide the answer
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block'; // Show the answer
+                button.textContent = 'Hide Answer'; // Update button text
+            } else {
+                answer.style.display = 'none'; // Hide the answer
+                button.textContent = 'Show Answer'; // Reset button text
+            }
+        };
+
+        // Insert the button before the answer
+        answer.parentNode.insertBefore(button, answer);
+    });
+});
+
+```
+
+::: file
+For the tasks below, you will require the **Carseats** dataset from the core
+textbook (James et. al 2021).
+
+This dataset is part of the `ISRL2` package. By loading the package, the
+**Auto** dataset loads automatically:
+
+`library(ISLR2)`
+
+Remember to install it first
+
+`install.packages("ISLR2")`
+:::
+
+This data file (text format) contains 398 observations of 9 variables.
+The variables are:
+
+-   mpg: miles per gallon
+-   cylinders: Number of cylinders between 4 and 8
+-   displacement: Engine displacement (cu. inches)
+-   horsepower: Engine horsepower
+-   weight: Vehicle weight (lbs.)
+-   acceleration: Time to accelerate from 0 to 60 mph (sec.)
+-   year: Model year
+-   origin: Origin of car (1. American, 2. European, 3. Japanese)
+-   name: Vehicle name
+
+## Task 1 {.unnumbered}

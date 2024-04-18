@@ -1,7 +1,8 @@
 ---
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
+output: word_document
 ---
 
 # (PART\*) Section 1 {.unnumbered}
@@ -13,7 +14,7 @@ Section 1: Introduction to Data Science - The Basics of Statistical
 Learning
 :::
 
-This section consists of two practicals, both of which will use
+This section is comprised of two practicals, both of which will use
 exercises adapted from the core textbook for this course:
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
@@ -35,77 +36,80 @@ New York: Springer. <https://www.statlearning.com/>
 **Throughout these two practicals, you will practice using the functions
 below. It is highly recommended that you explore these functions further
 using the Help tab in your RStudio console. You can access the R
-documentation in the Help tab using ? (e.g. `?read.csv`)**
+documentation in the Help tab using? (e.g. `?read.csv`)**
 
-+---------------------+---------------------+---------------------+
-| Function            | Description         | Package             |
-+:===================:+:===================:+:===================:+
-| `read.csv()`        | read csv files      | base R              |
-+---------------------+---------------------+---------------------+
-| `read_csv()`        | read csv files      | tidyverse           |
-+---------------------+---------------------+---------------------+
-| `co                 | convert column to   | tidyverse           |
-| lumn_to_rownames()` | row names           |                     |
-+---------------------+---------------------+---------------------+
-| `rownames()`        | obtain names of     | base R              |
-|                     | rows                |                     |
-+---------------------+---------------------+---------------------+
-| `summary()`         | obtain summary      | base R              |
-|                     | statistics          |                     |
-+---------------------+---------------------+---------------------+
-| `summarise()`       | object summaries    | tidyverse (dplyr)   |
-+---------------------+---------------------+---------------------+
-| `group_by()`        | group by one or     | tidyverse (dplyr)   |
-|                     | more variables      |                     |
-+---------------------+---------------------+---------------------+
-| `pairs()`           | produce a matrix of | base R              |
-|                     | scatterplots        |                     |
-+---------------------+---------------------+---------------------+
-| `plot()`            | create a plot       | base R              |
-+---------------------+---------------------+---------------------+
-| `ggplot()`          | generic function    | tidyverse (ggplot2) |
-|                     | for creating a plot |                     |
-+---------------------+---------------------+---------------------+
-| `mutate()`          | create, modify, and | tidyverse (dplyr)   |
-|                     | delete columns      |                     |
-+---------------------+---------------------+---------------------+
-| `if_else()`         | condition-based     | tidyverse (dplyr)   |
-|                     | function            |                     |
-+---------------------+---------------------+---------------------+
-| `as_factor()`       | create factor using | tidyverse (forcats) |
-|                     | existing levels     |                     |
-+---------------------+---------------------+---------------------+
-| `par()`             | set graphical       | base R              |
-|                     | parameters          |                     |
-+---------------------+---------------------+---------------------+
-| `mfrow()`           | `par()` parameter   | base R              |
-+---------------------+---------------------+---------------------+
-| `slice_min()` and   | index rows by       | tidyverse (dplyr)   |
-| `slice_max()`       | location (smallest  |                     |
-|                     | and largest values  |                     |
-|                     | of a variable       |                     |
-|                     | respectively)       |                     |
-+---------------------+---------------------+---------------------+
-| `sapply()`          | applying a function | base R              |
-|                     | over list or vector |                     |
-+---------------------+---------------------+---------------------+
-| `select()`          | keep or drop        | tidyverse (dplyr)   |
-|                     | columns             |                     |
-|                     |                     | *note that this     |
-|                     |                     | function is also    |
-|                     |                     | available through   |
-|                     |                     | the MASS package    |
-|                     |                     | (we will not cover  |
-|                     |                     | this in this        |
-|                     |                     | section)*           |
-+---------------------+---------------------+---------------------+
-| `pivot_longer()`    | lengthen data       | tidyverse (tidyr)   |
-+---------------------+---------------------+---------------------+
-| `where()`           | selection helper    | tidyverse           |
-+---------------------+---------------------+---------------------+
-| `median()`,         | median, mean,       | base R              |
-| `mean()`, `sd()`    | standard deviation  |                     |
-+---------------------+---------------------+---------------------+
++--------------------+--------------------+--------------------+
+| Function           | Description        | Package            |
++:==================:+:==================:+:==================:+
+| `read.csv()`       | read csv files     | base R             |
++--------------------+--------------------+--------------------+
+| `read_csv()`       | read csv files     | tidyverse          |
++--------------------+--------------------+--------------------+
+| `co l              | convert column to  | tidyverse          |
+| umn_to_rownames()` | row names          |                    |
++--------------------+--------------------+--------------------+
+| `rownames()`       | obtain names of    | base R             |
+|                    | rows               |                    |
++--------------------+--------------------+--------------------+
+| `summary()`        | obtain summary     | base R             |
+|                    | statistics         |                    |
++--------------------+--------------------+--------------------+
+| `summarise()`      | object summaries   | tidyverse (dplyr)  |
++--------------------+--------------------+--------------------+
+| `group_by()`       | group by one or    | tidyverse (dplyr)  |
+|                    | more variables     |                    |
++--------------------+--------------------+--------------------+
+| `pairs()`          | produce a matrix   | base R             |
+|                    | of scatterplots    |                    |
++--------------------+--------------------+--------------------+
+| `plot()`           | create a plot      | base R             |
++--------------------+--------------------+--------------------+
+| `ggplot()`         | generic function   | tidyverse          |
+|                    | for creating a     | (ggplot2)          |
+|                    | plot               |                    |
++--------------------+--------------------+--------------------+
+| `mutate()`         | create, modify,    | tidyverse (dplyr)  |
+|                    | and delete columns |                    |
++--------------------+--------------------+--------------------+
+| `if_else()`        | condition-based    | tidyverse (dplyr)  |
+|                    | function           |                    |
++--------------------+--------------------+--------------------+
+| `as_factor()`      | create factor      | tidyverse          |
+|                    | using existing     | (forcats)          |
+|                    | levels             |                    |
++--------------------+--------------------+--------------------+
+| `par()`            | set graphical      | base R             |
+|                    | parameters         |                    |
++--------------------+--------------------+--------------------+
+| `mfrow()`          | `par()` parameter  | base R             |
++--------------------+--------------------+--------------------+
+| `slice_min()` and  | index rows by      | tidyverse (dplyr)  |
+| `slice_max()`      | location (smallest |                    |
+|                    | and largest values |                    |
+|                    | of a variable      |                    |
+|                    | respectively)      |                    |
++--------------------+--------------------+--------------------+
+| `sapply()`         | applying a         | base R             |
+|                    | function over list |                    |
+|                    | or vector          |                    |
++--------------------+--------------------+--------------------+
+| `select()`         | keep or drop       | tidyverse (dplyr)  |
+|                    | columns            |                    |
+|                    |                    | *note that this    |
+|                    |                    | function is also   |
+|                    |                    | available through  |
+|                    |                    | the MASS package   |
+|                    |                    | (we will not cover |
+|                    |                    | this in this       |
+|                    |                    | section)*          |
++--------------------+--------------------+--------------------+
+| `pivot_longer()`   | lengthen data      | tidyverse (tidyr)  |
++--------------------+--------------------+--------------------+
+| `where()`          | selection helper   | tidyverse          |
++--------------------+--------------------+--------------------+
+| `median()`,        | median, mean,      | base R             |
+| `mean()`, `sd()`   | standard deviation |                    |
++--------------------+--------------------+--------------------+
 
 # Practical 1 {.unnumbered}
 
@@ -197,7 +201,7 @@ colleges in the United States. The variables are:
 -   Private : Public/private indicator
 -   Apps : Number of applications received
 -   Accept : Number of applicants accepted
--   Enroll : Number of new students enrolled\
+-   Enroll : Number of new students enrolled
 -   Top10perc : New students from top 10% of high school class
 -   Top25perc : New students from top 25% of high school class
 -   F.Undergrad : Number of full-time undergraduates
@@ -215,8 +219,8 @@ colleges in the United States. The variables are:
 
 ### Task 1 {.unnumbered}
 
-Import the dataset in an object called `college` using a suitable
-tidyverse function.
+Import the dataset in an object called **college** using a suitable
+`tidyverse` function.
 
 ```{r warning = FALSE, message = FALSE}
 # Remember to load tidyverse first
