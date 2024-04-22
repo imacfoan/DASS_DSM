@@ -534,5 +534,3 @@ fit <- lm(Sales ~ Price + Urban + US, data = Carseats)
 ```
 
 ## Task 2 {-}
-
-
