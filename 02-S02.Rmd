@@ -20,7 +20,7 @@ Introduction to Statistical Learning with Applications in R*. 2nd ed.
 New York: Springer. <https://www.statlearning.com/>
 
 ::: ilos
-**Learning Outcomes:**   
+**Learning Outcomes:**\
 - indexing using base R;
 :::
 
@@ -28,15 +28,15 @@ New York: Springer. <https://www.statlearning.com/>
 that you explore these functions further using the Help tab in your
 RStudio console.**
 
-|  Function   |                                       Description                                       | Package |     |
-|:-------------------:|:------------------------------:|:----------------:|------------------|
-|   `lm()`    |                                    fit linear models                                    | base R  |     |
-| `predict()` | generic function for predictions from results of different models (e.g. `predict.lm()`) | base R  |     |
-|  `plot()`   |                              generic function for plotting                              | base R  |     |
-| `abline()`  |                        adding one or more straight lines to plot                        | base R  |     |
-|   `cor()`   |                         computes correlation between variables                          | base R  |     |
-|   `fit()`   |                                                                                         |         |     |
-|             |                                                                                         |         |     |
+|  Function   |                                       Description                                       | Package |
+|:--------------------:|:---------------------------:|:--------------------:|
+|   `lm()`    |                                    fit linear models                                    | base R  |
+| `predict()` | generic function for predictions from results of different models (e.g. `predict.lm()`) | base R  |
+|  `plot()`   |                              generic function for plotting                              | base R  |
+| `abline()`  |                        adding one or more straight lines to plot                        | base R  |
+|   `cor()`   |                         computes correlation between variables                          | base R  |
+|  `rnorm()`  |                              generates normal distribution                              | base R  |
+|  `poly()`   |                            returns or evaluates polynomials                             | base R  |
 
 # Practical 1 {.unnumbered}
 
@@ -143,6 +143,12 @@ The variables are:
 Use the `lm()` function to perform simple linear regression with **mpg**
 as the response and **horsepower** as the predictor. Store the output in
 an object called **fit**.
+
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(ISLR2)
+```
+
 
 ```{r}
 fit <- lm(mpg ~ horsepower, data = Auto)
@@ -533,4 +539,484 @@ urban or rural location, and whether the store is in the US or not.
 fit <- lm(Sales ~ Price + Urban + US, data = Carseats)
 ```
 
-## Task 2 {-}
+## Task 2 {.unnumbered}
+
+Have a look at the results and interpret the coefficients.
+
+```{r}
+summary(fit)
+```
+
+::: question
+Which coefficients are statistically significant? What do they indicate?
+:::
+
+::: answers
+The null hypothesis for the slope being zero is rejected for the
+**Price** and **US** variables. The coefficient for **Price** is
+statistically significant; since it is negative, as price increases by a
+thousand dollars (i.e. one unit increase), the sales of child decrease
+by about 0.05. The slope for the **US** variable is also statistically
+significant but it is positive. Also, this is a binary factor variable
+coded as Yes and No (No is the reference category). Therefore, sales of
+child car seats are higher by 1.2 for car seat products that are
+produced in the US than for car seat products not produced in the US.
+:::
+
+## Task 3 {.unnumbered}
+
+Based on the conclusions you have drawn in Task 2, now fit a smaller
+model that only uses the predictors for which there is evidence of
+association with sales.
+
+```{r}
+fit2 <- lm(Sales ~ Price + US, data = Carseats)
+```
+
+## Task 4 {.unnumbered}
+
+Compare the two models (*fit* and *fit2*).
+
+```{r}
+anova(fit, fit2)
+```
+
+::: question
+Which model is the better fit?
+:::
+
+::: answers
+They have similar r-squared values, and the *fit* model (containing the
+extra variable **Urban**) is non-significantly better.
+:::
+
+## Task 5 {.unnumbered}
+
+Produce diagnostic plots for *fit2* and display these in a 2x2 grid.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit2, cex = 0.2)
+```
+
+::: question
+Is there evidence of outliers or high leverage observations in the
+*fit2* model?
+:::
+
+::: answers
+Yes, there is evidence of outliers and high leverage observations for
+*fit2*.
+:::
+
+# Practical 3 {.unnumbered}
+
+\Large
+
+In this practical, you will run simulations to dive deeper into the
+principles behind linear models.
+
+\normalsize
+
+## Part I - Simple Linear Models Without Intercept
+
+Let's investigate the *t-statistic* for the null hypothesis
+$H_{0} : \beta = 0$ in simple linear regression **without** an
+intercept. The formula would therefore be $y = \beta x$.
+
+By excluding the intercept, the model is constrained to pass through the
+origin $(0,0)$, allowing the relationship between the response and
+predictor to be interpreted as proportional. In other words, the removal
+of the intercept forces the regression line to start at $(0,0)$, so when
+$X = 0$, then $y = 0$.
+
+Let's first generate some data for a predictor **x** and a response
+**y**. We select a seed to ensure that we generate the same data every
+time. To generate values, we use the `rnorm` function to produce 100
+data values drawn from a normal distribution (hence `rnorm()`).
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2 * x + rnorm(100)
+```
+
+Now that we generated our predictor and our response variable, let's run
+a simple linear regression of *y* onto *x*, without an intercept. One
+way to do so is by adding 0 into the formula.
+
+```{r}
+fit <- lm(y ~ x + 0)
+```
+
+And now, let's have a look at the results.
+
+```{r}
+coef(summary(fit))
+```
+
+We can see a significant positive relationship between y and x. The
+coefficient estimate for *x* is 1.993876, and since the relationship
+betweeen x and y is proportional, we interpret the estimate as the y
+values being predicted to be (a little below) twice the x values.
+
+But what happens if we run a regression of *x* onto *y*?
+
+```{r}
+fit2 <- lm(x ~ y + 0)
+coef(summary(fit2))
+```
+
+We again observe a significant positive relationship between x and y,
+except that the x values are predicted to be (a little below) half the y
+values (since the coefficient estimate is 0.3911145).
+
+Note also the t-values for the two models. They are identical and of
+course so is the p-value (therefore, there is a significant
+relationships between *x* and *y*).
+
+Therefore, the results of the models of y onto x and x onto y indicate
+that the coefficients would be the inverse of each other (2 and 1/2)
+whilst the t-statistic values (and p-values) remain the same.
+
+**Why are the t-statistic values identical?**
+
+For each coefficient, the t statistic is calculated by dividing the
+coefficient estimate by its standard error. For example, for the *fit2*
+model, we have a coefficient estimate of 0.3911145 and a standard error
+of 0.02088625 and so dividing 0.3911145 by 0.02088625 gives us 18.72593.
+
+You'll also remember that the correlation coefficient between two
+variables is symmetric and so the correlation between X and Y is the
+same as for Y and X. This is the reason why it is incorrect to state
+that "X causes a change in Y".
+
+In a linear model, we are testing whether there is a linear association
+between X and Y but not if X causes Y or Y causes X. Therefore,
+irrespective of whether we are regressing Y onto X or X onto Y, the
+t-statistic is testing the same null hypothesis $H_{0} : \beta = 0$
+(i.e. fundamentally, it is testing whether there is a linear correlation
+between X and Y).
+
+**So what exactly is the role of the intercept?**
+
+As you already know, the intercept represents the value of y when x is 0
+which can be thought of as the initial value effect that exists
+independently of x. This not only applies to the simple linear
+regression model but also to the multiple linear regression model (i.e.
+the intercept is the value of Y when all predictors are zero). In other
+words, the intercept adjusts the starting point of regression line and
+allows for the line to shift up or down on the y-axis thus reflecting a
+"baseline" level of y that is not dependent on x. With an intercept, the
+slope coefficient still tells us how much Y changes with a one-unit
+change in X, but this change is relative to the y value when x is zero
+and this is important when x can take a value of 0 that is meaningful to
+the model.
+
+*Without the intercept*, the line is forced to pass through the origin
+$(0,0)$, which may not be suitable unless the data naturally begin at
+zero (or there are some other theoretical or practical reasons which
+warrant the line passing through the origin).
+
+*With an intercept*, the regression line is no longer forced to pass
+through zero (and will only do so if the data naturally begin at zero).
+The intercept therefore allows for the regression line to better fit the
+data, particularly when the data do not actually begin at zero. In this
+way, the model can capture the average outcome when the predictor(s)
+is/are zero.
+
+## Part II - Simple Linear Models with Intercept
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all <details> elements as potential containers of R input
+    var detailElements = document.querySelectorAll('details.chunk-details');
+
+    detailElements.forEach(function(details) {
+        var nextElement = details.nextElementSibling;
+        var elementToToggle = null;
+
+        // Check if the nextElement is a textual R output
+        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
+            elementToToggle = nextElement;
+        }
+        // Alternatively, check if the nextElement contains a graphical R output (plot)
+        else if (nextElement && nextElement.querySelector('img')) {
+            elementToToggle = nextElement;
+        }
+
+        // Proceed to create a toggle button only if a matching element is found
+        if (elementToToggle) {
+            var button = document.createElement('button');
+            button.className = 'toggle-button';
+            button.textContent = 'Show R Output';
+            button.style.display = 'block';
+
+            // Initially hide the R output/plot
+            elementToToggle.style.display = 'none';
+
+            button.onclick = function() {
+                var isHidden = elementToToggle.style.display === 'none';
+                elementToToggle.style.display = isHidden ? 'block' : 'none';
+                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
+            };
+
+            // Insert the toggle button immediately after the <details>
+            details.parentNode.insertBefore(button, details.nextSibling);
+        }
+    });
+});
+```
+
+```{js, echo=FALSE}
+document.addEventListener('DOMContentLoaded', function() {
+    var answers = document.querySelectorAll('.answers');
+
+    answers.forEach(function(answer) {
+        // Create the toggle button
+        var button = document.createElement('button');
+        button.className = 'toggle-answer-button';
+        button.textContent = 'Show Answer'; // Updated text content
+        button.style.display = 'block'; // Ensure button is visible
+        answer.style.display = 'none'; // Initially hide the answer
+
+        // Add click event listener to the button
+        button.onclick = function() {
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block'; // Show the answer
+                button.textContent = 'Hide Answer'; // Update button text
+            } else {
+                answer.style.display = 'none'; // Hide the answer
+                button.textContent = 'Show Answer'; // Reset button text
+            }
+        };
+
+        // Insert the button before the answer
+        answer.parentNode.insertBefore(button, answer);
+    });
+});
+
+```
+
+\Large
+
+*Do you think that the t-statistic will be the same for both regression of Y onto X and X onto Y if we were to include the intercept?*
+
+\normalsize 
+
+### Task 1
+
+Use the same data as before and run a regression with Y as response and
+X as predictor. Store the results into an object called **fit3**.
+
+```{r}
+fit3 <- lm(y ~ x)
+```
+
+### Task 2
+
+Extract the model coefficients from the summary results of the model.
+
+```{r}
+coef(summary(fit3))
+```
+
+::: question
+How does coefficient for **fit3** compare to **fit**? How about the
+t-statistic value?
+:::
+
+::: answers
+The coefficient for the model with the intercept is very similar to the
+coefficient for the model without the intercept. The t-statistic is also
+very close (18.72593 for the model without intercept and 18.5555993 for
+the model with the intercept).
+:::
+
+### Task 3
+
+Now run a regression with X as response and Y as predictor. Store the
+results into an object called **fit4**.
+
+```{r}
+fit4 <- lm(x ~ y)
+```
+
+### Task 4
+
+Extract the model coefficients from the summary results of the model.
+
+```{r}
+coef(summary(fit4))
+```
+
+::: question
+How does coefficient for **fit4** compare to **fit2**? How about the
+t-statistic value? Are the t-statistic values different between the
+**fit3** and **fit4** models?
+:::
+
+::: answers
+The slope coefficient for the model with the intercept (0.38942451) is
+very similar to the coefficient for the model without the intercept
+(0.3911145) and so is the t-statistic. Also, as expected, the
+t-statistic value is identical to that of the **fit3** model. Therefore,
+the t-statistic for simple regression of Y onto X is identical to the
+t-statistic for simple regression of X onto Y.
+:::
+
+## Part III - Noise
+
+\Large
+
+*How does variability affect the coefficients of a linear model?*
+
+\normalsize
+
+Let's generate our "true" population data.
+
+We create a variable **x** with 100 observations drawn from a normal
+distribution. To be more specific about the characteristic of our
+variable **x**, we will not only specify the total number of
+observations (100), but also the mean (0), and standard deviation (1).
+This will be our *predictor*.
+
+```{r}
+set.seed(1)
+x_n <- rnorm(100, 0, 1)
+```
+
+Now let's create another vector called **eps** containing 100
+observations drawn from a normal distribution with a mean of zero and a
+variance of 0.25. This will be the error or *epsilon*.
+
+```{r}
+eps_n <- rnorm(100, 0, sqrt(0.25))
+```
+
+using **x_n** and **eps_n**, we now generate a vector **y_n** according
+to the following formula: $Y = -1 + 0.5X + \epsilon$. Essentially, we
+specify our intercept, the slope coefficient, the predictor variable and
+the error to obtain our *response* variable.
+
+```{r}
+y_n <- -1 + 0.5 * x_n + eps_n
+```
+
+The values *-1* and *0.5* represent the "true" coefficients for the
+intercept $\beta_{0}$ and slope $\beta_{1}$ respectively.
+
+Now we can create a scatterplot to observe the association between X and
+Y.
+
+```{r}
+plot(x_n, y_n)
+```
+
+The plot indicates a linear relationship between X and Y. The
+relationship is clearly not perfectly linear due to noise.
+
+\Large
+
+**If we were to estimate these population parameters, to what degree do you think the estimated coefficients will differ from these true population parameters?**
+
+\normalsize
+
+Ok, so we have the variables we generated, so our predictor **x_n** and
+our response **y_n** and we run a regression model.
+
+```{r}
+fit5 <- lm(y_n ~ x_n)
+
+summary(fit5)
+```
+
+The results of the model show an estimated slope coefficient
+($\hat{\beta_{1}}$) for **x_n** of 0.49947. This is very close to the
+population value ($\beta_{1}$) which is 0.5! We see a similar estimated
+value for the intercept ($\hat{\beta_{0}}$) which is -1.01885, again
+very close to the true value for the intercept ($\beta_{0}$) which is
+-1!
+
+Therefore, if we were to plot the true regression line and the estimated
+regression line, we would see that the two are difficult to distinguish
+(given the similarity of the estimated and true values for the
+coefficients).
+
+```{r}
+plot(x_n, y_n)
+abline(fit5)
+abline(-1, 0.5, col = "red", lty = 2)
+legend("topleft",
+  c("model fit", "population regression"),
+  col = c("black", "red"),
+  lty = c(1, 2), 
+  cex = 0.72,
+)
+```
+
+What if we were to fit a polynomial regression model? Would there be any
+evidence that adding a quadratic term improves the model fit? To add a
+polynomial term of degree two, we can use the `poly` base R function
+directly in the code for the model.
+
+```{r}
+fit6 <- lm(y_n ~ poly(x_n, 2))
+anova(fit6, fit5)
+```
+
+Since the F-test is not statistically significant, there is no evidence that adding a quadratic term improves the model fit.   
+
+\Large 
+
+**Ok, so what do you think would happen if we were to *reduce the noise* in the data?**
+
+\normalsize
+
+Let's generate new data but reduce the variance from 0.25 to 0.05. We keep the predictor X the same. 
+
+```{r}
+set.seed(1)
+x_n2 <- rnorm(100, 0, 1)
+```
+
+But we reduce the error (so we reduce **eps** from 0.25 to 0.05). 
+
+```{r}
+eps_n2 <- rnorm(100, 0, sqrt(0.05))
+```
+
+using **x_n2** and **eps_n2**, we again now generate a vector **y_n2** according
+to the same formula as before: $Y = -1 + 0.5X + \epsilon$. 
+
+```{r}
+y_n2 <- -1 + 0.5 * x_n2 + eps_n2
+```
+
+We now build a new model called **fit7** using the new data. 
+
+```{r}
+fit7 <- lm(y_n2 ~ x_n2)
+summary(fit7)
+```
+
+If we compare the results of **fit7** with **fit5**, we can observe that the $R^{2}$ value for **fit7** is 0.8145, much higher than the $R^{2}$ value for **fit5** which is 0.4674. By plotting the data we can clearly see the reduced variability.
+
+```{r}
+plot(x_n2, y_n2)
+abline(fit7)
+abline(-1, 0.5, col = "red", lty = 2)
+legend("topleft",
+  c("model fit", "population regression"),
+  col = c("black", "red"),
+  lty = c(1, 2), 
+  cex = 0.72
+)
+```
+
+\Large 
+
+**Ok, so what if we were to *increase the noise* in the data?**
+
+\normalsize
+
