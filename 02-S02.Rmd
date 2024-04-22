@@ -20,35 +20,23 @@ Introduction to Statistical Learning with Applications in R*. 2nd ed.
 New York: Springer. <https://www.statlearning.com/>
 
 ::: ilos
-**Learning Outcomes:** - indexing using base R;
+**Learning Outcomes:**   
+- indexing using base R;
 :::
 
 **You will practice using the functions below. It is highly recommended
 that you explore these functions further using the Help tab in your
 RStudio console.**
 
-|  Function   |                                       Description                                       | Package |
-|:-------------------:|:-------------------------------:|:----------------:|
-| `predict()` | generic function for predictions from results of different models (e.g. `predict.lm()`) | base R  |
-|  `plot()`   |                              generic function for plotting                              | base R  |
-| `abline()`  |                        adding one or more straight lines to plot                        | base R  |
-|   `cor()`   |                         computes correlation between variables                          | base R  |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
-|             |                                                                                         |         |
+|  Function   |                                       Description                                       | Package |     |
+|:-------------------:|:------------------------------:|:----------------:|------------------|
+|   `lm()`    |                                    fit linear models                                    | base R  |     |
+| `predict()` | generic function for predictions from results of different models (e.g. `predict.lm()`) | base R  |     |
+|  `plot()`   |                              generic function for plotting                              | base R  |     |
+| `abline()`  |                        adding one or more straight lines to plot                        | base R  |     |
+|   `cor()`   |                         computes correlation between variables                          | base R  |     |
+|   `fit()`   |                                                                                         |         |     |
+|             |                                                                                         |         |     |
 
 # Practical 1 {.unnumbered}
 
@@ -234,7 +222,9 @@ plot(fit, cex = 0.2)
 
 ## Task 7 {.unnumbered}
 
-Subset the **Auto** dataset such that it excludes the **name** and **origin** variables and store this subsetted dataset in a new object called **quant_vars**. 
+Subset the **Auto** dataset such that it excludes the **name** and
+**origin** variables and store this subsetted dataset in a new object
+called **quant_vars**.
 
 ```{r}
 quant_vars <- subset(Auto, select = -c(name, origin))
@@ -242,35 +232,44 @@ quant_vars <- subset(Auto, select = -c(name, origin))
 
 ## Task 8 {.unnumbered}
 
-Compute a correlation matrix of all variables.  
+Compute a correlation matrix of all variables.
 
 ```{r}
 cor(quant_vars)
 ```
 
-:::question
-Did you use the **Auto** dataset or the **quant_vars** object? Why does it matter which data object you use?
+::: question
+Did you use the **Auto** dataset or the **quant_vars** object? Why does
+it matter which data object you use?
 :::
 
-:::answers
-To compute the correlation matrix using all variables of a data object, these variables must all be numeric. In the **Auto** data object, the **name** variable is coded as a factor.  
+::: answers
+To compute the correlation matrix using all variables of a data object,
+these variables must all be numeric. In the **Auto** data object, the
+**name** variable is coded as a factor.
 
-`class(Auto$name)`  
-`[1] "factor"`  
+`class(Auto$name)`\
+`[1] "factor"`
 
-Therefore, if you try to use the `cor()` function with **Auto** dataset without excluding the **name** variable, you will get an error.  
+Therefore, if you try to use the `cor()` function with **Auto** dataset
+without excluding the **name** variable, you will get an error.
 
-`cor(Auto)`  
-`Error in cor(Auto) : 'x' must be numeric`.    
+`cor(Auto)`\
+`Error in cor(Auto) : 'x' must be numeric`.
 
-Also, whilst the **origin** variable is of class integer and will not pose a problem when you apply the `cor()` function, you'll remember from the variable description list that this is a nominal variable with its categories numerically labelled.  
+Also, whilst the **origin** variable is of class integer and will not
+pose a problem when you apply the `cor()` function, you'll remember from
+the variable description list that this is a nominal variable with its
+categories numerically labelled.
 
 Compute the correlation matrix using **quant_vars**.
 :::
 
-## Task 9 {-}
+## Task 9 {.unnumbered}
 
-Using the **quant_vars** object, perform multiple linear regression with miles per gallon as the response and all other variables as the predictors. 
+Using the **quant_vars** object, perform multiple linear regression with
+miles per gallon as the response and all other variables as the
+predictors.
 
 Store the results in an object called **fit2**.
 
@@ -278,7 +277,7 @@ Store the results in an object called **fit2**.
 fit2 <- lm(mpg ~ ., data = quant_vars)
 ```
 
-## Task 10 {-}
+## Task 10 {.unnumbered}
 
 Have a look at the results of the multiple regression model.
 
@@ -286,34 +285,46 @@ Have a look at the results of the multiple regression model.
 summary(fit2)
 ```
 
-:::question 
-Is there a relationship between the predictors and the response? Which predictors appear to have a statistically significant relationship to the response? What does the coefficient for the year variable suggest?
+::: question
+Is there a relationship between the predictors and the response? Which
+predictors appear to have a statistically significant relationship to
+the response? What does the coefficient for the year variable suggest?
 :::
 
-:::answers
-Two of the predictors are statistically significant: **weight** and **year**. The relationship between **weight** and **mpg** is negative which suggests that for a one pound increase in weight of vehicle, the number of miles per gallon the vehicle can travel decreases, whilst that of **mpg** and **year** is positive which suggests that the more recent the vehicle is, the higher the number of miles per gallon it can travel.
+::: answers
+Two of the predictors are statistically significant: **weight** and
+**year**. The relationship between **weight** and **mpg** is negative
+which suggests that for a one pound increase in weight of vehicle, the
+number of miles per gallon the vehicle can travel decreases, whilst that
+of **mpg** and **year** is positive which suggests that the more recent
+the vehicle is, the higher the number of miles per gallon it can travel.
 :::
 
-## Task 11 {-}
+## Task 11 {.unnumbered}
 
-Produce diagnostic plots of the multiple linear regression fit in a 2x2 grid.
+Produce diagnostic plots of the multiple linear regression fit in a 2x2
+grid.
 
 ```{r}
 par(mfrow = c(2, 2))
 plot(fit2, cex = 0.2)
 ```
 
-:::question
-Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high leverage?
+::: question
+Do the residual plots suggest any unusually large outliers? Does the
+leverage plot identify any observations with unusually high leverage?
 :::
 
-:::answers
-One point has high leverage, the residuals also show a trend with fitted values.
+::: answers
+One point has high leverage, the residuals also show a trend with fitted
+values.
 :::
 
-## Task 11 {-}
+## Task 11 {.unnumbered}
 
-Fit separate linear regression models with interaction effect terms for: weight and horsepower, acceleration and horsepower, and cylinders and weight.
+Fit separate linear regression models with interaction effect terms for:
+weight and horsepower, acceleration and horsepower, and cylinders and
+weight.
 
 ```{r eval = FALSE}
 summary(lm(mpg ~ . + weight:horsepower, data = quant_vars))
@@ -321,21 +332,23 @@ summary(lm(mpg ~ . + acceleration:horsepower, data = quant_vars))
 summary(lm(mpg ~ . + cylinders:weight, data = quant_vars))
 ```
 
-:::question 
-Are any of the interaction terms statistically significant? 
+::: question
+Are any of the interaction terms statistically significant?
 :::
 
-:::answer
-For each model, the interaction term is statistically significant. 
+::: answer
+For each model, the interaction term is statistically significant.
 :::
 
-## Task 12 {-}
+## Task 12 {.unnumbered}
 
-Using the **Auto** data object, apply transformations for the **horsepower** variable and plot the relationship between **horsepower** and **mpg** in a 2x2 grid.   
+Using the **Auto** data object, apply transformations for the
+**horsepower** variable and plot the relationship between **horsepower**
+and **mpg** in a 2x2 grid.
 
-- First plot: use the original variable;   
-- Second plot: apply log transform;  
-- Third plot: raise it to the power of two. 
+-   First plot: use the original variable;\
+-   Second plot: apply log transform;\
+-   Third plot: raise it to the power of two.
 
 ```{r eval = FALSE}
 par(mfrow = c(2, 2))
@@ -344,59 +357,65 @@ plot(log(Auto$horsepower), Auto$mpg, cex = 0.2)
 plot(Auto$horsepower ^ 2, Auto$mpg, cex = 0.2)
 ```
 
-:::question
+::: question
 Which of these transformations is most suitable?
 :::
 
-:::answers
-The relationship between horsepower and miles per gallon is clearly non-linear (plot 1). The log transform seems to address this best.
+::: answers
+The relationship between horsepower and miles per gallon is clearly
+non-linear (plot 1). The log transform seems to address this best.
 :::
 
-## Task 13 {-}
+## Task 13 {.unnumbered}
 
-Now run a multiple regression model with all variables as before but this time, apply a log transformation of the **horsepower** variable.
+Now run a multiple regression model with all variables as before but
+this time, apply a log transformation of the **horsepower** variable.
 
 ```{r}
 quant_vars$horsepower <- log(quant_vars$horsepower)
 fit3 <- lm(mpg ~ ., data = quant_vars)
 ```
 
-## Task 14 {-}
+## Task 14 {.unnumbered}
 
-Have a look at the results. 
+Have a look at the results.
 
 ```{r}
 summary(fit3)
 ```
 
-:::question
-How do the results of model **fit3** differ from those of model **fit2**?
+::: question
+How do the results of model **fit3** differ from those of model
+**fit2**?
 :::
 
-:::answer
-The **fit2** model results showed that only two predictors were statistically significant: **weight** and **year**. The **fit3** model has two additional predictors that are statistically significant: **acceleration** as well as **horsepower**.Also, the coefficient values can now be interpreted more easily.
+::: answer
+The **fit2** model results showed that only two predictors were
+statistically significant: **weight** and **year**. The **fit3** model
+has two additional predictors that are statistically significant:
+**acceleration** as well as **horsepower**.Also, the coefficient values
+can now be interpreted more easily.
 :::
 
-## Task 15 {-}
+## Task 15 {.unnumbered}
 
-Produce diagnostic plots for the **fit3** object and display them in a 2x2 grid.
+Produce diagnostic plots for the **fit3** object and display them in a
+2x2 grid.
 
 ```{r}
 par(mfrow = c(2, 2))
 plot(fit3, cex = 0.2)
 ```
 
-:::question 
+::: question
 How do the diagnostic plots differ?
 :::
 
-:::answers
-A log transformation of **horsepower** appears to give a more linear relationship with **mpg** but this difference does not seem to be substantial.
+::: answers
+A log transformation of **horsepower** appears to give a more linear
+relationship with **mpg** but this difference does not seem to be
+substantial.
 :::
-
-
-
-
 
 # Practical 2 {.unnumbered}
 
@@ -472,30 +491,48 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 
 ::: file
-For the tasks below, you will require the **Carseats** dataset from the core
-textbook (James et. al 2021).
+For the tasks below, you will require the **Carseats** dataset from the
+core textbook (James et. al 2021).
 
 This dataset is part of the `ISRL2` package. By loading the package, the
-**Auto** dataset loads automatically:
+**Carseats** dataset loads automatically:
 
 `library(ISLR2)`
-
-Remember to install it first
-
-`install.packages("ISLR2")`
 :::
 
-This data file (text format) contains 398 observations of 9 variables.
-The variables are:
+This dataframe object contains a simulated dataset of sales of child car
+seats at 400 different stores.
 
--   mpg: miles per gallon
--   cylinders: Number of cylinders between 4 and 8
--   displacement: Engine displacement (cu. inches)
--   horsepower: Engine horsepower
--   weight: Vehicle weight (lbs.)
--   acceleration: Time to accelerate from 0 to 60 mph (sec.)
--   year: Model year
--   origin: Origin of car (1. American, 2. European, 3. Japanese)
--   name: Vehicle name
+The 9 variables are:
+
+-   Sales: Unit sales (thousands of dollars) at each location\
+-   CompPrice: Price charged by competitor at each location\
+-   Income: Community income level (thousands of dollars)\
+-   Advertising: Local advertising budget for company at each location
+    (thousands of dollars)\
+-   Population: Population size in region (thousands of dollars)\
+-   Price: Price company charges for car seats at each site\
+-   ShelveLoc: Quality of the shelving location for the car seats at
+    each site\
+-   Age: Average age of the local population\
+-   Education: Education level at each location\
+-   Urban: Whether the store is in an urban or rural location\
+-   US: Whether the store is in the US or not
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(ISLR2)
+```
 
 ## Task 1 {.unnumbered}
+
+Fit a multiple regression model to predict unit sales at each location
+based on price company charges for car seats, whether the store is in an
+urban or rural location, and whether the store is in the US or not.
+
+```{r}
+fit <- lm(Sales ~ Price + Urban + US, data = Carseats)
+```
+
+## Task 2 {-}
+
+
