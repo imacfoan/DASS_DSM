@@ -869,8 +869,7 @@ t-statistic for simple regression of X onto Y.
  
 *How does variability affect the coefficients of a linear model?*
 
- 
-Let's generate our "true" population data.
+ Let's generate our "true" population data.
 
 We create a variable **x** with 100 observations drawn from a normal
 distribution. To be more specific about the characteristic of our

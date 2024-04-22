@@ -197,15 +197,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical 3</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="practical-3.html"><a href="practical-3.html#part-i---simple-linear-models-without-intercept"><i class="fa fa-check"></i><b>0.1</b> Part I - Simple Linear Models Without Intercept</a></li>
-<li class="chapter" data-level="0.2" data-path="practical-3.html"><a href="practical-3.html#part-ii---simple-linear-models-with-intercept"><i class="fa fa-check"></i><b>0.2</b> Part II - Simple Linear Models with Intercept</a>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-i---simple-linear-models-without-intercept"><i class="fa fa-check"></i>Part I - Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-ii---simple-linear-models-with-intercept"><i class="fa fa-check"></i>Part II - Simple Linear Models with Intercept</a>
 <ul>
-<li class="chapter" data-level="0.2.1" data-path="practical-3.html"><a href="practical-3.html#task-1-4"><i class="fa fa-check"></i><b>0.2.1</b> Task 1</a></li>
-<li class="chapter" data-level="0.2.2" data-path="practical-3.html"><a href="practical-3.html#task-2-4"><i class="fa fa-check"></i><b>0.2.2</b> Task 2</a></li>
-<li class="chapter" data-level="0.2.3" data-path="practical-3.html"><a href="practical-3.html#task-3-4"><i class="fa fa-check"></i><b>0.2.3</b> Task 3</a></li>
-<li class="chapter" data-level="0.2.4" data-path="practical-3.html"><a href="practical-3.html#task-4-4"><i class="fa fa-check"></i><b>0.2.4</b> Task 4</a></li>
+<li class="chapter" data-level="0.0.1" data-path="practical-3.html"><a href="practical-3.html#task-1-4"><i class="fa fa-check"></i><b>0.0.1</b> Task 1</a></li>
+<li class="chapter" data-level="0.0.2" data-path="practical-3.html"><a href="practical-3.html#task-2-4"><i class="fa fa-check"></i><b>0.0.2</b> Task 2</a></li>
+<li class="chapter" data-level="0.0.3" data-path="practical-3.html"><a href="practical-3.html#task-3-4"><i class="fa fa-check"></i><b>0.0.3</b> Task 3</a></li>
+<li class="chapter" data-level="0.0.4" data-path="practical-3.html"><a href="practical-3.html#task-4-4"><i class="fa fa-check"></i><b>0.0.4</b> Task 4</a></li>
 </ul></li>
-<li class="chapter" data-level="0.3" data-path="practical-3.html"><a href="practical-3.html#part-iii---noise"><i class="fa fa-check"></i><b>0.3</b> Part III - Noise</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-iii---noise"><i class="fa fa-check"></i>Part III - Noise</a></li>
 </ul></li>
 <li class="part"><span><b>Section 3</b></span></li>
 <li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
@@ -252,75 +252,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </center>
 <div id="practical-2" class="section level1 unnumbered hasAnchor">
 <h1>Practical 2<a href="practical-2.html#practical-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Find all <details> elements as potential containers of R input
-    var detailElements = document.querySelectorAll('details.chunk-details');
-
-    detailElements.forEach(function(details) {
-        var nextElement = details.nextElementSibling;
-        var elementToToggle = null;
-
-        // Check if the nextElement is a textual R output
-        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
-            elementToToggle = nextElement;
-        }
-        // Alternatively, check if the nextElement contains a graphical R output (plot)
-        else if (nextElement && nextElement.querySelector('img')) {
-            elementToToggle = nextElement;
-        }
-
-        // Proceed to create a toggle button only if a matching element is found
-        if (elementToToggle) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block';
-
-            // Initially hide the R output/plot
-            elementToToggle.style.display = 'none';
-
-            button.onclick = function() {
-                var isHidden = elementToToggle.style.display === 'none';
-                elementToToggle.style.display = isHidden ? 'block' : 'none';
-                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
-            };
-
-            // Insert the toggle button immediately after the <details>
-            details.parentNode.insertBefore(button, details.nextSibling);
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var answers = document.querySelectorAll('.answers');
-
-    answers.forEach(function(answer) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-answer-button';
-        button.textContent = 'Show Answer'; // Updated text content
-        button.style.display = 'block'; // Ensure button is visible
-        answer.style.display = 'none'; // Initially hide the answer
-
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (answer.style.display === 'none') {
-                answer.style.display = 'block'; // Show the answer
-                button.textContent = 'Hide Answer'; // Update button text
-            } else {
-                answer.style.display = 'none'; // Hide the answer
-                button.textContent = 'Show Answer'; // Reset button text
-            }
-        };
-
-        // Insert the button before the answer
-        answer.parentNode.insertBefore(button, answer);
-    });
-});
-
-</script>
 <div class="file">
 <p>For the tasks below, you will require the <strong>Boston</strong> dataset. This
 dataset is part of the <code>MASS</code> R package.</p>
@@ -443,7 +374,7 @@ median may be a more a suitable summary statistic to describe crime rate
 <span id="cb22-4"><a href="practical-2.html#cb22-4" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>rad, Boston<span class="sc">$</span>crim)</span>
 <span id="cb22-5"><a href="practical-2.html#cb22-5" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>tax, Boston<span class="sc">$</span>crim)</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="question">
 <p>What can you say about the relationships between <code>age</code>, <code>dis</code>, <code>rad</code>,
 <code>tax</code>, and <code>crim</code>?</p>
@@ -465,7 +396,7 @@ and <code>ptratio</code> in a 1x2 multipanel plot. Set the <code>breaks</code> a
 <span id="cb23-2"><a href="practical-2.html#cb23-2" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>crim, <span class="at">breaks=</span><span class="dv">25</span>)</span>
 <span id="cb23-3"><a href="practical-2.html#cb23-3" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>tax, <span class="at">breaks=</span><span class="dv">25</span>)</span></code></pre></div>
 </details>
-<p><img src="01-S01_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="01-S01_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="question">
 <p>What do these histograms indicate?</p>
 </div>
