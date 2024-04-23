@@ -1,10 +1,10 @@
-name: s4_tutorial2
+name: s2_ex_diagnostics
 title:
 username: ioanamacoveciuc
 account: ioanamacoveciuc
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 11556892
-bundleId: 8401916
-url: https://ioanamacoveciuc.shinyapps.io/s4_tutorial2/
+appId: 11839003
+bundleId: 8530540
+url: https://ioanamacoveciuc.shinyapps.io/s2_ex_diagnostics/
 version: 1

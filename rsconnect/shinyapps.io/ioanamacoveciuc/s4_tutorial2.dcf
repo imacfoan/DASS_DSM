@@ -1,0 +1,13 @@
+name: s4_tutorial2
+title:
+username: ioanamacoveciuc
+account: ioanamacoveciuc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11556892
+bundleId: 8530436
+url: https://ioanamacoveciuc.shinyapps.io/s4_tutorial2/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .nojekyll|_bookdown.yml|_main.rds|_output.yml|01-S01.Rmd|02-S02.Rmd|03-S03.Rmd|04-S04.Rmd|05-S05.Rmd|06-S06.Rmd|07-S07.Rmd|08-S08.Rmd|book.bib|book.js|data/Auto.data|data/Boston.csv|data/College.csv|dsm.rds|header.html|index.Rmd|packages.bib|preamble.tex|README.md|render4fb844cf5337.rds|render5fe024196b5d.rds|renderc784d3a2abf.rds|scripts/Boston.R|scripts/College data.R|style.css|toggle-answer-button.js|_bookdown_files|02-S01_files|docs|images|tutorials

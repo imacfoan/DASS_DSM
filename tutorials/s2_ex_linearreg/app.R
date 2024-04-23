@@ -7,7 +7,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       # Preset wider ranges for the slope and intercept sliders
-      sliderInput("slope", "Slope", min = -1000, max = 1000, value = 750, step = 10),
+      sliderInput("slope", "Slope", min = 0, max = 1000, value = 750, step = 10),
       sliderInput("intercept", "Intercept", min = 0, max = 50000, value = 25000, step = 100)
     ),
     mainPanel(

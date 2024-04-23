@@ -202,9 +202,7 @@ Then run a new linear regression model, a second degree polynomial model, and th
 
 As you can see, if we were to choose different training datasets, we will obtain somewhat different errors on the validation set. Nevertheless, the results obtained using the second training dataset are consistent with the findings from the first training dataset whereby a model that predicts **mpg** using a quadratic function of **horsepower** performs better than a model that involves only a linear function of **horsepower**. Also, there is little evidence in favor of a model that uses a cubic function of **horsepower**.
 
-# 2. Leave-One-Out Cross-Validation
-
-# 2. Leave-One-Out Cross-Validation
+## 2. Leave-One-Out Cross-Validation
 
 The LOOCV estimate can be automatically computed for any generalized linear model  using the `glm()` and `cv.glm()` functions. You'll remember that by specifying the **family** argument in the `glm()` function, we can, for example, perform logistic regression. If we do not specify this argument, we can perform linear regression in the same way as we would with the `lm()` function. 
 
@@ -231,7 +229,7 @@ Then use `lm()` and obtain the coefficients.
  
 As you can see, both functions yield identical linear regression models. In the context of cross-validation, we will continue using the `glm()` function to perform linear regression since we need to use additional functions from the `boot` package. *This package will need to be installed and loaded before you can use it.*
 
-```{r chunk8}
+```{r chunk13}
 
 glm.fit <- glm(mpg ~ horsepower, data = Auto)
 cv.err <- cv.glm(Auto, glm.fit)
@@ -244,7 +242,7 @@ We can repeat this procedure for increasingly complex polynomial fits.
  To automate the process, we use the  `for()` function to initiate a *for loop* which iteratively fits polynomial regressions for polynomials of order $i=1$ to $i=10$, computes the associated cross-validation error, and stores it in the $i$th element of the vector `cv.error`.
  We begin by initializing the vector. 
 
-```{r chunk9}
+```{r chunk14}
 cv.error <- rep(0, 10)
 for (i in 1:10) {
   glm.fit <- glm(mpg ~ poly(horsepower, i), data = Auto)
@@ -255,11 +253,11 @@ cv.error
 
 As in Figure 5.4, we see a sharp drop in the estimated test MSE between the linear and quadratic fits, but then no clear improvement from using higher-order polynomials.
 
-# 3. $k$-Fold Cross-Validation
+## 3. $k$-Fold Cross-Validation
 The `cv.glm()` function can also be used to implement $k$-fold CV. Below we use $k=10$, a common choice for $k$, on the `Auto` data set.
 We once again set a random seed and initialize a vector in which we will store the CV errors corresponding to the polynomial fits of orders one to ten.
 
-```{r chunk10}
+```{r chunk15}
 set.seed(17)
 cv.error.10 <- rep(0, 10)
 for (i in 1:10) {
