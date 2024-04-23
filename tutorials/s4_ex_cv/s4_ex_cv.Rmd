@@ -78,7 +78,7 @@ for (i in 1:10) {
 }
 ```
 
-# Tutorial 1 - Cross-Validation in R
+# Cross-Validation in R
 
 How can we implement cross-validation in R? Follow the steps outlined in this interactive tutorial to build basic coding skills required to perform cross-validation. This tutorial serves as a step-by-step guide to performing cross-validation in R. It has a fully interactive console in which you can type and run the suggested code. To run code, click on the *Run Code* button. 
 

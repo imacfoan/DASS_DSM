@@ -24,4 +24,4 @@ body {
 ```
 
 
-# Tutorial 2 - Bootstrapping in R
+# Bootstrapping 

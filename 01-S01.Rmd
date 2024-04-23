@@ -377,7 +377,10 @@ specifications (e.g. breaks).
 
 ```{r}
 
-# An example is shown below. Note that the purpose of the mfrow parameter is to change the default way in which R displays plots which is in a single panel display. Once applied, all plots you create later will also be displayed in a 2x2 grid. To revert back, you need to enter par(mfrow=c(1,1)) into the console.
+# An example is shown below. Note that the purpose of the mfrow parameter is 
+# to change the default way in which R displays plots.
+# Once applied, all plots you create later will also be displayed in a 2x2 grid. 
+# To revert back, you need to enter par(mfrow=c(1,1)) into the console.
 
 par(mfrow=c(2,2))
 hist(college$Apps)
