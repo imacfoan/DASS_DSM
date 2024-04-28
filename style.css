@@ -90,6 +90,11 @@ pre {
     text-align: left;
 }
 
+pre {
+    max-height: 200px;  /* Maximum height before scrolling */
+    overflow: auto;     /* Enables scrolling */
+}
+
 /* Initially hide R output blocks */
 pre > code {
     display: none;
@@ -223,29 +228,25 @@ font-family: "Open Sans", sans-serif;
 /* -----------Sidebar div tips------------- */
 /* from r-pkgs.org*/
 
-  div.question {
+div.question {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
-    background-size: 70px;
+    background-size: 50px 50px;  /* Set both width and height */
     background-repeat: no-repeat;
     background-position: 15px center;
-    min-height: 120px;
     color: black;
     background-color: white;
-    border: solid 5px  #f0e6ff;
+    border: solid 5px #f0e6ff;
     text-align: center;
-  }
-
-div.question {
-  background-image: url("images/boxes/question.png");
+    background-image: url("images/boxes/question.png");
 }
 
 
 /* -----------Sidebar div tips------------- */
 /* from r-pkgs.org*/
 
-  div.ilos {
+div.ilos {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -257,31 +258,22 @@ div.question {
     background-color: #F8F3FF;
     border: 5px dotted #6D009D; /* Dotted border */
     text-align: left;
-  }
-
-div.ilos {
-  background-image: url("images/boxes/ilos.png");
+    background-image: url("images/boxes/ilos.png");
 }
 
 /* -----------Sidebar div tips------------- */
 /* from r-pkgs.org*/
-  div.folder {
+div.folder {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
     background-size: 70px;
     background-repeat: no-repeat;
     background-position: 15px center;
-    min-height: 120px;
     color: #003258;
     text-align: justify;
-  }
-
-div.folder {
-  background-image: url("images/boxes/folder.png");
+    background-image: url("images/boxes/folder.png");
 }
-
-
 
 
 div.file {
@@ -334,7 +326,7 @@ div.attention {
     border-color: #EAEAEA; /* This sets the border color to light grey */
 }
 
-  div.answers {
+div.answers {
     padding: 1em;
     margin: 1em 0;
     color: black;
@@ -343,7 +335,9 @@ div.attention {
     border-style: solid;
     border-width: 5px;
     border-color: #EAEAEA; /* This sets the border color to light grey */
-    font-size: 15px
+    font-size: 15px;
+    max-height: 200px; /* Maximum height before scrolling */
+    overflow: auto; /* Enables scrolling */
 }
 
 

@@ -3,14 +3,26 @@ split_by: part
 delete_merged_file: true
 rmd_files: 
 - index.Rmd
-- 01-S01.Rmd
-- 02-S02.Rmd
-- 03-S03.Rmd
-- 04-S04.Rmd
-- 05-S05.Rmd
-- 06-S06.Rmd
-- 07-S07.Rmd
-- 08-S08.Rmd
+- 01-S01-overview.Rmd
+- 01-S01-D1.Rmd
+- 01-S01-P1.Rmd
+- 01-S01-P2.Rmd
+- 01-S01-ANS.Rmd
+- 02-S02-overview.Rmd
+- 02-S02-D1.Rmd
+- 02-S02-D2.Rmd
+- 02-S02-P1.Rmd
+- 02-S02-P2.Rmd
+- 02-S02-ANS.Rmd
+- 03-S03-overview.Rmd
+- 03-S03-D1.Rmd
+- 04-S04-overview.Rmd
+- 04-S04-D1.Rmd
+- 04-S04-D2.Rmd
+- 05-S05-overview.Rmd
+- 06-S06-overview.Rmd
+- 07-S07-overview.Rmd
+- 08-S08-overview.Rmd
 
 output_dir: docs
 language:

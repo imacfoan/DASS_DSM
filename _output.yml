@@ -1,6 +1,5 @@
 bookdown::gitbook:
   css: style.css
-  code_folding: hide
   includes:     
     before_body: header.html
   config:

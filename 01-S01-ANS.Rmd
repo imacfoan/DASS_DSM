@@ -1,0 +1,421 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+output:
+  html_document:
+    code_folding: hide
+---
+
+# Answers {.unnumbered}
+
+## Practical 1 {-}
+
+::: file
+For the tasks below, you will require the **College** dataset from the
+core textbook (James et. al 2021).
+
+Click here to download the file:
+<a href="data/College.csv" download="College.csv"> College.csv </a>.
+
+*Remember to place your data file in a separate subfolder within your R
+project working directory.*
+:::
+
+This data file contains 18 variables for 777 different universities and
+colleges in the United States. The variables are:
+
+-   Private : Public/private indicator
+-   Apps : Number of applications received
+-   Accept : Number of applicants accepted
+-   Enroll : Number of new students enrolled
+-   Top10perc : New students from top 10% of high school class
+-   Top25perc : New students from top 25% of high school class
+-   F.Undergrad : Number of full-time undergraduates
+-   P.Undergrad : Number of part-time undergraduates
+-   Outstate : Out-of-state tuition
+-   Room.Board : Room and board costs
+-   Books : Estimated book costs
+-   Personal : Estimated personal spending
+-   PhD : Percent of faculty with Ph.D.’s
+-   Terminal : Percent of faculty with terminal degree
+-   S.F.Ratio: Student/faculty ratio
+-   perc.alumni : Percent of alumni who donate
+-   Expend : Instructional expenditure per student
+-   Grad.Rate : Graduation rate
+
+### Task 1 {.unnumbered}
+
+Import the dataset in an object called **college** using the tidyverse `read_csv()` function.
+
+```{r warning = FALSE, message = FALSE}
+# Remember to load tidyverse first
+
+library(tidyverse)
+
+college <- read_csv("data/College.csv")
+```
+
+If you have a look at the contents of the data object using `View()`,
+you will notice that the first column contains the names of all of the
+universities in the dataset. You will also notice that it has a strange
+name.
+
+<img src="images/snips/college-view.png"/>
+
+Actually, these data should not be treated as a variable (column) since
+it is just a list of university names.
+
+### Task 2 {.unnumbered}
+
+Keeping the list of names in the data object, transform this column such
+that the university names in the column become row names. Hint: use the
+`column_to_rownames()` function from `dplyr`.
+
+```{r warning = FALSE, message = FALSE}
+college <- college %>% column_to_rownames(var = "...1") 
+```
+
+::: question
+How would have your approach to this task differed if you would have
+imported the dataset using base R? Try it!
+:::
+
+::: answers
+The data file could have instead been imported using `read.csv()`:
+
+`college <- read.csv("data/College.csv")`
+
+Using the base R approach, the first column containing the university
+names would have been named "X", as shown below using `View()`.
+
+<img src="images/snips/college-base-view.png" style="width: 60%;"/>
+
+Now, how would be go about transforming the contents of the first column
+into row names?
+
+This would require two steps.
+
+First, we assign the column contents to rows names.
+
+`rownames(college) <- college[, 1]`
+
+If you have another look at the data object, you will see that the rows
+have now been renamed using the university names in the "X" column, but
+the column is still part of the dataset. We therefore need to tell R to
+delete the column.
+
+`college <- college[, -1]`
+:::
+
+### Task 3 {.unnumbered}
+
+Produce summary statistics for all variables in the data object.
+
+```{r warning = FALSE, message = FALSE}
+summary(college)
+```
+
+### Task 4 {.unnumbered}
+
+Create a scatterplot matrix of the first three numeric variables.
+
+```{r warning = FALSE, message = FALSE}
+pairs(college[,2:4])
+```
+
+### Task 5 {.unnumbered}
+
+Produce side by side box plots of `Outstate` versus `Private` using base
+R.
+
+```{r eval = FALSE}
+plot(college$Private, college$Outstate, xlab = "Private", ylab = "Outstate")
+```
+
+::: question
+Did this work? Why?
+:::
+
+::: answers
+Using the `plot()` base R function to produce a box plot would produce
+an error since the `Private` variable is of class character. Most
+statistical functions will not work with character vectors.
+
+`Error in plot.window(...) : need finite 'xlim' values`\
+`In addition: Warning messages:`\
+`1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion`\
+`2: In min(x) : no non-missing arguments to min; returning Inf`\
+`3: In max(x) : no non-missing arguments to max; returning -Inf`
+
+Creating a box plot with `tidyverse` would work.
+
+`college %>%       ggplot(aes(x = Private, y = Outstate)) +        geom_boxplot()`
+
+<img src="images/snips/private.png" style="width: 60%;"/>
+
+However, it is important to note that if a variable is not of the right
+class, then this might have unintended consequences for example, when
+building models. In this case, the `Private` variable must be
+transformed into a factor.
+:::
+
+### Task 6 {.unnumbered}
+
+Using the `Top10perc` variable, create a new categorical variable called
+`Elite` such that universities are divided into two groups based on
+whether or not the proportion of students coming from the top 10% of
+their high school classes exceeds 50%. Hint: use a combination of
+`mutate()` and `if_else()`.
+
+```{r warning = FALSE, message = FALSE}
+college <- college %>%
+  mutate(Elite = if_else(Top10perc > 50, "Yes", "No"),
+         Elite = as_factor(Elite))
+#do not forget the factor transformation step (categorical variables are factors in R)
+```
+
+### Task 7 {.unnumbered}
+
+Produce side by side box plots of the new `Elite` variable and
+`Outstate`.
+
+```{r}
+college %>%  
+  ggplot(aes(x = Elite, y = Outstate)) +   
+  geom_boxplot()
+```
+
+::: question
+How would you produce a similar plot using base R?
+:::
+
+::: answers
+`plot(college$Elite, college$Outstate,  xlab = "Elite", ylab = "Outstate")`
+:::
+
+### Task 8 {.unnumbered}
+
+Use base R to produce a multipanel plot that displays histograms of the
+following variables: `Apps`, `perc.alumni`, `S.F.Ratio`, `Expend`. Hint:
+use `par(mfrow=c(2,2))` to set up a 2x2 panel. Try to adjust the
+specifications (e.g. breaks).
+
+```{r}
+
+# An example is shown below. Note that the purpose of the mfrow parameter is 
+# to change the default way in which R displays plots.
+# Once applied, all plots you create later will also be displayed in a 2x2 grid. 
+# To revert back, you need to enter par(mfrow=c(1,1)) into the console.
+
+par(mfrow=c(2,2))
+hist(college$Apps)
+hist(college$perc.alumni, col=2)
+hist(college$S.F.Ratio, col=3, breaks=10)
+hist(college$Expend, breaks=100)
+```
+
+### Task 9 {.unnumbered}
+
+Using `Accept` and `Apps`, create a new variable that describes
+acceptance rate. Name this variable `acceptance_rate`. Hint: use
+`mutate()`.
+
+```{r}
+college <- college %>%
+  mutate(acceptance_rate = Accept / Apps)
+```
+
+### Task 10 {.unnumbered}
+
+Using the `acceptance_rate` variable, find out which university has the
+lowest acceptance rate. Hint: for a `tidyverse` approach, you can use
+`slice_min()`.
+
+```{r}
+college %>%
+  slice_min(order_by = acceptance_rate, n = 1)
+```
+
+### Task 11 {.unnumbered}
+
+Using the `acceptance_rate` variable, find out which university has the
+highest acceptance rate.
+
+```{r}
+college %>%
+  slice_max(order_by = acceptance_rate, n = 1)
+```
+
+
+## Practical 2 {-}
+
+::: file
+For the tasks below, you will require the **Boston** dataset. This
+dataset is part of the `MASS` R package.
+
+To access the dataset, load the `MASS` package (install the package
+first, if you have not done so previously).
+:::
+
+### Task 1 {.unnumbered}
+
+Install and load the `MASS` package. You will also require `tidyverse`.
+
+```{r eval = FALSE}
+
+# if you haven't already, install the MASS package before loading
+install.packages("MASS")
+library(MASS)
+library(tidyverse)
+```
+
+```{r echo = FALSE, warning = FALSE, message = FALSE, class.source = 'fold-show'} 
+
+library(MASS)
+library(tidyverse)
+```
+
+::: question
+Does R provide any message when loading `MASS`? Why does this matter?
+:::
+
+::: answers
+One important message that R provides when loading `MASS` is that this
+package masks the `select()` function from `tidyverse`.
+
+`Attaching package: ‘MASS’`
+
+`The following object is masked from ‘package:dplyr’:`
+
+```         
+`select`  
+```
+
+When masking occurs, this means that both packages contain the same
+function. If you were to use the `select()` function, R will call the
+function from the `MASS` package, rather than from `tidyverse (dplyr)`
+package. This is because the `MASS` package is the one masking the
+function. If you intend to use the `select()` function as defined by the
+`tidyverse` package, it may not work as intended and/or you may be
+prompted by an error message such as:
+
+`Error in select(...): unused argument (...)`
+
+To avoid such issues, you must 'call' on the package from which you want
+R to use the masked function (e.g. `dplyr::select()`). This is why it is
+important to read through all warnings and messages provided in the
+console.
+:::
+
+### Task 2 {.unnumbered}
+
+Find out more about the `Boston` dataset variables by accessing the R
+Documentation.
+
+```{r eval = FALSE}
+?Boston
+```
+
+To explore the `Boston` dataset, simply type the name of the data object
+into the console or use `View()`
+
+::: question
+What type of data structure is the `Boston` dataset? What are its
+dimensions? How many categorical and quantitative variables are there?
+:::
+
+::: answers
+The `Boston` dataset is a data frame with 506 rows (observations) and 14
+columns (variables). There is one categorical variable (`chas`), and 13
+quantitative variables.
+:::
+
+### Task 3 {.unnumbered}
+
+Find the class of all 14 variables. Hint: use `sapply`.
+
+```{r}
+sapply(Boston, class)
+```
+
+### Task 4 {.unnumbered}
+
+Using a `tidyverse` approach, calculate the mean, median, and standard
+deviation of all variables of class *numeric*.
+
+```{r}
+Boston %>%
+  dplyr::select(dplyr::where(is.numeric)) %>%
+  pivot_longer(everything()) %>%
+  group_by(name) %>%
+  summarise(Mean = mean(value, na.rm = TRUE),
+            SD = sd(value, na.rm = TRUE), 
+            Median = median(value, na.rm = TRUE))
+```
+
+::: question
+What is the mean pupil-teacher ratio? What is the median and mean per
+capita crime rate? Which value do you think is more suitable to describe
+per capita crime rate?
+:::
+
+::: answers
+The mean pupil-teacher ratio is about 19. The median crime rate is 0.257
+whilst the mean is larger at 3.61. Given the difference between the
+median and the mean, a skewed distribution is expected, therefore, the
+median may be a more a suitable summary statistic to describe crime rate
+(a histogram would be needed).
+:::
+
+### Task 5 {.unnumbered}
+
+Using a base R approach, create a 2x2 multipanel plot of `crim` versus
+`age`, `dis`, `rad`, `tax` and `ptratio`.
+
+```{r}
+par(mfrow = c(2,2))
+plot(Boston$age, Boston$crim)
+plot(Boston$dis, Boston$crim)
+plot(Boston$rad, Boston$crim)
+plot(Boston$tax, Boston$crim)
+```
+
+::: question
+What can you say about the relationships between `age`, `dis`, `rad`,
+`tax`, and `crim`?
+:::
+
+::: answers
+As the age of the home increases (`age`), crime also increases. There is
+also higher crime around employment centers (`dis`). With very high
+index of accessibility to radial highways (`rad`), and tax rates (`tax`)
+there also appears to be high crime rates.
+:::
+
+### Task 6 {.unnumbered}
+
+Using a base R approach, create and display histograms of `crim`, `tax`
+and `ptratio` in a 1x2 multipanel plot. Set the `breaks` argument to
+**25** .
+
+```{r}
+par(mfrow=c(1,2))
+hist(Boston$crim, breaks=25)
+hist(Boston$tax, breaks=25)
+```
+
+::: question
+What do these histograms indicate?
+:::
+
+::: answers
+Most areas have low crime rates, but there is a rather long tail showing
+high crime rates (although the frequency seems to be very low). Given
+the degree of skew, the mean would not be a good measure of central
+tendency. With respect to tax rates, there appears to be a large divide
+between low taxation and high taxation, with the highest peak at around
+670.
+
+*Remember to revert back to single panel display.*
+:::

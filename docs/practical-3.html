@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Practical 3 | Data Science Modelling</title>
+  <title>Practical | Data Science Modelling</title>
   <meta name="description" content="Notebook hosting practical materials for SOST70033." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Practical 3 | Data Science Modelling" />
+  <meta property="og:title" content="Practical | Data Science Modelling" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Practical 3 | Data Science Modelling" />
+  <meta name="twitter:title" content="Practical | Data Science Modelling" />
   
   <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="practical-2-1.html"/>
-<link rel="next" href="overview-2.html"/>
+<link rel="prev" href="overview-5.html"/>
+<link rel="next" href="overview-6.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -48,7 +48,6 @@
 
 
 
-<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -143,6 +142,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>Section 1</b></span></li>
 <li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#a-more-in-depth-consideration-of-model-accuracy"><i class="fa fa-check"></i>A more in-depth consideration of model accuracy</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
 <ul>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
@@ -166,65 +170,146 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Section 2</b></span></li>
 <li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html"><i class="fa fa-check"></i>Practical 2</a>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>2.1 Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>2.2 What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>2.3 What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>2.4 How does noise affect confidence intervals for the coefficients?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical 3</a>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-i---simple-linear-models-without-intercept"><i class="fa fa-check"></i>Part I - Simple Linear Models Without Intercept</a></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-ii---simple-linear-models-with-intercept"><i class="fa fa-check"></i>Part II - Simple Linear Models with Intercept</a>
-<ul>
-<li class="chapter" data-level="0.0.1" data-path="practical-3.html"><a href="practical-3.html#task-1-4"><i class="fa fa-check"></i><b>0.0.1</b> Task 1</a></li>
-<li class="chapter" data-level="0.0.2" data-path="practical-3.html"><a href="practical-3.html#task-2-4"><i class="fa fa-check"></i><b>0.0.2</b> Task 2</a></li>
-<li class="chapter" data-level="0.0.3" data-path="practical-3.html"><a href="practical-3.html#task-3-4"><i class="fa fa-check"></i><b>0.0.3</b> Task 3</a></li>
-<li class="chapter" data-level="0.0.4" data-path="practical-3.html"><a href="practical-3.html#task-4-4"><i class="fa fa-check"></i><b>0.0.4</b> Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-iii---noise"><i class="fa fa-check"></i>Part III - Noise</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>Section 3</b></span></li>
 <li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
 <li class="part"><span><b>Section 4</b></span></li>
 <li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-4.html"><a href="practical-4.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#the-validation-set-approach"><i class="fa fa-check"></i>1.1 The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>1.2 Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#k-fold-cross-validation"><i class="fa fa-check"></i>1.3 <span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
 <li class="part"><span><b>Section 5</b></span></li>
 <li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-5.html"><a href="practical-5.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 6</b></span></li>
 <li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-6.html"><a href="practical-6.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 7</b></span></li>
 <li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-7.html"><a href="practical-7.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-4.html"><a href="practical-4.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 8</b></span></li>
 <li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-8.html"><a href="practical-8.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-5.html"><a href="practical-5.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -251,385 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </center>
 <div id="practical-3" class="section level1 unnumbered hasAnchor">
-<h1>Practical 3<a href="practical-3.html#practical-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this practical, you will run simulations to dive deeper into the
-principles behind linear models.</p>
-<div id="part-i---simple-linear-models-without-intercept" class="section level2 unnumbered hasAnchor">
-<h2>Part I - Simple Linear Models Without Intercept<a href="practical-3.html#part-i---simple-linear-models-without-intercept" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s investigate the <em>t-statistic</em> for the null hypothesis
-<span class="math inline">\(H_{0} : \beta = 0\)</span> in simple linear regression <strong>without</strong> an
-intercept. The formula would therefore be <span class="math inline">\(y = \beta x\)</span>.</p>
-<p>By excluding the intercept, the model is constrained to pass through the
-origin <span class="math inline">\((0,0)\)</span>, allowing the relationship between the response and
-predictor to be interpreted as proportional. In other words, the removal
-of the intercept forces the regression line to start at <span class="math inline">\((0,0)\)</span>, so when
-<span class="math inline">\(X = 0\)</span>, then <span class="math inline">\(y = 0\)</span>.</p>
-<p>Let’s first generate some data for a predictor <strong>x</strong> and a response
-<strong>y</strong>. We select a seed to ensure that we generate the same data every
-time. To generate values, we use the <code>rnorm</code> function to produce 100
-data values drawn from a normal distribution (hence <code>rnorm()</code>).</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="practical-3.html#cb53-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb53-2"><a href="practical-3.html#cb53-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb53-3"><a href="practical-3.html#cb53-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
-</details>
-<p>Now that we generated our predictor and our response variable, let’s run
-a simple linear regression of <em>y</em> onto <em>x</em>, without an intercept. One
-way to do so is by adding 0 into the formula.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="practical-3.html#cb54-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="dv">0</span>)</span></code></pre></div>
-</details>
-<p>And now, let’s have a look at the results.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="practical-3.html#cb55-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fit))</span></code></pre></div>
-</details>
-<pre><code>##   Estimate Std. Error  t value     Pr(&gt;|t|)
-## x 1.993876  0.1064767 18.72593 2.642197e-34</code></pre>
-<p>We can see a significant positive relationship between y and x. The
-coefficient estimate for <em>x</em> is 1.993876, and since the relationship
-betweeen x and y is proportional, we interpret the estimate as the y
-values being predicted to be (a little below) twice the x values.</p>
-<p>But what happens if we run a regression of <em>x</em> onto <em>y</em>?</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="practical-3.html#cb57-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(x <span class="sc">~</span> y <span class="sc">+</span> <span class="dv">0</span>)</span>
-<span id="cb57-2"><a href="practical-3.html#cb57-2" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fit2))</span></code></pre></div>
-</details>
-<pre><code>##    Estimate Std. Error  t value     Pr(&gt;|t|)
-## y 0.3911145 0.02088625 18.72593 2.642197e-34</code></pre>
-<p>We again observe a significant positive relationship between x and y,
-except that the x values are predicted to be (a little below) half the y
-values (since the coefficient estimate is 0.3911145).</p>
-<p>Note also the t-values for the two models. They are identical and of
-course so is the p-value (therefore, there is a significant
-relationships between <em>x</em> and <em>y</em>).</p>
-<p>Therefore, the results of the models of y onto x and x onto y indicate
-that the coefficients would be the inverse of each other (2 and 1/2)
-whilst the t-statistic values (and p-values) remain the same.</p>
-<p><strong>Why are the t-statistic values identical?</strong></p>
-<p>For each coefficient, the t statistic is calculated by dividing the
-coefficient estimate by its standard error. For example, for the <em>fit2</em>
-model, we have a coefficient estimate of 0.3911145 and a standard error
-of 0.02088625 and so dividing 0.3911145 by 0.02088625 gives us 18.72593.</p>
-<p>You’ll also remember that the correlation coefficient between two
-variables is symmetric and so the correlation between X and Y is the
-same as for Y and X. This is the reason why it is incorrect to state
-that “X causes a change in Y”.</p>
-<p>In a linear model, we are testing whether there is a linear association
-between X and Y but not if X causes Y or Y causes X. Therefore,
-irrespective of whether we are regressing Y onto X or X onto Y, the
-t-statistic is testing the same null hypothesis <span class="math inline">\(H_{0} : \beta = 0\)</span>
-(i.e. fundamentally, it is testing whether there is a linear correlation
-between X and Y).</p>
-<p><strong>So what exactly is the role of the intercept?</strong></p>
-<p>As you already know, the intercept represents the value of y when x is 0
-which can be thought of as the initial value effect that exists
-independently of x. This not only applies to the simple linear
-regression model but also to the multiple linear regression model (i.e.
-the intercept is the value of Y when all predictors are zero). In other
-words, the intercept adjusts the starting point of regression line and
-allows for the line to shift up or down on the y-axis thus reflecting a
-“baseline” level of y that is not dependent on x. With an intercept, the
-slope coefficient still tells us how much Y changes with a one-unit
-change in X, but this change is relative to the y value when x is zero
-and this is important when x can take a value of 0 that is meaningful to
-the model.</p>
-<p><em>Without the intercept</em>, the line is forced to pass through the origin
-<span class="math inline">\((0,0)\)</span>, which may not be suitable unless the data naturally begin at
-zero (or there are some other theoretical or practical reasons which
-warrant the line passing through the origin).</p>
-<p><em>With an intercept</em>, the regression line is no longer forced to pass
-through zero (and will only do so if the data naturally begin at zero).
-The intercept therefore allows for the regression line to better fit the
-data, particularly when the data do not actually begin at zero. In this
-way, the model can capture the average outcome when the predictor(s)
-is/are zero.</p>
-</div>
-<div id="part-ii---simple-linear-models-with-intercept" class="section level2 unnumbered hasAnchor">
-<h2>Part II - Simple Linear Models with Intercept<a href="practical-3.html#part-ii---simple-linear-models-with-intercept" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Find all <details> elements as potential containers of R input
-    var detailElements = document.querySelectorAll('details.chunk-details');
+<h1>Practical<a href="practical-3.html#practical-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-    detailElements.forEach(function(details) {
-        var nextElement = details.nextElementSibling;
-        var elementToToggle = null;
-
-        // Check if the nextElement is a textual R output
-        if (nextElement && nextElement.matches('pre') && nextElement.textContent.trim().startsWith('##')) {
-            elementToToggle = nextElement;
-        }
-        // Alternatively, check if the nextElement contains a graphical R output (plot)
-        else if (nextElement && nextElement.querySelector('img')) {
-            elementToToggle = nextElement;
-        }
-
-        // Proceed to create a toggle button only if a matching element is found
-        if (elementToToggle) {
-            var button = document.createElement('button');
-            button.className = 'toggle-button';
-            button.textContent = 'Show R Output';
-            button.style.display = 'block';
-
-            // Initially hide the R output/plot
-            elementToToggle.style.display = 'none';
-
-            button.onclick = function() {
-                var isHidden = elementToToggle.style.display === 'none';
-                elementToToggle.style.display = isHidden ? 'block' : 'none';
-                button.textContent = isHidden ? 'Hide R Output' : 'Show R Output';
-            };
-
-            // Insert the toggle button immediately after the <details>
-            details.parentNode.insertBefore(button, details.nextSibling);
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var answers = document.querySelectorAll('.answers');
-
-    answers.forEach(function(answer) {
-        // Create the toggle button
-        var button = document.createElement('button');
-        button.className = 'toggle-answer-button';
-        button.textContent = 'Show Answer'; // Updated text content
-        button.style.display = 'block'; // Ensure button is visible
-        answer.style.display = 'none'; // Initially hide the answer
-
-        // Add click event listener to the button
-        button.onclick = function() {
-            if (answer.style.display === 'none') {
-                answer.style.display = 'block'; // Show the answer
-                button.textContent = 'Hide Answer'; // Update button text
-            } else {
-                answer.style.display = 'none'; // Hide the answer
-                button.textContent = 'Show Answer'; // Reset button text
-            }
-        };
-
-        // Insert the button before the answer
-        answer.parentNode.insertBefore(button, answer);
-    });
-});
-
-</script>
-<p><em>Do you think that the t-statistic will be the same for both regression of Y onto X and X onto Y if we were to include the intercept?</em></p>
-<div id="task-1-4" class="section level3 hasAnchor" number="0.0.1">
-<h3><span class="header-section-number">0.0.1</span> Task 1<a href="practical-3.html#task-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Use the same data as before and run a regression with Y as response and
-X as predictor. Store the results into an object called <strong>fit3</strong>.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="practical-3.html#cb59-1" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span></code></pre></div>
-</details>
-</div>
-<div id="task-2-4" class="section level3 hasAnchor" number="0.0.2">
-<h3><span class="header-section-number">0.0.2</span> Task 2<a href="practical-3.html#task-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Extract the model coefficients from the summary results of the model.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="practical-3.html#cb60-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fit3))</span></code></pre></div>
-</details>
-<pre><code>##                Estimate Std. Error    t value     Pr(&gt;|t|)
-## (Intercept) -0.03769261 0.09698729 -0.3886346 6.983896e-01
-## x            1.99893961 0.10772703 18.5555993 7.723851e-34</code></pre>
-<div class="question">
-<p>How does coefficient for <strong>fit3</strong> compare to <strong>fit</strong>? How about the
-t-statistic value?</p>
-</div>
-<div class="answers">
-<p>The coefficient for the model with the intercept is very similar to the
-coefficient for the model without the intercept. The t-statistic is also
-very close (18.72593 for the model without intercept and 18.5555993 for
-the model with the intercept).</p>
-</div>
-</div>
-<div id="task-3-4" class="section level3 hasAnchor" number="0.0.3">
-<h3><span class="header-section-number">0.0.3</span> Task 3<a href="practical-3.html#task-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now run a regression with X as response and Y as predictor. Store the
-results into an object called <strong>fit4</strong>.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="practical-3.html#cb62-1" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(x <span class="sc">~</span> y)</span></code></pre></div>
-</details>
-</div>
-<div id="task-4-4" class="section level3 hasAnchor" number="0.0.4">
-<h3><span class="header-section-number">0.0.4</span> Task 4<a href="practical-3.html#task-4-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Extract the model coefficients from the summary results of the model.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="practical-3.html#cb63-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fit4))</span></code></pre></div>
-</details>
-<pre><code>##               Estimate Std. Error    t value     Pr(&gt;|t|)
-## (Intercept) 0.03880394 0.04266144  0.9095787 3.652764e-01
-## y           0.38942451 0.02098690 18.5555993 7.723851e-34</code></pre>
-<div class="question">
-<p>How does coefficient for <strong>fit4</strong> compare to <strong>fit2</strong>? How about the
-t-statistic value? Are the t-statistic values different between the
-<strong>fit3</strong> and <strong>fit4</strong> models?</p>
-</div>
-<div class="answers">
-<p>The slope coefficient for the model with the intercept (0.38942451) is
-very similar to the coefficient for the model without the intercept
-(0.3911145) and so is the t-statistic. Also, as expected, the
-t-statistic value is identical to that of the <strong>fit3</strong> model. Therefore,
-the t-statistic for simple regression of Y onto X is identical to the
-t-statistic for simple regression of X onto Y.</p>
-</div>
-</div>
-</div>
-<div id="part-iii---noise" class="section level2 unnumbered hasAnchor">
-<h2>Part III - Noise<a href="practical-3.html#part-iii---noise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>How does variability affect the coefficients of a linear model?</em></p>
-<p>Let’s generate our “true” population data.</p>
-<p>We create a variable <strong>x</strong> with 100 observations drawn from a normal
-distribution. To be more specific about the characteristic of our
-variable <strong>x</strong>, we will not only specify the total number of
-observations (100), but also the mean (0), and standard deviation (1).
-This will be our <em>predictor</em>.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="practical-3.html#cb65-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb65-2"><a href="practical-3.html#cb65-2" tabindex="-1"></a>x_n <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
-</details>
-<p>Now let’s create another vector called <strong>eps</strong> containing 100
-observations drawn from a normal distribution with a mean of zero and a
-variance of 0.25. This will be the error or <em>epsilon</em>.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="practical-3.html#cb66-1" tabindex="-1"></a>eps_n <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="fl">0.25</span>))</span></code></pre></div>
-</details>
-<p>using <strong>x_n</strong> and <strong>eps_n</strong>, we now generate a vector <strong>y_n</strong> according
-to the following formula: <span class="math inline">\(Y = -1 + 0.5X + \epsilon\)</span>. Essentially, we
-specify our intercept, the slope coefficient, the predictor variable and
-the error to obtain our <em>response</em> variable.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="practical-3.html#cb67-1" tabindex="-1"></a>y_n <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> x_n <span class="sc">+</span> eps_n</span></code></pre></div>
-</details>
-<p>The values <em>-1</em> and <em>0.5</em> represent the “true” coefficients for the
-intercept <span class="math inline">\(\beta_{0}\)</span> and slope <span class="math inline">\(\beta_{1}\)</span> respectively.</p>
-<p>Now we can create a scatterplot to observe the association between X and
-Y.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="practical-3.html#cb68-1" tabindex="-1"></a><span class="fu">plot</span>(x_n, y_n)</span></code></pre></div>
-</details>
-<p><img src="02-S02_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
-<p>The plot indicates a linear relationship between X and Y. The
-relationship is clearly not perfectly linear due to noise.</p>
-<p><strong>If we were to estimate these population parameters, to what degree do you think the estimated coefficients will differ from these true population parameters?</strong></p>
-<p>Ok, so we have the variables we generated, so our predictor <strong>x_n</strong> and
-our response <strong>y_n</strong> and we run a regression model.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="practical-3.html#cb69-1" tabindex="-1"></a>fit5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_n <span class="sc">~</span> x_n)</span>
-<span id="cb69-2"><a href="practical-3.html#cb69-2" tabindex="-1"></a></span>
-<span id="cb69-3"><a href="practical-3.html#cb69-3" tabindex="-1"></a><span class="fu">summary</span>(fit5)</span></code></pre></div>
-</details>
-<pre><code>## 
-## Call:
-## lm(formula = y_n ~ x_n)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.93842 -0.30688 -0.06975  0.26970  1.17309 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -1.01885    0.04849 -21.010  &lt; 2e-16 ***
-## x_n          0.49947    0.05386   9.273 4.58e-15 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.4814 on 98 degrees of freedom
-## Multiple R-squared:  0.4674, Adjusted R-squared:  0.4619 
-## F-statistic: 85.99 on 1 and 98 DF,  p-value: 4.583e-15</code></pre>
-<p>The results of the model show an estimated slope coefficient
-(<span class="math inline">\(\hat{\beta_{1}}\)</span>) for <strong>x_n</strong> of 0.49947. This is very close to the
-population value (<span class="math inline">\(\beta_{1}\)</span>) which is 0.5! We see a similar estimated
-value for the intercept (<span class="math inline">\(\hat{\beta_{0}}\)</span>) which is -1.01885, again
-very close to the true value for the intercept (<span class="math inline">\(\beta_{0}\)</span>) which is
--1!</p>
-<p>Therefore, if we were to plot the true regression line and the estimated
-regression line, we would see that the two are difficult to distinguish
-(given the similarity of the estimated and true values for the
-coefficients).</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="practical-3.html#cb71-1" tabindex="-1"></a><span class="fu">plot</span>(x_n, y_n)</span>
-<span id="cb71-2"><a href="practical-3.html#cb71-2" tabindex="-1"></a><span class="fu">abline</span>(fit5)</span>
-<span id="cb71-3"><a href="practical-3.html#cb71-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb71-4"><a href="practical-3.html#cb71-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
-<span id="cb71-5"><a href="practical-3.html#cb71-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;model fit&quot;</span>, <span class="st">&quot;population regression&quot;</span>),</span>
-<span id="cb71-6"><a href="practical-3.html#cb71-6" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
-<span id="cb71-7"><a href="practical-3.html#cb71-7" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
-<span id="cb71-8"><a href="practical-3.html#cb71-8" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.72</span>,</span>
-<span id="cb71-9"><a href="practical-3.html#cb71-9" tabindex="-1"></a>)</span></code></pre></div>
-</details>
-<p><img src="02-S02_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
-<p>What if we were to fit a polynomial regression model? Would there be any
-evidence that adding a quadratic term improves the model fit? To add a
-polynomial term of degree two, we can use the <code>poly</code> base R function
-directly in the code for the model.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="practical-3.html#cb72-1" tabindex="-1"></a>fit6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_n <span class="sc">~</span> <span class="fu">poly</span>(x_n, <span class="dv">2</span>))</span>
-<span id="cb72-2"><a href="practical-3.html#cb72-2" tabindex="-1"></a><span class="fu">anova</span>(fit6, fit5)</span></code></pre></div>
-</details>
-<pre><code>## Analysis of Variance Table
-## 
-## Model 1: y_n ~ poly(x_n, 2)
-## Model 2: y_n ~ x_n
-##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
-## 1     97 22.257                           
-## 2     98 22.709 -1  -0.45163 1.9682 0.1638</code></pre>
-<p>Since the F-test is not statistically significant, there is no evidence that adding a quadratic term improves the model fit.</p>
-<p><strong>Ok, so what do you think would happen if we were to <em>reduce the noise</em> in the data?</strong></p>
-<p>Let’s generate new data but reduce the variance from 0.25 to 0.05. We keep the predictor X the same.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="practical-3.html#cb74-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb74-2"><a href="practical-3.html#cb74-2" tabindex="-1"></a>x_n2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
-</details>
-<p>But we reduce the error (so we reduce <strong>eps</strong> from 0.25 to 0.05).</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="practical-3.html#cb75-1" tabindex="-1"></a>eps_n2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="fl">0.05</span>))</span></code></pre></div>
-</details>
-<p>using <strong>x_n2</strong> and <strong>eps_n2</strong>, we again now generate a vector <strong>y_n2</strong> according
-to the same formula as before: <span class="math inline">\(Y = -1 + 0.5X + \epsilon\)</span>.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="practical-3.html#cb76-1" tabindex="-1"></a>y_n2 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> x_n2 <span class="sc">+</span> eps_n2</span></code></pre></div>
-</details>
-<p>We now build a new model called <strong>fit7</strong> using the new data.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="practical-3.html#cb77-1" tabindex="-1"></a>fit7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y_n2 <span class="sc">~</span> x_n2)</span>
-<span id="cb77-2"><a href="practical-3.html#cb77-2" tabindex="-1"></a><span class="fu">summary</span>(fit7)</span></code></pre></div>
-</details>
-<pre><code>## 
-## Call:
-## lm(formula = y_n2 ~ x_n2)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.41967 -0.13724 -0.03119  0.12061  0.52462 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -1.00843    0.02169  -46.50   &lt;2e-16 ***
-## x_n2         0.49976    0.02409   20.75   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.2153 on 98 degrees of freedom
-## Multiple R-squared:  0.8145, Adjusted R-squared:  0.8127 
-## F-statistic: 430.4 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>If we compare the results of <strong>fit7</strong> with <strong>fit5</strong>, we can observe that the <span class="math inline">\(R^{2}\)</span> value for <strong>fit7</strong> is 0.8145, much higher than the <span class="math inline">\(R^{2}\)</span> value for <strong>fit5</strong> which is 0.4674. By plotting the data we can clearly see the reduced variability.</p>
-<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="practical-3.html#cb79-1" tabindex="-1"></a><span class="fu">plot</span>(x_n2, y_n2)</span>
-<span id="cb79-2"><a href="practical-3.html#cb79-2" tabindex="-1"></a><span class="fu">abline</span>(fit7)</span>
-<span id="cb79-3"><a href="practical-3.html#cb79-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb79-4"><a href="practical-3.html#cb79-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
-<span id="cb79-5"><a href="practical-3.html#cb79-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;model fit&quot;</span>, <span class="st">&quot;population regression&quot;</span>),</span>
-<span id="cb79-6"><a href="practical-3.html#cb79-6" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
-<span id="cb79-7"><a href="practical-3.html#cb79-7" tabindex="-1"></a>  <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
-<span id="cb79-8"><a href="practical-3.html#cb79-8" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.72</span></span>
-<span id="cb79-9"><a href="practical-3.html#cb79-9" tabindex="-1"></a>)</span></code></pre></div>
-</details>
-<p><img src="02-S02_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
-<p><strong>Ok, so what if we were to <em>increase the noise</em> in the data?</strong></p>
-
-</div>
 </div>
 
 
@@ -639,8 +347,8 @@ to the same formula as before: <span class="math inline">\(Y = -1 + 0.5X + \epsi
           </div>
         </div>
       </div>
-<a href="practical-2-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="overview-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="overview-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overview-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,33 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Practical | Data Science Modelling</title>
+  <title>Practical | Untitled</title>
   <meta name="description" content="Notebook hosting practical materials for SOST70033." />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Practical | Data Science Modelling" />
+  <meta property="og:title" content="Practical | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Practical | Data Science Modelling" />
+  <meta name="twitter:title" content="Practical | Untitled" />
   
   <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
   
 
-<meta name="author" content="Dr. Ioana Macoveciuc" />
+<meta name="author" content="Ioana Macoveciuc" />
 
 
+<meta name="date" content="2024-04-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="overview-5.html"/>
-<link rel="next" href="overview-6.html"/>
+<link rel="prev" href="overview-7.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -48,7 +49,6 @@
 
 
 
-<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -143,6 +143,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="part"><span><b>Section 1</b></span></li>
 <li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#a-more-in-depth-consideration-of-assessing-model-accuracy"><i class="fa fa-check"></i>A more in-depth consideration of assessing model accuracy</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
 <ul>
 <li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
@@ -166,65 +171,145 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
 <li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Section 2</b></span></li>
 <li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
-<li class="chapter" data-level="" data-path="practical-1-1.html"><a href="practical-1-1.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html"><i class="fa fa-check"></i>Practical 2</a>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
-<li class="chapter" data-level="" data-path="practical-2-1.html"><a href="practical-2-1.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical 3</a>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
 <ul>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-i---simple-linear-models-without-intercept"><i class="fa fa-check"></i>Part I - Simple Linear Models Without Intercept</a></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-ii---simple-linear-models-with-intercept"><i class="fa fa-check"></i>Part II - Simple Linear Models with Intercept</a>
-<ul>
-<li class="chapter" data-level="0.0.1" data-path="practical-3.html"><a href="practical-3.html#task-1-4"><i class="fa fa-check"></i><b>0.0.1</b> Task 1</a></li>
-<li class="chapter" data-level="0.0.2" data-path="practical-3.html"><a href="practical-3.html#task-2-4"><i class="fa fa-check"></i><b>0.0.2</b> Task 2</a></li>
-<li class="chapter" data-level="0.0.3" data-path="practical-3.html"><a href="practical-3.html#task-3-4"><i class="fa fa-check"></i><b>0.0.3</b> Task 3</a></li>
-<li class="chapter" data-level="0.0.4" data-path="practical-3.html"><a href="practical-3.html#task-4-4"><i class="fa fa-check"></i><b>0.0.4</b> Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html#part-iii---noise"><i class="fa fa-check"></i>Part III - Noise</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>Section 3</b></span></li>
 <li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="practical.html"><a href="practical.html#r-markdown"><i class="fa fa-check"></i><b>0.1</b> R Markdown</a></li>
+<li class="chapter" data-level="0.2" data-path="practical.html"><a href="practical.html#including-plots"><i class="fa fa-check"></i><b>0.2</b> Including Plots</a></li>
+</ul></li>
 <li class="part"><span><b>Section 4</b></span></li>
 <li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-4.html"><a href="practical-4.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#the-validation-set-approach"><i class="fa fa-check"></i>1. The Validation Set Approach</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#training-and-test-datasets"><i class="fa fa-check"></i>Training and Test Datasets</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#fitting-the-linear-regression-model-using-the-training-set"><i class="fa fa-check"></i>Fitting the Linear Regression Model using the Training Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#the-estimated-test-mean-squared-error"><i class="fa fa-check"></i>The Estimated Test Mean Squared Error</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#different-training-datasets"><i class="fa fa-check"></i>Different Training Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>2. Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#k-fold-cross-validation"><i class="fa fa-check"></i>3. <span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="0.3" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#r-markdown-1"><i class="fa fa-check"></i><b>0.3</b> R Markdown</a></li>
+<li class="chapter" data-level="0.4" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#including-plots-1"><i class="fa fa-check"></i><b>0.4</b> Including Plots</a></li>
+<li class="chapter" data-level="0.5" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#r-markdown-2"><i class="fa fa-check"></i><b>0.5</b> R Markdown</a></li>
+<li class="chapter" data-level="0.6" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#including-plots-2"><i class="fa fa-check"></i><b>0.6</b> Including Plots</a></li>
+<li class="chapter" data-level="0.7" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#r-markdown-3"><i class="fa fa-check"></i><b>0.7</b> R Markdown</a></li>
+<li class="chapter" data-level="0.8" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#including-plots-3"><i class="fa fa-check"></i><b>0.8</b> Including Plots</a></li>
+</ul></li>
 <li class="part"><span><b>Section 5</b></span></li>
 <li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-5.html"><a href="practical-5.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 6</b></span></li>
 <li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-6.html"><a href="practical-6.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-4.html"><a href="practical-4.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 7</b></span></li>
 <li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-7.html"><a href="practical-7.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-5.html"><a href="practical-5.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="part"><span><b>Section 8</b></span></li>
 <li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="practical-8.html"><a href="practical-8.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="chapter" data-level="" data-path="practical-6.html"><a href="practical-6.html"><i class="fa fa-check"></i>Practical</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -236,7 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Modelling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
           </h1>
         </div>
 
@@ -254,16 +339,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Practical<a href="practical-6.html#practical-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="overview-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="overview-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="overview-7.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

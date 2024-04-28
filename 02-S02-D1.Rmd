@@ -1,0 +1,112 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+# Demonstration 1 {-}
+
+## Simple Linear Models Without Intercept {-}
+
+Let's investigate the *t-statistic* for the null hypothesis $H_{0}:\beta = 0$ in simple linear regression **without** an intercept. The equation for a model without the intercept would therefore be $Y = \beta X$.
+
+By excluding the intercept, the model is constrained to pass through the origin $(0,0)$, allowing the relationship between the response and predictor to be interpreted as proportional. In other words, the removal of the intercept forces the regression line to start at $(0,0)$, so when $x = 0$, then $y = 0$.
+
+Let's first generate some data for a predictor $x$ and a response $y$.  
+
+We select a seed value to ensure that we generate the same data every time. To generate values, we use the `rnorm` function to produce 100 data values drawn from a normal distribution (hence `rnorm()`).
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2 * x + rnorm(100)
+```
+
+Now that we generated our predictor and our response variable, let's run a simple linear regression without an intercept using $y$ as the response and $x$ as a predictor. One way to do so is by adding $0$ into the formula. 
+
+```{r}
+fit <- lm(y ~ x + 0)
+```
+
+And now, let's have a look at the results.
+
+```{r}
+coef(summary(fit))
+```
+
+We can see a significant positive relationship between y and x. The coefficient estimate for $x$ is $1.993876$, and since the relationship between $x$ and $y$ is proportional, we interpret the estimate as the $y$ values being predicted to be (a little below) twice the $x$ values.  
+
+But what happens if we swap $x$ and $y$ and run a model using $y$ as the predictor and $x$ as the response?
+
+```{r}
+fit2 <- lm(x ~ y + 0)
+coef(summary(fit2))
+```
+
+We again observe a significant positive relationship between $x$ and $y$, except that the  $x$ values are predicted to be (a little below) half the $y$ values (since the coefficient estimate is $0.3911145$).  
+
+Note also the t-statistic values for the two models. They are identical and of course so is the p-value (therefore, there is a significant relationships between $x$ and $y$).
+
+Therefore, the results of the models of $y$ onto $x$ and $x$ onto $y$ indicate that the coefficients would be the inverse of each other (2 and 1/2) whilst the t-statistic values (and p-values) remain the same.  
+
+**Why are the t-statistic values identical?**  
+
+For each coefficient, the t statistic is calculated by dividing the coefficient estimate by its standard error. For example, for the *fit2* model, we have a coefficient estimate of $0.3911145$ and a standard error of $0.02088625$ and so dividing $0.3911145$ by $0.02088625$ gives us $18.72593$.  
+
+You'll also remember that the correlation coefficient between two variables is symmetric and so the correlation between $X$ and $Y$ is the same as for $Y$ and $X$. This is the reason why it is incorrect to state that "$X$ causes a change in $Y$".  
+
+In a linear model, we are testing whether there is a linear association between  $x$ and $y$ but not if X causes Y or Y causes X. Therefore, irrespective of whether we are regressing $y$ onto $x$ or $y$ onto $y$, the t-statistic is testing the same null hypothesis $H_{0} : \beta = 0$ (i.e. fundamentally, it is testing whether there is a linear correlation between $x$ and $y$).  
+
+**So what exactly is the role of the intercept?**  
+ 
+As you already know, the intercept represents the value of $y$ when $x = 0$ which can be thought of as the initial value effect that exists independently of $x$. This not only applies to the simple linear regression model but also to the multiple linear regression model (i.e. the intercept is the value of $y$ when all predictors are zero). In other words, the intercept adjusts the starting point of regression line and allows for the line to shift up or down on the y-axis thus reflecting a "baseline" level of $y$ that is not dependent on $x$. With an intercept, the slope coefficient still tells us how much $Y$ changes with a one-unit change in $x$, but this change is relative to the value of $y$ when $x = 0$ and this is important when $x$ can take a value of $0$ that is meaningful to the model.  
+
+*Without the intercept*, the line is forced to pass through the origin $(0,0)$, which may not be suitable unless the data naturally begin at zero (or there are some other theoretical or practical reasons which warrant the line passing through the origin).  
+
+*With an intercept*, the regression line is no longer forced to pass  through zero (and will only do so if the data naturally begin at zero). The intercept therefore allows for the regression line to better fit the data, particularly when the data do not actually begin at zero. In this way, the model can capture the average outcome when the predictor(s) is/are zero.
+
+## Simple Linear Models with Intercept {-}
+
+*Do you think that the t-statistic will be the same for both regression of Y onto X and X onto Y if we were to include the intercept?*   
+
+We use the same data as before and run a regression with $y$ as response and $x$ as predictor and include the intercept. 
+
+```{r}
+fit3 <- lm(y ~ x)
+```
+
+We then extract the model coefficients from the summary results of the model.
+
+```{r}
+coef(summary(fit3))
+```
+
+How does coefficient for **fit3** compare to **fit**? How about the t-statistic value?
+
+```{r}
+coef(summary(fit))
+```
+
+As you can see, the coefficient for the model with the intercept (**fit3**) is very similar to the coefficient for the model without the intercept (**fit**). The t-statistic is also very close ($18.72593$ for the model without intercept and $18.5555993$ for the model with the intercept).  
+
+Now we run a regression with $x$ *as response* and $y$ *as predictor*. 
+
+```{r}
+fit4 <- lm(x ~ y)
+```
+
+We then extract the model coefficients from the summary results of the model.
+
+```{r}
+coef(summary(fit4))
+```
+
+How does the coefficient for **fit4** compare to **fit2**? How about the t-statistic value? Are the t-statistic values different between the **fit3** and **fit4** models?  
+
+```{r}
+coef(summary(fit2))
+```
+
+The slope coefficient for the model with the intercept ($0.38942451$) is very similar to the coefficient for the model without the intercept ($0.3911145$) and so is the t-statistic. 
+
+Also, as expected, the t-statistic value for the two models for which we included the intercept are identical. Therefore, irrespective of whether we include the intercept or not, the t-statistic value for the regression of $y$ onto $x$ will be identical to the t-statistic value for the regression of $x$ onto $y$. 
