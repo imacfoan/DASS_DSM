@@ -22,7 +22,11 @@ rmd_files:
 - 05-S05-overview.Rmd
 - 06-S06-overview.Rmd
 - 07-S07-overview.Rmd
+- 07-S07-D1.Rmd
+- 07-S07-D2.Rmd
 - 08-S08-overview.Rmd
+- 08-S08-D1.Rmd
+
 
 output_dir: docs
 language:

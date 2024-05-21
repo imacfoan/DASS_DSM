@@ -28,6 +28,8 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to
     output.
 :::
 
+**In this section, you will practice using the functions below. It is highly recommended that you explore these functions further using the Help tab in your RStudio console.**
+
 |  Function  |                               Description                                | Package |
 |:----------------------:|:----------------------:|:----------------------:|
 | `sample()` |            obtain a random sample with or without replacement            | base R  |

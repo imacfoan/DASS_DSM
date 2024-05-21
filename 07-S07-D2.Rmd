@@ -1,0 +1,233 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Demonstration 2: Principal Component Analysis in R {-}
+
+For the tasks below, you will require the **World Happiness Report (2021)** dataset.  
+
+Click here to download the file: 
+<a href="data/world_happiness_report_2021.csv" download="world_happiness_report_2021.csv"> world_happiness_report_2021.csv </a>.   
+Remember to place your data file in a separate subfolder within your R project working directory.  
+
+Prior to beginning the practical, you will be required install two packages `easyCODA` and `janitor`. 
+
+## Load packages {-}
+
+```{r, warning = FALSE, message = FALSE}
+library(easyCODA)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(janitor)
+library(ggplot2)
+
+theme_set(theme_light())
+```
+
+## Preprocess the world happiness report data {-}
+
+```{r}
+happy <-
+  read_csv(
+    file = "data/world_happiness_report_2021.csv",
+    show_col_types = FALSE
+  ) |>
+  clean_names()
+
+happy_standardized <- 
+  happy |>
+  select(
+    social = social_support,
+    life = healthy_life_expectancy,
+    choices = freedom_to_make_life_choices,
+    generosity,
+    corruption = perceptions_of_corruption
+  ) |>
+  scale()
+
+rownames(happy_standardized) <- happy$country_name
+```
+
+## Profile the happiness data {-}
+
+```{r}
+head(happy)
+```
+
+## Plot happiness score against feature {-}
+
+```{r}
+happy |>
+  select(
+    ladder = ladder_score,
+    social = social_support,
+    life = healthy_life_expectancy,
+    choices = freedom_to_make_life_choices,
+    generosity,
+    corruption = perceptions_of_corruption
+  ) |>
+  pivot_longer(-ladder, names_to = "feature", values_to = "value") |>
+  ggplot(aes(value, ladder)) +
+  geom_point(alpha = 0.4) +
+  scale_x_continuous("Feature value") +
+  scale_y_continuous("Cantrill Ladder happiness score") +
+  facet_wrap(~ feature, scales = "free_x")
+```
+
+## Run PCA using five features {-}
+
+```{r}
+happy_pca <- PCA(happy_standardized, weight = FALSE)
+summary(happy_pca)
+```
+
+:::question
+What is the percentage of variance explained by each principal component?
+:::
+
+```{r}
+happy_pca$sv ^ 2 / sum(happy_pca$sv ^ 2)
+```
+
+:::question
+What is the cumulative variance explained for each variable?
+:::
+
+```{r}
+vexp <- function(feature, df, pca) {
+  reg_pc1 <- lm(df[, feature] ~ pca$rowpcoord[, 1])
+  reg_pc1_pc2 <- lm(df[, feature] ~ pca$rowpcoord[, 1] + pca$rowpcoord[, 2])
+  
+  explained_pc1 <- cor(predict(reg_pc1), df[, feature]) ^ 2
+  explained_pc1_pc2 <- cor(predict(reg_pc1_pc2), df[, feature]) ^ 2
+  
+  c(explained_pc1, explained_pc1_pc2)
+}
+```
+
+```{r}
+var_explained <- sapply(1:5, \(x) vexp(x, happy_standardized, happy_pca))
+colnames(var_explained) <- colnames(happy_standardized)
+rownames(var_explained) <- c("PC1", "PC2")
+t(round(var_explained, 3))
+
+round(colMeans(t(var_explained)), 3)
+```
+
+:::question
+How do we build a correlation matrix of all variables?
+:::
+
+```{r}
+round(cor(cbind("ladder" = happy$ladder_score, happy_standardized)), 3)
+```
+
+## Correlations of happiness score with PC1 and PC2 {-}
+
+```{r}
+row_principal <- -happy_pca$rowpcoord[, 1:2]
+colnames(row_principal) <- c("PC1", "PC2")
+round(cor(cbind("ladder" = happy$ladder_score, row_principal)), 3)
+```
+
+## Plot first two principal components {-}
+
+```{r}
+row_principal |>
+  as_tibble() |>
+  mutate(
+    region = happy$regional_indicator,
+    country = happy$country_name
+  ) |>
+  ggplot(aes(PC1, -PC2, color = region, label = country)) +
+  geom_hline(yintercept = 0, color = "gray70", linetype = "dashed") +
+  geom_vline(xintercept = 0, color = "gray70", linetype = "dashed") +
+  geom_text(size = 3, show.legend = FALSE) +
+  coord_equal()
+```
+
+## Regress happiness on the five indicators {-}
+
+```{r}
+happy_standardized_pc <-
+  happy_standardized |>
+  as_tibble() |>
+  mutate(
+    ladder = happy$ladder_score,
+    pc1 = happy_pca$rowpcoord[, 1],
+    pc2 = happy_pca$rowpcoord[, 2],
+    country = happy$country_name,
+    region = happy$regional_indicator
+  )
+
+happiness_full <- 
+  lm(ladder ~ social + life + choices + generosity + corruption,
+     data = happy_standardized_pc)
+
+summary(happiness_full)
+```
+
+:::question
+What is the correlation between observed y and fitted y?
+:::
+
+```{r}
+sqrt(summary(happiness_full)$r.squared)
+```
+
+## Visualise happiness against principal components {-}
+
+```{r}
+happy_standardized_pc |>
+  pivot_longer(
+    cols = c(pc1, pc2),
+    names_to = "PC",
+    values_to = "value"
+  ) |>
+  ggplot(aes(value, ladder)) +
+  geom_point(aes(color = region)) +
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x,
+    linewidth = 0.5,
+    color = "grey20",
+    se = FALSE
+  ) +
+  scale_x_continuous("PC Value") +
+  scale_y_continuous("Cantrill Ladder Happiness Score") +
+  facet_wrap(~ PC) +
+  theme(text = element_text(size = 12))
+```
+
+## Regress happiness on first principal component {-}
+
+```{r}
+happiness_reduced <-
+  lm(formula = ladder ~ pc1, data = happy_standardized_pc)
+
+summary(happiness_reduced)
+sqrt(summary(happiness_reduced)$r.squared)
+```
+
+## 👉 TASK {-}
+
+Now let's consider PCA using six features. In the example of PCA above, we did not use `logged_gdp_per_capita` feature for the PCA analysis.  
+
+Run PCA using the original five features (`ladder`, `social`, `life`, 
+`choices`, `corruption`) and `logged_gdp_per_capita`. You may need to do 
+some preprocessing first.  
+
+> Your code here  
+
+Now regress happiness on the first principal component from your analysis.  
+
+> Your code here  
+
+How does this compare to the previous analysis with five features? Consider 
+here the R^2 value and the correlation between the observed and fitted values.  
+
+> Your code here  
+

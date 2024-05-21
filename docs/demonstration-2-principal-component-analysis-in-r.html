@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Demonstration 2: Principal Component Analysis in R | Data Science Modelling</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70033." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Demonstration 2: Principal Component Analysis in R | Data Science Modelling" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Demonstration 2: Principal Component Analysis in R | Data Science Modelling" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="demonstration-1-k-means-clustering-in-r.html"/>
+<link rel="next" href="overview-7.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#a-more-in-depth-consideration-of-model-accuracy"><i class="fa fa-check"></i>A more in-depth consideration of model accuracy</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#the-validation-set-approach"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#k-fold-cross-validation"><i class="fa fa-check"></i><span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html"><i class="fa fa-check"></i>Demonstration 1: K-means Clustering in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages"><i class="fa fa-check"></i>Loading the necessary packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset"><i class="fa fa-check"></i>Profile the Palmer Penguins dataset</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering"><i class="fa fa-check"></i>Preprocess the data for clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering"><i class="fa fa-check"></i>Perform k-means clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters"><i class="fa fa-check"></i>Visualise the clusters</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#tasks"><i class="fa fa-check"></i>👉 TASKS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform"><i class="fa fa-check"></i>TASK 1: How well did k-means clustering perform?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use"><i class="fa fa-check"></i>TASK 2: How many clusters should we use?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars"><i class="fa fa-check"></i>TASK 3: Clustering cars</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html"><i class="fa fa-check"></i>Demonstration 2: Principal Component Analysis in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#load-packages"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data"><i class="fa fa-check"></i>Preprocess the world happiness report data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data"><i class="fa fa-check"></i>Profile the happiness data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature"><i class="fa fa-check"></i>Plot happiness score against feature</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features"><i class="fa fa-check"></i>Run PCA using five features</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2"><i class="fa fa-check"></i>Correlations of happiness score with PC1 and PC2</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components"><i class="fa fa-check"></i>Plot first two principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators"><i class="fa fa-check"></i>Regress happiness on the five indicators</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components"><i class="fa fa-check"></i>Visualise happiness against principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component"><i class="fa fa-check"></i>Regress happiness on first principal component</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#task"><i class="fa fa-check"></i>👉 TASK</a></li>
+</ul></li>
+<li class="part"><span><b>Section 8</b></span></li>
+<li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-set"><i class="fa fa-check"></i>Data Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#project-planning-setting-the-stage-for-success"><i class="fa fa-check"></i>Project Planning: Setting the Stage for Success</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-preprocessing"><i class="fa fa-check"></i>Data Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i>Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-selection-and-model-training"><i class="fa fa-check"></i>Model Selection and Model Training</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-evaluation"><i class="fa fa-check"></i>Model Evaluation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-interpretation"><i class="fa fa-check"></i>Model Interpretation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#report-conclusion"><i class="fa fa-check"></i>Report Conclusion</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#key-insights"><i class="fa fa-check"></i>Key Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="your-turn.html"><a href="your-turn.html"><i class="fa fa-check"></i>👉 Your Turn!</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DSM_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="demonstration-2-principal-component-analysis-in-r" class="section level1 unnumbered hasAnchor">
+<h1>Demonstration 2: Principal Component Analysis in R<a href="demonstration-2-principal-component-analysis-in-r.html#demonstration-2-principal-component-analysis-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For the tasks below, you will require the <strong>World Happiness Report (2021)</strong> dataset.</p>
+<p>Click here to download the file:
+<a href="data/world_happiness_report_2021.csv" download="world_happiness_report_2021.csv"> world_happiness_report_2021.csv </a>.<br />
+Remember to place your data file in a separate subfolder within your R project working directory.</p>
+<p>Prior to beginning the practical, you will be required install two packages <code>easyCODA</code> and <code>janitor</code>.</p>
+<div id="load-packages" class="section level2 unnumbered hasAnchor">
+<h2>Load packages<a href="demonstration-2-principal-component-analysis-in-r.html#load-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-1" tabindex="-1"></a><span class="fu">library</span>(easyCODA)</span>
+<span id="cb244-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb244-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-3" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb244-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-4" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb244-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-5" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb244-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-6" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb244-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-7" tabindex="-1"></a></span>
+<span id="cb244-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb244-8" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span></code></pre></div>
+</div>
+<div id="preprocess-the-world-happiness-report-data" class="section level2 unnumbered hasAnchor">
+<h2>Preprocess the world happiness report data<a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-1" tabindex="-1"></a>happy <span class="ot">&lt;-</span></span>
+<span id="cb245-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-2" tabindex="-1"></a>  <span class="fu">read_csv</span>(</span>
+<span id="cb245-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-3" tabindex="-1"></a>    <span class="at">file =</span> <span class="st">&quot;data/world_happiness_report_2021.csv&quot;</span>,</span>
+<span id="cb245-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-4" tabindex="-1"></a>    <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb245-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-5" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb245-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-6" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb245-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-7" tabindex="-1"></a></span>
+<span id="cb245-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-8" tabindex="-1"></a>happy_standardized <span class="ot">&lt;-</span> </span>
+<span id="cb245-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-9" tabindex="-1"></a>  happy <span class="sc">|&gt;</span></span>
+<span id="cb245-10"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-10" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb245-11"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-11" tabindex="-1"></a>    <span class="at">social =</span> social_support,</span>
+<span id="cb245-12"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-12" tabindex="-1"></a>    <span class="at">life =</span> healthy_life_expectancy,</span>
+<span id="cb245-13"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-13" tabindex="-1"></a>    <span class="at">choices =</span> freedom_to_make_life_choices,</span>
+<span id="cb245-14"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-14" tabindex="-1"></a>    generosity,</span>
+<span id="cb245-15"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-15" tabindex="-1"></a>    <span class="at">corruption =</span> perceptions_of_corruption</span>
+<span id="cb245-16"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-16" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb245-17"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-17" tabindex="-1"></a>  <span class="fu">scale</span>()</span>
+<span id="cb245-18"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-18" tabindex="-1"></a></span>
+<span id="cb245-19"><a href="demonstration-2-principal-component-analysis-in-r.html#cb245-19" tabindex="-1"></a><span class="fu">rownames</span>(happy_standardized) <span class="ot">&lt;-</span> happy<span class="sc">$</span>country_name</span></code></pre></div>
+</div>
+<div id="profile-the-happiness-data" class="section level2 unnumbered hasAnchor">
+<h2>Profile the happiness data<a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb246-1" tabindex="-1"></a><span class="fu">head</span>(happy)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 20
+##   country_name regional_indicator ladder_score standard_error_of_ladder_score
+##   &lt;chr&gt;        &lt;chr&gt;                     &lt;dbl&gt;                          &lt;dbl&gt;
+## 1 Finland      Western Europe             7.84                          0.032
+## 2 Denmark      Western Europe             7.62                          0.035
+## 3 Switzerland  Western Europe             7.57                          0.036
+## 4 Iceland      Western Europe             7.55                          0.059
+## 5 Netherlands  Western Europe             7.46                          0.027
+## 6 Norway       Western Europe             7.39                          0.035
+## # ℹ 16 more variables: upperwhisker &lt;dbl&gt;, lowerwhisker &lt;dbl&gt;,
+## #   logged_gdp_per_capita &lt;dbl&gt;, social_support &lt;dbl&gt;,
+## #   healthy_life_expectancy &lt;dbl&gt;, freedom_to_make_life_choices &lt;dbl&gt;,
+## #   generosity &lt;dbl&gt;, perceptions_of_corruption &lt;dbl&gt;,
+## #   ladder_score_in_dystopia &lt;dbl&gt;, explained_by_log_gdp_per_capita &lt;dbl&gt;,
+## #   explained_by_social_support &lt;dbl&gt;,
+## #   explained_by_healthy_life_expectancy &lt;dbl&gt;, …</code></pre>
+</div>
+<div id="plot-happiness-score-against-feature" class="section level2 unnumbered hasAnchor">
+<h2>Plot happiness score against feature<a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-1" tabindex="-1"></a>happy <span class="sc">|&gt;</span></span>
+<span id="cb248-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-2" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb248-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-3" tabindex="-1"></a>    <span class="at">ladder =</span> ladder_score,</span>
+<span id="cb248-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-4" tabindex="-1"></a>    <span class="at">social =</span> social_support,</span>
+<span id="cb248-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-5" tabindex="-1"></a>    <span class="at">life =</span> healthy_life_expectancy,</span>
+<span id="cb248-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-6" tabindex="-1"></a>    <span class="at">choices =</span> freedom_to_make_life_choices,</span>
+<span id="cb248-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-7" tabindex="-1"></a>    generosity,</span>
+<span id="cb248-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-8" tabindex="-1"></a>    <span class="at">corruption =</span> perceptions_of_corruption</span>
+<span id="cb248-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb248-10"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-10" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>ladder, <span class="at">names_to =</span> <span class="st">&quot;feature&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb248-11"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, ladder)) <span class="sc">+</span></span>
+<span id="cb248-12"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb248-13"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;Feature value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb248-14"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Cantrill Ladder happiness score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb248-15"><a href="demonstration-2-principal-component-analysis-in-r.html#cb248-15" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> feature, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>)</span></code></pre></div>
+<p><img src="07-S07-D2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="run-pca-using-five-features" class="section level2 unnumbered hasAnchor">
+<h2>Run PCA using five features<a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb249-1" tabindex="-1"></a>happy_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(happy_standardized, <span class="at">weight =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb249-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb249-2" tabindex="-1"></a><span class="fu">summary</span>(happy_pca)</span></code></pre></div>
+<pre><code>## 
+## Principal inertias (eigenvalues):
+## 
+##  dim    value      %   cum%   scree plot               
+##  1      0.466493  47.0  47.0  ************             
+##  2      0.243482  24.5  71.5  ******                   
+##  3      0.139560  14.1  85.5  ****                     
+##  4      0.095018   9.6  95.1  **                       
+##  5      0.048735   4.9 100.0  *                        
+##         -------- -----                                 
+##  Total: 0.993289 100.0                                 
+## 
+## 
+## Rows:
+##         name   mass  qlt  inr     k=1 cor ctr     k=2 cor ctr  
+## 1   |   Fnln |    7  707   19 | -1378 683  27 |  -257  24   2 |
+## 2   |   Dnmr |    7  808   19 | -1403 699  28 |  -553 109   8 |
+## 3   |   Swtz |    7  860   14 | -1281 789  24 |  -384  71   4 |
+## 4   |   Icln |    7  817   10 | -1021 738  15 |  -334  79   3 |
+## 5   |   Nthr |    7  929   13 | -1149 667  19 |  -719 261  14 |
+## 6   |   Nrwy |    7  918   17 | -1366 763  27 |  -615 155  10 |
+## 7   |   Swdn |    7  871   16 | -1303 699  24 |  -647 172  12 |
+## 8   |   Lxmb |    7  834    9 | -1030 803  15 |  -201  30   1 |
+## 9   |   NwZl |    7  890   17 | -1322 689  25 |  -713 201  14 |
+## 10  |  Austr |    7  973    8 | -1022 919  15 |  -247  54   2 |
+## 11  |  Astrl |    7  958   11 | -1104 765  18 |  -554 193   8 |
+## 12  |   Isrl |    7  615    4 |  -569 563   5 |   173  52   1 |
+## 13  |   Grmn |    7  888    6 |  -882 842  11 |  -206  46   1 |
+## 14  |   Cand |    7  951   10 | -1099 824  17 |  -433 128   5 |
+## 15  |   Irln |    7  867   10 | -1070 750  16 |  -422 116   5 |
+## 16  |   CstR |    7  695    5 |  -602 495   5 |   383 200   4 |
+## 17  |   UntK |    7  856   10 |  -914 548  12 |  -685 308  13 |
+## 18  |   CzcR |    7  885    6 |  -493 261   3 |   763 624  16 |
+## 19  |   UntS |    7  665    2 |  -456 572   3 |  -184  93   1 |
+## 20  |   Blgm |    7  864    4 |  -522 483   4 |   463 381   6 |
+## 21  |   Frnc |    7  890    6 |  -812 717   9 |   399 173   4 |
+## 22  |   Bhrn |    7  717    3 |  -533 573   4 |  -267 144   2 |
+## 23  |   Malt |    7  873    6 |  -847 759  10 |  -328 114   3 |
+## 24  |   TwPC |    7  883    2 |  -338 506   2 |   292 377   2 |
+## 25  |   UnAE |    7  919    4 |  -555 578   4 |  -427 342   5 |
+## 26  |   SdAr |    7  707    3 |  -431 485   3 |   291 222   2 |
+## 27  |   Span |    7  762    5 |  -531 418   4 |   482 345   6 |
+## 28  |   Itly |    7  552    5 |  -140  27   0 |   613 525  10 |
+## 29  |   Slvn |    7  747    6 |  -754 606   8 |   364 142   4 |
+## 30  |   Gtml |    7  139    2 |  -175 138   0 |   -16   1   0 |
+## 31  |   Urgy |    7  893    4 |  -721 870   7 |   117  23   0 |
+## 32  |   Sngp |    7  710   25 | -1535 644  34 |  -491  66   7 |
+## 33  |   Kosv |    7  307    7 |    62   4   0 |  -544 303   8 |
+## 34  |   Slvk |    7  762    4 |  -187  56   1 |   664 706  12 |
+## 35  |   Brzl |    7  864    1 |  -199 344   1 |   244 520   2 |
+## 36  |   Mexc |    7  646    2 |  -240 179   1 |   388 467   4 |
+## 37  |   Jamc |    7  534    4 |  -270 140   1 |   453 394   6 |
+## 38  |   Lthn |    7  941    4 |  -233  85   1 |   736 855  15 |
+## 39  |   Cypr |    7  214    3 |  -138  42   0 |   277 171   2 |
+## 40  |   Estn |    7  824    6 |  -829 815  10 |    85   8   0 |
+## 41  |   Panm |    7  777    4 |  -382 243   2 |   566 534   9 |
+## 42  |   Uzbk |    7  918   13 |  -775 320   9 | -1059 598  31 |
+## 43  |   Chil |    7  542    2 |  -133  61   0 |   373 481   4 |
+## 44  |   Plnd |    7  959    3 |  -442 445   3 |   475 514   6 |
+## 45  |   Kzkh |    7  584    3 |  -411 457   2 |   217 127   1 |
+## 46  |   Romn |    7  684    5 |   -32   1   0 |   699 682  13 |
+## 47  |   Kuwt |    7  615    1 |  -272 395   1 |   203 220   1 |
+## 48  |   Serb |    7  304    1 |  -127  87   0 |   201 217   1 |
+## 49  |   ElSl |    7  112    2 |  -170 102   0 |    55  11   0 |
+## 50  |   Mrts |    7  601    2 |  -343 450   2 |   199 151   1 |
+## 51  |   Latv |    7  823    4 |   -96  18   0 |   650 806  12 |
+## 52  |   Clmb |    7  733    2 |  -162  90   0 |   435 643   5 |
+## 53  |   Hngr |    7  893    5 |  -170  41   0 |   775 852  17 |
+## 54  |   Thln |    7  283    8 |  -262  56   1 |  -526 227   8 |
+## 55  |   Ncrg |    7  982    1 |  -350 909   2 |   -99  73   0 |
+## 56  |   Japn |    7  820    7 |  -618 351   5 |   715 469  14 |
+## 57  |   Argn |    7  916    3 |  -296 171   1 |   618 745  11 |
+## 58  |   Prtg |    7  772    7 |  -467 199   3 |   791 573  17 |
+## 59  |   Hndr |    7  227    1 |  -130  79   0 |  -177 148   1 |
+## 60  |   Crot |    7  726    5 |  -171  41   0 |   703 685  14 |
+## 61  |   Phlp |    7   75    2 |  -154  69   0 |    49   7   0 |
+## 62  |   SthK |    7  279    4 |   -65   7   0 |   409 272   5 |
+## 63  |   Peru |    7  722    3 |   -64  10   0 |   535 711   8 |
+## 64  |   BsnH |    7   44    4 |   132  29   0 |    97  16   0 |
+## 65  |  Moldv |    7  446    2 |     6   0   0 |   369 446   4 |
+## 66  |   Ecdr |    7  600    2 |  -146  73   0 |   392 527   4 |
+## 67  |   Kyrg |    7  137    5 |  -250  81   1 |  -209  56   1 |
+## 68  |   Grec |    7  741   11 |   199  24   1 |  1088 717  33 |
+## 69  |   Bolv |    7  104    2 |    -8   0   0 |   153 104   1 |
+## 70  |   Mngl |    7   28    4 |   129  27   0 |   -11   0   0 |
+## 71  |   Prgy |    7  137    3 |  -216 125   1 |    65  11   0 |
+## 72  |   Mntn |    7  419    2 |    16   1   0 |   320 418   3 |
+## 73  |   DmnR |    7  614    2 |  -270 326   1 |   254 288   2 |
+## 74  |   NrtC |    7  476    3 |  -445 474   3 |   -23   1   0 |
+## 75  |   Blrs |    7  407    5 |   -66   6   0 |   552 401   8 |
+## 76  |   Russ |    7  717    2 |    81  18   0 |   508 699   7 |
+## 77  |   HKSA |    7  333   10 |  -645 293   6 |  -237  39   2 |
+## 78  |   Tjks |    7  404    2 |  -314 375   1 |   -86  28   0 |
+## 79  |   Vtnm |    7  432    3 |  -415 350   2 |   201  82   1 |
+## 80  |   Liby |    7  120    1 |    57  29   0 |    99  91   0 |
+## 81  |   Mlys |    7  263    3 |  -179  73   0 |  -288 190   2 |
+## 82  |   Indn |    7  576   20 |    90   3   0 | -1310 574  47 |
+## 83  |   CngB |    7  812    6 |   832 809  10 |   -53   3   0 |
+## 84  |   Chin |    7  485    3 |  -360 291   2 |   294 194   2 |
+## 85  |   IvrC |    7  840   10 |  1074 781  17 |  -295  59   2 |
+## 86  |   Armn |    7  334    2 |  -205 137   1 |   245 197   2 |
+## 87  |   Nepl |    7  774    2 |   134  66   0 |  -441 708   5 |
+## 88  |   Blgr |    7  597    4 |  -118  26   0 |   556 572   9 |
+## 89  |  Mldvs |    7  516    3 |  -444 473   3 |   135  43   1 |
+## 90  |   Azrb |    7  262    5 |  -327 152   2 |   278 110   2 |
+## 91  |   Cmrn |    7  905    6 |   881 858  11 |  -206  47   1 |
+## 92  |   Sngl |    7  964    3 |   672 958   6 |    54   6   0 |
+## 93  |   Albn |    7  216    3 |   275 161   1 |   160  55   1 |
+## 94  |   NrtM |    7  289    2 |   252 254   1 |    93  35   0 |
+## 95  |   Ghan |    7  781    4 |   546 481   4 |  -431 300   5 |
+## 96  |  Niger |    7  738    7 |   721 506   7 |  -488 232   7 |
+## 97  |   Trkm |    7  202   10 |  -268  49   1 |  -474 153   6 |
+## 98  |   Gamb |    7  869   17 |   837 280  10 | -1213 589  41 |
+## 99  |   Benn |    7  653   14 |  1070 540  16 |  -490 113   7 |
+## 100 |   Laos |    7  738    5 |   109  17   0 |  -705 721  14 |
+## 101 |   Bngl |    7  120    2 |    51   7   0 |  -201 113   1 |
+## 102 |   Guin |    7  991    8 |   964 801  13 |  -468 189   6 |
+## 103 |   SthA |    7  460    3 |   415 361   2 |   218  99   1 |
+## 104 |   Trky |    7  563    6 |   371 154   2 |   605 409  10 |
+## 105 |   Pkst |    7  965    5 |   764 748   8 |  -412 217   5 |
+## 106 |   Mrcc |    7  334   10 |   590 239   5 |   372  95   4 |
+## 107 |   Vnzl |    7  746    5 |   279  97   1 |   721 649  14 |
+## 108 |   Gerg |    7  211    5 |   272  94   1 |   303 117   3 |
+## 109 |   Algr |    7  394   10 |   624 252   6 |   468 141   6 |
+## 110 |   Ukrn |    7  355    3 |   170  73   0 |   333 282   3 |
+## 111 |   Iraq |    7  921    5 |   766 824   8 |   262  96   2 |
+## 112 |   Gabn |    7  851    4 |   492 424   3 |   493 427   7 |
+## 113 |   BrkF |    7  906    7 |   912 857  12 |  -217  49   1 |
+## 114 |   Cmbd |    7  117    4 |    -3   0   0 |  -269 117   2 |
+## 115 |   Mzmb |    7  557    5 |   313 134   1 |  -555 423   8 |
+## 116 | Nigeri |    7  773    9 |   962 731  13 |  -232  42   1 |
+## 117 |   Mali |    7  855    7 |   955 852  13 |   -56   3   0 |
+## 118 |   Iran |    7  417    8 |   522 231   4 |  -468 185   6 |
+## 119 |   Ugnd |    7  755    5 |   687 641   7 |  -289 114   2 |
+## 120 |   Libr |    7  942    4 |   743 874   8 |  -207  68   1 |
+## 121 |   Keny |    7  795    8 |   547 251   4 |  -805 544  18 |
+## 122 |   Tuns |    7  752    7 |   577 343   5 |   630 409  11 |
+## 123 |   Lbnn |    7  520    9 |   528 205   4 |   654 315  12 |
+## 124 |   Namb |    7  728    4 |   553 491   4 |   385 238   4 |
+## 125 |   PlsT |    7  859    4 |   438 330   3 |   554 529   8 |
+## 126 |   Mynm |    7  857   18 |    64   1   0 | -1526 855  64 |
+## 127 |   Jrdn |    7  476    2 |    74  20   0 |   357 457   4 |
+## 128 |   Chad |    7  943   17 |  1519 907  33 |  -304  36   3 |
+## 129 |   SrLn |    7   53    2 |   -79  24   0 |   -86  29   0 |
+## 130 |   Swzl |    7  569   10 |   884 525  11 |   256  44   2 |
+## 131 |   Cmrs |    7  839   12 |  1211 806  21 |  -247  33   2 |
+## 132 |   Egyp |    7  762    3 |   393 381   2 |   392 380   4 |
+## 133 |   Ethp |    7  923    2 |   440 624   3 |  -305 299   3 |
+## 134 |   Mrtn |    7  610    8 |   789 529   9 |   307  80   3 |
+## 135 |   Mdgs |    7  797    9 |  1025 793  15 |    71   4   0 |
+## 136 |   Togo |    7  924   13 |  1272 873  23 |  -308  51   3 |
+## 137 |   Zamb |    7  872    4 |   676 702   7 |  -332 169   3 |
+## 138 |   SrrL |    7  965   11 |  1163 852  19 |  -424 113   5 |
+## 139 |   Indi |    7  538    7 |   452 198   3 |  -592 340  10 |
+## 140 |   Brnd |    7  724   18 |  1323 647  25 |  -456  77   6 |
+## 141 |   Yemn |    7  693    7 |   697 476   7 |   471 217   6 |
+## 142 |   Tnzn |    7  950    6 |   275  82   1 |  -894 868  22 |
+## 143 |   Hait |    7  876   26 |  1312 450  25 | -1275 426  45 |
+## 144 |   Malw |    7  721   10 |   869 535  11 |  -514 187   7 |
+## 145 |   Lsth |    7  654   11 |   992 615  14 |   253  40   2 |
+## 146 |   Btsw |    7  436    5 |   281 116   1 |   466 320   6 |
+## 147 |   Rwnd |    7  430   22 |   -55   1   0 | -1187 429  39 |
+## 148 |   Zmbb |    7  910    5 |   777 901   9 |    79   9   0 |
+## 149 |   Afgh |    7  890   37 |  2193 878  69 |   257  12   2 |
+## 
+## Columns:
+##     name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  
+## 1 | socl |  200  767  200 | -822 680 290 |  294  87  71 |
+## 2 | life |  200  816  200 | -860 744 317 |  268  72  59 |
+## 3 | chcs |  200  664  200 | -761 583 248 | -284  81  66 |
+## 4 | gnrs |  200  782  200 |    7   0   0 | -881 782 638 |
+## 5 | crrp |  200  544  200 |  582 341 145 |  449 203 166 |</code></pre>
+<div class="question">
+<p>What is the percentage of variance explained by each principal component?</p>
+</div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb251-1" tabindex="-1"></a>happy_pca<span class="sc">$</span>sv <span class="sc">^</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(happy_pca<span class="sc">$</span>sv <span class="sc">^</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.46964540 0.24512744 0.14050280 0.09566051 0.04906384</code></pre>
+<div class="question">
+<p>What is the cumulative variance explained for each variable?</p>
+</div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-1" tabindex="-1"></a>vexp <span class="ot">&lt;-</span> <span class="cf">function</span>(feature, df, pca) {</span>
+<span id="cb253-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-2" tabindex="-1"></a>  reg_pc1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df[, feature] <span class="sc">~</span> pca<span class="sc">$</span>rowpcoord[, <span class="dv">1</span>])</span>
+<span id="cb253-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-3" tabindex="-1"></a>  reg_pc1_pc2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(df[, feature] <span class="sc">~</span> pca<span class="sc">$</span>rowpcoord[, <span class="dv">1</span>] <span class="sc">+</span> pca<span class="sc">$</span>rowpcoord[, <span class="dv">2</span>])</span>
+<span id="cb253-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-4" tabindex="-1"></a>  </span>
+<span id="cb253-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-5" tabindex="-1"></a>  explained_pc1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">predict</span>(reg_pc1), df[, feature]) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb253-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-6" tabindex="-1"></a>  explained_pc1_pc2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">predict</span>(reg_pc1_pc2), df[, feature]) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb253-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-7" tabindex="-1"></a>  </span>
+<span id="cb253-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-8" tabindex="-1"></a>  <span class="fu">c</span>(explained_pc1, explained_pc1_pc2)</span>
+<span id="cb253-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb253-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb254-1" tabindex="-1"></a>var_explained <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, \(x) <span class="fu">vexp</span>(x, happy_standardized, happy_pca))</span>
+<span id="cb254-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb254-2" tabindex="-1"></a><span class="fu">colnames</span>(var_explained) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(happy_standardized)</span>
+<span id="cb254-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb254-3" tabindex="-1"></a><span class="fu">rownames</span>(var_explained) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
+<span id="cb254-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb254-4" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">round</span>(var_explained, <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>##              PC1   PC2
+## social     0.680 0.767
+## life       0.744 0.816
+## choices    0.583 0.664
+## generosity 0.000 0.782
+## corruption 0.341 0.544</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb256-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">colMeans</span>(<span class="fu">t</span>(var_explained)), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   PC1   PC2 
+## 0.470 0.715</code></pre>
+<div class="question">
+<p>How do we build a correlation matrix of all variables?</p>
+</div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb258-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(<span class="fu">cbind</span>(<span class="st">&quot;ladder&quot;</span> <span class="ot">=</span> happy<span class="sc">$</span>ladder_score, happy_standardized)), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##            ladder social   life choices generosity corruption
+## ladder      1.000  0.757  0.768   0.608     -0.018     -0.421
+## social      0.757  1.000  0.723   0.483     -0.115     -0.203
+## life        0.768  0.723  1.000   0.461     -0.162     -0.364
+## choices     0.608  0.483  0.461   1.000      0.169     -0.401
+## generosity -0.018 -0.115 -0.162   0.169      1.000     -0.164
+## corruption -0.421 -0.203 -0.364  -0.401     -0.164      1.000</code></pre>
+</div>
+<div id="correlations-of-happiness-score-with-pc1-and-pc2" class="section level2 unnumbered hasAnchor">
+<h2>Correlations of happiness score with PC1 and PC2<a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb260-1" tabindex="-1"></a>row_principal <span class="ot">&lt;-</span> <span class="sc">-</span>happy_pca<span class="sc">$</span>rowpcoord[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb260-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb260-2" tabindex="-1"></a><span class="fu">colnames</span>(row_principal) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
+<span id="cb260-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb260-3" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(<span class="fu">cbind</span>(<span class="st">&quot;ladder&quot;</span> <span class="ot">=</span> happy<span class="sc">$</span>ladder_score, row_principal)), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##        ladder  PC1    PC2
+## ladder  1.000 0.85 -0.067
+## PC1     0.850 1.00  0.000
+## PC2    -0.067 0.00  1.000</code></pre>
+</div>
+<div id="plot-first-two-principal-components" class="section level2 unnumbered hasAnchor">
+<h2>Plot first two principal components<a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-1" tabindex="-1"></a>row_principal <span class="sc">|&gt;</span></span>
+<span id="cb262-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-2" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb262-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb262-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-4" tabindex="-1"></a>    <span class="at">region =</span> happy<span class="sc">$</span>regional_indicator,</span>
+<span id="cb262-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-5" tabindex="-1"></a>    <span class="at">country =</span> happy<span class="sc">$</span>country_name</span>
+<span id="cb262-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-6" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb262-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PC1, <span class="sc">-</span>PC2, <span class="at">color =</span> region, <span class="at">label =</span> country)) <span class="sc">+</span></span>
+<span id="cb262-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-8" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;gray70&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb262-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-9" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;gray70&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb262-10"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-10" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb262-11"><a href="demonstration-2-principal-component-analysis-in-r.html#cb262-11" tabindex="-1"></a>  <span class="fu">coord_equal</span>()</span></code></pre></div>
+<p><img src="07-S07-D2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="regress-happiness-on-the-five-indicators" class="section level2 unnumbered hasAnchor">
+<h2>Regress happiness on the five indicators<a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-1" tabindex="-1"></a>happy_standardized_pc <span class="ot">&lt;-</span></span>
+<span id="cb263-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-2" tabindex="-1"></a>  happy_standardized <span class="sc">|&gt;</span></span>
+<span id="cb263-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-3" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb263-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-4" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb263-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-5" tabindex="-1"></a>    <span class="at">ladder =</span> happy<span class="sc">$</span>ladder_score,</span>
+<span id="cb263-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-6" tabindex="-1"></a>    <span class="at">pc1 =</span> happy_pca<span class="sc">$</span>rowpcoord[, <span class="dv">1</span>],</span>
+<span id="cb263-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-7" tabindex="-1"></a>    <span class="at">pc2 =</span> happy_pca<span class="sc">$</span>rowpcoord[, <span class="dv">2</span>],</span>
+<span id="cb263-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-8" tabindex="-1"></a>    <span class="at">country =</span> happy<span class="sc">$</span>country_name,</span>
+<span id="cb263-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-9" tabindex="-1"></a>    <span class="at">region =</span> happy<span class="sc">$</span>regional_indicator</span>
+<span id="cb263-10"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-10" tabindex="-1"></a>  )</span>
+<span id="cb263-11"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-11" tabindex="-1"></a></span>
+<span id="cb263-12"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-12" tabindex="-1"></a>happiness_full <span class="ot">&lt;-</span> </span>
+<span id="cb263-13"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-13" tabindex="-1"></a>  <span class="fu">lm</span>(ladder <span class="sc">~</span> social <span class="sc">+</span> life <span class="sc">+</span> choices <span class="sc">+</span> generosity <span class="sc">+</span> corruption,</span>
+<span id="cb263-14"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-14" tabindex="-1"></a>     <span class="at">data =</span> happy_standardized_pc)</span>
+<span id="cb263-15"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-15" tabindex="-1"></a></span>
+<span id="cb263-16"><a href="demonstration-2-principal-component-analysis-in-r.html#cb263-16" tabindex="-1"></a><span class="fu">summary</span>(happiness_full)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ladder ~ social + life + choices + generosity + 
+##     corruption, data = happy_standardized_pc)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.63771 -0.26591  0.02327  0.37120  1.37329 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.53284    0.04581 120.776  &lt; 2e-16 ***
+## social       0.40177    0.06975   5.760 4.96e-08 ***
+## life         0.38823    0.07217   5.380 2.98e-07 ***
+## choices      0.21977    0.05783   3.801 0.000213 ***
+## generosity   0.03033    0.04933   0.615 0.539620    
+## corruption  -0.13599    0.05301  -2.565 0.011343 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5592 on 143 degrees of freedom
+## Multiple R-squared:  0.738,  Adjusted R-squared:  0.7289 
+## F-statistic: 80.57 on 5 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="question">
+<p>What is the correlation between observed y and fitted y?</p>
+</div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb265-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">summary</span>(happiness_full)<span class="sc">$</span>r.squared)</span></code></pre></div>
+<pre><code>## [1] 0.8590876</code></pre>
+</div>
+<div id="visualise-happiness-against-principal-components" class="section level2 unnumbered hasAnchor">
+<h2>Visualise happiness against principal components<a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-1" tabindex="-1"></a>happy_standardized_pc <span class="sc">|&gt;</span></span>
+<span id="cb267-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb267-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-3" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(pc1, pc2),</span>
+<span id="cb267-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-4" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;PC&quot;</span>,</span>
+<span id="cb267-5"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-5" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span></span>
+<span id="cb267-6"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-6" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb267-7"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, ladder)) <span class="sc">+</span></span>
+<span id="cb267-8"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> region)) <span class="sc">+</span></span>
+<span id="cb267-9"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-9" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb267-10"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-10" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb267-11"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-11" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb267-12"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-12" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb267-13"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-13" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;grey20&quot;</span>,</span>
+<span id="cb267-14"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-14" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span></span>
+<span id="cb267-15"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb267-16"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;PC Value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb267-17"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-17" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Cantrill Ladder Happiness Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb267-18"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> PC) <span class="sc">+</span></span>
+<span id="cb267-19"><a href="demonstration-2-principal-component-analysis-in-r.html#cb267-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span></code></pre></div>
+<p><img src="07-S07-D2_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="regress-happiness-on-first-principal-component" class="section level2 unnumbered hasAnchor">
+<h2>Regress happiness on first principal component<a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb268-1" tabindex="-1"></a>happiness_reduced <span class="ot">&lt;-</span></span>
+<span id="cb268-2"><a href="demonstration-2-principal-component-analysis-in-r.html#cb268-2" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> ladder <span class="sc">~</span> pc1, <span class="at">data =</span> happy_standardized_pc)</span>
+<span id="cb268-3"><a href="demonstration-2-principal-component-analysis-in-r.html#cb268-3" tabindex="-1"></a></span>
+<span id="cb268-4"><a href="demonstration-2-principal-component-analysis-in-r.html#cb268-4" tabindex="-1"></a><span class="fu">summary</span>(happiness_reduced)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ladder ~ pc1, data = happy_standardized_pc)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.19102 -0.26848  0.06941  0.40025  1.20478 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.53284    0.04645  119.11   &lt;2e-16 ***
+## pc1         -1.33258    0.06801  -19.59   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.567 on 147 degrees of freedom
+## Multiple R-squared:  0.7231, Adjusted R-squared:  0.7212 
+## F-statistic: 383.9 on 1 and 147 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="demonstration-2-principal-component-analysis-in-r.html#cb270-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">summary</span>(happiness_reduced)<span class="sc">$</span>r.squared)</span></code></pre></div>
+<pre><code>## [1] 0.8503647</code></pre>
+</div>
+<div id="task" class="section level2 unnumbered hasAnchor">
+<h2>👉 TASK<a href="#task" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now let’s consider PCA using six features. In the example of PCA above, we did not use <code>logged_gdp_per_capita</code> feature for the PCA analysis.</p>
+<p>Run PCA using the original five features (<code>ladder</code>, <code>social</code>, <code>life</code>,
+<code>choices</code>, <code>corruption</code>) and <code>logged_gdp_per_capita</code>. You may need to do
+some preprocessing first.</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+<p>Now regress happiness on the first principal component from your analysis.</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+<p>How does this compare to the previous analysis with five features? Consider
+here the R^2 value and the correlation between the observed and fitted values.</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="demonstration-1-k-means-clustering-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overview-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

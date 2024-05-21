@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Demonstration 1: K-means Clustering in R | Data Science Modelling</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70033." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Demonstration 1: K-means Clustering in R | Data Science Modelling" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Demonstration 1: K-means Clustering in R | Data Science Modelling" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="overview-6.html"/>
+<link rel="next" href="demonstration-2-principal-component-analysis-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#a-more-in-depth-consideration-of-model-accuracy"><i class="fa fa-check"></i>A more in-depth consideration of model accuracy</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-1.html"><a href="demonstration-1-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-2.html"><a href="demonstration-1-2.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#the-validation-set-approach"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-3.html"><a href="demonstration-1-3.html#k-fold-cross-validation"><i class="fa fa-check"></i><span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-1.html"><a href="demonstration-2-1.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-3.html"><a href="practical-3.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html"><i class="fa fa-check"></i>Demonstration 1: K-means Clustering in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages"><i class="fa fa-check"></i>Loading the necessary packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset"><i class="fa fa-check"></i>Profile the Palmer Penguins dataset</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering"><i class="fa fa-check"></i>Preprocess the data for clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering"><i class="fa fa-check"></i>Perform k-means clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters"><i class="fa fa-check"></i>Visualise the clusters</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#tasks"><i class="fa fa-check"></i>👉 TASKS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform"><i class="fa fa-check"></i>TASK 1: How well did k-means clustering perform?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use"><i class="fa fa-check"></i>TASK 2: How many clusters should we use?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars"><i class="fa fa-check"></i>TASK 3: Clustering cars</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html"><i class="fa fa-check"></i>Demonstration 2: Principal Component Analysis in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#load-packages"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data"><i class="fa fa-check"></i>Preprocess the world happiness report data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data"><i class="fa fa-check"></i>Profile the happiness data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature"><i class="fa fa-check"></i>Plot happiness score against feature</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features"><i class="fa fa-check"></i>Run PCA using five features</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2"><i class="fa fa-check"></i>Correlations of happiness score with PC1 and PC2</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components"><i class="fa fa-check"></i>Plot first two principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators"><i class="fa fa-check"></i>Regress happiness on the five indicators</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components"><i class="fa fa-check"></i>Visualise happiness against principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component"><i class="fa fa-check"></i>Regress happiness on first principal component</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#task"><i class="fa fa-check"></i>👉 TASK</a></li>
+</ul></li>
+<li class="part"><span><b>Section 8</b></span></li>
+<li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-set"><i class="fa fa-check"></i>Data Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#project-planning-setting-the-stage-for-success"><i class="fa fa-check"></i>Project Planning: Setting the Stage for Success</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-preprocessing"><i class="fa fa-check"></i>Data Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i>Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-selection-and-model-training"><i class="fa fa-check"></i>Model Selection and Model Training</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-evaluation"><i class="fa fa-check"></i>Model Evaluation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-interpretation"><i class="fa fa-check"></i>Model Interpretation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#report-conclusion"><i class="fa fa-check"></i>Report Conclusion</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#key-insights"><i class="fa fa-check"></i>Key Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="your-turn.html"><a href="your-turn.html"><i class="fa fa-check"></i>👉 Your Turn!</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DSM_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="demonstration-1-k-means-clustering-in-r" class="section level1 unnumbered hasAnchor">
+<h1>Demonstration 1: K-means Clustering in R<a href="demonstration-1-k-means-clustering-in-r.html#demonstration-1-k-means-clustering-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this practical, you will learn how to implement k-means clustering using the Palmer Penguins dataset. You can read more about this data here:</p>
+<p><a href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html">Palmer Penguins Dataset</a></p>
+<p>The task in this practical is to cluster penguins based on their bill length and flipper length. We will then assess whether the predicted clusters map onto the actual species of penguin in the data. You can view this as an exercise in whether bill length and flipper length is sufficient to differentiate between species of penguin.</p>
+<p><img src="images/penguins.png" fig-align="center" /></p>
+<p>(Artwork by @allison_horst)</p>
+<p>You should modify and experiment with the below code. There is also a brief exercise for you complete at the end of the walk-through.</p>
+<p>You will be required to install two new packages first: <code>palmerpenguins</code> and <code>factoextra</code>.</p>
+<div id="loading-the-necessary-packages" class="section level2 unnumbered hasAnchor">
+<h2>Loading the necessary packages<a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb223-1" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb223-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb223-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb223-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb223-3" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code></pre></div>
+</div>
+<div id="profile-the-palmer-penguins-dataset" class="section level2 unnumbered hasAnchor">
+<h2>Profile the Palmer Penguins dataset<a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb224-1" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## 6 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb226-1" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code></pre></div>
+<pre><code>## Rows: 344
+## Columns: 8
+## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+</div>
+<div id="plot" class="section level2 unnumbered hasAnchor">
+<h2>Plot<a href="demonstration-1-k-means-clustering-in-r.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb228-1" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb228-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb228-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(bill_length_mm, flipper_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb228-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb228-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="preprocess-the-data-for-clustering" class="section level2 unnumbered hasAnchor">
+<h2>Preprocess the data for clustering<a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb230-1" tabindex="-1"></a>pengs <span class="ot">&lt;-</span> </span>
+<span id="cb230-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb230-2" tabindex="-1"></a>  penguins <span class="sc">|&gt;</span></span>
+<span id="cb230-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb230-3" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+</div>
+<div id="perform-k-means-clustering" class="section level2 unnumbered hasAnchor">
+<h2>Perform k-means clustering<a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb231-1" tabindex="-1"></a>k2 <span class="ot">&lt;-</span> </span>
+<span id="cb231-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb231-2" tabindex="-1"></a>  pengs <span class="sc">|&gt;</span></span>
+<span id="cb231-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb231-3" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm, flipper_length_mm) <span class="sc">|&gt;</span></span>
+<span id="cb231-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb231-4" tabindex="-1"></a>  <span class="fu">kmeans</span>(<span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code></pre></div>
+<p>Let’s add the predicted cluster to the <code>pengs</code> data frame:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb232-1" tabindex="-1"></a>pengs <span class="ot">&lt;-</span> pengs <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">cluster =</span> k2<span class="sc">$</span>cluster)</span></code></pre></div>
+</div>
+<div id="visualise-the-clusters" class="section level2 unnumbered hasAnchor">
+<h2>Visualise the clusters<a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb233-1" tabindex="-1"></a><span class="fu">fviz_cluster</span>(</span>
+<span id="cb233-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb233-2" tabindex="-1"></a>  k2,</span>
+<span id="cb233-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb233-3" tabindex="-1"></a>  <span class="at">data =</span> pengs <span class="sc">|&gt;</span> <span class="fu">select</span>(bill_length_mm, flipper_length_mm)</span>
+<span id="cb233-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb233-4" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-1" tabindex="-1"></a>pengs <span class="sc">|&gt;</span></span>
+<span id="cb234-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb234-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-3" tabindex="-1"></a>             <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb234-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-4" tabindex="-1"></a>             <span class="at">color =</span> <span class="fu">factor</span>(cluster),</span>
+<span id="cb234-5"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-5" tabindex="-1"></a>             <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb234-6"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb234-7"><a href="demonstration-1-k-means-clustering-in-r.html#cb234-7" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="st">&quot;cluster&quot;</span>)</span></code></pre></div>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="question">
+<p>To what extent do the clusters overlap with species?</p>
+</div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb235-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">table</span>(pengs<span class="sc">$</span>species, k2<span class="sc">$</span>cluster)</span>
+<span id="cb235-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb235-2" tabindex="-1"></a>pred</span></code></pre></div>
+<pre><code>##            
+##               1   2   3
+##   Adelie    106   2  38
+##   Chinstrap   9   5  54
+##   Gentoo      0 117   2</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb237-1" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(pred))</span>
+<span id="cb237-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb237-2" tabindex="-1"></a>differs <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred[<span class="fu">upper.tri</span>(pred)], pred[<span class="fu">lower.tri</span>(pred)])</span>
+<span id="cb237-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb237-3" tabindex="-1"></a></span>
+<span id="cb237-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb237-4" tabindex="-1"></a><span class="co"># proportion of penguins &quot;correctly&quot; classified according to species:</span></span>
+<span id="cb237-5"><a href="demonstration-1-k-means-clustering-in-r.html#cb237-5" tabindex="-1"></a>overlap <span class="sc">/</span> <span class="fu">sum</span>(overlap, differs)</span></code></pre></div>
+<pre><code>## [1] 0.3393393</code></pre>
+<div class="question">
+<p>How can we visualise the cluster-species overlap?</p>
+</div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-1" tabindex="-1"></a>pengs <span class="sc">|&gt;</span></span>
+<span id="cb239-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb239-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-3" tabindex="-1"></a>    <span class="at">overlap =</span> <span class="fu">case_when</span>(</span>
+<span id="cb239-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-4" tabindex="-1"></a>      species <span class="sc">==</span> <span class="st">&quot;Adelie&quot;</span>    <span class="sc">&amp;</span> cluster <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;overlap&quot;</span>,</span>
+<span id="cb239-5"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-5" tabindex="-1"></a>      species <span class="sc">==</span> <span class="st">&quot;Chinstrap&quot;</span> <span class="sc">&amp;</span> cluster <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;overlap&quot;</span>,</span>
+<span id="cb239-6"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-6" tabindex="-1"></a>      species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>    <span class="sc">&amp;</span> cluster <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;overlap&quot;</span>,</span>
+<span id="cb239-7"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-7" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;differs&quot;</span></span>
+<span id="cb239-8"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-8" tabindex="-1"></a>    )</span>
+<span id="cb239-9"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb239-10"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm,</span>
+<span id="cb239-11"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-11" tabindex="-1"></a>             <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb239-12"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-12" tabindex="-1"></a>             <span class="at">color =</span> overlap,</span>
+<span id="cb239-13"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-13" tabindex="-1"></a>             <span class="at">shape =</span> species)) <span class="sc">+</span></span>
+<span id="cb239-14"><a href="demonstration-1-k-means-clustering-in-r.html#cb239-14" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="tasks" class="section level2 unnumbered hasAnchor">
+<h2>👉 TASKS<a href="#tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="task-1-how-well-did-k-means-clustering-perform" class="section level3 unnumbered hasAnchor">
+<h3>TASK 1: How well did k-means clustering perform?<a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose you randomly picked Adelie, Chinstrap, or Gentoo for each penguin. What proportion of penguins would you “correctly” classify?</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+<p>Consider how this compares to the performance of the k-means clustering algorithm.</p>
+</div>
+<div id="task-2-how-many-clusters-should-we-use" class="section level3 unnumbered hasAnchor">
+<h3>TASK 2: How many clusters should we use?<a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the above example, we used three clusters because there are three species of penguin in our data. However, in practice, we may not know this “ground-truth” information. That is, we may not know how many species are of penguin are represented in the data.</p>
+<p>Additionally, we may wish to cluster the data based on other criteria, such as minimizing the intra-cluster variation. Recall that unsupervised learning is useful for <em>detecting patterns</em> in the data.</p>
+<p>One method we can use to determine the optimal number of clusters is the <strong>elbow method</strong>. This method involves plotting the within-cluster sum of squares (WSS; also known as within-cluster variation or intra-cluster variation) for a range values of <em>k</em> (recall that <em>k</em> is the number of clusters). We then look for the location of the “bend” in the in the plot, i.e., the elbow.</p>
+<p>Below, we use the elbow method to determine the optimal number of clusters of penguins using the <code>body_mass_g</code> and <code>bill_length_mm</code> features.</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-1" tabindex="-1"></a><span class="co"># preprocess data</span></span>
+<span id="cb240-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-2" tabindex="-1"></a>pengs_mass_length <span class="ot">&lt;-</span> </span>
+<span id="cb240-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-3" tabindex="-1"></a>  pengs <span class="sc">|&gt;</span></span>
+<span id="cb240-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-4" tabindex="-1"></a>  <span class="fu">select</span>(body_mass_g, bill_length_mm)</span>
+<span id="cb240-5"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-5" tabindex="-1"></a></span>
+<span id="cb240-6"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-6" tabindex="-1"></a><span class="co"># compute total within-cluster sum of square </span></span>
+<span id="cb240-7"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-7" tabindex="-1"></a>wss <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb240-8"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-8" tabindex="-1"></a>  <span class="fu">kmeans</span>(</span>
+<span id="cb240-9"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-9" tabindex="-1"></a>    pengs_mass_length,</span>
+<span id="cb240-10"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-10" tabindex="-1"></a>    <span class="at">centers =</span> k,</span>
+<span id="cb240-11"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-11" tabindex="-1"></a>    <span class="at">nstart =</span> <span class="dv">10</span></span>
+<span id="cb240-12"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-12" tabindex="-1"></a>  )<span class="sc">$</span>tot.withinss</span>
+<span id="cb240-13"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-13" tabindex="-1"></a>}</span>
+<span id="cb240-14"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-14" tabindex="-1"></a></span>
+<span id="cb240-15"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-15" tabindex="-1"></a><span class="co"># Compute and plot WSS for k = 1 to k = 15</span></span>
+<span id="cb240-16"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-16" tabindex="-1"></a>k_values <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb240-17"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-17" tabindex="-1"></a></span>
+<span id="cb240-18"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-18" tabindex="-1"></a><span class="co"># plot the WSS values against k</span></span>
+<span id="cb240-19"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-19" tabindex="-1"></a>wss_values <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(k_values, wss)</span>
+<span id="cb240-20"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-20" tabindex="-1"></a></span>
+<span id="cb240-21"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-21" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb240-22"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-22" tabindex="-1"></a>  k_values,</span>
+<span id="cb240-23"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-23" tabindex="-1"></a>  wss_values</span>
+<span id="cb240-24"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-24" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb240-25"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-25" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(k_values, wss_values)) <span class="sc">+</span></span>
+<span id="cb240-26"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-26" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb240-27"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-27" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb240-28"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-28" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;Number of clusters, k&quot;</span>, <span class="at">breaks =</span> <span class="fu">unique</span>(k_values)) <span class="sc">+</span></span>
+<span id="cb240-29"><a href="demonstration-1-k-means-clustering-in-r.html#cb240-29" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</span></code></pre></div>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>The results here suggest that the optimal number of clusters is 3 (which neatly aligns with the number of penguin species in the data). Although, 4 also looks like a good choice. The elbow method is useful, but it isn’t always clear where the elbow lies, which often simply reflects the reality of the data.</p>
+<p>The elbow method is implemented in <code>fviz_nbclust()</code> function from the <code>factoextra</code> package:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb241-1" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(pengs_mass_length, kmeans, <span class="at">method =</span> <span class="st">&quot;wss&quot;</span>)</span></code></pre></div>
+<p><img src="07-S07-D1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="task-3-clustering-cars" class="section level3 unnumbered hasAnchor">
+<h3>TASK 3: Clustering cars<a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cluster the <code>mtcars</code> data using <code>kmeans()</code>.</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb242-1" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<p>Use the <code>mpg</code> and <code>hp</code> features to group the cars into three clusters.</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+<p>How well do your predicted clusters map onto the <code>cyl</code> feature in the <code>mtcars</code> data? (Note that the <code>cyl</code> feature (cylinders) has three values: 4, 6, 8).</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+<p>Next, find the optimal number of clusters in the data using the elbow method. You should start by using the <code>mpg</code> and <code>hp</code> features, although feel free to experiment with using other features.</p>
+<blockquote>
+<p>Your code here</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overview-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="demonstration-2-principal-component-analysis-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

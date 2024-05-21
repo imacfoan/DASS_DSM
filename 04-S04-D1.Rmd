@@ -40,7 +40,7 @@ library(ISLR2)
 library(boot) #don't forget to install it first
 ```
 
-## 1.1 The Validation Set Approach {-}
+## The Validation Set Approach {-}
 
 Let's first consider the validation set approach.  
 
@@ -130,7 +130,7 @@ This is an important point of reflection: if we implement the fixed split approa
 
 Nevertheless, the validation set approach still does not solve this challenge. 
 
-## 1.2 Leave-One-Out Cross-Validation {-}
+## Leave-One-Out Cross-Validation {-}
 
 Now, let's consider LOOCV. In R, one way to compute the LOOCV estimate is by using functions from the `boot` package. This package nevertheless requires that the models are built using the `glm()` function, including linear models. The `glm()` function will produce identical results to `lm()` when fitting a linear model. You do not need to specify the `family` argument as you did for logistic regression since it is already set by default to `gaussian`. 
 
@@ -172,7 +172,7 @@ cv.error
 
 We can see a sharp drop in the estimated test MSE between the linear and quadratic fits, but then no clear improvement from using higher-order polynomials.
 
-## 1.3 $k$-Fold Cross-Validation {-}
+## $k$-Fold Cross-Validation {-}
 
 Finally, let's consider $k$-fold cross-Validation. The same function (`cv.glm()`) can be used by setting the value of K. By default, the value of K is equal to the number of observations in data which therefore gives us LOOCV.
 
