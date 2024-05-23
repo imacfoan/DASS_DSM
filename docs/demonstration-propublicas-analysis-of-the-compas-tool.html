@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Demonstration: ProPublica’s Analysis of the COMPAS Tool | R Notebook</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70033." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Demonstration: ProPublica’s Analysis of the COMPAS Tool | R Notebook" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Demonstration: ProPublica’s Analysis of the COMPAS Tool | R Notebook" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="practical-2-foreign-direct-investment-fdi-study.html"/>
+<link rel="next" href="answers-2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><i class="fa fa-check"></i>Demonstration: A more in-depth consideration of model accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html"><i class="fa fa-check"></i>Demonstration: Classification Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html"><i class="fa fa-check"></i>Demonstration 1: Cross-validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#the-validation-set-approach"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#k-fold-cross-validation"><i class="fa fa-check"></i><span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html"><i class="fa fa-check"></i>Demonstration 2: Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="overview-4.html"><a href="overview-4.html#learning-outcomes"><i class="fa fa-check"></i><b>0.1</b> <strong>Learning Outcomes:</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html"><i class="fa fa-check"></i>Practical 1: Academic Salary</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-i"><i class="fa fa-check"></i>Part I</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#exploring-the-data"><i class="fa fa-check"></i>Exploring the data</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-since-phd"><i class="fa fa-check"></i>Salary and Years since PhD</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-of-service"><i class="fa fa-check"></i>Salary and Years of Service</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#the-model"><i class="fa fa-check"></i>The Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-a-does-the-fitted-model-make-sense"><i class="fa fa-check"></i>Test a): Does the fitted model make sense?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-b-overall-is-the-model-a-good-fit"><i class="fa fa-check"></i>Test b): Overall, is the model a good fit?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-c-individually-are-the-explanatory-variables-important"><i class="fa fa-check"></i>Test c): Individually, are the explanatory variables important?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-ii"><i class="fa fa-check"></i>Part II</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#interpreting-coefficients-of-attribute-variables"><i class="fa fa-check"></i>Interpreting coefficients of attribute variables</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-a-multivariate-regression-model"><i class="fa fa-check"></i>Fitting a Multivariate Regression Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-the-model"><i class="fa fa-check"></i>Fitting the Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-foreign-direct-investment-fdi-study.html"><a href="practical-2-foreign-direct-investment-fdi-study.html"><i class="fa fa-check"></i>Practical 2: Foreign Direct Investment (FDI) Study</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html"><i class="fa fa-check"></i>Demonstration: ProPublica’s Analysis of the COMPAS Tool</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#notes-on-the-data"><i class="fa fa-check"></i>Notes on the data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#setup"><i class="fa fa-check"></i>Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-packages"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-data"><i class="fa fa-check"></i>Load data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data"><i class="fa fa-check"></i>Inspect data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data"><i class="fa fa-check"></i>Preprocess data</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data-again"><i class="fa fa-check"></i>Inspect data again</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#risk-labels"><i class="fa fa-check"></i>Risk labels</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#bias-in-compas"><i class="fa fa-check"></i>Bias in COMPAS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data-for-logistic-regression"><i class="fa fa-check"></i>Preprocess data for logistic regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#estimate-the-logistic-regression-model"><i class="fa fa-check"></i>Estimate the logistic regression model</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#interpret-estimates"><i class="fa fa-check"></i>Interpret estimates</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-1"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#predictive-accuracy"><i class="fa fa-check"></i>Predictive Accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-2"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-3"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#practical-1-4"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#part-i-1"><i class="fa fa-check"></i>Part I</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#part-ii-1"><i class="fa fa-check"></i>Part II</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#practical-2-4"><i class="fa fa-check"></i>Practical 2</a></li>
+</ul></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html"><i class="fa fa-check"></i>Demonstration 1: K-means Clustering in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages"><i class="fa fa-check"></i>Loading the necessary packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset"><i class="fa fa-check"></i>Profile the Palmer Penguins dataset</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering"><i class="fa fa-check"></i>Preprocess the data for clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering"><i class="fa fa-check"></i>Perform k-means clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters"><i class="fa fa-check"></i>Visualise the clusters</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#tasks"><i class="fa fa-check"></i>👉 TASKS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform"><i class="fa fa-check"></i>TASK 1: How well did k-means clustering perform?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use"><i class="fa fa-check"></i>TASK 2: How many clusters should we use?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars"><i class="fa fa-check"></i>TASK 3: Clustering cars</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html"><i class="fa fa-check"></i>Demonstration 2: Principal Component Analysis in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#load-packages-1"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data"><i class="fa fa-check"></i>Preprocess the world happiness report data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data"><i class="fa fa-check"></i>Profile the happiness data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature"><i class="fa fa-check"></i>Plot happiness score against feature</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features"><i class="fa fa-check"></i>Run PCA using five features</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2"><i class="fa fa-check"></i>Correlations of happiness score with PC1 and PC2</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components"><i class="fa fa-check"></i>Plot first two principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators"><i class="fa fa-check"></i>Regress happiness on the five indicators</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components"><i class="fa fa-check"></i>Visualise happiness against principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component"><i class="fa fa-check"></i>Regress happiness on first principal component</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#task"><i class="fa fa-check"></i>👉 TASK</a></li>
+</ul></li>
+<li class="part"><span><b>Section 8</b></span></li>
+<li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-set"><i class="fa fa-check"></i>Data Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#project-planning-setting-the-stage-for-success"><i class="fa fa-check"></i>Project Planning: Setting the Stage for Success</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-preprocessing"><i class="fa fa-check"></i>Data Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i>Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-selection-and-model-training"><i class="fa fa-check"></i>Model Selection and Model Training</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-evaluation"><i class="fa fa-check"></i>Model Evaluation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-interpretation"><i class="fa fa-check"></i>Model Interpretation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#report-conclusion"><i class="fa fa-check"></i>Report Conclusion</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#key-insights"><i class="fa fa-check"></i>Key Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="your-turn.html"><a href="your-turn.html"><i class="fa fa-check"></i>👉 Your Turn!</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Notebook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DSM_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="demonstration-propublicas-analysis-of-the-compas-tool" class="section level1 unnumbered hasAnchor">
+<h1>Demonstration: ProPublica’s Analysis of the COMPAS Tool<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#demonstration-propublicas-analysis-of-the-compas-tool" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this demonstration, you will explore the analysis conducted by ProPublica on the COMPAS Recidivism Algorithm.</p>
+<div id="notes-on-the-data" class="section level2 unnumbered hasAnchor">
+<h2>Notes on the data<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#notes-on-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Please ensure that your first complete the two readings indicated in the learning materials for this section.</p>
+<p>Salient points are highlighted below; see the full description from ProPublica for additional details.</p>
+<blockquote>
+<p><strong>Goal:</strong> We looked at more than 10,000 criminal defendants in Broward County, Florida, and compared their predicted recidivism rates with the rate that actually occurred over a two-year period.</p>
+<p><strong>COMPAS tool input (data subjects):</strong> When most defendants are booked in jail, they respond to a COMPAS questionnaire. Their answers are fed into the COMPAS software to generate several scores including predictions of Risk of Recidivism and Risk of Violent Recidivism.</p>
+<p><strong>How COMPAS input was acquired by ProPublica:</strong> Through a public records request, ProPublica obtained two years worth of COMPAS scores from the Broward County Sheriff’s Office in Florida. We received data for all 18,610 people who were scored in 2013 and 2014.</p>
+<p><strong>COMPAS tool output:</strong> Each pretrial defendant received at least three COMPAS scores: “Risk of Recidivism,” “Risk of Violence” and “Risk of Failure to Appear. <span class="math display">\[...\]</span> COMPAS scores for each defendant ranged from 1 to 10, with ten being the highest risk. Scores 1 to 4 were labeled by COMPAS as”Low;” 5 to 7 were labeled “Medium;” and 8 to 10 were labeled “High.”</p>
+<p><strong>Data integration (record linkage):</strong> Starting with the database of COMPAS scores, we built a profile of each person’s criminal history, both before and after they were scored. We collected public criminal records from the Broward County Clerk’s Office website through April 1, 2016. On average, defendants in our dataset were not incarcerated for 622.87 days (sd: 329.19). We matched the criminal records to the COMPAS records using a person’s first and last names and date of birth. This is the same technique used in the Broward County COMPAS validation study conducted by researchers at Florida State University in 2010. We downloaded around 80,000 criminal records from the Broward County Clerk’s Office website.</p>
+<p><strong>What is recidivism?</strong> Northpointe defined recidivism as “a finger-printable arrest involving a charge and a filing for any uniform crime reporting (UCR) code.” We interpreted that to mean a criminal offense that resulted in a jail booking and took place after the crime for which the person was COMPAS scored. <span class="math display">\[...\]</span> For most of our analysis, we defined recidivism as a new arrest within two years.</p>
+</blockquote>
+</div>
+<div id="setup" class="section level2 unnumbered hasAnchor">
+<h2>Setup<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before proceeding through the tasks, ensure that you install the <code>glue</code> package.</p>
+<div id="load-packages" class="section level3 unnumbered hasAnchor">
+<h3>Load packages<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb281-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb281-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb281-2" tabindex="-1"></a><span class="fu">library</span>(glue)</span></code></pre></div>
+</div>
+<div id="load-data" class="section level3 unnumbered hasAnchor">
+<h3>Load data<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-1" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv&quot;</span></span>
+<span id="cb282-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-2" tabindex="-1"></a></span>
+<span id="cb282-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-3" tabindex="-1"></a>compas_raw <span class="ot">&lt;-</span> </span>
+<span id="cb282-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-4" tabindex="-1"></a>  <span class="fu">read_csv</span>(</span>
+<span id="cb282-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-5" tabindex="-1"></a>    <span class="at">file =</span> url,</span>
+<span id="cb282-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-6" tabindex="-1"></a>    <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb282-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb282-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb283-1" tabindex="-1"></a><span class="fu">dim</span>(compas_raw)</span></code></pre></div>
+<pre><code>## [1] 7214   53</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb285-1" tabindex="-1"></a><span class="fu">head</span>(compas_raw)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 53
+##      id name    first last  compas_screening_date sex   dob          age age_cat
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;date&gt;                &lt;chr&gt; &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;  
+## 1     1 miguel… migu… hern… 2013-08-14            Male  1947-04-18    69 Greate…
+## 2     3 kevon … kevon dixon 2013-01-27            Male  1982-01-22    34 25 - 45
+## 3     4 ed phi… ed    philo 2013-04-14            Male  1991-05-14    24 Less t…
+## 4     5 marcu … marcu brown 2013-01-13            Male  1993-01-21    23 Less t…
+## 5     6 bouthy… bout… pier… 2013-03-26            Male  1973-01-22    43 25 - 45
+## 6     7 marsha… mars… miles 2013-11-30            Male  1971-08-22    44 25 - 45
+## # ℹ 44 more variables: race &lt;chr&gt;, juv_fel_count &lt;dbl&gt;,
+## #   decile_score...12 &lt;dbl&gt;, juv_misd_count &lt;dbl&gt;, juv_other_count &lt;dbl&gt;,
+## #   priors_count...15 &lt;dbl&gt;, days_b_screening_arrest &lt;dbl&gt;, c_jail_in &lt;dttm&gt;,
+## #   c_jail_out &lt;dttm&gt;, c_case_number &lt;chr&gt;, c_offense_date &lt;date&gt;,
+## #   c_arrest_date &lt;date&gt;, c_days_from_compas &lt;dbl&gt;, c_charge_degree &lt;chr&gt;,
+## #   c_charge_desc &lt;chr&gt;, is_recid &lt;dbl&gt;, r_case_number &lt;chr&gt;,
+## #   r_charge_degree &lt;chr&gt;, r_days_from_arrest &lt;dbl&gt;, r_offense_date &lt;date&gt;, …</code></pre>
+</div>
+<div id="inspect-data" class="section level3 unnumbered hasAnchor">
+<h3>Inspect data<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For convenience, here is a table of variable definitions:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>age</td>
+<td>Age of the defendant</td>
+</tr>
+<tr class="even">
+<td>age_cat</td>
+<td>Age category. It can be &lt; 25, 25-45, &gt;45</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Sex of the defendant. It is either “Male” or “Female”</td>
+</tr>
+<tr class="even">
+<td>race</td>
+<td>Race of the defendant. It can be “African-American”, “Caucasian”, “Hispanic”, “Asian”, or “Other”</td>
+</tr>
+<tr class="odd">
+<td>c_charge_degree</td>
+<td>Charge. Either “M” for misdemeanor, “F” for felony, or “O” (not causing jail time)</td>
+</tr>
+<tr class="even">
+<td>priors_count</td>
+<td>Count of prior crimes committed by the defendant</td>
+</tr>
+<tr class="odd">
+<td>days_b_screening_arrest</td>
+<td>Days between the arrest and COMPAS screening</td>
+</tr>
+<tr class="even">
+<td>decile_score</td>
+<td>The COMPAS score estimated by the system. It is between 0-10</td>
+</tr>
+<tr class="odd">
+<td>score_text</td>
+<td>Decile score. It can be “Low” (1-4), “Medium” (5-7), or “High” (8-10)</td>
+</tr>
+<tr class="even">
+<td>is_recid</td>
+<td>Indicates if the defendant recidivated. It can be 0, 1, or -1</td>
+</tr>
+<tr class="odd">
+<td>two_year_recid</td>
+<td>Indicates if the defendant recidivated within two years of COMPAS assessment</td>
+</tr>
+<tr class="even">
+<td>c_jail_in</td>
+<td>Date the defendant was in jail</td>
+</tr>
+<tr class="odd">
+<td>c_jail_out</td>
+<td>Date when the defendant was released from jail</td>
+</tr>
+</tbody>
+</table>
+<p>Plot the distribution of age, race, and sex in the imported data (<code>compas_raw</code>):</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb287-1" tabindex="-1"></a>compas_raw <span class="sc">|&gt;</span></span>
+<span id="cb287-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb287-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb287-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb287-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb288-1" tabindex="-1"></a>compas_raw <span class="sc">|&gt;</span></span>
+<span id="cb288-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb288-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(race)) <span class="sc">+</span></span>
+<span id="cb288-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb288-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb289-1" tabindex="-1"></a>compas_raw <span class="sc">|&gt;</span></span>
+<span id="cb289-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb289-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sex)) <span class="sc">+</span></span>
+<span id="cb289-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb289-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+</div>
+</div>
+<div id="preprocess-data" class="section level2 unnumbered hasAnchor">
+<h2>Preprocess data<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ProPublica implemented a few pre-processing steps. First, they generated a subset of the data with a few variables of interest. Here, we select even fewer variables, keeping only those that we will use in this notebook. We also relabel the race column.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-1" tabindex="-1"></a>cols <span class="ot">&lt;-</span> </span>
+<span id="cb290-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-2" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;c_charge_degree&quot;</span>, <span class="st">&quot;race&quot;</span>, <span class="st">&quot;age_cat&quot;</span>,</span>
+<span id="cb290-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-3" tabindex="-1"></a>    <span class="st">&quot;score_text&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;priors_count...15&quot;</span>,</span>
+<span id="cb290-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-4" tabindex="-1"></a>    <span class="st">&quot;days_b_screening_arrest&quot;</span>, <span class="st">&quot;decile_score...12&quot;</span>,</span>
+<span id="cb290-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-5" tabindex="-1"></a>    <span class="st">&quot;is_recid&quot;</span>, <span class="st">&quot;two_year_recid&quot;</span>)</span>
+<span id="cb290-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-6" tabindex="-1"></a></span>
+<span id="cb290-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-7" tabindex="-1"></a>compas_selected <span class="ot">&lt;-</span> </span>
+<span id="cb290-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-8" tabindex="-1"></a>  compas_raw <span class="sc">|&gt;</span></span>
+<span id="cb290-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-9" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb290-10"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-10" tabindex="-1"></a>    <span class="fu">all_of</span>(cols)</span>
+<span id="cb290-11"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-11" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb290-12"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-12" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb290-13"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-13" tabindex="-1"></a>    <span class="at">priors_count =</span> priors_count...<span class="dv">15</span>,</span>
+<span id="cb290-14"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-14" tabindex="-1"></a>    <span class="at">decile_score =</span> decile_score...<span class="dv">12</span></span>
+<span id="cb290-15"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-15" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb290-16"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-16" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb290-17"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-17" tabindex="-1"></a>    <span class="at">race =</span> <span class="fu">case_when</span>(</span>
+<span id="cb290-18"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-18" tabindex="-1"></a>      race <span class="sc">==</span> <span class="st">&quot;African-American&quot;</span> <span class="sc">~</span> <span class="st">&quot;Black&quot;</span>,</span>
+<span id="cb290-19"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-19" tabindex="-1"></a>      race <span class="sc">==</span> <span class="st">&quot;Caucasian&quot;</span> <span class="sc">~</span> <span class="st">&quot;White&quot;</span>,</span>
+<span id="cb290-20"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-20" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> race</span>
+<span id="cb290-21"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-21" tabindex="-1"></a>    )</span>
+<span id="cb290-22"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-22" tabindex="-1"></a>  )</span>
+<span id="cb290-23"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-23" tabindex="-1"></a></span>
+<span id="cb290-24"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb290-24" tabindex="-1"></a><span class="fu">head</span>(compas_selected)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 12
+##      id   age c_charge_degree race  age_cat        score_text sex   priors_count
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+## 1     1    69 F               Other Greater than … Low        Male             0
+## 2     3    34 F               Black 25 - 45        Low        Male             0
+## 3     4    24 F               Black Less than 25   Low        Male             4
+## 4     5    23 F               Black Less than 25   High       Male             1
+## 5     6    43 F               Other 25 - 45        Low        Male             2
+## 6     7    44 M               Other 25 - 45        Low        Male             0
+## # ℹ 4 more variables: days_b_screening_arrest &lt;dbl&gt;, decile_score &lt;dbl&gt;,
+## #   is_recid &lt;dbl&gt;, two_year_recid &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb292-1" tabindex="-1"></a><span class="fu">glimpse</span>(compas_selected)</span></code></pre></div>
+<pre><code>## Rows: 7,214
+## Columns: 12
+## $ id                      &lt;dbl&gt; 1, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 18…
+## $ age                     &lt;dbl&gt; 69, 34, 24, 23, 43, 44, 41, 43, 39, 21, 27, 23…
+## $ c_charge_degree         &lt;chr&gt; &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;…
+## $ race                    &lt;chr&gt; &quot;Other&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Black&quot;, &quot;Other&quot;, &quot;…
+## $ age_cat                 &lt;chr&gt; &quot;Greater than 45&quot;, &quot;25 - 45&quot;, &quot;Less than 25&quot;, …
+## $ score_text              &lt;chr&gt; &quot;Low&quot;, &quot;Low&quot;, &quot;Low&quot;, &quot;High&quot;, &quot;Low&quot;, &quot;Low&quot;, &quot;Me…
+## $ sex                     &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;…
+## $ priors_count            &lt;dbl&gt; 0, 0, 4, 1, 2, 0, 14, 3, 0, 1, 0, 3, 0, 0, 1, …
+## $ days_b_screening_arrest &lt;dbl&gt; -1, -1, -1, NA, NA, 0, -1, -1, -1, 428, -1, 0,…
+## $ decile_score            &lt;dbl&gt; 1, 3, 4, 8, 1, 1, 6, 4, 1, 3, 4, 6, 1, 4, 1, 3…
+## $ is_recid                &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1…
+## $ two_year_recid          &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1…</code></pre>
+<p>Take a moment to get a feel for the variables and structure of the data. ProPublica filtered the above data by removing rows where:</p>
+<ol style="list-style-type: decimal">
+<li>The COMPAS score is missing.</li>
+<li>The charge date of the defendant’s COMPAS-scored crime was not within 30 days from the date of arrest. ProPublica assumed that the offense may not be correct in these cases.</li>
+<li>The recividist flag is “-1”. In such cases, ProPublica could not find a COMPAS record at all.</li>
+<li>The charge is “O”. These are ordinary traffic offenses and do not result in jail time.</li>
+</ol>
+<p>We implement these conditions here:</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-1" tabindex="-1"></a>compas <span class="ot">&lt;-</span></span>
+<span id="cb294-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-2" tabindex="-1"></a>  compas_selected <span class="sc">|&gt;</span></span>
+<span id="cb294-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-3" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb294-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-4" tabindex="-1"></a>    score_text <span class="sc">!=</span> <span class="st">&quot;N/A&quot;</span>,</span>
+<span id="cb294-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-5" tabindex="-1"></a>    days_b_screening_arrest <span class="sc">&lt;=</span> <span class="dv">30</span>,</span>
+<span id="cb294-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-6" tabindex="-1"></a>    days_b_screening_arrest <span class="sc">&gt;=</span> <span class="sc">-</span><span class="dv">30</span>,</span>
+<span id="cb294-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-7" tabindex="-1"></a>    is_recid <span class="sc">!=</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb294-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-8" tabindex="-1"></a>    c_charge_degree <span class="sc">!=</span> <span class="st">&quot;O&quot;</span></span>
+<span id="cb294-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb294-9" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Note that ProPublica only included people who had recidivated within two years or had at least two years outside a correctional facility. This pre-processing step is “baked in” to the data that we imported from GitHub in this notebook.</p>
+<p>Check the dimensions (i.e. the number of variables and observations) of the imported (<code>compas_raw</code>) and preprocessed (<code>compas</code>) data:</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb295-1" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;Imported data: {nrow(compas_raw)}, {ncol(compas_raw)}&quot;</span>)</span></code></pre></div>
+<pre><code>## Imported data: 7214, 53</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb297-1" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;Data after selecting variables: {nrow(compas_selected)}, {ncol(compas_selected)}&quot;</span>)</span></code></pre></div>
+<pre><code>## Data after selecting variables: 7214, 12</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb299-1" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;Data after filtering observations: {nrow(compas)}, {ncol(compas)}&quot;</span>)</span></code></pre></div>
+<pre><code>## Data after filtering observations: 6172, 12</code></pre>
+<p>Take the additional step of making sure that the decile score (discussed below) is numeric:</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb301-1" tabindex="-1"></a>compas <span class="ot">&lt;-</span> compas <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">decile_score =</span> <span class="fu">as.numeric</span>(decile_score))</span></code></pre></div>
+<div id="inspect-data-again" class="section level3 unnumbered hasAnchor">
+<h3>Inspect data again<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data-again" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Re-inspect salient variables in the data after the preprocessing steps. Plot the distribution of age, race, and sex in the preprocessed data (<code>compas</code>) and compare these distributions to the imported data (<code>compas_raw</code>):</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-1" tabindex="-1"></a>compas_compare <span class="ot">&lt;-</span> </span>
+<span id="cb302-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-2" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb302-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-3" tabindex="-1"></a>    <span class="fu">mutate</span>(compas, <span class="at">source =</span> <span class="st">&quot;raw&quot;</span>),</span>
+<span id="cb302-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-4" tabindex="-1"></a>    <span class="fu">mutate</span>(compas_raw, <span class="at">source =</span> <span class="st">&quot;preprocessed&quot;</span>),</span>
+<span id="cb302-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-5" tabindex="-1"></a>  )</span>
+<span id="cb302-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-6" tabindex="-1"></a></span>
+<span id="cb302-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-7" tabindex="-1"></a>compas_compare <span class="sc">|&gt;</span></span>
+<span id="cb302-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, <span class="at">fill =</span> source)) <span class="sc">+</span></span>
+<span id="cb302-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb302-9" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb304-1" tabindex="-1"></a>compas_compare <span class="sc">|&gt;</span></span>
+<span id="cb304-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb304-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(race, <span class="at">fill =</span> source)) <span class="sc">+</span></span>
+<span id="cb304-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb304-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb305-1" tabindex="-1"></a>compas_compare <span class="sc">|&gt;</span></span>
+<span id="cb305-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb305-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sex, <span class="at">fill =</span> source)) <span class="sc">+</span></span>
+<span id="cb305-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb305-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<p>Observe that we are iterating through the data analysis: import, inspect &amp; profile, preprocess, and profile again. Generate a crosstab summarizing the number of observations by race and sex:</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb306-1" tabindex="-1"></a><span class="fu">table</span>(compas<span class="sc">$</span>race, compas<span class="sc">$</span>sex)</span></code></pre></div>
+<pre><code>##                  
+##                   Female Male
+##   Asian                2   29
+##   Black              549 2626
+##   Hispanic            82  427
+##   Native American      2    9
+##   Other               58  285
+##   White              482 1621</code></pre>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level2 unnumbered hasAnchor">
+<h2>Exploratory analysis<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exploratory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s turn our focus to the primary variable of interest: the COMPAS recidivism score. In this exploratory analysis, we are interested in the variable named <code>decile_score</code>.</p>
+<p>The ProPublica analysis notes: “Judges are often presented with two sets of scores from the COMPAS system: one that classifies people into high, medium or low risk, and a corresponding decile score.”</p>
+<p>Plot the distribution of <code>decile_score</code> for males and for females. To what extent do these distributions differ?</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-1" tabindex="-1"></a><span class="co"># plot decile score by sex</span></span>
+<span id="cb308-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-2" tabindex="-1"></a>compas <span class="sc">|&gt;</span></span>
+<span id="cb308-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> decile_score)) <span class="sc">+</span></span>
+<span id="cb308-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb308-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-5" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">stat</span>(density <span class="sc">*</span> width)),</span>
+<span id="cb308-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-6" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb308-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb308-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb308-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;proportion&quot;</span>) <span class="sc">+</span></span>
+<span id="cb308-10"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb308-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> sex)</span></code></pre></div>
+<pre><code>## Warning: `stat(density * width)` was deprecated in ggplot2 3.4.0.
+## ℹ Please use `after_stat(density * width)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>What about race?</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-1" tabindex="-1"></a><span class="co"># plot decile score by race</span></span>
+<span id="cb310-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-2" tabindex="-1"></a>compas <span class="sc">|&gt;</span></span>
+<span id="cb310-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-3" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb310-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> decile_score)) <span class="sc">+</span></span>
+<span id="cb310-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb310-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-6" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density <span class="sc">*</span> width)),</span>
+<span id="cb310-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-7" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb310-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb310-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb310-10"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;proportion&quot;</span>) <span class="sc">+</span></span>
+<span id="cb310-11"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb310-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> race)</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div id="exercise" class="section level3 unnumbered hasAnchor">
+<h3>👉 Exercise<a href="#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Summarise the difference between the distribution of decile scores for Black defendants and White defendants in this text cell:</p>
+<blockquote>
+<p><em>Your answer here</em></p>
+</blockquote>
+</div>
+<div id="risk-labels" class="section level3 unnumbered hasAnchor">
+<h3>Risk labels<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#risk-labels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Plot the distribution of COMPAS-assigned “risk labels” (the variable is named <code>score_text</code>) for Black defendants and White defendants:</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-1" tabindex="-1"></a><span class="co"># plot risk labels by race</span></span>
+<span id="cb311-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-2" tabindex="-1"></a>compas <span class="sc">|&gt;</span></span>
+<span id="cb311-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb311-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-4" tabindex="-1"></a>    <span class="at">score_text =</span> <span class="fu">factor</span>(</span>
+<span id="cb311-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-5" tabindex="-1"></a>      score_text,</span>
+<span id="cb311-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-6" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;Medium&quot;</span>, <span class="st">&quot;High&quot;</span>)</span>
+<span id="cb311-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-7" tabindex="-1"></a>    )</span>
+<span id="cb311-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-8" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb311-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-9" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb311-10"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> score_text, <span class="at">group =</span> race, <span class="at">fill =</span> race)) <span class="sc">+</span></span>
+<span id="cb311-11"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-11" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(prop)), <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb311-12"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb311-12" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;proportion&quot;</span>)</span></code></pre></div>
+<p><img src="05-S05-D1_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+<div id="bias-in-compas" class="section level2 unnumbered hasAnchor">
+<h2>Bias in COMPAS<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#bias-in-compas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ProPublica focused on racial bias in the COMPAS algorithm. In general terms, ProPublica analyzed (i) how the <em>risk scores</em> vary by race and (ii) the extent to which the <em>risk labels</em> assigned to defendants matches up with their observed recidivism and how this varies by race. We will (approximately) reproduce this analysis below.</p>
+<div id="preprocess-data-for-logistic-regression" class="section level3 unnumbered hasAnchor">
+<h3>Preprocess data for logistic regression<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data-for-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ProPublica used a logistic regression model to analyze variation in the risk scores by race. In their analysis, they considered a “medium” and “high” risk score to be “high”, and “low” to be low. We will prepare the data accordingly, with <code>low = 0</code> and <code>high = 1</code>:</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb312-1" tabindex="-1"></a>compas <span class="ot">&lt;-</span> </span>
+<span id="cb312-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb312-2" tabindex="-1"></a>  compas <span class="sc">|&gt;</span></span>
+<span id="cb312-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb312-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">score_binary =</span> <span class="fu">ifelse</span>(score_text <span class="sc">==</span> <span class="st">&quot;Low&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb312-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb312-4" tabindex="-1"></a></span>
+<span id="cb312-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb312-5" tabindex="-1"></a><span class="fu">table</span>(compas<span class="sc">$</span>score_text, compas<span class="sc">$</span>score_binary)</span></code></pre></div>
+<pre><code>##         
+##             0    1
+##   High      0 1144
+##   Low    3421    0
+##   Medium    0 1607</code></pre>
+</div>
+<div id="estimate-the-logistic-regression-model" class="section level3 unnumbered hasAnchor">
+<h3>Estimate the logistic regression model<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#estimate-the-logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-1" tabindex="-1"></a>model <span class="ot">&lt;-</span> </span>
+<span id="cb314-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-2" tabindex="-1"></a>  <span class="fu">glm</span>(</span>
+<span id="cb314-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-3" tabindex="-1"></a>    score_binary <span class="sc">~</span></span>
+<span id="cb314-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-4" tabindex="-1"></a>      priors_count <span class="sc">+</span></span>
+<span id="cb314-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-5" tabindex="-1"></a>      two_year_recid <span class="sc">+</span></span>
+<span id="cb314-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-6" tabindex="-1"></a>      c_charge_degree <span class="sc">+</span></span>
+<span id="cb314-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-7" tabindex="-1"></a>      age_cat <span class="sc">+</span></span>
+<span id="cb314-8"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-8" tabindex="-1"></a>      race <span class="sc">+</span> </span>
+<span id="cb314-9"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-9" tabindex="-1"></a>      sex,</span>
+<span id="cb314-10"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-10" tabindex="-1"></a>    <span class="at">data =</span> compas,</span>
+<span id="cb314-11"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-11" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb314-12"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-12" tabindex="-1"></a>  )</span>
+<span id="cb314-13"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-13" tabindex="-1"></a></span>
+<span id="cb314-14"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb314-14" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = score_binary ~ priors_count + two_year_recid + 
+##     c_charge_degree + age_cat + race + sex, family = binomial(link = &quot;logit&quot;), 
+##     data = compas)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.9966  -0.7919  -0.3303   0.8121   2.6024  
+## 
+## Coefficients:
+##                        Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)            -1.55869    0.48236  -3.231  0.00123 ** 
+## priors_count            0.26895    0.01110  24.221  &lt; 2e-16 ***
+## two_year_recid          0.68586    0.06402  10.713  &lt; 2e-16 ***
+## c_charge_degreeM       -0.31124    0.06655  -4.677 2.91e-06 ***
+## age_catGreater than 45 -1.35563    0.09908 -13.682  &lt; 2e-16 ***
+## age_catLess than 25     1.30839    0.07593  17.232  &lt; 2e-16 ***
+## raceBlack               0.73162    0.47708   1.534  0.12514    
+## raceHispanic           -0.17398    0.48897  -0.356  0.72199    
+## raceNative American     1.64862    0.89972   1.832  0.06689 .  
+## raceOther              -0.57193    0.49897  -1.146  0.25170    
+## raceWhite               0.25441    0.47821   0.532  0.59472    
+## sexMale                -0.22127    0.07951  -2.783  0.00539 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 8483.3  on 6171  degrees of freedom
+## Residual deviance: 6168.4  on 6160  degrees of freedom
+## AIC: 6192.4
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div id="interpret-estimates" class="section level3 unnumbered hasAnchor">
+<h3>Interpret estimates<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#interpret-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Take a moment to read through the model summary.</p>
+<p>One way to interpret the estimates is by calculating odds ratios. To calculate odds ratios, we take the exponential of the coefficients. For example, taking the exponential of the coefficient for defendants aged less than 25 (<span class="math inline">\(\beta_{age&lt;25}\)</span> = 1.30839) will return the odds of score_text taking the value “high” for those aged under 25 relative to those aged 25-45. Calculate this odds ratio here:</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb316-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">1.30839</span>)</span></code></pre></div>
+<pre><code>## [1] 3.700212</code></pre>
+<p>In words, the odds that COMPAS labeled a defendant as “high risk” of recidivism is 3.7 times greater for someone aged 25-45.</p>
+<p>Next, calculate the odds ratio for all of the coefficients in the model:</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb318-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model))</span></code></pre></div>
+<pre><code>##            (Intercept)           priors_count         two_year_recid 
+##              0.2104123              1.3085835              1.9854836 
+##       c_charge_degreeM age_catGreater than 45    age_catLess than 25 
+##              0.7325374              0.2577840              3.7002128 
+##              raceBlack           raceHispanic    raceNative American 
+##              2.0784485              0.8403136              5.1998120 
+##              raceOther              raceWhite                sexMale 
+##              0.5644338              1.2897066              0.8015029</code></pre>
+<p>Take a moment to read through these coefficients. What is the reference category for each variable? (e.g. For females, the reference category is male.) Think in terms of comparisons, for example:</p>
+<blockquote>
+<p>A person with a value of <span class="math display">\[     \]</span> on variable <span class="math display">\[     \]</span> is <span class="math display">\[     \]</span> times more likely to be labeled high risk compared to a person with a value of <span class="math display">\[     \]</span> on variable <span class="math display">\[     \]</span></p>
+</blockquote>
+<p>In the female example above, this could be stated:</p>
+<blockquote>
+<p>“A person with a value of female on variable sex is 1.25 times more likely to be labeled high risk compared to a person with a value of male on variable sex”</p>
+</blockquote>
+<p>Of course, we should be more straightforward when writing up results. “A person with a value of male on variable sex” is rather verbose; “males” will suffice. Interpreting model estimates in straightforward terms is an underrated skill.</p>
+</div>
+<div id="exercise-1" class="section level3 unnumbered hasAnchor">
+<h3>👉 Exercise<a href="#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Summarise the odds associated with the <code>race</code> variable.</p>
+<blockquote>
+<p><em>Your answer here</em></p>
+</blockquote>
+</div>
+</div>
+<div id="predictive-accuracy" class="section level2 unnumbered hasAnchor">
+<h2>Predictive Accuracy<a href="demonstration-propublicas-analysis-of-the-compas-tool.html#predictive-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In terms of fairness, ProPublica focused on the predictive accuracy of the COMPAS algorithm. In this case, predictive accuracy refers to the concordance between a person’s recidivism and the label assigned to that person by the COMPAS algorithm. For instance, how often did COMPAS predict that a person was at “high risk” of recidivism and that person in fact recidivated within two years? We can think of this in terms of a 2x2 table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">Did not recidivate</th>
+<th align="right">Recidivated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Labeled high risk</strong></td>
+<td align="center">A</td>
+<td align="right">B</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Labeled low risk</strong></td>
+<td align="center">C</td>
+<td align="right">D</td>
+</tr>
+</tbody>
+</table>
+<p>ProPublica reported A and D for black defendants and white defendants, separately.</p>
+<div id="exercise-2" class="section level3 unnumbered hasAnchor">
+<h3>👉 Exercise<a href="#exercise-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>What are generic terms for A and D? Why focus on A and D?</strong></p>
+<blockquote>
+<p><em>Your answer here</em></p>
+</blockquote>
+<p>ProPublica used a somewhat different data set to calculate the predictive accuracy of COMPAS. In this section we will use the <code>compas</code> data we preprocessed above for brevity. Note therefore that the numbers we calculate below will not match those reported by ProPublica. Let’s generate a crosstab of the variable denoting recidivism within two years (<code>is_recid</code>) and the binary score variable (<code>score_binary</code>):</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb320-1" tabindex="-1"></a><span class="fu">table</span>(compas<span class="sc">$</span>is_recid, compas<span class="sc">$</span>score_binary)</span></code></pre></div>
+<pre><code>##    
+##        0    1
+##   0 2248  934
+##   1 1173 1817</code></pre>
+<p>Based on this crosstab, input the number of true positives, false positives, true negatives, and false negatives:</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb322-1" tabindex="-1"></a>true_positive  <span class="ot">=</span> <span class="dv">1817</span></span>
+<span id="cb322-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb322-2" tabindex="-1"></a>false_positive <span class="ot">=</span> <span class="dv">934</span></span>
+<span id="cb322-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb322-3" tabindex="-1"></a>true_negative  <span class="ot">=</span> <span class="dv">2248</span></span>
+<span id="cb322-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb322-4" tabindex="-1"></a>false_negative <span class="ot">=</span> <span class="dv">1173</span></span></code></pre></div>
+<p>You can calculate the false positive rate by taking FP / (FP + TN), where FP is the number of false positives and TN is the number of true negatives. Calculate the false positive rate:</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb323-1" tabindex="-1"></a><span class="fu">glue</span>(</span>
+<span id="cb323-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb323-2" tabindex="-1"></a>  <span class="st">&quot;All defendants, false positive rate:</span></span>
+<span id="cb323-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb323-3" tabindex="-1"></a><span class="st">  {(false_positive / (false_positive + true_negative) * 100)}&quot;</span></span>
+<span id="cb323-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb323-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## All defendants, false positive rate:
+## 29.3526084223759</code></pre>
+<p>Now calculate the false <em>negative</em> rate: (hint, replace the terms in the false positive rate formula in the previous text cell)</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb325-1" tabindex="-1"></a><span class="fu">glue</span>(</span>
+<span id="cb325-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb325-2" tabindex="-1"></a>  <span class="st">&quot;All defendants, false negative rate:</span></span>
+<span id="cb325-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb325-3" tabindex="-1"></a><span class="st">  {(false_negative / (false_negative + true_positive) * 100)}&quot;</span></span>
+<span id="cb325-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb325-4" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## All defendants, false negative rate:
+## 39.2307692307692</code></pre>
+<p>How do the false positive and false negative rates vary by race? Calculate the false positive rate and false negative rate for White defendants:</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb327-1" tabindex="-1"></a>rates <span class="ot">&lt;-</span> </span>
+<span id="cb327-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb327-2" tabindex="-1"></a>  compas <span class="sc">|&gt;</span></span>
+<span id="cb327-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb327-3" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;White&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb327-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb327-4" tabindex="-1"></a>  <span class="fu">group_by</span>(race) <span class="sc">|&gt;</span></span>
+<span id="cb327-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb327-5" tabindex="-1"></a>  <span class="fu">count</span>(score_binary, is_recid)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-1" tabindex="-1"></a><span class="co"># white defendants</span></span>
+<span id="cb328-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-2" tabindex="-1"></a>w_tp <span class="ot">=</span> <span class="dv">430</span></span>
+<span id="cb328-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-3" tabindex="-1"></a>w_fp <span class="ot">=</span> <span class="dv">266</span></span>
+<span id="cb328-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-4" tabindex="-1"></a>w_tn <span class="ot">=</span> <span class="dv">963</span></span>
+<span id="cb328-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-5" tabindex="-1"></a>w_fn <span class="ot">=</span> <span class="dv">444</span></span>
+<span id="cb328-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-6" tabindex="-1"></a></span>
+<span id="cb328-7"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb328-7" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;White defendants, false positive rate: {(w_fp / (w_fp + w_tn) * 100)}&quot;</span>)</span></code></pre></div>
+<pre><code>## White defendants, false positive rate: 21.6436126932465</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb330-1" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;White defendants, false negative rate: {(w_fn / (w_fn + w_tp) * 100)}&quot;</span>)</span></code></pre></div>
+<pre><code>## White defendants, false negative rate: 50.8009153318078</code></pre>
+<p>Lastly, calculate the false positive rate and false negative rate for Black defendants:</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-1" tabindex="-1"></a>b_tp <span class="ot">=</span> <span class="dv">1248</span></span>
+<span id="cb332-2"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-2" tabindex="-1"></a>b_fp <span class="ot">=</span> <span class="dv">581</span></span>
+<span id="cb332-3"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-3" tabindex="-1"></a>b_tn <span class="ot">=</span> <span class="dv">821</span></span>
+<span id="cb332-4"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-4" tabindex="-1"></a>b_fn <span class="ot">=</span> <span class="dv">525</span></span>
+<span id="cb332-5"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-5" tabindex="-1"></a></span>
+<span id="cb332-6"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb332-6" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;Black defendants, false positive rate: {(b_fp / (b_fp + b_tn) * 100)}&quot;</span>)</span></code></pre></div>
+<pre><code>## Black defendants, false positive rate: 41.4407988587732</code></pre>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#cb334-1" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">&quot;Black defendants, false negative rate: {(b_fn / (b_fn + b_tp) * 100)}&quot;</span>)</span></code></pre></div>
+<pre><code>## Black defendants, false negative rate: 29.6108291032149</code></pre>
+<p>Take a moment to review and compare the false positive rates and false negative rates above.</p>
+</div>
+<div id="exercise-3" class="section level3 unnumbered hasAnchor">
+<h3>👉 Exercise<a href="#exercise-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Reflect on the false positive and false negative rates for Black and White defendants. What do these rates suggest about the COMPAS algorithm’s and whether it should be used to assist sentencing decisions?</p>
+<blockquote>
+<p>Your answer here</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="practical-2-foreign-direct-investment-fdi-study.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="answers-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

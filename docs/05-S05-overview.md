@@ -9,15 +9,13 @@ editor_options:
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 5
+Section 5: Data Science in Practice 
 :::
-
-**In this section, we will cover the following functions:**
-
 
 ::: ilos
 **Learning Outcomes:**
-
+- 
 :::
 
-# Practical {-}
+
+**In this section, you will practice using the functions below. It is highly recommended that you explore these functions further using the Help tab in your RStudio console.**
