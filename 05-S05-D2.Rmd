@@ -1,0 +1,224 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Demonstration 2
+
+**Foreign Direct Investment (FDI) Study**
+
+*This demonstration has been developed by Dr. Tatjana Kecojevic,
+Lecturer in Social Statistics.*
+
+::: file
+For the tasks below, you will require the **FDI** dataset.  
+
+Click here to download the file:
+<a href="data/FDI.csv" download="FDI.csv"> FDI.csv </a>.
+
+Remember to place your data file in a separate subfolder within your R
+project working directory.
+:::
+
+A business consultancy firm is compiling a major report about
+globalisation. One aspect of this study concerns the determinants of FDI
+undertaken by multi-national enterprises. Relevant information from a
+sample of 60 multi-national companies that undertook significant
+investment in overseas projects was made available as follows:
+
++---------------+----------------------------------------------------+
+| Variable Name | Variable Description                               |
++:=============:+:==================================================:+
+| FDI           | Value of FDI undertaken, in £ millions, by          |
+|               | investing company                                  |
++---------------+----------------------------------------------------+
+| GDP_Cap       | GDP per capita, £000s, in the country receiving    |
+|               | the investment                                     |
++---------------+----------------------------------------------------+
+| Gr_rate       | The economic growth rate, in %-terms, in the       |
+|               | country receiving the investment                   |
++---------------+----------------------------------------------------+
+| ROC           | The average return on capital invested, in         |
+|               | %-terms, in the country receiving the investment   |
++---------------+----------------------------------------------------+
+| Stable        | The political stability of the country receiving   |
+|               | the investment as measured by the number of        |
+|               | changes in government over the past 25 years       |
++---------------+----------------------------------------------------+
+| Infra         | Infrastructure facilities (eg transport,           |
+|               | communications) in the country receiving the       |
+|               | investment                                         |
+|               |                                                    |
+|               | Coded: 1 = basic infrastructure 2 = good           |
+|               | infrastructure                                     |
++---------------+----------------------------------------------------+
+| Trade         | The openness to trade of the country receiving the |
+|               | investment                                         |
+|               |                                                    |
+|               | Coded: 1 = trade tightly controlled 2 = some       |
+|               | restrictions on trade 3 = free trade               |
++---------------+----------------------------------------------------+
+
+This is a multiple regression type of the problem; FDI is the key
+response variable as this study concerns the determinants of FDI
+undertaken by multi-national enterprises.
+
+The model is defined as $Y = b_0 + b_1x_1 + b_2x_2 + ... + b_kx_k + e$,
+for the general $k$ explanatory variable model and where e is also known
+as the error term $e ∼ N(0,\sigma^2)$, with the error term from a normal
+distribution with a mean of $0$, and a variance of $\sigma^2$.
+
+Based on prior knowledge, we make the assumption that GDP_Cap, Gr_rate,
+ROC, Infra, and Trade have positive relationships with FDI, whilst
+Stable has a negative relationship with FDI.
+
+We will use our best fit model to predict FDI for the following information:  *country X receiving the investment has GDP per capita of 11.1 and Gr_rate per capita of 3.05; The average return on capital invested is 20.5%; There were 11 changes of government over the past 25 years and country X has good infrastructure with some restrictions on trade.* 
+
+Let's import the data into R.
+
+```{r}
+mydataq1 <- read.csv("data/FDI.csv", header = T) 
+```
+
+Now let's get a glimpse of the data. As you know, there are many ways to
+do that, such as, for example, using the tidyverse `glimpse` function.
+This is quite a handy function because it also tells us more about the
+class of each variable. We can see that although **Infra** and **Trade**
+categorical, these are coded as integers.
+
+```{r}
+glimpse(mydataq1)
+```
+
+We therefore need to transform them into factors.
+
+```{r}
+mydataq1 <- mydataq1 %>%
+  mutate(Infra = as_factor(Infra),
+         Trade = as_factor(Trade)
+         )
+```
+
+We can then explore all variables in the dataset as pairs using a matrix
+of plots. Among many interesting features, we can note quite strong
+correlations among pairs of variables which suggest the presence of
+multicollinearity: GDP_Cap and ROC, Infra and GDP_Cap, Infra and ROC,
+and Infra and Gr_rate.
+
+```{r}
+GGally::ggpairs(mydataq1)
+```
+
+Ok, so our initial model is:
+
+$FDI = b_0 + b_1GDP\_Cap + b_2Gr\_rate + b_3ROC – b_4Stable + b_5Infra + b_6Trade + e$
+
+where **Infra** and **Stable** are dummy variables.
+
+We can have a look at how these two dummy variables are used in the
+model by using the `contrasts()` function from base R.
+
+The **Infra** variable is coded as *1 = basic infrastructure* and *2 =
+good infrastructure*. Since this is a binary variable, there will be one
+reference category and a single dummy variable.
+
+```{r}
+contrasts(Infra)
+```
+
+The **Trade** variable is coded as *1 = trade tightly* and *2 = some
+restrictions on trade* and *2 = some restrictions on trade*. Since this
+is variable with three categories, there will be one reference category
+and two dummy variables.
+
+```{r}
+contrasts(Trade)
+```
+
+Let's now fit our multiple regression model.
+
+```{r}
+m1 <- lm(FDI ~ GDP_Cap + Gr_rate + ROC + Stable + Infra + Trade)
+```
+
+And explore the results.
+
+```{r}
+summary(m1)
+```
+
+The results provide us with several pieces of important information. We
+initially assumed that the relationship between Gr_rate and FDI and
+Infra and FDI are positive. However, we can see that the estimated
+coefficients are negative. Also, there are several variables that are
+not statistically significant. The **ROC** variable has the highest
+p-value. Overall, the model appears to be a good fit given that 74.81% of variability is being explained. Also, make a note of the adjusted r-squared value which is 71.42 % (as the name implies, this measure adjusts the r-squared value according to the number of predictors in the model).  
+
+Ok, so given the evidence of multicollinearity from earlier and given
+the lack of statistical significance, we can proceed to remove the
+variable with the largest p-value (so the **ROC**) variable and refit
+the model.
+
+```{r}
+m2 <- lm(FDI ~ GDP_Cap + Gr_rate + Stable + Infra + Trade)
+
+# or 
+
+m2 <- update(m1,~. - ROC) 
+```
+
+Now, we see that the explained variability is the same as in model 1 (74.81%). However, the adjusted R-squared has increased slightly (from 71.4% to about 72%).
+
+```{r}
+summary(m2)
+```
+
+We can observe that the **Infra** variable has the largest p-value and,
+as before with the **ROC** variable, we remove it and refit the model by
+removing the least significant term.
+
+```{r}
+m3 <- update(m2,~. - Infra) 
+```
+
+The r-squared value has decreased slightly from 74.81% to 74.8. But, again, we see that the adjusted R-squared increased from about 72% in model 2 to about 72.5%.
+
+```{r}
+summary(m3)
+```
+
+The **Gr_rate** variable has the largest p-value and, as before, we
+remove it and refit the model by removing the least significant term.
+
+```{r}
+m4 <- update(m3,~. - Gr_rate) 
+```
+
+Finally, we obtain a model where all coefficients are statistically
+significant (although the **Stable** is significant at an $\alpha$ level
+of 0.05). We see that the r-squared value has again decreased slightly to 74.79% but the explained variability is highest for this model, about 73% (the adjusted r-squared penalises the addition of predictors that are non-significant; since we removed these, the value increased). 
+
+Overall, the explained variability is still about 75% (the decrease across the models was extremely small). 
+
+```{r}
+summary(m4)
+```
+
+Now, we can specify the model as:
+
+$FDI = 189.4274 + 0.9109*GDP_Cap - 0.5411*Stable + 0.0000*Trade1$   
+                                                  $4.8837*Trade2$                      
+                                                  $5.9368*Trade3$  
+
+
+
+Finally, we use our best fit model to predict FDI for the following information: *country X receiving the investment has GDP per capita of 11.1 and Gr_rate per capita of 3.05; The average return on capital invested is 20.5%; There were 11 changes of government over the past 25 years and country X has good infrastructure with some restrictions on trade.*   
+
+$FDI = 189.4274 + 0.9109*11.1 - 0.5411*11 + 4.8837$
+
+```{r}
+189.4274 + 0.9109*11.1 - 0.5411*11 + 4.8837
+```
+
+Given that our final model (model 4) explains about 75% of the variability, we can conclude that our prediction of 198.47 is a fairly good one. 

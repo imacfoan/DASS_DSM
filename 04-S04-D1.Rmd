@@ -4,7 +4,7 @@ editor_options:
     wrap: 72
 ---
 
-# Demonstration 1 {-}
+# Demonstration 1: Cross-validation {-}
 
 So far, we have established the importance of training and test data and you now should have a robust understanding of the differences between training and test error rates in relation to model performance. However, several challenges remain and these include:
 

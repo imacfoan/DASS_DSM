@@ -4,12 +4,11 @@ editor_options:
     wrap: 72
 ---
 
-# Demonstration 1 {-}
+# Demonstration: Classification Problems {-}
 
 In this demonstration, you will learn how to address classification problems using logistic regression, discriminant analysis, KNN, and Naive Bayes.
 
-You will need the **Weekly** dataset from the core textbook (James et. al 2021). This dataset is part of the `ISRL2` package. By loading the package, the
-**Weekly** dataset loads automatically.
+You will need the **Weekly** dataset, part of the `ISRL2` package. By loading the package, the **Weekly** dataset loads automatically.
 
 In addition to the `ISLR2` package, will also require the following:  
 

@@ -1,0 +1,278 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Demonstration 1: {.unnumbered}
+
+*This demonstration has been developed by Dr. Tatjana Kecojevic,
+Lecturer in Social Statistics.*
+
+::: file
+For the tasks below, you will require the **Salaries** dataset. This
+dataset is part of the `carData` R package.
+
+To access the dataset, load the `carData` package (make sure to first
+install the package).
+:::
+
+**Salaries** is a data frame with 397 observations. This dataset
+consists of nine-month academic salary for Assistant Professors,
+Associate Professors and Professors in a college in the U.S to monitor
+salary differences between male and female faculty members. The data are
+from 2008-09.
+
+There are six variables:
+
+|                   |                                                                              |
+|-------------------|-----------------------------------------------------|
+| **Variable Name** | **Variable Description**                                                     |
+| rank              | a factor with levels = AssocProf, AsstProf, Prof                             |
+| discipline        | a factor with levels A = theoretical departments) or B = applied departments |
+| yrs.since.phd     | years since PhD                                                              |
+| yrs.service       | years of service                                                             |
+| sex               | a factor with levels Female and Male                                         |
+| salary            | nine-month salary, in dollars.                                               |
+
+Let's first load the packages:
+
+```{r warning = FALSE, message = FALSE}
+library(carData)
+library(tidyverse)
+```
+
+Once you load the `carData` package, the **Salaries** dataset will be
+'loaded' too and can be accessed without needing to assign it to a
+separate object.
+
+```{r}
+head(Salaries)
+```
+
+As usual, we can access variables within the dataset by indexing them.
+
+```{r}
+Salaries$salary
+```
+
+However, if we want to access variables within the dataset without
+needing to index them we can use the base R `attach()` function.
+
+```{r}
+attach(Salaries)
+```
+
+So now, we can call on the variables from the dataset directly.
+
+```{r}
+salary
+```
+
+Now let's return to exploring the data.
+
+```{r}
+glimpse(Salaries)
+```
+
+We can see that **rank**, **discipline**, and **sex** are already coded
+as factors. The variables **yrs.since.phd** and **yrs.service** are
+coded as integers.
+
+Our viewpoint states a belief that more years in service will cause
+higher salary. Let us focus on the mechanics of fitting the model. First
+we will examine the impact of each individual variable to see if our
+view point is correct.
+
+We start off with **salary** vs **yrs.since.phd**.
+
+```{r}
+summary(Salaries)
+```
+
+Both explanatory variables, **yrs.since.phd** and **yrs.service** have
+mean and median values that are close to each other. However, the mean
+and median for the **salary** variable are quite different.
+
+We can better visualise this using boxplots.
+
+```{r}
+boxplot(Salaries[,3:4], col = c('brown1', 'steelblue'), main = "Distribution")
+means <- sapply(Salaries[,3:4], mean)
+points(means, col = "gray", pch = 22, lwd = 7)
+```
+
+```{r}
+boxplot(salary, col = c('chartreuse4'), main = "Distributions")
+means <- sapply(salary, mean)
+points(means, col = "gray", pch = 22, lwd = 7)
+```
+
+We notice that a number of observations are identified as the outliers
+that are pulling the mean away from the median.
+
+Let's consider the relationship between **yrs.since.phd** and **salary**
+using a scatterplot onto which we add a line of best fit. Note that
+since we 'attached' the dataset, we can call on the variables without
+need to index or specify the dataset by name.
+
+```{r}
+plot(salary ~ yrs.since.phd, cex =.6, main = "The Relationship between Nine-month Salary and Years since PhD", xlab = "Years since PhD", ylab = "Nine-month Salary (dollars)")
+
+model1 <- lm(salary ~ yrs.since.phd)
+
+abline(model1, lty = 2, col = 2)
+```
+
+The results show that there is a positive relationship between the
+nine-month salary and years since PhD completion. The relationship is on
+a weak side, with only 17.60% of variability in the response variable
+**salary** being explained by the predictor **yrs.since.phd**.
+
+```{r}
+summary(model1)
+```
+
+Let's find out more about the relationship between nine-month salary and
+years of service.
+
+```{r}
+plot(salary ~ yrs.service, cex =.6, main = "The Relationship between Nine-month Salary and Years of Service", xlab = "Years of Service", ylab = "Nine-month Salary (dollars)")
+
+model2 <- lm(salary ~ yrs.service)
+
+abline(model1, lty = 2, col = 2)
+```
+
+```{r}
+summary(model2)
+```
+
+The plot confirms our viewpoint and again we have a positive
+relationship between salary and years of service. This variable explains
+around 11 % of variability in the response variable.
+
+Individually, the two variables do not seem to explain much of the
+variability in the response.  
+
+Therefore, let's consider both and so we define our multiple linear
+regression model as:
+
+$y = b_0 + b_1x_1 + b_2x_2 + e$
+
+```{r}
+mr_model <- lm(salary ~ yrs.since.phd + yrs.service)
+summary(mr_model)
+```
+
+**Test a): Does the fitted model make sense?**\
+*Do the estimated coefficients have the correct sign?*
+
+The estimated model of best fit is:
+
+$salary = 89912.2 + 1562.9yrs.since.phd − 629.1yrs.service$
+
+We notice that when put together with the variable **yrs.since.phd**,
+the **yrs.service** changes sign, which is not in line with our
+previously drawn conclusion and the viewpoint. This is the result of
+*collinearity*, which you already know happens when two predictors are
+correlated with one another.
+
+(Multi)collinearity can be identified when:
+
+-   a regression coefficient $x_i$ is not significant even though,
+    theoretically, it should be highly correlated with the response
+    variable $y$;\
+-   by adding or deleting an $x_i$ variable, the regression coefficients
+    change dramatically;\
+-   we get a negative regression coefficient when the response should
+    increase along with $x_i$, or we get a positive regression
+    coefficient when the response should decrease as $x_i$ increases;\
+-   the explanatory variables have high pairwise correlations.
+
+Removing one of the correlated explanatory variables usually doesn’t
+drastically reduce the $R^2/R^2adj$.
+
+With this model, using **yrs.since.phd** and **yrs.service** variables
+we have managed to explain just over 18% of variation in the variable
+**salary**.
+
+**Test b): Overall, is the model a good fit?**
+
+$R^2adj$ is 18.42%, putting this model on the weaker side. However let
+us go through the formal procedure and set the hypothesis below. The
+null hypothesis of will be tested using the F-test:
+
+-   $H_0:R^2=0$ (that is, the set of explanatory variables are
+    insignificant, or in other words: useless)\
+-   $H_1:R^2>0$ (that is, at least one explanatory variable is
+    significant, or in other words: important)
+
+The decision rule is:   
+
+-   if $F_{calc} < F_{crit} => H_0$  
+-   if $F_{calc} > F_{crit} => H_1$
+
+Examining the sample evidence we get that $F_{calc} = 45.71$. The value
+for $F_{crit}$ can be found in the statistical tables for $df1 = 2$ and
+$df2 = 394$.
+
+```{r}
+qf(0.95, 2, 394)
+```
+
+Since $F_{crit} = 3.02 < F_{calc} => H_1$, this implies that this is a valid
+model.
+
+As pointed out earlier, this formal test involves a rather weak alternative hypothesis, which says only that $R^2$ is significantly bigger than 0. With $R^2$ of around 18% we can conclude that this is a useful model worthy of further investigation.  
+
+**Individually, are the explanatory variables important?**
+Stage two of our model validation procedure is to examine the importance of any one single explanatory variable used in the fitted model. We have pointed out that just because a set of variables is important does not necessarily mean that each individual variable is contributing towards explaining the behaviour of $Y$.
+
+We will conduct a set of t-tests to check the validity of each variable one at a time.   
+
+**$b_1$: previously we concluded that the relationship between $x_1$ and $y$ is positive (in the fitted model parameter $b_1$  is positive). Consequently, we will use one tail t-test to assess the importance of $x_1$ in the model.**  
+
+$H_0:b_1 = 0$ (explanatory variable $i$ is not important)  
+
+$H_1:b_1 > 0$ (explanatory variable $i$ has a positive influence)
+
+whereby: 
+
+- If $t_{calc} < t_{crit} => H_0$   
+
+- If $t_{calc} > t_{crit} => H_1$  
+
+```{r}
+qt(0.95, 394)
+```
+
+$t_{calc} = 6.09 > t_{crit} = 1.65 => H_1$, which implies that we need to keep x1 in the model. 
+
+
+**$b_2$: previously we concluded that the relationship between $x_2$ and y is a positive relationship, but the model is suggesting that it is negative. We will stick to our belief and test if the coefficient should be positive:**
+
+$H_0:b_2 = 0$ (explanatory variable $i$ is not important)  
+
+$H_1:b_2 > 0$ (explanatory variable $i$ has a positive influence)  
+
+whereby: 
+
+- If $t_{calc} < t_{crit} => H_0$   
+
+- If $t_{calc} > t_{crit} => H_1$  
+
+```{r}
+qt(0.95, 394)
+```
+
+$t_{calc} = −2.47 < t_{crit} = 1.65 => H_0$ therefore, the variable should be removed from the model.
+
+The increase in the explain variation of around 1% is negligible in comparison to the best one factor model $salary = f(yrs.since.phd) + e$. Hence, we will put forward the model $salary = 91719 + 985yrs.since.phd$ as our best fitted model.  
+
+Alternatively you could test for the coefficient not being equal to zero and make a conclusion for yourself if this would be a sensible thing to do.  
+
+In this example, we have adopted a 'standard' regression approach that assumes modelling a relationship between quantitative response and only quantitative predictors. However, often when building multiple regression models, we do not want to be limited to just quantitative predictors.   
+
+
+
