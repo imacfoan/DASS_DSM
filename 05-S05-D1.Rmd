@@ -197,7 +197,7 @@ The ProPublica analysis notes: "Judges are often presented with two sets of scor
 
 Plot the distribution of `decile_score` for males and for females. To what extent do these distributions differ?
 
-```{r}
+```{r warning = FALSE, message = FALSE}
 # plot decile score by sex
 compas |>
   ggplot(aes(x = decile_score)) +

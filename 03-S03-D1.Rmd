@@ -4,7 +4,7 @@ editor_options:
     wrap: 72
 ---
 
-# Demonstration: Classification Problems {-}
+# Demonstration 1: Classification Problems {-}
 
 In this demonstration, you will learn how to address classification problems using logistic regression, discriminant analysis, KNN, and Naive Bayes.
 

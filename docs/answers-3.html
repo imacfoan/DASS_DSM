@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Answers | R Notebook</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70033." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Answers | R Notebook" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Answers | R Notebook" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="demonstration-propublicas-analysis-of-the-compas-tool.html"/>
+<link rel="next" href="overview-5.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><i class="fa fa-check"></i>Demonstration: A more in-depth consideration of model accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-3-the-quality-of-red-bordeaux-vintages.html"><a href="practical-3-the-quality-of-red-bordeaux-vintages.html"><i class="fa fa-check"></i>Practical 3: The Quality of Red Bordeaux Vintages</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-3-the-quality-of-red-bordeaux-vintages-1"><i class="fa fa-check"></i>Practical 3: The Quality of Red Bordeaux Vintages</a></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html"><i class="fa fa-check"></i>Demonstration: Classification Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-classification-problems.html"><a href="demonstration-classification-problems.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html"><i class="fa fa-check"></i>Practical: Predicting a company’s bankruptcy</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#importing-the-data"><i class="fa fa-check"></i>Importing the data</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#loading-required-packages"><i class="fa fa-check"></i>Loading required packages</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#correlation-matrix-and-plot-1"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#explaining-the-logit"><i class="fa fa-check"></i>Explaining the Logit</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#linear-discriminant-analysis-1"><i class="fa fa-check"></i>Linear Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-8"><i class="fa fa-check"></i>TASK 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-8"><i class="fa fa-check"></i>TASK 2</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-3-8"><i class="fa fa-check"></i>TASK 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#quadratic-discriminant-analysis-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-9"><i class="fa fa-check"></i>TASK 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-9"><i class="fa fa-check"></i>TASK 2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#k-nearest-neighbours-1"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-10"><i class="fa fa-check"></i>TASK 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-10"><i class="fa fa-check"></i>TASK 2</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-3-9"><i class="fa fa-check"></i>TASK 3</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-4-8"><i class="fa fa-check"></i>TASK 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#naive-bayes-1"><i class="fa fa-check"></i>Naive Bayes</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-11"><i class="fa fa-check"></i>TASK 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-11"><i class="fa fa-check"></i>TASK 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#practical-predicting-a-companys-bankruptcy-1"><i class="fa fa-check"></i>Practical: Predicting a company’s bankruptcy</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#importing-the-data-1"><i class="fa fa-check"></i>Importing the data</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#loading-required-packages-1"><i class="fa fa-check"></i>Loading required packages</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#correlation-matrix-and-plot-2"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#logistic-regression-1"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#linear-discriminant-analysis-2"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#quadratic-discriminant-analysis-2"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#k-nearest-neighbours-2"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#naive-bayes-2"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html"><i class="fa fa-check"></i>Demonstration 1: Cross-validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#data-and-variables-2"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#the-validation-set-approach"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#k-fold-cross-validation"><i class="fa fa-check"></i><span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html"><i class="fa fa-check"></i>Demonstration 2: Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#data-and-variables-3"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html"><i class="fa fa-check"></i>Practical 1: Academic Salary</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-i"><i class="fa fa-check"></i>Part I</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#exploring-the-data"><i class="fa fa-check"></i>Exploring the data</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-since-phd"><i class="fa fa-check"></i>Salary and Years since PhD</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-of-service"><i class="fa fa-check"></i>Salary and Years of Service</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#the-model"><i class="fa fa-check"></i>The Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-a-does-the-fitted-model-make-sense"><i class="fa fa-check"></i>Test a): Does the fitted model make sense?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-b-overall-is-the-model-a-good-fit"><i class="fa fa-check"></i>Test b): Overall, is the model a good fit?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-c-individually-are-the-explanatory-variables-important"><i class="fa fa-check"></i>Test c): Individually, are the explanatory variables important?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-ii"><i class="fa fa-check"></i>Part II</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#interpreting-coefficients-of-attribute-variables"><i class="fa fa-check"></i>Interpreting coefficients of attribute variables</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-a-multivariate-regression-model"><i class="fa fa-check"></i>Fitting a Multivariate Regression Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-the-model"><i class="fa fa-check"></i>Fitting the Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-foreign-direct-investment-fdi-study.html"><a href="practical-2-foreign-direct-investment-fdi-study.html"><i class="fa fa-check"></i>Practical 2: Foreign Direct Investment (FDI) Study</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html"><i class="fa fa-check"></i>Demonstration: ProPublica’s Analysis of the COMPAS Tool</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#notes-on-the-data"><i class="fa fa-check"></i>Notes on the data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#setup"><i class="fa fa-check"></i>Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-packages"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#load-data"><i class="fa fa-check"></i>Load data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data"><i class="fa fa-check"></i>Inspect data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data"><i class="fa fa-check"></i>Preprocess data</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#inspect-data-again"><i class="fa fa-check"></i>Inspect data again</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#risk-labels"><i class="fa fa-check"></i>Risk labels</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#bias-in-compas"><i class="fa fa-check"></i>Bias in COMPAS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#preprocess-data-for-logistic-regression"><i class="fa fa-check"></i>Preprocess data for logistic regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#estimate-the-logistic-regression-model"><i class="fa fa-check"></i>Estimate the logistic regression model</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#interpret-estimates"><i class="fa fa-check"></i>Interpret estimates</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-1"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#predictive-accuracy"><i class="fa fa-check"></i>Predictive Accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-2"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-propublicas-analysis-of-the-compas-tool.html#exercise-3"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#practical-1-4"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#part-i-1"><i class="fa fa-check"></i>Part I</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#part-ii-1"><i class="fa fa-check"></i>Part II</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#practical-2-4"><i class="fa fa-check"></i>Practical 2</a></li>
+</ul></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html"><i class="fa fa-check"></i>Demonstration 1: K-means Clustering in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages"><i class="fa fa-check"></i>Loading the necessary packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset"><i class="fa fa-check"></i>Profile the Palmer Penguins dataset</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering"><i class="fa fa-check"></i>Preprocess the data for clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering"><i class="fa fa-check"></i>Perform k-means clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters"><i class="fa fa-check"></i>Visualise the clusters</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#tasks"><i class="fa fa-check"></i>👉 TASKS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform"><i class="fa fa-check"></i>TASK 1: How well did k-means clustering perform?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use"><i class="fa fa-check"></i>TASK 2: How many clusters should we use?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars"><i class="fa fa-check"></i>TASK 3: Clustering cars</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html"><i class="fa fa-check"></i>Demonstration 2: Principal Component Analysis in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#load-packages-1"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data"><i class="fa fa-check"></i>Preprocess the world happiness report data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data"><i class="fa fa-check"></i>Profile the happiness data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature"><i class="fa fa-check"></i>Plot happiness score against feature</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features"><i class="fa fa-check"></i>Run PCA using five features</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2"><i class="fa fa-check"></i>Correlations of happiness score with PC1 and PC2</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components"><i class="fa fa-check"></i>Plot first two principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators"><i class="fa fa-check"></i>Regress happiness on the five indicators</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components"><i class="fa fa-check"></i>Visualise happiness against principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component"><i class="fa fa-check"></i>Regress happiness on first principal component</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#task"><i class="fa fa-check"></i>👉 TASK</a></li>
+</ul></li>
+<li class="part"><span><b>Section 8</b></span></li>
+<li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-set"><i class="fa fa-check"></i>Data Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#project-planning-setting-the-stage-for-success"><i class="fa fa-check"></i>Project Planning: Setting the Stage for Success</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-preprocessing"><i class="fa fa-check"></i>Data Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i>Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-selection-and-model-training"><i class="fa fa-check"></i>Model Selection and Model Training</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-evaluation"><i class="fa fa-check"></i>Model Evaluation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-interpretation"><i class="fa fa-check"></i>Model Interpretation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#report-conclusion"><i class="fa fa-check"></i>Report Conclusion</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#key-insights"><i class="fa fa-check"></i>Key Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="your-turn.html"><a href="your-turn.html"><i class="fa fa-check"></i>👉 Your Turn!</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R Notebook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DSM_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="answers-3" class="section level1 unnumbered hasAnchor">
+<h1>Answers<a href="answers-3.html#answers-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="practical-1-4" class="section level2 unnumbered hasAnchor">
+<h2>Practical 1<a href="answers-3.html#practical-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>This practical is based on a demonstration created by Dr. Tatjana Kecojevic, Lecturer in Social Statistics.</em></p>
+<div class="file">
+<p>For the tasks below, you will require the <strong>Salaries</strong> dataset. This
+dataset is part of the <code>carData</code> R package.</p>
+<p>To access the dataset, load the <code>carData</code> package (make sure to first
+install the package).</p>
+<p>You will also require the <code>GGally</code> package; please make sure to install it.</p>
+</div>
+<p><strong>Salaries</strong> is a data frame with 397 observations. This dataset
+consists of nine-month academic salary for Assistant Professors,
+Associate Professors and Professors in a college in the U.S to monitor
+salary differences between male and female faculty members. The data are
+from 2008-09.</p>
+<p>There are six variables:</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="73%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Variable Name</strong></td>
+<td><strong>Variable Description</strong></td>
+</tr>
+<tr class="even">
+<td>rank</td>
+<td>a factor with levels = AssocProf, AsstProf, Prof</td>
+</tr>
+<tr class="odd">
+<td>discipline</td>
+<td>a factor with levels A = theoretical departments) or B = applied departments</td>
+</tr>
+<tr class="even">
+<td>yrs.since.phd</td>
+<td>years since PhD</td>
+</tr>
+<tr class="odd">
+<td>yrs.service</td>
+<td>years of service</td>
+</tr>
+<tr class="even">
+<td>sex</td>
+<td>a factor with levels Female and Male</td>
+</tr>
+<tr class="odd">
+<td>salary</td>
+<td>nine-month salary, in dollars.</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s first load the packages:</p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="answers-3.html#cb462-1" tabindex="-1"></a><span class="fu">library</span>(carData)</span>
+<span id="cb462-2"><a href="answers-3.html#cb462-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb462-3"><a href="answers-3.html#cb462-3" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code></pre></div>
+<p>Once you load the <code>carData</code> package, the <strong>Salaries</strong> dataset will be
+‘loaded’ too and can be accessed without needing to assign it to a
+separate object.</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="answers-3.html#cb463-1" tabindex="-1"></a><span class="fu">head</span>(Salaries)</span></code></pre></div>
+<pre><code>##        rank discipline yrs.since.phd yrs.service  sex salary
+## 1      Prof          B            19          18 Male 139750
+## 2      Prof          B            20          16 Male 173200
+## 3  AsstProf          B             4           3 Male  79750
+## 4      Prof          B            45          39 Male 115000
+## 5      Prof          B            40          41 Male 141500
+## 6 AssocProf          B             6           6 Male  97000</code></pre>
+<p>As usual, we can access variables within the dataset by indexing them.</p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="answers-3.html#cb465-1" tabindex="-1"></a>Salaries<span class="sc">$</span>salary</span></code></pre></div>
+<pre><code>##   [1] 139750 173200  79750 115000 141500  97000 175000 147765 119250 129000
+##  [11] 119800  79800  77700  78000 104800 117150 101000 103450 124750 137000
+##  [21]  89565 102580  93904 113068  74830 106294 134885  82379  77000 118223
+##  [31] 132261  79916 117256  80225  80225  77000 155750  86373 125196 100938
+##  [41] 146500  93418 101299 231545  94384 114778  98193 151768 140096  70768
+##  [51] 126621 108875  74692 106639 103760  83900 117704  90215 100135  75044
+##  [61]  90304  75243 109785 103613  68404 100522 101000  99418 111512  91412
+##  [71] 126320 146856 100131  92391 113398  73266 150480 193000  86100  84240
+##  [81] 150743 135585 144640  88825 122960 132825 152708  88400 172272 107008
+##  [91]  97032 105128 105631 166024 123683  84000  95611 129676 102235 106689
+## [101] 133217 126933 153303 127512  83850 113543  82099  82600  81500 131205
+## [111] 112429  82100  72500 104279 105000 120806 148500 117515  72500  73500
+## [121] 115313 124309  97262  62884  96614  78162 155500  72500 113278  73000
+## [131]  83001  76840  77500  72500 168635 136000 108262 105668  73877 152664
+## [141] 100102  81500 106608  89942 112696 119015  92000 156938 144651  95079
+## [151] 128148  92000 111168 103994  92000 118971 113341  88000  95408 137167
+## [161]  89516 176500  98510  89942  88795 105890 167284 130664 101210 181257
+## [171]  91227 151575  93164 134185 105000 111751  95436 100944 147349  92000
+## [181] 142467 141136 100000 150000 101000 134000 103750 107500 106300 153750
+## [191] 180000 133700 122100  86250  90000 113600  92700  92000 189409 114500
+## [201]  92700 119700 160400 152500 165000  96545 162200 120000  91300 163200
+## [211]  91000 111350 128400 126200 118700 145350 146000 105350 109650 119500
+## [221] 170000 145200 107150 129600  87800 122400  63900  70000  88175 133900
+## [231]  91000  73300 148750 117555  69700  81700 114000  63100  77202  96200
+## [241]  69200 122875 102600 108200  84273  90450  91100 101100 128800 204000
+## [251] 109000 102000 132000  77500 116450  83000 140300  74000  73800  92550
+## [261]  88600 107550 121200 126000  99000 134800 143940 104350  89650 103700
+## [271] 143250 194800  73000  74000  78500  93000 107200 163200 107100 100600
+## [281] 136500 103600  57800 155865  88650  81800 115800  85000 150500  74000
+## [291] 174500 168500 183800 104800 107300  97150 126300 148800  72300  70700
+## [301]  88600 127100 170500 105260 144050 111350  74500 122500  74000 166800
+## [311]  92050 108100  94350 100351 146800  84716  71065  67559 134550 135027
+## [321] 104428  95642 126431 161101 162221  84500 124714 151650  99247 134778
+## [331] 192253 116518 105450 145098 104542 151445  98053 145000 128464 137317
+## [341] 106231 124312 114596 162150 150376 107986 142023 128250  80139 144309
+## [351] 186960  93519 142500 138000  83600 145028  88709 107309 109954  78785
+## [361] 121946 109646 138771  81285 205500 101036 115435 108413 131950 134690
+## [371]  78182 110515 109707 136660 103275 103649  74856  77081 150680 104121
+## [381]  75996 172505  86895 105000 125192 114330 139219 109305 119450 186023
+## [391] 166605 151292 103106 150564 101738  95329  81035</code></pre>
+<p>However, if we want to access variables within the dataset without
+needing to index them we can use the base R <code>attach()</code> function.</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="answers-3.html#cb467-1" tabindex="-1"></a><span class="fu">attach</span>(Salaries)</span></code></pre></div>
+<p>So now, we can call on the variables from the dataset directly.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="answers-3.html#cb468-1" tabindex="-1"></a>salary</span></code></pre></div>
+<pre><code>##   [1] 139750 173200  79750 115000 141500  97000 175000 147765 119250 129000
+##  [11] 119800  79800  77700  78000 104800 117150 101000 103450 124750 137000
+##  [21]  89565 102580  93904 113068  74830 106294 134885  82379  77000 118223
+##  [31] 132261  79916 117256  80225  80225  77000 155750  86373 125196 100938
+##  [41] 146500  93418 101299 231545  94384 114778  98193 151768 140096  70768
+##  [51] 126621 108875  74692 106639 103760  83900 117704  90215 100135  75044
+##  [61]  90304  75243 109785 103613  68404 100522 101000  99418 111512  91412
+##  [71] 126320 146856 100131  92391 113398  73266 150480 193000  86100  84240
+##  [81] 150743 135585 144640  88825 122960 132825 152708  88400 172272 107008
+##  [91]  97032 105128 105631 166024 123683  84000  95611 129676 102235 106689
+## [101] 133217 126933 153303 127512  83850 113543  82099  82600  81500 131205
+## [111] 112429  82100  72500 104279 105000 120806 148500 117515  72500  73500
+## [121] 115313 124309  97262  62884  96614  78162 155500  72500 113278  73000
+## [131]  83001  76840  77500  72500 168635 136000 108262 105668  73877 152664
+## [141] 100102  81500 106608  89942 112696 119015  92000 156938 144651  95079
+## [151] 128148  92000 111168 103994  92000 118971 113341  88000  95408 137167
+## [161]  89516 176500  98510  89942  88795 105890 167284 130664 101210 181257
+## [171]  91227 151575  93164 134185 105000 111751  95436 100944 147349  92000
+## [181] 142467 141136 100000 150000 101000 134000 103750 107500 106300 153750
+## [191] 180000 133700 122100  86250  90000 113600  92700  92000 189409 114500
+## [201]  92700 119700 160400 152500 165000  96545 162200 120000  91300 163200
+## [211]  91000 111350 128400 126200 118700 145350 146000 105350 109650 119500
+## [221] 170000 145200 107150 129600  87800 122400  63900  70000  88175 133900
+## [231]  91000  73300 148750 117555  69700  81700 114000  63100  77202  96200
+## [241]  69200 122875 102600 108200  84273  90450  91100 101100 128800 204000
+## [251] 109000 102000 132000  77500 116450  83000 140300  74000  73800  92550
+## [261]  88600 107550 121200 126000  99000 134800 143940 104350  89650 103700
+## [271] 143250 194800  73000  74000  78500  93000 107200 163200 107100 100600
+## [281] 136500 103600  57800 155865  88650  81800 115800  85000 150500  74000
+## [291] 174500 168500 183800 104800 107300  97150 126300 148800  72300  70700
+## [301]  88600 127100 170500 105260 144050 111350  74500 122500  74000 166800
+## [311]  92050 108100  94350 100351 146800  84716  71065  67559 134550 135027
+## [321] 104428  95642 126431 161101 162221  84500 124714 151650  99247 134778
+## [331] 192253 116518 105450 145098 104542 151445  98053 145000 128464 137317
+## [341] 106231 124312 114596 162150 150376 107986 142023 128250  80139 144309
+## [351] 186960  93519 142500 138000  83600 145028  88709 107309 109954  78785
+## [361] 121946 109646 138771  81285 205500 101036 115435 108413 131950 134690
+## [371]  78182 110515 109707 136660 103275 103649  74856  77081 150680 104121
+## [381]  75996 172505  86895 105000 125192 114330 139219 109305 119450 186023
+## [391] 166605 151292 103106 150564 101738  95329  81035</code></pre>
+<div id="part-i-1" class="section level3 unnumbered hasAnchor">
+<h3>Part I<a href="answers-3.html#part-i-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="exploring-the-data-1" class="section level4 unnumbered hasAnchor">
+<h4>Exploring the data<a href="answers-3.html#exploring-the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s begin by exploring the dataset.</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="answers-3.html#cb470-1" tabindex="-1"></a><span class="fu">glimpse</span>(Salaries)</span></code></pre></div>
+<pre><code>## Rows: 397
+## Columns: 6
+## $ rank          &lt;fct&gt; Prof, Prof, AsstProf, Prof, Prof, AssocProf, Prof, Prof,…
+## $ discipline    &lt;fct&gt; B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, A, A,…
+## $ yrs.since.phd &lt;int&gt; 19, 20, 4, 45, 40, 6, 30, 45, 21, 18, 12, 7, 1, 2, 20, 1…
+## $ yrs.service   &lt;int&gt; 18, 16, 3, 39, 41, 6, 23, 45, 20, 18, 8, 2, 1, 0, 18, 3,…
+## $ sex           &lt;fct&gt; Male, Male, Male, Male, Male, Male, Male, Male, Male, Fe…
+## $ salary        &lt;int&gt; 139750, 173200, 79750, 115000, 141500, 97000, 175000, 14…</code></pre>
+<p>We can see that <strong>rank</strong>, <strong>discipline</strong>, and <strong>sex</strong> are already coded
+as factors. The variables <strong>yrs.since.phd</strong> and <strong>yrs.service</strong> are
+coded as integers.</p>
+<p>Our viewpoint states a belief that more years in service will cause
+higher salary. Let us focus on the mechanics of fitting the model. First
+we will examine the impact of each individual variable to see if our
+view point is correct.</p>
+<p>We start off with <strong>salary</strong> vs <strong>yrs.since.phd</strong>.</p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="answers-3.html#cb472-1" tabindex="-1"></a><span class="fu">summary</span>(Salaries)</span></code></pre></div>
+<pre><code>##         rank     discipline yrs.since.phd    yrs.service        sex     
+##  AsstProf : 67   A:181      Min.   : 1.00   Min.   : 0.00   Female: 39  
+##  AssocProf: 64   B:216      1st Qu.:12.00   1st Qu.: 7.00   Male  :358  
+##  Prof     :266              Median :21.00   Median :16.00               
+##                             Mean   :22.31   Mean   :17.61               
+##                             3rd Qu.:32.00   3rd Qu.:27.00               
+##                             Max.   :56.00   Max.   :60.00               
+##      salary      
+##  Min.   : 57800  
+##  1st Qu.: 91000  
+##  Median :107300  
+##  Mean   :113706  
+##  3rd Qu.:134185  
+##  Max.   :231545</code></pre>
+<p>Both explanatory variables, <strong>yrs.since.phd</strong> and <strong>yrs.service</strong> have
+mean and median values that are close to each other. However, the mean
+and median for the <strong>salary</strong> variable are quite different.</p>
+<p>We can better visualise this using boxplots.</p>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="answers-3.html#cb474-1" tabindex="-1"></a><span class="fu">boxplot</span>(Salaries[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&#39;brown1&#39;</span>, <span class="st">&#39;steelblue&#39;</span>), <span class="at">main =</span> <span class="st">&quot;Distribution&quot;</span>)</span>
+<span id="cb474-2"><a href="answers-3.html#cb474-2" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">sapply</span>(Salaries[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], mean)</span>
+<span id="cb474-3"><a href="answers-3.html#cb474-3" tabindex="-1"></a><span class="fu">points</span>(means, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">pch =</span> <span class="dv">22</span>, <span class="at">lwd =</span> <span class="dv">7</span>)</span></code></pre></div>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="answers-3.html#cb475-1" tabindex="-1"></a><span class="fu">boxplot</span>(salary, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&#39;chartreuse4&#39;</span>), <span class="at">main =</span> <span class="st">&quot;Distributions&quot;</span>)</span>
+<span id="cb475-2"><a href="answers-3.html#cb475-2" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">sapply</span>(salary, mean)</span>
+<span id="cb475-3"><a href="answers-3.html#cb475-3" tabindex="-1"></a><span class="fu">points</span>(means, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">pch =</span> <span class="dv">22</span>, <span class="at">lwd =</span> <span class="dv">7</span>)</span></code></pre></div>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="question">
+<p>What do the box plots indicate?</p>
+</div>
+<div class="answers">
+<p>We notice that a number of observations are identified as the outliers
+that are pulling the mean away from the median.</p>
+</div>
+</div>
+<div id="salary-and-years-since-phd-1" class="section level4 unnumbered hasAnchor">
+<h4>Salary and Years since PhD<a href="answers-3.html#salary-and-years-since-phd-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s now consider the relationship between <strong>yrs.since.phd</strong> and <strong>salary</strong>
+using a scatterplot onto which we add a line of best fit. Note that
+since we ‘attached’ the dataset, we can call on the variables without
+need to index or specify the dataset by name.</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="answers-3.html#cb476-1" tabindex="-1"></a><span class="fu">plot</span>(salary <span class="sc">~</span> yrs.since.phd, <span class="at">cex =</span>.<span class="dv">6</span>, <span class="at">main =</span> <span class="st">&quot;The Relationship between Nine-month Salary and Years since PhD&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Years since PhD&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Nine-month Salary (dollars)&quot;</span>)</span>
+<span id="cb476-2"><a href="answers-3.html#cb476-2" tabindex="-1"></a></span>
+<span id="cb476-3"><a href="answers-3.html#cb476-3" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.since.phd)</span>
+<span id="cb476-4"><a href="answers-3.html#cb476-4" tabindex="-1"></a></span>
+<span id="cb476-5"><a href="answers-3.html#cb476-5" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="answers-3.html#cb477-1" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ yrs.since.phd)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -84171 -19432  -2858  16086 102383 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    91718.7     2765.8  33.162   &lt;2e-16 ***
+## yrs.since.phd    985.3      107.4   9.177   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27530 on 395 degrees of freedom
+## Multiple R-squared:  0.1758, Adjusted R-squared:  0.1737 
+## F-statistic: 84.23 on 1 and 395 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="question">
+<p>What do the results indicate?</p>
+</div>
+<div class="answers">
+<p>The results show that there is a positive relationship between the
+nine-month salary and years since PhD completion. The relationship is on
+a weak side, with only 17.60% of variability in the response variable
+<strong>salary</strong> being explained by the predictor <strong>yrs.since.phd</strong>.</p>
+</div>
+</div>
+<div id="salary-and-years-of-service-1" class="section level4 unnumbered hasAnchor">
+<h4>Salary and Years of Service<a href="answers-3.html#salary-and-years-of-service-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s find out more about the relationship between nine-month salary and
+years of service.</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="answers-3.html#cb479-1" tabindex="-1"></a><span class="fu">plot</span>(salary <span class="sc">~</span> yrs.service, <span class="at">cex =</span>.<span class="dv">6</span>, <span class="at">main =</span> <span class="st">&quot;The Relationship between Nine-month Salary and Years of Service&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Years of Service&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Nine-month Salary (dollars)&quot;</span>)</span>
+<span id="cb479-2"><a href="answers-3.html#cb479-2" tabindex="-1"></a></span>
+<span id="cb479-3"><a href="answers-3.html#cb479-3" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.service)</span>
+<span id="cb479-4"><a href="answers-3.html#cb479-4" tabindex="-1"></a></span>
+<span id="cb479-5"><a href="answers-3.html#cb479-5" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="answers-3.html#cb480-1" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ yrs.service)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -81933 -20511  -3776  16417 101947 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  99974.7     2416.6   41.37  &lt; 2e-16 ***
+## yrs.service    779.6      110.4    7.06 7.53e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 28580 on 395 degrees of freedom
+## Multiple R-squared:  0.1121, Adjusted R-squared:  0.1098 
+## F-statistic: 49.85 on 1 and 395 DF,  p-value: 7.529e-12</code></pre>
+<div class="question">
+<p>What do the plot and model results indicate?</p>
+</div>
+<div class="answers">
+<p>The plot confirms our viewpoint and again we have a positive
+relationship between salary and years of service. This variable explains
+around 11 % of variability in the response variable.</p>
+<p>Individually, the two variables do not seem to explain much of the
+variability in the response.</p>
+</div>
+</div>
+<div id="the-model-1" class="section level4 unnumbered hasAnchor">
+<h4>The Model<a href="answers-3.html#the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s consider both variables (years of service and years since PhD) and whether these help explain salary. We define our multiple linear regression model as:</p>
+<p><span class="math display">\[y = b_0 + b_1x_1 + b_2x_2 + e\]</span></p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="answers-3.html#cb482-1" tabindex="-1"></a>mr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.since.phd <span class="sc">+</span> yrs.service)</span>
+<span id="cb482-2"><a href="answers-3.html#cb482-2" tabindex="-1"></a><span class="fu">summary</span>(mr_model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ yrs.since.phd + yrs.service)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -79735 -19823  -2617  15149 106149 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    89912.2     2843.6  31.620  &lt; 2e-16 ***
+## yrs.since.phd   1562.9      256.8   6.086 2.75e-09 ***
+## yrs.service     -629.1      254.5  -2.472   0.0138 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27360 on 394 degrees of freedom
+## Multiple R-squared:  0.1883, Adjusted R-squared:  0.1842 
+## F-statistic: 45.71 on 2 and 394 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="test-a-does-the-fitted-model-make-sense-1" class="section level4 unnumbered hasAnchor">
+<h4>Test a): Does the fitted model make sense?<a href="answers-3.html#test-a-does-the-fitted-model-make-sense-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Do the estimated coefficients have the correct sign?</em></p>
+<p>The estimated model of best fit is:</p>
+<p><span class="math inline">\(salary = 89912.2 + 1562.9yrs.since.phd − 629.1yrs.service\)</span></p>
+<p>We notice that when put together with the variable <strong>yrs.since.phd</strong>,
+the <strong>yrs.service</strong> changes sign, which is not in line with our
+previously drawn conclusion and the viewpoint. This is the result of
+<em>collinearity</em>, which you already know happens when two predictors are
+correlated with one another.</p>
+<p>(Multi)collinearity can be identified when:</p>
+<ul>
+<li>a regression coefficient <span class="math inline">\(x_i\)</span> is not significant even though,
+theoretically, it should be highly correlated with the response
+variable <span class="math inline">\(y\)</span>;<br />
+</li>
+<li>by adding or deleting an <span class="math inline">\(x_i\)</span> variable, the regression coefficients
+change dramatically;<br />
+</li>
+<li>we get a negative regression coefficient when the response should
+increase along with <span class="math inline">\(x_i\)</span>, or we get a positive regression
+coefficient when the response should decrease as <span class="math inline">\(x_i\)</span> increases;<br />
+</li>
+<li>the explanatory variables have high pairwise correlations.</li>
+</ul>
+<p>Removing one of the correlated explanatory variables usually doesn’t
+drastically reduce the <span class="math inline">\(R^2/R^2adj\)</span>.</p>
+<p>With this model, using <strong>yrs.since.phd</strong> and <strong>yrs.service</strong> variables
+we have managed to explain just over 18% of variation in the variable
+<strong>salary</strong>.</p>
+</div>
+<div id="test-b-overall-is-the-model-a-good-fit-1" class="section level4 unnumbered hasAnchor">
+<h4>Test b): Overall, is the model a good fit?<a href="answers-3.html#test-b-overall-is-the-model-a-good-fit-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math inline">\(R^2adj\)</span> is 18.42%, putting this model on the weaker side. However let
+us go through the formal procedure and set the hypothesis below. The
+null hypothesis of will be tested using the F-test:</p>
+<ul>
+<li><span class="math inline">\(H_0:R^2=0\)</span> (that is, the set of explanatory variables are
+insignificant, or in other words: useless)<br />
+</li>
+<li><span class="math inline">\(H_1:R^2&gt;0\)</span> (that is, at least one explanatory variable is
+significant, or in other words: important)</li>
+</ul>
+<p>The decision rule is:</p>
+<ul>
+<li>if <span class="math inline">\(F_{calc} &lt; F_{crit} =&gt; H_0\)</span><br />
+</li>
+<li>if <span class="math inline">\(F_{calc} &gt; F_{crit} =&gt; H_1\)</span></li>
+</ul>
+<p>Examining the sample evidence we get that <span class="math inline">\(F_{calc} = 45.71\)</span>. The value
+for <span class="math inline">\(F_{crit}\)</span> can be found in the statistical tables for <span class="math inline">\(df1 = 2\)</span> and
+<span class="math inline">\(df2 = 394\)</span>.</p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="answers-3.html#cb484-1" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="dv">2</span>, <span class="dv">394</span>)</span></code></pre></div>
+<pre><code>## [1] 3.018626</code></pre>
+<p>Since <span class="math inline">\(F_{crit} = 3.02 &lt; F_{calc} =&gt; H_1\)</span>, this implies that this is a valid
+model.</p>
+<p>As pointed out earlier, this formal test involves a rather weak alternative hypothesis, which says only that <span class="math inline">\(R^2\)</span> is significantly bigger than 0. With <span class="math inline">\(R^2\)</span> of around 18% we can conclude that this is a useful model worthy of further investigation.</p>
+</div>
+<div id="test-c-individually-are-the-explanatory-variables-important-1" class="section level4 unnumbered hasAnchor">
+<h4>Test c): Individually, are the explanatory variables important?<a href="answers-3.html#test-c-individually-are-the-explanatory-variables-important-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Stage two of our model validation procedure is to examine the importance of any one single explanatory variable used in the fitted model. We have pointed out that just because a set of variables is important does not necessarily mean that each individual variable is contributing towards explaining the behaviour of <span class="math inline">\(Y\)</span>.</p>
+<p>We will conduct a set of t-tests to check the validity of each variable one at a time.</p>
+<p><strong><span class="math inline">\(b_1\)</span>: previously we concluded that the relationship between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(y\)</span> is positive (in the fitted model parameter <span class="math inline">\(b_1\)</span> is positive). Consequently, we will use one tail t-test to assess the importance of <span class="math inline">\(x_1\)</span> in the model.</strong></p>
+<p><span class="math inline">\(H_0:b_1 = 0\)</span> (explanatory variable <span class="math inline">\(i\)</span> is not important)</p>
+<p><span class="math inline">\(H_1:b_1 &gt; 0\)</span> (explanatory variable <span class="math inline">\(i\)</span> has a positive influence)</p>
+<p>whereby:</p>
+<ul>
+<li><p>If <span class="math inline">\(t_{calc} &lt; t_{crit} =&gt; H_0\)</span></p></li>
+<li><p>If <span class="math inline">\(t_{calc} &gt; t_{crit} =&gt; H_1\)</span></p></li>
+</ul>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="answers-3.html#cb486-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="dv">394</span>)</span></code></pre></div>
+<pre><code>## [1] 1.64873</code></pre>
+<p><span class="math inline">\(t_{calc} = 6.09 &gt; t_{crit} = 1.65 =&gt; H_1\)</span>, which implies that we need to keep x1 in the model.</p>
+<p><strong><span class="math inline">\(b_2\)</span>: previously we concluded that the relationship between <span class="math inline">\(x_2\)</span> and y is a positive relationship, but the model is suggesting that it is negative. We will stick to our belief and test if the coefficient should be positive:</strong></p>
+<p><span class="math inline">\(H_0:b_2 = 0\)</span> (explanatory variable <span class="math inline">\(i\)</span> is not important)</p>
+<p><span class="math inline">\(H_1:b_2 &gt; 0\)</span> (explanatory variable <span class="math inline">\(i\)</span> has a positive influence)</p>
+<p>whereby:</p>
+<ul>
+<li><p>If <span class="math inline">\(t_{calc} &lt; t_{crit} =&gt; H_0\)</span></p></li>
+<li><p>If <span class="math inline">\(t_{calc} &gt; t_{crit} =&gt; H_1\)</span></p></li>
+</ul>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="answers-3.html#cb488-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="dv">394</span>)</span></code></pre></div>
+<pre><code>## [1] 1.64873</code></pre>
+<p><span class="math inline">\(t_{calc} = −2.47 &lt; t_{crit} = 1.65 =&gt; H_0\)</span> therefore, the variable should be removed from the model.</p>
+<p>The increase in the explain variation of around 1% is negligible in comparison to the best one factor model <span class="math inline">\(salary = f(yrs.since.phd) + e\)</span>. Hence, we will put forward the model <span class="math inline">\(salary = 91719 + 985yrs.since.phd\)</span> as our best fitted model.</p>
+<p>Alternatively you could test for the coefficient not being equal to zero and make a conclusion for yourself if this would be a sensible thing to do.</p>
+<p>In this example, we have adopted a ‘standard’ regression approach that assumes modelling a relationship between quantitative response and only quantitative predictors. However, often when building multiple regression models, we do not want to be limited to just quantitative predictors.</p>
+</div>
+</div>
+<div id="part-ii-1" class="section level3 unnumbered hasAnchor">
+<h3>Part II<a href="answers-3.html#part-ii-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let’s expand our multiple linear regression model with two <em>quantitative</em> variables to a model that also includes <em>categorical</em> variables.</p>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="answers-3.html#cb490-1" tabindex="-1"></a><span class="co"># if you are starting a fresh R session, don&#39;t forget to:</span></span>
+<span id="cb490-2"><a href="answers-3.html#cb490-2" tabindex="-1"></a></span>
+<span id="cb490-3"><a href="answers-3.html#cb490-3" tabindex="-1"></a><span class="co"># load the package</span></span>
+<span id="cb490-4"><a href="answers-3.html#cb490-4" tabindex="-1"></a><span class="fu">library</span>(carData)</span>
+<span id="cb490-5"><a href="answers-3.html#cb490-5" tabindex="-1"></a></span>
+<span id="cb490-6"><a href="answers-3.html#cb490-6" tabindex="-1"></a><span class="co"># attach the dataset</span></span>
+<span id="cb490-7"><a href="answers-3.html#cb490-7" tabindex="-1"></a><span class="fu">attach</span>(Salaries)</span></code></pre></div>
+<pre><code>## The following objects are masked from Salaries (pos = 3):
+## 
+##     discipline, rank, salary, sex, yrs.service, yrs.since.phd</code></pre>
+<p>In many datasets, categorical (attribute) variables are usually encoded numerically and are accompanied by information about the levels of the variable saved in the levels attribute.</p>
+<p>Let’s consider the <strong>sex</strong> variable.</p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="answers-3.html#cb492-1" tabindex="-1"></a><span class="fu">attributes</span>(sex)</span></code></pre></div>
+<pre><code>## $levels
+## [1] &quot;Female&quot; &quot;Male&quot;  
+## 
+## $class
+## [1] &quot;factor&quot;</code></pre>
+<p>This variable is already coded as a factor with two levels, <em>Female</em> and <em>Male</em> (which you should already know from earlier in the demonstration). Now, what if we want to transform a variable of class <code>factor</code> into one of class <code>integer</code>?</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="answers-3.html#cb494-1" tabindex="-1"></a><span class="fu">unclass</span>(sex)</span></code></pre></div>
+<pre><code>##   [1] 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2 2 2 2 2 1 1 2
+##  [38] 2 2 2 2 2 2 2 2 2 2 1 1 2 2 2 1 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2
+##  [75] 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2
+## [112] 2 2 2 1 2 2 2 2 1 2 2 2 1 2 2 2 1 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [149] 1 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2
+## [186] 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2
+## [223] 2 2 2 2 2 2 2 2 1 1 2 1 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 1 1 2 2 2 2
+## [260] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+## [297] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 1
+## [334] 2 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2 2 2 2 2 2 2
+## [371] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+## attr(,&quot;levels&quot;)
+## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<p>We can easily do so with the <code>unclass()</code> function which removes the attributes of a factor variable and transforms the levels into numeric values.</p>
+<p>However, when using factor variable in a linear regression model, it would make no sense to treat it as a <em>quantitative</em> explanatory variable. In the context of linear modelling we need to code each category to represent factor levels. Two-level attribute variables are very easy to code. We simply create an indicator or dummy variable that takes on two possible dummy numerical values. Consider the <strong>sex</strong> variable.</p>
+<p>We can code this using a dummy variable <span class="math inline">\(d\)</span>:<br />
+</p>
+<p><span class="math display">\[
+d = \begin{cases}
+0, &amp; \text{if female} \\
+1, &amp; \text{if male}
+\end{cases}
+\]</span>
+💡 This is the default coding used in R. A zero value is assigned to the level which is first alphabetically, unless it is changed by using the <code>releveld()</code> function for example, or by specifying the levels of the factor variable specifically.</p>
+<p>So, for a simple regression model predicting nine-month salary using one categorical variable:</p>
+<p><span class="math display">\[salary = b_0 + b_1sex + e\]</span><br />
+the model is specified as follows:</p>
+<p><span class="math display">\[salary_i = b_0 + b_1 sex_i + e_i =
+\begin{cases}
+b_0 + b_1 \times 1 + e_i = b_0 + b_1 + e_i, &amp; \text{if the person is male} \\
+b_0 + b_1 \times 0 + e_i = b_0 + e_i, &amp; \text{if the person is female}
+\end{cases}\]</span></p>
+<p>where <span class="math inline">\(b_0\)</span> can be interpreted as the average nine-month salary for females, and <span class="math inline">\(b_0 + b_1\)</span> as the nine-month average salary for males. The value of <span class="math inline">\(b_1\)</span> represents the average difference in nine-month salary between females and males.</p>
+<p>We can conclude that dealing with an attribute variable with two levels in a linear model is straightforward. In this case, a dummy variable indicates whether an observation has a particular characteristic: yes/no. We can observe it as a ‘switch’ in a model, as this dummy variable can only assume the values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, where <span class="math inline">\(0\)</span> indicates the absence of the effect, and <span class="math inline">\(1\)</span> indicates the presence. The values <strong>0/1</strong> can be seen as <strong>off/on</strong>.</p>
+<p>The way in which R codes dummy variables is controlled by the <code>contrasts</code> option:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="answers-3.html#cb496-1" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;contrasts&quot;</span>)</span></code></pre></div>
+<pre><code>## $contrasts
+##         unordered           ordered 
+## &quot;contr.treatment&quot;      &quot;contr.poly&quot;</code></pre>
+<p>The output points out the conversion of the factor into an appropriate set of contrasts. In particular, the first one: for unordered factors, and the second one: the ordered factors. The former is applicable in our context. To explicitly identify the coding of the factor, i.e. dummy variable used by R, we can use the <code>contrasts()</code> function.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="answers-3.html#cb498-1" tabindex="-1"></a><span class="fu">contrasts</span>(sex)</span></code></pre></div>
+<pre><code>##        Male
+## Female    0
+## Male      1</code></pre>
+<p>Note that applied <code>contr.treatment</code> conversion takes only the value <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span> and that for an attribute variable with <span class="math inline">\(k\)</span> levels it will create <span class="math inline">\(k-1\)</span> dummy variables. There are many different ways of coding attribute variables besides the dummy variable approach explained here. All of these different approaches lead to equivalent model fits. What differs are the coefficients (i.e. model parameters as they require different interpretations, arranged to measure particular contrasts). This 0/1 coding implemented in R’s default <code>contr.treatment</code> contrast offers straightforward interpretation of the associated parameter in the model, which often is not the case when implementing other contrasts.</p>
+<div id="interpreting-coefficients-of-attribute-variables-1" class="section level4 unnumbered hasAnchor">
+<h4>Interpreting coefficients of attribute variables<a href="answers-3.html#interpreting-coefficients-of-attribute-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In the case of measured predictors, we are comfortable with the interpretation of the linear model coefficient as a slope, which tells us what a unit increase in the response variable is (i.e. outcome per unit increase in the explanatory variable). This is not necessarily the right interpretation for attribute predictors.</p>
+<p>Let’s consider average nine-month salary values for males and females separately.</p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="answers-3.html#cb500-1" tabindex="-1"></a>Salaries <span class="sc">%&gt;%</span> </span>
+<span id="cb500-2"><a href="answers-3.html#cb500-2" tabindex="-1"></a>  <span class="fu">select</span>(salary, sex) <span class="sc">%&gt;%</span>   </span>
+<span id="cb500-3"><a href="answers-3.html#cb500-3" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb500-4"><a href="answers-3.html#cb500-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(salary))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   sex       mean
+##   &lt;fct&gt;    &lt;dbl&gt;
+## 1 Female 101002.
+## 2 Male   115090.</code></pre>
+<p>If we obtain the mean salary for each sex group we will find that for female professors the average salary is $ $101,002$ and for male professors the average is $ $115,090$. That is, a difference of <span class="math inline">\(\$14,088\)</span>.</p>
+<p>If we now look at the parameters of the regression model for salary vs sex where females are coded as zero and males as one, we get exactly the same information, implying that the coefficient is the estimated difference in average between the two groups.</p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="answers-3.html#cb502-1" tabindex="-1"></a><span class="fu">lm</span>(salary <span class="sc">~</span>  sex)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ sex)
+## 
+## Coefficients:
+## (Intercept)      sexMale  
+##      101002        14088</code></pre>
+</div>
+<div id="fitting-a-multivariate-regression-model-1" class="section level4 unnumbered hasAnchor">
+<h4>Fitting a Multivariate Regression Model<a href="answers-3.html#fitting-a-multivariate-regression-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In Part I, we explored the extent to which variation in the response variable <strong>salary</strong> is associated with variation in years since PhD and years in service.
+Now, we extend the model to also include <strong>sex</strong>, <strong>discipline</strong> and <strong>rank</strong>.
+The overall goals of any model we construct is that it should contain enough to explain relations in the data and at the same time be simple enough to understand, explain to others, and use.</p>
+<p>For convenience we will adopt the following notation:</p>
+<p><span class="math inline">\(y\)</span>: salary<br />
+<span class="math inline">\(x_1\)</span>: yrs.since.phd<br />
+<span class="math inline">\(x_2\)</span>: yrs.service<br />
+<span class="math inline">\(x_3\)</span>: discipline<br />
+<span class="math inline">\(x_4\)</span>: sex<br />
+<span class="math inline">\(x_5\)</span>: rank</p>
+<p>Next, we need to specify the model that embodies our mechanistic understanding of the factors involved and the way that they are related to the response variable. It would make sense to expect that all of the available x variables may impact the behaviour of y, thus the model we wish to build should reflect our viewpoint, i.e. <span class="math inline">\(y=f(x_1,x_2,x_3,x_4,x_5)\)</span>:</p>
+<p><span class="math display">\[y=b_0 + b_1x_1 + b_2x_2 + b_3x_3 + b_4x_4 + b_5x_5 + e\]</span>
+Our viewpoint states a belief that all explanatory variables have a positive impact on the response. For example, more years in service will cause a higher salary.</p>
+<p>Our objective now is to determine the values of the parameters in the model that lead to the best fit of the model to the data. That is, we are not only trying to estimate the parameters of the model, but we are also seeking the minimal adequate model to describe the data.</p>
+<p>The best model is the model that produces the least unexplained variation following the principle of parsimony rather than complexity. That is the model should have as few parameters as possible, subject to the constraint that the parameters in the model should all be statistically significant.</p>
+<p>For regression modelling in R we use the lm() function, that fits a linear model assuming normal errors and constant variance. We specify the model by a formula that uses arithmetic operators which enable different functionalities from their ordinary ones. But, before we dive into statistical modelling of the given data, we need to take a first step and conduct the most fundamental task of data analysis procedure: <strong>Get to Know Our Data</strong>.</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="answers-3.html#cb504-1" tabindex="-1"></a><span class="fu">ggpairs</span>(Salaries)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="question">
+<p>What information can you extract from this visualisation?</p>
+</div>
+<div class="answers">
+<p>This is an information rich visualisation that includes pairwise relationships of all the variables we want to consider for our model. By focusing on the last column of the plots, we can notice influence from all explanatory variables onto the response, except maybe for discipline and sex. We also notice unbalanced representation of the groups for the variables rank and sex, but for the purpose of our practice in fitting a multi-factor model this isn’t too problematic. We need to be especially concerned with the extent of correlations between the explanatory variables, and what is of particular interest to us is the high multicollinearity between rank, yrs.since.phd and yrs.service, which happens when the variables are highly linearly related. As a consequence, we will need to keep an eye on the significance of using all of these variables in the model.</p>
+</div>
+</div>
+<div id="fitting-the-model-1" class="section level4 unnumbered hasAnchor">
+<h4>Fitting the Model<a href="answers-3.html#fitting-the-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>There are no fixed rules when fitting linear models, but there are adopted standards that have proven to work well in practice. We start off by fitting a maximal model then we carry on simplifying it by removing non-significant explanatory variables. This needs to be done with caution, making sure that the simplifications make good scientific sense, and do not lead to significant reductions in explanatory power. Although this should be the adopted strategy for fitting a model, it is not a guarantee to finding all the important structures in a complex data frame.</p>
+<p>We can summarise our model building procedure algorithm as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Fit the maximal model that includes all the variables. Then, assess the overall significance of the model by checking how big the <span class="math inline">\(R^2/\overline{R}^2\)</span> is. If statistically significant, carry on with the model fitting procedure, otherwise stop (F-test).<br />
+</li>
+<li>Remove the least significant terms one at a time. Then, check the <span class="math inline">\(t_calculated\)</span> for the variables values and perform a one tail or two tail t-test depending on your prior view. If the deletion causes an insignificant increase in <span class="math inline">\(\overline{R}^2\)</span>, leave that term out of the model.<br />
+</li>
+<li>Keep removing terms from the model until the model contains nothing but significant terms.</li>
+</ol>
+<p>Let’s build the model. Now, if we plan to use all variables in a dataset, there is no need to write the names of each individual predictor. Instead, we can use a full stop which tell R to include all other variables in the data object that do not already appear in the formula.</p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="answers-3.html#cb506-1" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> ., <span class="at">data =</span> Salaries)</span>
+<span id="cb506-2"><a href="answers-3.html#cb506-2" tabindex="-1"></a></span>
+<span id="cb506-3"><a href="answers-3.html#cb506-3" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ ., data = Salaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -65248 -13211  -1775  10384  99592 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    65955.2     4588.6  14.374  &lt; 2e-16 ***
+## rankAssocProf  12907.6     4145.3   3.114  0.00198 ** 
+## rankProf       45066.0     4237.5  10.635  &lt; 2e-16 ***
+## disciplineB    14417.6     2342.9   6.154 1.88e-09 ***
+## yrs.since.phd    535.1      241.0   2.220  0.02698 *  
+## yrs.service     -489.5      211.9  -2.310  0.02143 *  
+## sexMale         4783.5     3858.7   1.240  0.21584    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 22540 on 390 degrees of freedom
+## Multiple R-squared:  0.4547, Adjusted R-squared:  0.4463 
+## F-statistic:  54.2 on 6 and 390 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="question">
+<p><strong>Overall, is the model a good fit? How big is the <span class="math inline">\(R^2/\overline{R}^2\)</span>?</strong></p>
+</div>
+<div class="answers">
+<p>The <span class="math inline">\(R^2 = 45.47%\)</span> and the <span class="math inline">\(\overline{R}^2= 44.63%\)</span> are well above the value of zero allowing us to accept this as a valid model without having to formally test it to assess its statistical significance. It manages to explain almost half of the variability in the response variable <strong>salary</strong>.</p>
+</div>
+<div class="question">
+<p><strong>Individually, are the explanatory variables important? What steps are required given the results of the model?</strong></p>
+</div>
+<p>We identify the <strong>sex</strong> variable as clearly not significant, which is in line with the conclusion we could draw from the boxplot in the pairwise comparison plot for <strong>salary</strong> vs. <strong>sex</strong>. We will remove it to begin the process of model simplification and remove the least significant term. We therefore re-fit (or ‘update’) the model without the <strong>sex</strong> variable.</p>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="answers-3.html#cb508-1" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">update</span>(model_1,<span class="sc">~</span>. <span class="sc">-</span> sex) </span>
+<span id="cb508-2"><a href="answers-3.html#cb508-2" tabindex="-1"></a></span>
+<span id="cb508-3"><a href="answers-3.html#cb508-3" tabindex="-1"></a><span class="fu">summary</span>(model_2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ rank + discipline + yrs.since.phd + yrs.service, 
+##     data = Salaries)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -65244 -13498  -1455   9638  99682 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    69869.0     3332.1  20.968  &lt; 2e-16 ***
+## rankAssocProf  12831.5     4147.7   3.094  0.00212 ** 
+## rankProf       45287.7     4236.7  10.689  &lt; 2e-16 ***
+## disciplineB    14505.2     2343.4   6.190 1.52e-09 ***
+## yrs.since.phd    534.6      241.2   2.217  0.02720 *  
+## yrs.service     -476.7      211.8  -2.250  0.02497 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 22550 on 391 degrees of freedom
+## Multiple R-squared:  0.4525, Adjusted R-squared:  0.4455 
+## F-statistic: 64.64 on 5 and 391 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We note a slight reduction in <span class="math inline">\(\overline{R}^2\)</span> from <span class="math inline">\(44.63%\)</span> to <span class="math inline">\(44.55%\)</span> which we can regard as an insignificant decrease. The next step is to check the coefficients and assess for the effect of the remaining variables. We identify <strong>yrs.since.phd</strong> and <strong>yrs.service</strong> as the least influential in explaining the variability of salary. To illustrate how to formally assess their effect, we will conduct the t-test for the <strong>yrs.since.phd</strong> variable:</p>
+<p><span class="math inline">\(H_0:b_{ysp} = 0\)</span></p>
+<p><span class="math inline">\(H_1:b_{ysp} &gt; 0\)</span></p>
+<p>Therefore:</p>
+<p>If <span class="math inline">\(t_{calc} &lt; t_{crit} =&gt; H_0\)</span></p>
+<p>If <span class="math inline">\(t_{calc} &gt; t_{crit} =&gt; H_1\)</span></p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="answers-3.html#cb510-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="dv">391</span>)</span></code></pre></div>
+<pre><code>## [1] 1.64876</code></pre>
+<p>As <span class="math inline">\(t_{calc} = 2.217 &gt; t_{crit} = 1.64876 =&gt; H1\)</span>, we will keep the remaining variable and stop with the model simplification and focus on its interpretation.</p>
+<div class="question">
+<p>Specify the final fitted model.</p>
+</div>
+<p>The structure of our final fitted model is:</p>
+<p><span class="math display">\[y=b_0 + b_1x_1 + b_2x_2 + b_3x_3 + b_4x_4 + e\]</span><br />
+where:
+<span class="math inline">\(y\)</span>: salary<br />
+<span class="math inline">\(x_1\)</span>: yrs.since.phd<br />
+<span class="math inline">\(x_2\)</span>: yrs.service<br />
+<span class="math inline">\(x_3\)</span>: discipline<br />
+<span class="math inline">\(x_4\)</span>: rank</p>
+<p>We can take a closer look at the coefficients of our fitted model:</p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="answers-3.html#cb512-1" tabindex="-1"></a><span class="fu">coef</span>(model_2)</span></code></pre></div>
+<pre><code>##   (Intercept) rankAssocProf      rankProf   disciplineB yrs.since.phd 
+##    69869.0110    12831.5375    45287.6890    14505.1514      534.6313 
+##   yrs.service 
+##     -476.7179</code></pre>
+<p>Examining the output we realise that R has created three dummy variables for the variable <strong>rank</strong>:<br />
+<span class="math display">\[
+dr_1 = \begin{cases}
+1 &amp; \text{rank is AsstProf} \\
+0 &amp; \text{for rank is not AsstProf}
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+dr_2 = \begin{cases}
+1 &amp; \text{rank is AssocProf} \\
+0 &amp; \text{rank is not AssocProf}
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+dr_3 = \begin{cases}
+1 &amp; \text{rank is Prof} \\
+0 &amp; \text{rank is not Prof}
+\end{cases}
+\]</span>
+Therefore, R has chosen to use the model:<br />
+<span class="math display">\[y = b_0 + b_1dr_2 + b_2dr_3 + b_3d_1 + b_4x_1 + b_5x_2 + e\]</span><br />
+where:
+- <span class="math inline">\(y\)</span> is salary<br />
+- <span class="math inline">\(x_1\)</span> is yrs.since.phd<br />
+- <span class="math inline">\(x_2\)</span> is yrs.service<br />
+- <span class="math inline">\(dr_2\)</span> and <span class="math inline">\(dr_3\)</span> are the dummy variables defined above for the purpose of coding variable rank<br />
+- <span class="math inline">\(d_1\)</span> is a dummy variable used in the coding of variable discipline as explained earlier</p>
+<p>Note that R doesn’t need to use <span class="math inline">\(dr_1\)</span> to create three models; it only needs two dummy variables since it is using <span class="math inline">\(dr_1\)</span> as a reference level, also known as the base line. This subsequently allows R to create three models relating to the <strong>rank</strong> variable:</p>
+<ul>
+<li>AsstProf: <span class="math inline">\(y = b_0 + b_3d_1 + b_4x_1 + b_5x_2 + e\)</span><br />
+</li>
+<li>AssocProf: <span class="math inline">\(y = (b_0 + b_1) + b_3d_1 + b_4x_1 + b_5x_2 + e\)</span><br />
+</li>
+<li>Prof: <span class="math inline">\(y = (b_0 + b_2) + b_3d_1 + b_4x_1 + b_5x_2 + e\)</span></li>
+</ul>
+<p>telling us that:</p>
+<ul>
+<li><span class="math inline">\(b_0\)</span> is the average salary for an Assistant Professor who works in a ‘theoretical’ department and <span class="math inline">\(b_0 + b_3\)</span> the average salary for an Assistant Professor who works in an ‘applied’ department.</li>
+<li><span class="math inline">\((b_0 + b_1)\)</span> is the average salary for an Associate Professor who works in a ‘theoretical’ department and <span class="math inline">\((b_0 + b_1) + b_3\)</span> the average salary for an Associate Professor who works in an ‘applied’ department.<br />
+</li>
+<li><span class="math inline">\((b_0 + b_2)\)</span> is the average salary for a Professor who works in a ‘theoretical’ department and <span class="math inline">\((b_0 + b_2) + b_3\)</span> the average salary for a Professor who works in an ‘applied’ department.</li>
+</ul>
+<div class="question">
+<p>Interpret the results</p>
+</div>
+<p>Learning this we can make an interpretation of our final fitted model as follows:</p>
+<p>For every year since PhD (yrs.since.phd) on average salary (salary) will go up by $534.63 assuming the rest of the variables are fixed in the model.</p>
+<p>For every year in service (yrs.service) on average salary (salary) will go down by $476.72 assuming the rest of the variables are fixed in the model.</p>
+<p>The average salary of an Assistant Professor (rank: AsstProf) who works in a “theoretical” department is <span class="math inline">\(\$69,869.01\)</span> and who works in an “applied” department is <span class="math inline">\(\$84,374.16\)</span>; this can vary for the number of years in service and since PhD.<br />
+The average salary of an Associate Professor (rank: AssocProf) who works in a ‘theoretical’ department is <span class="math inline">\(\$82,700.55\)</span>, and one who works in an ‘applied’ department is <span class="math inline">\(\$97,205.70\)</span>; this can vary for the number of years in service and since PhD.</p>
+<p>The average salary of a Professor (rank: Prof) who works in a ‘theoretical’ department is <span class="math inline">\(\$115,156.70\)</span>, and who works in an ‘applied’ department is <span class="math inline">\(\$129,661.90\)</span>; this can vary for the number of years in service and since PhD.</p>
+<p>This model explains around 45% of the variability in the response variable <strong>salary</strong>.</p>
+<p>Adding <code>~ 0</code> to the <code>lm()</code> formula enables R to suppress the intercept. Note that if we remove the intercept, then we can directly obtain all “three intercepts” without a base level to fit the final fitted model:</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="answers-3.html#cb514-1" tabindex="-1"></a>model_2_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span>  <span class="dv">0</span> <span class="sc">+</span> rank <span class="sc">+</span> discipline <span class="sc">+</span> yrs.since.phd <span class="sc">+</span> yrs.service)</span>
+<span id="cb514-2"><a href="answers-3.html#cb514-2" tabindex="-1"></a></span>
+<span id="cb514-3"><a href="answers-3.html#cb514-3" tabindex="-1"></a><span class="fu">summary</span>(model_2_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = salary ~ 0 + rank + discipline + yrs.since.phd + 
+##     yrs.service)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -65244 -13498  -1455   9638  99682 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## rankAsstProf   69869.0     3332.1  20.968  &lt; 2e-16 ***
+## rankAssocProf  82700.5     3916.7  21.115  &lt; 2e-16 ***
+## rankProf      115156.7     4350.9  26.467  &lt; 2e-16 ***
+## disciplineB    14505.2     2343.4   6.190 1.52e-09 ***
+## yrs.since.phd    534.6      241.2   2.217   0.0272 *  
+## yrs.service     -476.7      211.8  -2.250   0.0250 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 22550 on 391 degrees of freedom
+## Multiple R-squared:  0.9638, Adjusted R-squared:  0.9633 
+## F-statistic:  1736 on 6 and 391 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+<div id="practical-2-4" class="section level2 unnumbered hasAnchor">
+<h2>Practical 2<a href="answers-3.html#practical-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>This practical has been developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics.</em></p>
+<div class="file">
+<p>For the tasks below, you will require the <strong>FDI</strong> dataset.</p>
+<p>Click here to download the file:
+<a href="data/FDI.csv" download="FDI.csv"> FDI.csv </a>.</p>
+<p>Remember to place your data file in a separate subfolder within your R
+project working directory.</p>
+</div>
+<p>A business consultancy firm is compiling a major report about
+globalisation. One aspect of this study concerns the determinants of FDI
+undertaken by multi-national enterprises. Relevant information from a
+sample of 60 multi-national companies that undertook significant
+investment in overseas projects was made available as follows:</p>
+<table style="width:97%;">
+<colgroup>
+<col width="22%" />
+<col width="73%" />
+<col width="1%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Variable Name</th>
+<th align="center">Variable Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">FDI</td>
+<td colspan="2" align="center">Value of FDI undertaken, in £ millions, by
+investing company |</td>
+</tr>
+<tr class="even">
+<td align="center">GDP_Cap</td>
+<td align="center">GDP per capita, £000s, in the country receiving
+the investment</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td align="center">Gr_rate</td>
+<td align="center">The economic growth rate, in %-terms, in the
+country receiving the investment</td>
+<td></td>
+</tr>
+<tr class="even">
+<td align="center">ROC</td>
+<td align="center">The average return on capital invested, in
+%-terms, in the country receiving the investment</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td align="center">Stable</td>
+<td align="center">The political stability of the country receiving
+the investment as measured by the number of
+changes in government over the past 25 years</td>
+<td></td>
+</tr>
+<tr class="even">
+<td align="center">Infra</td>
+<td align="center"><p>Infrastructure facilities (eg transport,
+communications) in the country receiving the
+investment</p>
+<p>Coded: 1 = basic infrastructure 2 = good
+infrastructure</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td align="center">Trade</td>
+<td align="center"><p>The openness to trade of the country receiving the
+investment</p>
+<p>Coded: 1 = trade tightly controlled 2 = some
+restrictions on trade 3 = free trade</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>This is a multiple regression type of the problem; FDI is the key
+response variable as this study concerns the determinants of FDI
+undertaken by multi-national enterprises.</p>
+<p>The model is defined as <span class="math inline">\(Y = b_0 + b_1x_1 + b_2x_2 + ... + b_kx_k + e\)</span>,
+for the general <span class="math inline">\(k\)</span> explanatory variable model and where e is also known
+as the error term <span class="math inline">\(e ∼ N(0,\sigma^2)\)</span>, with the error term from a normal
+distribution with a mean of <span class="math inline">\(0\)</span>, and a variance of <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Based on prior knowledge, we make the assumption that GDP_Cap, Gr_rate,
+ROC, Infra, and Trade have positive relationships with FDI, whilst
+Stable has a negative relationship with FDI.</p>
+<p>We will use our best fit model to predict FDI for the following information: <em>country X receiving the investment has GDP per capita of 11.1 and Gr_rate per capita of 3.05; The average return on capital invested is 20.5%; There were 11 changes of government over the past 25 years and country X has good infrastructure with some restrictions on trade.</em></p>
+<p>First, let’s load the required packages:</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="answers-3.html#cb516-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb516-2"><a href="answers-3.html#cb516-2" tabindex="-1"></a><span class="co"># you should have already installed this package as part of the previous Demonstration</span></span>
+<span id="cb516-3"><a href="answers-3.html#cb516-3" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code></pre></div>
+<p>Let’s import the data into R.</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="answers-3.html#cb517-1" tabindex="-1"></a>mydataq1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/FDI.csv&quot;</span>, <span class="at">header =</span> T) </span></code></pre></div>
+<p>Now let’s get a glimpse of the data. As you know, there are many ways to
+do that, such as, for example, using the tidyverse <code>glimpse</code> function.
+This is quite a handy function because it also tells us more about the
+class of each variable. We can see that although <strong>Infra</strong> and <strong>Trade</strong>
+categorical, these are coded as integers.</p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="answers-3.html#cb518-1" tabindex="-1"></a><span class="fu">glimpse</span>(mydataq1)</span></code></pre></div>
+<pre><code>## Rows: 60
+## Columns: 7
+## $ FDI     &lt;dbl&gt; 184.00, 187.00, 186.00, 192.00, 188.00, 190.00, 193.00, 194.00…
+## $ GDP_Cap &lt;dbl&gt; 4.4, 6.3, 5.3, 5.9, 9.4, 7.6, 8.7, 6.0, 8.4, 10.1, 8.0, 6.9, 7…
+## $ Gr_rate &lt;dbl&gt; 2.54, 4.06, 3.79, 3.38, 1.54, 2.25, 3.01, 2.13, 2.18, 3.33, 2.…
+## $ ROC     &lt;dbl&gt; 6.7, 9.3, 7.1, 3.9, 6.3, 9.3, 6.3, 9.7, 5.6, 17.1, 9.1, 15.2, …
+## $ Stable  &lt;int&gt; 9, 8, 11, 11, 8, 9, 9, 11, 12, 12, 8, 7, 12, 9, 8, 5, 9, 7, 11…
+## $ Infra   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ Trade   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,…</code></pre>
+<p>We therefore need to transform them into factors.</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="answers-3.html#cb520-1" tabindex="-1"></a>mydataq1 <span class="ot">&lt;-</span> mydataq1 <span class="sc">%&gt;%</span></span>
+<span id="cb520-2"><a href="answers-3.html#cb520-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Infra =</span> <span class="fu">as_factor</span>(Infra),</span>
+<span id="cb520-3"><a href="answers-3.html#cb520-3" tabindex="-1"></a>         <span class="at">Trade =</span> <span class="fu">as_factor</span>(Trade)</span>
+<span id="cb520-4"><a href="answers-3.html#cb520-4" tabindex="-1"></a>         )</span></code></pre></div>
+<p>We can then explore all variables in the dataset as pairs using a matrix
+of plots. Among many interesting features, we can note quite strong
+correlations among pairs of variables which suggest the presence of
+multicollinearity: GDP_Cap and ROC, Infra and GDP_Cap, Infra and ROC,
+and Infra and Gr_rate.</p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="answers-3.html#cb521-1" tabindex="-1"></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(mydataq1)</span></code></pre></div>
+<p><img src="05-S05-ANS_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>Ok, so our initial model is:</p>
+<p><span class="math inline">\(FDI = b_0 + b_1GDP\_Cap + b_2Gr\_rate + b_3ROC – b_4Stable + b_5Infra + b_6Trade + e\)</span></p>
+<p>where <strong>Infra</strong> and <strong>Stable</strong> are dummy variables.</p>
+<p>We can have a look at how these two dummy variables are used in the
+model by using the <code>contrasts()</code> function from base R.</p>
+<p>The <strong>Infra</strong> variable is coded as <em>1 = basic infrastructure</em> and <em>2 = good infrastructure</em>. Since this is a binary variable, there will be one
+reference category and a single dummy variable.</p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="answers-3.html#cb522-1" tabindex="-1"></a><span class="fu">contrasts</span>(mydataq1<span class="sc">$</span>Infra)</span></code></pre></div>
+<pre><code>##   2
+## 1 0
+## 2 1</code></pre>
+<p>The <strong>Trade</strong> variable is coded as <em>1 = trade tightly</em> and <em>2 = some
+restrictions on trade</em> and <em>2 = some restrictions on trade</em>. Since this
+is variable with three categories, there will be one reference category
+and two dummy variables.</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="answers-3.html#cb524-1" tabindex="-1"></a><span class="fu">contrasts</span>(mydataq1<span class="sc">$</span>Trade)</span></code></pre></div>
+<pre><code>##   2 3
+## 1 0 0
+## 2 1 0
+## 3 0 1</code></pre>
+<p>Let’s now fit our multiple regression model.</p>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="answers-3.html#cb526-1" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(FDI <span class="sc">~</span> GDP_Cap <span class="sc">+</span> Gr_rate <span class="sc">+</span> ROC <span class="sc">+</span> Stable <span class="sc">+</span> Infra <span class="sc">+</span> Trade, <span class="at">data =</span> mydataq1)</span></code></pre></div>
+<p>And explore the results.</p>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="answers-3.html#cb527-1" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = FDI ~ GDP_Cap + Gr_rate + ROC + Stable + Infra + 
+##     Trade, data = mydataq1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.8594 -1.2595 -0.0808  1.4183  8.7210 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 189.472086   2.690418  70.425  &lt; 2e-16 ***
+## GDP_Cap       0.938713   0.236206   3.974 0.000219 ***
+## Gr_rate      -0.089122   0.498508  -0.179 0.858807    
+## ROC           0.003144   0.088466   0.036 0.971782    
+## Stable       -0.539889   0.172155  -3.136 0.002816 ** 
+## Infra2       -0.169110   1.493552  -0.113 0.910287    
+## Trade2        4.875539   0.891476   5.469 1.31e-06 ***
+## Trade3        5.890833   1.179891   4.993 7.07e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.734 on 52 degrees of freedom
+## Multiple R-squared:  0.7481, Adjusted R-squared:  0.7142 
+## F-statistic: 22.06 on 7 and 52 DF,  p-value: 1.646e-13</code></pre>
+<div class="question">
+<p>What do the results indicate?<br />
+How do they compare with our initial assumptions?<br />
+How do you proceed with the analysis?</p>
+</div>
+<p>The results provide us with several pieces of important information. We
+initially assumed that the relationship between Gr_rate and FDI and
+Infra and FDI are positive. However, we can see that the estimated
+coefficients are negative. Also, there are several variables that are
+not statistically significant. The <strong>ROC</strong> variable has the highest
+p-value. Overall, the model appears to be a good fit given that 74.81% of variability is being explained. Also, make a note of the adjusted r-squared value which is 71.42 % (as the name implies, this measure adjusts the r-squared value according to the number of predictors in the model).</p>
+<p>Ok, so given the evidence of multicollinearity from earlier and given
+the lack of statistical significance, we can proceed to remove the
+variable with the largest p-value (so the <strong>ROC</strong>) variable and refit
+the model.</p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="answers-3.html#cb529-1" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(FDI <span class="sc">~</span> GDP_Cap <span class="sc">+</span> Gr_rate <span class="sc">+</span> Stable <span class="sc">+</span> Infra <span class="sc">+</span> Trade, <span class="at">data =</span> mydataq1)</span>
+<span id="cb529-2"><a href="answers-3.html#cb529-2" tabindex="-1"></a></span>
+<span id="cb529-3"><a href="answers-3.html#cb529-3" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb529-4"><a href="answers-3.html#cb529-4" tabindex="-1"></a></span>
+<span id="cb529-5"><a href="answers-3.html#cb529-5" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(m1,<span class="sc">~</span>. <span class="sc">-</span> ROC, <span class="at">data =</span> mydataq1) </span></code></pre></div>
+<p>Now, we see that the explained variability is the same as in model 1 (74.81%). However, the adjusted R-squared has increased slightly (from 71.4% to about 72%).</p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="answers-3.html#cb530-1" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = FDI ~ GDP_Cap + Gr_rate + Stable + Infra + Trade, 
+##     data = mydataq1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.8633 -1.2684 -0.0897  1.4174  8.7346 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 189.4790     2.6579  71.289  &lt; 2e-16 ***
+## GDP_Cap       0.9409     0.2258   4.167 0.000114 ***
+## Gr_rate      -0.0846     0.4774  -0.177 0.860031    
+## Stable       -0.5413     0.1663  -3.255 0.001976 ** 
+## Infra2       -0.1358     1.1519  -0.118 0.906598    
+## Trade2        4.8805     0.8723   5.595 7.92e-07 ***
+## Trade3        5.9116     1.0151   5.824 3.45e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.708 on 53 degrees of freedom
+## Multiple R-squared:  0.7481, Adjusted R-squared:  0.7196 
+## F-statistic: 26.23 on 6 and 53 DF,  p-value: 3.05e-14</code></pre>
+<p>We can observe that the <strong>Infra</strong> variable has the largest p-value and,
+as before with the <strong>ROC</strong> variable, we remove it and refit the model by
+removing the least significant term.</p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="answers-3.html#cb532-1" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2,<span class="sc">~</span>. <span class="sc">-</span> Infra, <span class="at">data =</span> mydataq1) </span></code></pre></div>
+<p>The r-squared value has decreased slightly from 74.81% to 74.8. But, again, we see that the adjusted R-squared increased from about 72% in model 2 to about 72.5%.</p>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="answers-3.html#cb533-1" tabindex="-1"></a><span class="fu">summary</span>(m3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = FDI ~ GDP_Cap + Gr_rate + Stable + Trade, data = mydataq1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.8072 -1.3012 -0.0538  1.3545  8.7185 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 189.63356    2.29103  82.772  &lt; 2e-16 ***
+## GDP_Cap       0.92068    0.14544   6.331 5.01e-08 ***
+## Gr_rate      -0.09192    0.46906  -0.196  0.84537    
+## Stable       -0.54240    0.16445  -3.298  0.00173 ** 
+## Trade2        4.89108    0.85969   5.689 5.34e-07 ***
+## Trade3        5.95001    0.95263   6.246 6.86e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.683 on 54 degrees of freedom
+## Multiple R-squared:  0.748,  Adjusted R-squared:  0.7247 
+## F-statistic: 32.06 on 5 and 54 DF,  p-value: 5.104e-15</code></pre>
+<p>The <strong>Gr_rate</strong> variable has the largest p-value and, as before, we
+remove it and refit the model by removing the least significant term.</p>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="answers-3.html#cb535-1" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">update</span>(m3,<span class="sc">~</span>. <span class="sc">-</span> Gr_rate, <span class="at">data =</span> mydataq1) </span></code></pre></div>
+<p>Finally, we obtain a model where all coefficients are statistically
+significant (although the <strong>Stable</strong> is significant at an <span class="math inline">\(\alpha\)</span> level
+of 0.05). We see that the r-squared value has again decreased slightly to 74.79% but the explained variability is highest for this model, about 73% (the adjusted r-squared penalises the addition of predictors that are non-significant; since we removed these, the value increased).</p>
+<p>Overall, the explained variability is still about 75% (the decrease across the models was extremely small).</p>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="answers-3.html#cb536-1" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = FDI ~ GDP_Cap + Stable + Trade, data = mydataq1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -5.661 -1.300 -0.035  1.317  8.626 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 189.4274     2.0173  93.903  &lt; 2e-16 ***
+## GDP_Cap       0.9109     0.1355   6.723 1.07e-08 ***
+## Stable       -0.5411     0.1629  -3.322  0.00159 ** 
+## Trade2        4.8837     0.8513   5.737 4.27e-07 ***
+## Trade3        5.9368     0.9419   6.303 5.19e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.66 on 55 degrees of freedom
+## Multiple R-squared:  0.7479, Adjusted R-squared:  0.7295 
+## F-statistic: 40.78 on 4 and 55 DF,  p-value: 7.573e-16</code></pre>
+<p>Now, we can specify the model as:</p>
+<p><span class="math display">\[
+\begin{align*}
+FDI &amp;= 189.4274 + 0.9109 \cdot GDP\_Cap - 0.5411 \cdot stable + 0.0000 \cdot Trade1 \\
+    &amp;\phantom{= 189.4274 + 0.9109 \cdot GDP\_Cap - 0.5411 \cdot stable} + 4.8837 \cdot Trade2 \\
+    &amp;\phantom{= 189.4274 + 0.9109 \cdot GDP\_Cap - 0.5411 \cdot stable} + 5.9368 \cdot Trade3
+\end{align*}
+\]</span></p>
+<p>Finally, we use our best fit model to predict FDI for the following information: <em>country X receiving the investment has GDP per capita of 11.1 and Gr_rate per capita of 3.05; The average return on capital invested is 20.5%; There were 11 changes of government over the past 25 years and country X has good infrastructure with some restrictions on trade.</em></p>
+<p><span class="math inline">\(FDI = 189.4274 + 0.9109*11.1 - 0.5411*11 + 4.8837\)</span></p>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="answers-3.html#cb538-1" tabindex="-1"></a><span class="fl">189.4274</span> <span class="sc">+</span> <span class="fl">0.9109</span><span class="sc">*</span><span class="fl">11.1</span> <span class="sc">-</span> <span class="fl">0.5411</span><span class="sc">*</span><span class="dv">11</span> <span class="sc">+</span> <span class="fl">4.8837</span></span></code></pre></div>
+<pre><code>## [1] 198.47</code></pre>
+<p>Given that our final model (model 4) explains about 75% of the variability, we can conclude that our prediction of 198.47 is a fairly good one.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="demonstration-propublicas-analysis-of-the-compas-tool.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overview-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

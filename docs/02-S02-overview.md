@@ -12,9 +12,7 @@ editor_options:
 Section 2: Linear Regression and Prediction
 :::
 
-This section is comprised of two demonstrations and two practicals. The
-two practicals will make use of exercises adapted from the core textbook
-for this course:
+This section is comprised of two demonstrations and three practicals. Practical 3 is based on a demonstration developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics. Practicals 1 and 2 will make use of exercises adapted from the core textbook for this course:  
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
 Introduction to Statistical Learning with Applications in R*. 2nd ed.
@@ -23,12 +21,12 @@ New York: Springer. <https://www.statlearning.com/>
 ::: ilos
 **Learning Outcomes:**
 
--   explain the relevance of the intercept;
--   appreciate the impact of noise on coefficient estimates;
--   produce and interpret diagnostic plots with base R;
--   apply non-linear transformations;
--   compare model fit;
--   compute and interpret confidence intervals.
+-   explain the relevance of the intercept;  
+-   appreciate the impact of noise on coefficient estimates;  
+-   produce and interpret diagnostic plots with base R;  
+-   include non-linear transformations and interactions;  
+-   compare model fit;  
+-   compute and interpret confidence intervals.  
 :::
 
 **In this section, you will practice using the functions below. It is highly recommended that you explore these functions further using the Help tab in your RStudio console.**

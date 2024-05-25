@@ -1,0 +1,307 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+# Demonstration 2: Poisson versus Linear Regression {.unnumbered}
+
+In this demonstration, we will cover the basics of building and
+interpreting a Poisson regression model.
+
+You will need the **Bikeshare** dataset, part of the `ISRL2` package. By
+loading the package, the **Weekly** dataset loads automatically.
+
+This dataset measures the number of bike rentals (`bikers`) per hour in
+Washington, DC. It contains 8645 observations on several variables. The
+variables we will use in this practical and their descriptions are
+listed below. For further information on additional variables, type
+`?Bikeshare` in your R console after loading the `ISLR2` package.
+
+-   mnth: Month of the year, coded as a factor.
+
+-   hr: Hour of the day, coded as a factor from 0 to 23.
+
+-   workingday: Is it a work day? Yes=1, No=0.
+
+-   temp: Normalised temperature in Celsius. The values are derived via
+    (t-t_min)/(t_max-t_min), t_min=-8, t_max=+39;
+
+-   weathersit: Weather, coded as a factor.
+
+Loading the necessary packages:
+
+```{r}
+library(ISLR2)
+```
+
+Once you load the `ISLR2` package, the **Bikeshare** dataset will be
+'loaded' too and can be accessed without needing to assign it to a
+separate object.
+
+```{r}
+head(Bikeshare)
+```
+
+As usual, we can access variables within the dataset by indexing them.
+
+```{r}
+Bikeshare$temp
+```
+
+However, if we want to access variables within the dataset without
+needing to index them we can use the base R `attach()` function.
+
+```{r}
+attach(Bikeshare)
+```
+
+So now, we can call on the variables from the dataset directly (if we do
+not have other datasets loaded in the R environment with variables named
+in the same way).
+
+```{r}
+temp
+```
+
+## The Linear Model {.unnumbered}
+
+### Approaches to variable coding {.unnumbered}
+
+The purpose of this task is to predict the number of bikers (bikers)
+using month (mnth), hour (hr), whether it's a working day (workingday),
+temperature (temp), and weather situation (weathersit).
+
+We begin by fitting a least squares linear regression model to the data.
+
+```{r chunk36}
+mod.lm <- lm(bikers ~ mnth + hr + workingday + temp + weathersit)
+summary(mod.lm)
+```
+
+In `mod.lm`, the first level of hr (0) and mnth (January) are treated as
+baseline values, meaning no coefficient estimates are provided for them.
+Implicitly, their coefficient estimates are zero, and all other levels
+are measured relative to these baselines. For instance, the February
+coefficient of $6.845$ indicates that, holding all other variables
+constant, there are on average about 7 more riders in February than in
+January. Similarly, there are about 16.5 more riders in March compared
+to January.
+
+However, what if we were to recode the **hr** and **mnth** variables?
+
+```{r chunk37}
+contrasts(Bikeshare$hr) = contr.sum(24)
+contrasts(Bikeshare$mnth) = contr.sum(12)
+mod.lm2 <- lm(bikers ~ mnth + hr + workingday + temp + weathersit,
+              data = Bikeshare)
+summary(mod.lm2)
+```
+
+What is the difference between the two codings? In `mod.lm2`, a
+coefficient estimate is reported for all but the last level of **hr**
+and **mnth**. Importantly, in `mod.lm2`, the coefficient estimate for
+the last level of **mnth** is not zero; instead, it equals the negative
+of the sum of the coefficient estimates for all the other levels.
+Similarly, in `mod.lm2`, the coefficient estimate for the last level of
+**hr** is the negative of the sum of the coefficient estimates for all
+the other levels. This means the coefficients of hr and **mnth** in
+`mod.lm2` will always sum to zero and can be interpreted as the
+difference from the mean level. For example, the coefficient for January
+of $-46.087$ indicates that, holding all other variables constant, there
+are typically 46 fewer riders in January compared to the yearly average.
+
+The predictions from either of the two models is identical, as confirmed
+below. However, the choice of coding is crucial for correct
+interpretation of the model results.
+
+```{r chunk38}
+sum((predict(mod.lm) - predict(mod.lm2))^2)
+```
+
+The sum of squared differences is zero. We can also see this using the
+`all.equal()` function:
+
+```{r chunk39}
+all.equal(predict(mod.lm), predict(mod.lm2))
+```
+
+### Plotting Coefficient Estimates {.unnumbered}
+
+Let's plot the coefficient estimates for the variable **mnth**.
+
+First we obtain the coefficients for January through November from the
+`mod.lm2` object. The coefficient for December must be explicitly
+computed as the negative sum of all the other months.
+
+```{r chunk40}
+coef.months <- c(coef(mod.lm2)[2:12], -sum(coef(mod.lm2)[2:12]))
+```
+
+To make the plot, we manually label the $x$-axis with the names of the
+months.
+
+```{r chunk41}
+plot(coef.months, xlab = "Month", ylab = "Coefficient",
+    xaxt = "n", col = "blue", pch = 19, type = "o")
+axis(side = 1, at = 1:12, labels = c("J", "F", "M", "A",
+    "M", "J", "J", "A", "S", "O", "N", "D"))
+```
+
+Now let's do the same for the variable **mhr**.
+
+```{r chunk42}
+coef.hours <- c(coef(mod.lm2)[13:35], -sum(coef(mod.lm2)[13:35]))
+
+plot(coef.hours, xlab = "Hour", ylab = "Coefficient",
+     col = "blue", pch = 19, type = "o")
+```
+
+::: question
+What do these two plots show?
+:::
+
+## The Poisson Model {.unnumbered}
+
+Now let's fit a Poisson model that is more appropriate given that we are
+dealing with count data. The approach to fitting the model is very
+similar to that of logistic regression except that we use the argument
+`family = poisson`.
+
+As with the linear model, the purpose is to predict the number of bikers
+(bikers) using month (mnth), hour (hr), whether it's a working day
+(workingday), temperature (temp), and weather situation (weathersit).
+
+```{r chunk43}
+mod.pois <- glm(bikers ~ mnth + hr + workingday + temp + weathersit,
+                data = Bikeshare, family = poisson)
+
+summary(mod.pois)
+```
+
+Below is a table which summarises what the coefficients tell us:
+
++---------------+------------------------------------------------------+
+| intercept     | baseline log count of bikers when all predictors are |
+|               | at their reference levels                            |
++---------------+------------------------------------------------------+
+| mnth          | effects of different months (1-11) relative to the   |
+|               | reference month (mnth 12 - December)                 |
+|               |                                                      |
+|               | For example, the **estimate for January (mnth1)** is |
+|               | $-0.670170$. This tells us that the log count of     |
+|               | bikers in January is lower by approximately 0.67     |
+|               | units compared to the reference month (December).    |
+|               |                                                      |
+|               | To facilitate interpretation, we exponentiate the    |
+|               | coefficient: `exp(-0.670170) ≈ 0.5116`. Therefore,   |
+|               | the expected number of bikers in January is about    |
+|               | $51\%$ that of December. This indicates a decrease   |
+|               | of approximately $0.511 6-1 = 0.4884(100) = 48.84\%$ |
+|               | compared to December, holding all other variables    |
+|               | constant.                                            |
++---------------+------------------------------------------------------+
+| hr            | effects of different hours (1-23) relative to the    |
+|               | reference hour (hr24)                                |
+|               |                                                      |
+|               | For example, the **estimate for 8:00 (hr8)** is      |
+|               | $0.575181$. This tells us that the log count of      |
+|               | bikers at 8 in the morning is higher by              |
+|               | approximately 0.58 units compared to the reference   |
+|               | hour (midnight). We exponentiate the coefficient:    |
+|               | `exp(0.575181) ≈ 1.777452`. Therefore, the expected  |
+|               | number of bikers at 8 in the morning is about        |
+|               | $1 .777-1 = 0.77(100) = 77.7\%$ higher than the      |
+|               | number of bikers at midnight, holding all other      |
+|               | variables constant.                                  |
++---------------+------------------------------------------------------+
+| workingday    | since the coefficient is positive, it suggests that  |
+|               | there are more bikers on working days                |
+|               |                                                      |
+|               | We exponentiate the coefficient:                     |
+|               | `exp(0.014665) ≈ 1.014773`. Therefore, the expected  |
+|               | number of bikers on working day is about             |
+|               | $1.01 4773-1 = 0.015(100) = 1.5\%$ higher than the   |
+|               | number of bikers during a non-working day, holding   |
+|               | all other variables constant.                        |
++---------------+------------------------------------------------------+
+| temp          | since the coefficient is positive, it suggests that  |
+|               | higher temperatures are associated with more bikers  |
+|               |                                                      |
+|               | We exponentiate the coefficient:                     |
+|               | `exp(0.785292) ≈ 2.193047`.                          |
+|               |                                                      |
+|               | Therefore, for each one-unit increase in the         |
+|               | normalised temperature, the expected number of       |
+|               | bikers is about                                      |
+|               | $2.193047- 1 = 1.193047(100) = 119.3\%$ higher,      |
+|               | holding all other variables constant                 |
++---------------+------------------------------------------------------+
+| weathersit    | indicates the effect of different weather conditions |
+|               | on the number of bikers relative to the reference    |
+|               | (clear weather). Since the coefficients are          |
+|               | negative, this suggests that adverse weather         |
+|               | conditions (e.g., heavy rain/snow) significantly     |
+|               | reduce the number of bikers                          |
+|               |                                                      |
+|               | -   For cloudy/misty weather, the expected number of |
+|               |     bikers is                                        |
+|               |     -   `exp(-0.075231) ≈ 0.9275` times the number   |
+|               |         of bikers in clear weather, indicating a     |
+|               |         decrease of about 7.25%.                     |
+|               | -   For light rain/snow, the expected number of      |
+|               |     bikers is                                        |
+|               |     -   `exp(-0.575800) ≈ 0.5621` times the number   |
+|               |         of bikers in clear weather, indicating a     |
+|               |         decrease of about 43.79%.                    |
+|               | -   For heavy rain/snow, the expected number of      |
+|               |     bikers is                                        |
+|               |     -   `exp(-0.926287) ≈ 0.3957` times the number   |
+|               |         of bikers in clear weather, indicating a     |
+|               |         decrease of about 60.43%.                    |
++---------------+------------------------------------------------------+
+
+Let's plot the coefficients associated with the **mnth** variable.
+
+```{r chunk44}
+coef.mnth <- c(coef(mod.pois)[2:12], -sum(coef(mod.pois)[2:12]))
+
+plot(coef.mnth, xlab = "Month", ylab = "Coefficient",
+     xaxt = "n", col = "blue", pch = 19, type = "o")
+
+axis(side = 1, at = 1:12, 
+     labels = c("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"))
+```
+
+And the coefficients associated with the **hr** variable.
+
+```{r}
+coef.hours <- c(coef(mod.pois)[13:35], -sum(coef(mod.pois)[13:35]))
+
+plot(coef.hours, xlab = "Hour", ylab = "Coefficient",
+    col = "blue", pch = 19, type = "o")
+```
+
+::: question
+What do these plots suggest?
+:::
+
+## Linear versus Poisson Regression {.unnumbered}
+
+Let's plot the fitted values from the Poisson model and compare them to
+those of the linear model. For the Poisson predictions, we must use the
+argument `type = "response"` to specify that we want `R` to output
+$\exp(\hat\beta_0 + \hat\beta_1 X_1 + \ldots +\hat\beta_p X_p)$ rather
+than $\hat\beta_0 + \hat\beta_1 X_1 + \ldots + \hat\beta_p X_p$, which
+it will output by default.
+
+```{r chunk45}
+plot(predict(mod.lm2), predict(mod.pois, type = "response"))
+abline(0, 1, col = 2, lwd = 3)
+```
+
+As you can see, the predictions from the Poisson regression model are
+correlated with those from the linear model; however, the former are
+non-negative. As a result the Poisson regression predictions tend to be
+larger than those from the linear model for either very low or very high
+levels of ridership.

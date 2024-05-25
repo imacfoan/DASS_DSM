@@ -13,7 +13,7 @@ Section 1: Introduction to Data Science - The Basics of Statistical
 Learning
 :::
 
-This section is comprised of a demonstration and two practicals. The two practicals will make use of exercises  adapted from the core textbook for this course:
+This section is comprised of a demonstration and two practicals. The two practicals will make use of exercises adapted from the core textbook for this course:
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
 Introduction to Statistical Learning with Applications in R*. 2nd ed.

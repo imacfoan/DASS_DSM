@@ -77,7 +77,7 @@ First, let's load the required packages:
 
 ```{r warning = FALSE, message = FALSE}
 library(tidyverse)
-# you should have already installed this package as part of the previous Demonstration
+# you should have already installed this package for Practical 2 (Section 5)
 library(GGally)
 ```
 

@@ -13,24 +13,14 @@ rmd_files:
 - 02-S02-D2.Rmd
 - 02-S02-P1.Rmd
 - 02-S02-P2.Rmd
+- 02-S02-P3.Rmd
 - 02-S02-ANS.Rmd
 - 03-S03-overview.Rmd
 - 03-S03-D1.Rmd
-- 04-S04-overview.Rmd
-- 04-S04-D1.Rmd
-- 04-S04-D2.Rmd
-- 04-S04-P1.Rmd
-- 05-S05-overview.Rmd
-- 05-S05-P1.Rmd
-- 05-S05-P2.Rmd
-- 05-S05-D1.Rmd
-- 05-S05-ANS.Rmd
-- 06-S06-overview.Rmd
-- 07-S07-overview.Rmd
-- 07-S07-D1.Rmd
-- 07-S07-D2.Rmd
-- 08-S08-overview.Rmd
-- 08-S08-D1.Rmd
+- 03-S03-D2.Rmd
+- 03-S03-P1.Rmd
+- 03-S03-ANS.Rmd
+
 
 output_dir: docs
 language:

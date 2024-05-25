@@ -436,3 +436,120 @@ Yes, there is evidence of outliers and high leverage observations for
 :::
 
 
+## Practical 3: The Quality of Red Bordeaux Vintages {.unnumbered}
+
+*This demonstration was developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics.*
+
+We would like to analyse the quality of a vintage that has been quantified as the price and make the interpretation of our statistical findings. 
+
+We are going to use `wine.csv` available from Eduardo García Portugués’s book: *Notes for Predictive Modelling; https://bookdown.org/egarpor/PM-UC3M/*. 
+
+The **wine** dataset is formed by the auction price of 27 red Bordeaux vintages, five vintage descriptors (WinterRain, AGST, HarvestRain, Age, Year), and the population of France in the year of the vintage, FrancePop.
+  
+- Year: year in which grapes were harvested to make wine   
+- Price: logarithm of the average market price for Bordeaux vintages according to 1990–1991 auctions. The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded  
+- WinterRain: winter rainfall (in mm)  
+- AGST: Average Growing Season Temperature (in degrees Celsius)  
+- HarvestRain: harvest rainfall (in mm)  
+- Age: age of the wine measured as the number of years stored in a cask   
+- FrancePop: population of France at Year (in thousands)  
+
+You will require the `GGally` package; please make sure to install it first. 
+
+```{r warning = FALSE, message = FALSE}
+library(GGally)
+```
+
+And now let's import the data.
+
+```{r}
+wine <- read.csv("https://raw.githubusercontent.com/egarpor/handy/master/datasets/wine.csv")
+```
+
+Let's first obtain some summary statistics.  
+
+```{r}
+summary(wine)
+```
+
+And a matrix of plots.
+
+```{r}
+ggpairs(wine)
+```
+
+
+:::question
+What conclusions can you draw based on the above information?
+:::
+
+:::answers
+We can notice a perfect relationship between the variables Year and Age. This is to be expected since this data was collected in 1983 and Age was calculated as: Age = 1983 - Year. Knowing this, we are going to remove Year from the analysis and use Age as it will be easier to interpret.
+
+There is a strong relationship between Year, ie. Age and FrancePop and since we want to impose our viewpoint that the total population does not influence the quality of the wine we will not consider this variable in the model.
+:::
+
+We are going to investigate possible interactions between the rainfall (WinterRain) and the growing season temperature (AGST). We will start with the most complicated model that includes the highest-order interaction. In R we will specify the three-way interaction, which will automatically add all combinations of two-way interactions.  
+
+
+```{r}
+model1 <- lm(Price ~ WinterRain + AGST + HarvestRain + Age + WinterRain * AGST * HarvestRain, data = wine)
+
+summary(model1)
+```
+
+:::question
+What can you say about the explained variability of the model? Which coefficients are statistically significant? Simplify the model in stages and decide on the final model. 
+:::
+
+The model explains well over 80% of variability and is clearly a strong model, but the key question is whether we can simplify it. 
+
+We will start the process of this model simplification by removing the three-way interaction as it is clearly not significant.
+
+```{r}
+model2 <- update(model1, ~. -WinterRain:AGST:HarvestRain, data = wine)
+summary(model2)
+```
+
+The $\overline{R}^2$ has slightly increased in value. Next, we remove the least significant two-way interaction term.
+
+
+```{r}
+model3 <- update(model2, ~. -AGST:HarvestRain, data = wine)
+summary(model3)
+```
+
+Again, it is reassuring to notice an increase in the $\overline{R}^2$, but we can still simplify the model further by removing another least significant two-way interaction term.
+
+```{r}
+model4 <- update(model3, ~. -WinterRain:AGST, data = wine)
+summary(model4)
+```
+
+There is an insignificant decrease in $\overline{R}^2$. We notice HarvestRain is now the least significant term, but it is used for the WinterRain:HarvestRain interaction, which is significant at $\alpha = 0.05$ and therefore we should keep it. However, as the concept of parsimony prefers a model without interactions to a model containing interactions between variables, we will remove the remaining interaction term and see if it significantly affects the explanatory power of the model.
+
+```{r}
+model5 <- update(model4, ~. -WinterRain:HarvestRain, data = wine)
+summary(model5)
+```
+
+The $\overline{R}^2$ is reduced by around 2%, but it has all the significant terms and it is easier to interpret. For those reasons and in the spirit of parsimony that argues that a model should be as simple as possible, we can suggest that this should be regarded as the best final fitted model.
+
+We realise that for the large numbers of explanatory variables, and many interactions and non-linear terms, the process of model simplification can take a very long time. There are many algorithms for automatic variable selection that can help us to choose the variables to include in a regression model. *Stepwise* regression and *Best Subsets* regression are two of the more common variable selection methods.
+
+The *stepwise* procedure starts from the saturated model (or the maximal model, whichever is appropriate) through a series of simplifications to the minimal adequate model. This progression is made on the basis of deletion tests: F tests, AIC, t-tests or chi-squared tests that assess the significance of the increase in deviance that results when a given term is removed from the current model.
+
+The best subset regression (BREG), also known as “all possible regressions”, as the name of the procedure indicates, fits a separate least squares regression for each possible combination of the p predictors, i.e. explanatory variables. After fitting all of the models, BREG then displays the best fitted models with one explanatory variable, two explanatory variables, three explanatory variables, and so on. Usually, either adjusted R-squared or Mallows Cp is the criterion for picking the best fitting models for this process. The result is a display of the best fitted models of different sizes up to the full/maximal model and the final fitted model can be selected by comparing displayed models based on the criteria of parsimony. **You will learn more about variable selection later in the course**. 
+
+"These methods are frequently abused by naive researchers who seek to interpret the order of entry of variables into the regression equation as an index of their 'importance'. This practice is potentially misleading." *J. Fox and S. Weisberg’s book: An R Companion to Applied Regression, Third Edition, Sage (2019)*
+
+
+*'Parsimony says that, other things being equal, we prefer:*  
+
+- *a model with n−1 parameters to a model with n parameters*  
+- *a model with k−1 explanatory variables to a model with k explanatory variables a linear model to a model which is curved*
+- *a model without a hump to a model with a hump*
+- *a model without interactions to a model containing interactions between factors'* 
+
+*Crawley, M.J. 2013, The R Book. 2nd Edition. John Wiley, New York*
+

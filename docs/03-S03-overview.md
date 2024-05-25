@@ -12,7 +12,7 @@ editor_options:
 Section 3: Classification
 :::
 
-This section is comprised of one, expanded demonstration which is adapted from the core textbook for this course:  
+This section is comprised of two demonstrations adapted from the core textbook for this course:  
 
 James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to Statistical Learning with Applications in R*. 2nd ed. New York: Springer. <https://www.statlearning.com/>
 
@@ -27,8 +27,11 @@ James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to
 -   compute and interpret a confusion matrix and overall prediction
     accuracy;
 
--   perform a variety of classification methods and appreciate their
-    advantages and limitations.
+-   apply a variety of classification methods and appreciate their
+    advantages and limitations;   
+    
+-   understand the differences between modelling count data using a linear versus a Poisson model;   
+-   interpret the results of a Poisson regression model.
 :::
 
 **In this section, you will practice using the functions below. It is

@@ -132,7 +132,18 @@ Nevertheless, the validation set approach still does not solve this challenge.
 
 ## Leave-One-Out Cross-Validation {-}
 
-Now, let's consider LOOCV. In R, one way to compute the LOOCV estimate is by using functions from the `boot` package. This package nevertheless requires that the models are built using the `glm()` function, including linear models. The `glm()` function will produce identical results to `lm()` when fitting a linear model. You do not need to specify the `family` argument as you did for logistic regression since it is already set by default to `gaussian`. 
+Now, let's consider LOOCV. The training set of data is split into two parts, with the difference that here they are not of comparable sizes as the validation set consists of a single observation and the remaining observations make up the training set. 
+
+<img src="images/loocv.png" style="display: block; margin-left: auto; margin-right: auto;" />
+
+Repeating the process $n$ times produces $n$ square errors and the estimate for the test MSE is the average of those $n$ test error estimates:
+
+$$CV_{(n)} = \frac{1}{n} \sum_{i=1}^{n} MSE_i$$
+The main advantage of the LOOCV approach over a simple train and test validation is that it produces less bias. The model is fit on $n−1$ training observations, almost as many as there are in the entire data set. Furthermore, since LOOCV is performed multiple times it yields consistent results with less randomness than in a simple train and test approach. 
+
+One more down side to the generally high value of $k$ is that the computation side of the procedure becomes more taxing especially if the model is rather a complex one. Come to think about it, the LOOCV requires as many model fits as data points and each model fit uses a subset that is ALMOST the same size as the training.  
+
+In R, one way to compute the LOOCV estimate is by using functions from the `boot` package. This package nevertheless requires that the models are built using the `glm()` function, including linear models. The `glm()` function will produce identical results to `lm()` when fitting a linear model. You do not need to specify the `family` argument as you did for logistic regression since it is already set by default to `gaussian`. 
 
 Fitting a linear model with `glm()` is the same as with `lm()`. 
 
@@ -174,9 +185,36 @@ We can see a sharp drop in the estimated test MSE between the linear and quadrat
 
 ## $k$-Fold Cross-Validation {-}
 
-Finally, let's consider $k$-fold cross-Validation. The same function (`cv.glm()`) can be used by setting the value of K. By default, the value of K is equal to the number of observations in data which therefore gives us LOOCV.
+Finally, let's consider $k$-fold cross-validation. This approach involves randomly dividing the set of observations into $k$ groups (known as folds) of approximately equal size. With cross-validation the test data is held out (approximately one fifth of data), and the remaining training data is randomly divided into $k$ groups. Several different portions of this training data are used for validation, and the remaining part of the data is used for training as shown in the diagram below. Hence, a fold is treated as a validation set, and the method is fit on to the remaining $k−1$ folds. The $k$ resampled estimates of performance are summarised and used for testing and model building.
 
-In this example, we will use $k=10$, a common choice for $k$. We will again perform the same approach of increasingly complex polynomial fits as we did for LOOCV. The code is identical to the one we used to LOOCV except that of course, we specified `K = 10`.
+<img src="images/k-fold.png" style="display: block; margin-left: auto; margin-right: auto;" />
+
+In this illustration, the non-holdout data is divided into five portions, and we therefore call this *5-fold cross-validation*. If there had been ten blocks, it would have been 10-fold cross-validation. The model that has been built using k-fold cross-validation is then tested on the originally held out test data subset. The $k$ resampled estimates of model’s performance are summarised commonly using the mean and standard error to develop a better reasoning of its effectiveness in relation to its tuning parameters. In fact, LOOCV is a special case of k-fold CV in which $k$ is equal to $n$:
+
+$$CV_{(k)} = \frac{1}{k} \sum_{i=1}^{k} MSE_i$$
+A typical choice for $k$ is 5 or 10, but there is no formal rule. One should keep in mind when making a choice that as $k$ increases, the difference in size between the training set and the resampling subset gets smaller, causing the bias of the statistical model to become smaller. However, when compared with k-fold CV, LOOCV results in a poorer estimate as it provides an approximately unbiased estimate for the test error that is highly variable.  
+
+Using k-fold cross-validation increases validation sensitivity, allowing better reasoning with the model. One of the key questions is how to choose the number of folds, i.e. how big does $k$ need to be? In general, the choice of the number of folds depends on the size of the dataset. For large datasets, 5-fold cross-validation is considered to be quite accurate and when dealing with very sparse datasets, we may consider using leave-one-out in order to train on as many examples as possible.
+
+There is a bias-variance trade-off associated with the choice of $k$ in k-fold cross-validation. Larger $k$, for which training folds are closer to the total dataset, results in less bias towards overestimating the true expected error but higher variance and higher running time. We can summarise those findings as follows:
+
+For a large number of folds:  
+
+- positives:small bias of the true error rate estimator (as a result of a very accurate estimator)  
+- negatives: large variance of the true error rate estimator; computational time is large 
+
+For a small number of folds: 
+
+- positives: small variance of the estimator; the number of experiments and, therefore, computation time are reduced
+- negatives: large bias of the estimator  
+
+
+In practice, typical choices for k in cross-validation are $k=5$ or $k=10$, as these values have been shown empirically to yield test error rate estimates that suffer neither from excessively high bias nor from very high variance.
+
+
+Let's practice $k$-fold cross-validation. The same function (`cv.glm()`) can be used by setting the value of $k$. By default, the value of K is equal to the number of observations in data which therefore gives us LOOCV.
+
+In this example, we will use $k = 10$. We will again perform the same approach of increasingly complex polynomial fits as we did for LOOCV. The code is identical to the one we used to LOOCV except that of course, we specified `K = 10`.
 
 ```{r}
 set.seed(17)
@@ -198,3 +236,4 @@ We saw earlier that when we LOOCV, the two values were essentially the same. In 
 ```{r}
 cv.glm(Auto, glm.fit, K = 10)$delta
 ```
+

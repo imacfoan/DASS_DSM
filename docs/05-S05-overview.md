@@ -13,7 +13,13 @@ Section 5: Data Science in Practice
 :::
 
 ::: ilos
-**Learning Outcomes:**
+**Learning Outcomes:**  
+- create suitable visualisations to describe univariate and bivariate data;  
+- build simple and multiple linear regression models with quantitative and qualitative predictors and interpret the results;  
+- assess model fit and evaluate the importance of individual predictors;  
+- make decisions about the structure of the 'final' model;  
+- build logistic regression models and interpret the results;   
+- calculate false positive and false negative rates;  
 - 
 :::
 
