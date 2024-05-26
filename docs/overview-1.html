@@ -371,10 +371,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="color: #333; font-size: 24px; font-style: italic; text-align: justify;">
 <p>Section 2: Linear Regression and Prediction</p>
 </div>
-<p>This section is comprised of two demonstrations and three practicals. Practical 3 is based on a demonstration developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics. Practicals 1 and 2 will make use of exercises adapted from the core textbook for this course:</p>
-<p>James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An
-Introduction to Statistical Learning with Applications in R</em>. 2nd ed.
-New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
+<p>This section is comprised of two demonstrations and three practicals.</p>
+<p>The two demonstrations and Practicals 1 and 2 are adapted from exercises
+from the core textbook for this course: James, G., Witten, D., Hastie,
+T. and Tibshirani, R. (2021). <em>An Introduction to Statistical Learning
+with Applications in R</em>. 2nd ed. New York: Springer.
+<a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
+<p>Practical 3 is based on a demonstration developed by Dr. Tatjana
+Kecojevic, Lecturer in Social Statistics.</p>
 <div class="ilos">
 <p><strong>Learning Outcomes:</strong></p>
 <ul>
@@ -392,12 +396,14 @@ New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://
 </li>
 </ul>
 </div>
-<p><strong>In this section, you will practice using the functions below. It is highly recommended that you explore these functions further using the Help tab in your RStudio console.</strong></p>
-<table style="width:96%;">
+<p><strong>In this section, you will practice using the functions below. It is
+highly recommended that you explore these functions further using the
+Help tab in your RStudio console.</strong></p>
+<table style="width:97%;">
 <colgroup>
-<col width="29%" />
-<col width="37%" />
-<col width="29%" />
+<col width="26%" />
+<col width="48%" />
+<col width="22%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -410,98 +416,85 @@ New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://
 <tr class="odd">
 <td align="center"><code>lm()</code></td>
 <td align="center">fit linear models</td>
-<td align="center">base R</td>
+<td align="center">stats</td>
 </tr>
 <tr class="even">
 <td align="center"><code>predict()</code></td>
-<td align="center">generic function for
-predictions from results
-of different models
+<td align="center">generic function for predictions
+from results of different models
 (e.g. <code>predict.lm()</code>)</td>
-<td align="center">base R</td>
+<td align="center">stats</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>confint()</code></td>
-<td align="center">compute confidence
-intervals</td>
-<td align="center">base R</td>
+<td align="center">compute confidence intervals</td>
+<td align="center">stats</td>
 </tr>
 <tr class="even">
 <td align="center"><code>plot()</code></td>
-<td align="center">generic function for
-plotting</td>
-<td align="center">base R</td>
+<td align="center">generic function for plotting</td>
+<td align="center">base</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>legend()</code></td>
 <td align="center"><p>add legend (to <code>plot()</code>)</p>
-<p>arguments such as <code>col</code>,
-<code>lty</code>, and <code>cex</code> control
-colour, line type, and
-font size respectively</p></td>
-<td align="center">base R</td>
+<p>arguments such as <code>col</code>, <code>lty</code>,
+and <code>cex</code> control colour, line
+type, and font size respectively</p></td>
+<td align="center">graphics</td>
 </tr>
 <tr class="even">
 <td align="center"><code>abline()</code></td>
-<td align="center">adding one or more
-straight lines to plot</td>
-<td align="center">base R</td>
+<td align="center">adding one or more straight
+lines to plot</td>
+<td align="center">graphics</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>cor()</code></td>
-<td align="center">computes correlation
-between variables</td>
-<td align="center">base R</td>
+<td align="center">computes correlation between
+variables</td>
+<td align="center">stats</td>
 </tr>
 <tr class="even">
 <td align="center"><code>rnorm()</code></td>
-<td align="center">generates normal
-distribution</td>
-<td align="center">base R</td>
+<td align="center">generates normal distribution</td>
+<td align="center">stats</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>poly()</code></td>
-<td align="center">returns or evaluates
-polynomials</td>
-<td align="center">base R</td>
+<td align="center">returns or evaluates polynomials</td>
+<td align="center">stats</td>
 </tr>
 <tr class="even">
 <td align="center"><code>par()</code></td>
-<td align="center">set graphical parameters</td>
-<td align="center">base R</td>
+<td align="center">set graphical parameters (e.g.
+<code>mfrow()</code> )</td>
+<td align="center">graphics</td>
 </tr>
 <tr class="odd">
-<td align="center"><code>mfrow()</code></td>
-<td align="center"><code>par()</code> parameter</td>
-<td align="center">base R</td>
-</tr>
-<tr class="even">
 <td align="center"><code>subset()</code></td>
-<td align="center">return subset of a data
-object (vector, matrix,
-or dataframe) according
-to condition(s)</td>
-<td align="center">base R</td>
-</tr>
-<tr class="odd">
-<td align="center"><code>anova()</code></td>
-<td align="center">compute analysis of
-variance for</td>
-<td align="center">base R</td>
+<td align="center">return subset of a data object
+(vector, matrix, or dataframe)
+according to condition(s)</td>
+<td align="center">base</td>
 </tr>
 <tr class="even">
-<td align="center"><code>rnorm()</code></td>
-<td align="center">density, distribution
-function, quantile
-function and random
-generation for the
-normal distribution</td>
-<td align="center">base R</td>
+<td align="center"><code>anova()</code></td>
+<td align="center">compute analysis of variance for</td>
+<td align="center">stats</td>
 </tr>
 <tr class="odd">
+<td align="center"><code>rnorm()</code></td>
+<td align="center">density, distribution function,
+quantile function and random
+generation for the normal
+distribution</td>
+<td align="center">stats</td>
+</tr>
+<tr class="even">
 <td align="center"><code>sqrt()</code></td>
 <td align="center">compute square root</td>
-<td align="center">base R</td>
+<td align="center">base</td>
 </tr>
 </tbody>
 </table>

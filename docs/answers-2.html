@@ -399,18 +399,18 @@ project working directory.</p>
 </div>
 <div id="importing-the-data-1" class="section level3 unnumbered hasAnchor">
 <h3>Importing the data<a href="answers-2.html#importing-the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="answers-2.html#cb249-1" tabindex="-1"></a>four_ratios <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/four_ratios.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="answers-2.html#cb248-1" tabindex="-1"></a>four_ratios <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/four_ratios.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="loading-required-packages-1" class="section level3 unnumbered hasAnchor">
 <h3>Loading required packages<a href="answers-2.html#loading-required-packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="answers-2.html#cb250-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb250-2"><a href="answers-2.html#cb250-2" tabindex="-1"></a><span class="fu">library</span>(class)</span>
-<span id="cb250-3"><a href="answers-2.html#cb250-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb250-4"><a href="answers-2.html#cb250-4" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
-<span id="cb250-5"><a href="answers-2.html#cb250-5" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb250-6"><a href="answers-2.html#cb250-6" tabindex="-1"></a><span class="fu">library</span>(e1071)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="answers-2.html#cb249-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb249-2"><a href="answers-2.html#cb249-2" tabindex="-1"></a><span class="fu">library</span>(class)</span>
+<span id="cb249-3"><a href="answers-2.html#cb249-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb249-4"><a href="answers-2.html#cb249-4" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb249-5"><a href="answers-2.html#cb249-5" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb249-6"><a href="answers-2.html#cb249-6" tabindex="-1"></a><span class="fu">library</span>(e1071)</span></code></pre></div>
 <p>We can see that the predictors are all of class double. The response is of class integer, despite this being a binary categorical variable. There are a total of 111 observations, so quite a small dataset.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="answers-2.html#cb251-1" tabindex="-1"></a><span class="fu">glimpse</span>(four_ratios)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="answers-2.html#cb250-1" tabindex="-1"></a><span class="fu">glimpse</span>(four_ratios)</span></code></pre></div>
 <pre><code>## Rows: 111
 ## Columns: 5
 ## $ x1 &lt;dbl&gt; 0.3778, 0.2783, 0.1192, 0.6070, 0.5334, 0.3868, 0.3312, 0.0130, 0.6…
@@ -419,29 +419,29 @@ project working directory.</p>
 ## $ x4 &lt;dbl&gt; 1.2784, 0.2216, 1.6702, 0.9844, 1.3474, 1.0579, 2.0899, 1.2230, 1.7…
 ## $ y  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…</code></pre>
 <p>We therefore transform the response to a factor.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="answers-2.html#cb253-1" tabindex="-1"></a>four_ratios<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(four_ratios<span class="sc">$</span>y)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="answers-2.html#cb252-1" tabindex="-1"></a>four_ratios<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(four_ratios<span class="sc">$</span>y)</span></code></pre></div>
 </div>
 <div id="correlation-matrix-and-plot-2" class="section level3 unnumbered hasAnchor">
 <h3>Correlation Matrix and Plot<a href="answers-2.html#correlation-matrix-and-plot-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s now produce a correlation plot between all pairs of variables in the dataset.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="answers-2.html#cb254-1" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(four_ratios[,<span class="sc">-</span><span class="dv">5</span>])</span>
-<span id="cb254-2"><a href="answers-2.html#cb254-2" tabindex="-1"></a></span>
-<span id="cb254-3"><a href="answers-2.html#cb254-3" tabindex="-1"></a><span class="fu">corrplot</span>(cor_matrix, <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="answers-2.html#cb253-1" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(four_ratios[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb253-2"><a href="answers-2.html#cb253-2" tabindex="-1"></a></span>
+<span id="cb253-3"><a href="answers-2.html#cb253-3" tabindex="-1"></a><span class="fu">corrplot</span>(cor_matrix, <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="03-S03-ANS_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We observe a strong positive correlation between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. The correlations between other variables are quite weak.</p>
 <p>Before we consider the model, we split the data into training and test sets as we will later on assess model accuracy in correct prediction using the test data set. We consider a basic fixed split of 80:20. Since there are a total of 111 observations, we split at row 89</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="answers-2.html#cb255-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb255-2"><a href="answers-2.html#cb255-2" tabindex="-1"></a>split_idx <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(four_ratios), <span class="dv">89</span>)</span>
-<span id="cb255-3"><a href="answers-2.html#cb255-3" tabindex="-1"></a>train <span class="ot">=</span> four_ratios[split_idx, ]</span>
-<span id="cb255-4"><a href="answers-2.html#cb255-4" tabindex="-1"></a>test <span class="ot">=</span> four_ratios[<span class="sc">-</span>split_idx, ]</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="answers-2.html#cb254-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb254-2"><a href="answers-2.html#cb254-2" tabindex="-1"></a>split_idx <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(four_ratios), <span class="dv">89</span>)</span>
+<span id="cb254-3"><a href="answers-2.html#cb254-3" tabindex="-1"></a>train <span class="ot">=</span> four_ratios[split_idx, ]</span>
+<span id="cb254-4"><a href="answers-2.html#cb254-4" tabindex="-1"></a>test <span class="ot">=</span> four_ratios[<span class="sc">-</span>split_idx, ]</span></code></pre></div>
 </div>
 <div id="logistic-regression-1" class="section level3 unnumbered hasAnchor">
 <h3>Logistic Regression<a href="answers-2.html#logistic-regression-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now let’s first consider logistic regression and build the model. Given the high correlation between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> (this is to be expected, given what they measure), we have to reflect on how we want to address this. Assuming we have knowledge of important factors that can predict bankruptcy, we can decide to drop one of the two financial ratios. In this case, we drop <span class="math inline">\(x_2\)</span>.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="answers-2.html#cb256-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3 <span class="sc">+</span> x4,</span>
-<span id="cb256-2"><a href="answers-2.html#cb256-2" tabindex="-1"></a>           <span class="at">data =</span> train, <span class="at">family =</span> binomial)</span>
-<span id="cb256-3"><a href="answers-2.html#cb256-3" tabindex="-1"></a></span>
-<span id="cb256-4"><a href="answers-2.html#cb256-4" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="answers-2.html#cb255-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3 <span class="sc">+</span> x4,</span>
+<span id="cb255-2"><a href="answers-2.html#cb255-2" tabindex="-1"></a>           <span class="at">data =</span> train, <span class="at">family =</span> binomial)</span>
+<span id="cb255-3"><a href="answers-2.html#cb255-3" tabindex="-1"></a></span>
+<span id="cb255-4"><a href="answers-2.html#cb255-4" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x1 + x3 + x4, family = binomial, data = train)
@@ -468,26 +468,26 @@ project working directory.</p>
 ## Number of Fisher Scoring iterations: 7</code></pre>
 <p>We now need to make a proper assessment to check if the variables collectively contribute in explaining the logit.</p>
 <p>Therefore, we calculate the G statistic.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="answers-2.html#cb258-1" tabindex="-1"></a>G_calc <span class="ot">&lt;-</span> fit<span class="sc">$</span>null.deviance <span class="sc">-</span> fit<span class="sc">$</span>deviance</span>
-<span id="cb258-2"><a href="answers-2.html#cb258-2" tabindex="-1"></a></span>
-<span id="cb258-3"><a href="answers-2.html#cb258-3" tabindex="-1"></a>G_calc</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="answers-2.html#cb257-1" tabindex="-1"></a>G_calc <span class="ot">&lt;-</span> fit<span class="sc">$</span>null.deviance <span class="sc">-</span> fit<span class="sc">$</span>deviance</span>
+<span id="cb257-2"><a href="answers-2.html#cb257-2" tabindex="-1"></a></span>
+<span id="cb257-3"><a href="answers-2.html#cb257-3" tabindex="-1"></a>G_calc</span></code></pre></div>
 <pre><code>## [1] 68.81702</code></pre>
 <p>Then the degrees of freedom of the predictors.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="answers-2.html#cb260-1" tabindex="-1"></a>Gdf <span class="ot">&lt;-</span> fit<span class="sc">$</span>df.null <span class="sc">-</span> fit<span class="sc">$</span>df.residual</span>
-<span id="cb260-2"><a href="answers-2.html#cb260-2" tabindex="-1"></a></span>
-<span id="cb260-3"><a href="answers-2.html#cb260-3" tabindex="-1"></a>Gdf</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="answers-2.html#cb259-1" tabindex="-1"></a>Gdf <span class="ot">&lt;-</span> fit<span class="sc">$</span>df.null <span class="sc">-</span> fit<span class="sc">$</span>df.residual</span>
+<span id="cb259-2"><a href="answers-2.html#cb259-2" tabindex="-1"></a></span>
+<span id="cb259-3"><a href="answers-2.html#cb259-3" tabindex="-1"></a>Gdf</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>We find the critical value for the G statistic.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="answers-2.html#cb262-1" tabindex="-1"></a><span class="fu">qchisq</span>(.<span class="dv">95</span>, <span class="at">df =</span> Gdf) </span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="answers-2.html#cb261-1" tabindex="-1"></a><span class="fu">qchisq</span>(.<span class="dv">95</span>, <span class="at">df =</span> Gdf) </span></code></pre></div>
 <pre><code>## [1] 7.814728</code></pre>
 <p>And finally, the p-value associated with the G statistic.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="answers-2.html#cb264-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(G_calc, Gdf)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="answers-2.html#cb263-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(G_calc, Gdf)</span></code></pre></div>
 <pre><code>## [1] 7.660539e-15</code></pre>
 <p>Now, we have to decide whether our model is a statistically valid one.
 Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\)</span> (and the p-value is much smaller than 0.05), we can conclude that this is a statistically valid model and that the variables collectively have explanatory power.</p>
 <p><strong>However, do we need ALL three variables?</strong></p>
 <p>Rather than fitting individual models and doing a manual comparison we can make use of the anova function for comparing the nested model using the chi-square test.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="answers-2.html#cb266-1" tabindex="-1"></a><span class="fu">anova</span>(fit, <span class="at">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="answers-2.html#cb265-1" tabindex="-1"></a><span class="fu">anova</span>(fit, <span class="at">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: binomial, link: logit
@@ -505,9 +505,9 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Based on the output, we can remove <span class="math inline">\(X_4\)</span> ratio variable from the model and we update our model (we also know that <span class="math inline">\(X_4\)</span> is not statistically significant from the summary of the model results earlier).</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="answers-2.html#cb268-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit, <span class="sc">~</span>. <span class="sc">-</span>x4, <span class="at">data =</span> train)</span>
-<span id="cb268-2"><a href="answers-2.html#cb268-2" tabindex="-1"></a></span>
-<span id="cb268-3"><a href="answers-2.html#cb268-3" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="answers-2.html#cb267-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit, <span class="sc">~</span>. <span class="sc">-</span>x4, <span class="at">data =</span> train)</span>
+<span id="cb267-2"><a href="answers-2.html#cb267-2" tabindex="-1"></a></span>
+<span id="cb267-3"><a href="answers-2.html#cb267-3" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x1 + x3, family = binomial, data = train)
@@ -532,7 +532,7 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 ## 
 ## Number of Fisher Scoring iterations: 7</code></pre>
 <p>To compare the fit of the new model we will use the Akaike Information Criterion (AIC), which is an index of fit that takes account of parsimony of the model by penalising for the number of parameters.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="answers-2.html#cb270-1" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="answers-2.html#cb269-1" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ x1 + x3, family = binomial, data = train)
@@ -558,15 +558,15 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 ## Number of Fisher Scoring iterations: 7</code></pre>
 <p>The AIC of our initial model is 62.552 and of the new model 62.884 (very little difference). Checking the new model, we can see that it consists of the variables that all significantly contribute in explaining the logits. <em>So, in the spirit of parsimony we can choose the second model to be a better fit.</em> You will learn more about the AIC and other similar metrics later in the course.</p>
 <p>To obtain the overall accuracy rate we need to find the predicted probabilities of the observations kept aside in the test subset.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="answers-2.html#cb272-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit2, test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">&gt;</span> <span class="fl">0.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="answers-2.html#cb271-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit2, test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>) <span class="sc">&gt;</span> <span class="fl">0.5</span></span></code></pre></div>
 <p>Now let’s compute the confusion matrix such that we can compare our predictions on the test data against the actual values in our dataset. We can see that our model predicts one instance incorrectly (it predicts <em>bankrupt</em> when in fact it should predict <em>solvent</em>)</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="answers-2.html#cb273-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">ifelse</span>(pred, <span class="st">&quot;Solvent (pred)&quot;</span>, <span class="st">&quot;Bankrupt (pred)&quot;</span>), test<span class="sc">$</span>y))</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="answers-2.html#cb272-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">ifelse</span>(pred, <span class="st">&quot;Solvent (pred)&quot;</span>, <span class="st">&quot;Bankrupt (pred)&quot;</span>), test<span class="sc">$</span>y))</span></code></pre></div>
 <pre><code>##                  
 ##                    0  1
 ##   Bankrupt (pred) 11  1
 ##   Solvent (pred)   0 10</code></pre>
 <p>If we then compute the overall fraction of correct predictions, we can see that this is extremely high (0.955) which means that our model is performing extremely well. <em>In practice</em>: Although the overall accuracy rate might be easy to compute and to interpret, it makes no distinction about the type of errors being made. Although we did remove one the variables due to high correlation, other variables do show some degree of correlation and so we must be cautious about the strength of the relationship and therefore, the overall predictive performance.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="answers-2.html#cb275-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="answers-2.html#cb274-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.9545455</code></pre>
 <p><em>Do note that if you performing any rounding of the probabilities prior to classification, values near the threshold of 0.5 may be classified differently than if you were not to round the probabilities.</em></p>
 </div>
@@ -575,9 +575,9 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-1-12" class="section level4 unnumbered hasAnchor">
 <h4>Task 1<a href="answers-2.html#task-1-12" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Build a LDA classifier for the final logistic model with two predictors and explain what the output means.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="answers-2.html#cb277-1" tabindex="-1"></a>fit_lda <span class="ot">&lt;-</span> <span class="fu">lda</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
-<span id="cb277-2"><a href="answers-2.html#cb277-2" tabindex="-1"></a></span>
-<span id="cb277-3"><a href="answers-2.html#cb277-3" tabindex="-1"></a>fit_lda</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="answers-2.html#cb276-1" tabindex="-1"></a>fit_lda <span class="ot">&lt;-</span> <span class="fu">lda</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
+<span id="cb276-2"><a href="answers-2.html#cb276-2" tabindex="-1"></a></span>
+<span id="cb276-3"><a href="answers-2.html#cb276-3" tabindex="-1"></a>fit_lda</span></code></pre></div>
 <pre><code>## Call:
 ## lda(y ~ x1 + x3, data = train)
 ## 
@@ -601,7 +601,7 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 </li>
 <li>coefficient(s) of linear discriminants: tells us how our predictor(s) influence the score that is used to classify the observations into one of the two categories. Here, the coefficients both predictors are positive and so this indicates that higher values for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> will make the model more likely classify an observation as belonging to the <strong>solvent</strong> class; also, the larger the absolute value of the coefficient, the stronger the influence on the model.</li>
 </ul>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="answers-2.html#cb279-1" tabindex="-1"></a>fit_lda</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="answers-2.html#cb278-1" tabindex="-1"></a>fit_lda</span></code></pre></div>
 <pre><code>## Call:
 ## lda(y ~ x1 + x3, data = train)
 ## 
@@ -622,13 +622,13 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-2-12" class="section level4 unnumbered hasAnchor">
 <h4>Task 2<a href="answers-2.html#task-2-12" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Compute the predictions and explain what the results mean.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="answers-2.html#cb281-1" tabindex="-1"></a>result_lda <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_lda, test)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="answers-2.html#cb280-1" tabindex="-1"></a>result_lda <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_lda, test)</span></code></pre></div>
 <p>The <code>class</code> component is a factor that contains the predictions for bankruptcy status (solvent/bankrupt).</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="answers-2.html#cb282-1" tabindex="-1"></a>result_lda<span class="sc">$</span>class</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="answers-2.html#cb281-1" tabindex="-1"></a>result_lda<span class="sc">$</span>class</span></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0
 ## Levels: 0 1</code></pre>
 <p>The <code>posterior</code> component is matrix that contains the posterior probability that the corresponding observation belongs to a given class.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="answers-2.html#cb284-1" tabindex="-1"></a>result_lda<span class="sc">$</span>posterior</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="answers-2.html#cb283-1" tabindex="-1"></a>result_lda<span class="sc">$</span>posterior</span></code></pre></div>
 <pre><code>##              0            1
 ## 1   0.17760365 8.223963e-01
 ## 2   0.31142722 6.885728e-01
@@ -653,7 +653,7 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 ## 105 0.99988023 1.197708e-04
 ## 109 0.96722224 3.277776e-02</code></pre>
 <p>The <code>x</code> component contains the linear discriminants.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="answers-2.html#cb286-1" tabindex="-1"></a>result_lda<span class="sc">$</span>x</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="answers-2.html#cb285-1" tabindex="-1"></a>result_lda<span class="sc">$</span>x</span></code></pre></div>
 <pre><code>##            LD1
 ## 1    0.8942494
 ## 2    0.4519351
@@ -678,18 +678,18 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 ## 105 -5.4259016
 ## 109 -2.0480872</code></pre>
 <p>To obtain our predictions, we can simply extract the <code>class</code> element.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="answers-2.html#cb288-1" tabindex="-1"></a>pred_lda <span class="ot">&lt;-</span> result_lda<span class="sc">$</span>class</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="answers-2.html#cb287-1" tabindex="-1"></a>pred_lda <span class="ot">&lt;-</span> result_lda<span class="sc">$</span>class</span></code></pre></div>
 </div>
 <div id="task-3-10" class="section level4 unnumbered hasAnchor">
 <h4>Task 3<a href="answers-2.html#task-3-10" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Compute the confusion matrix for the LDA classifier and calculate the fraction of correct predictions. Explain the results.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="answers-2.html#cb289-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_lda, test<span class="sc">$</span>y))</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="answers-2.html#cb288-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_lda, test<span class="sc">$</span>y))</span></code></pre></div>
 <pre><code>##         
 ## pred_lda  0  1
 ##        0 11  1
 ##        1  0 10</code></pre>
 <p>And now the fraction of correct predictions which, we can see is identical to that obtained for logistic regression.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="answers-2.html#cb291-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="answers-2.html#cb290-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.9545455</code></pre>
 <p>LDA performs identically to logistic regression.</p>
 </div>
@@ -699,9 +699,9 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-1-13" class="section level4 unnumbered hasAnchor">
 <h4>Task 1<a href="answers-2.html#task-1-13" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Build a QDA clasifier and describe the output.</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="answers-2.html#cb293-1" tabindex="-1"></a>fit_qda <span class="ot">&lt;-</span> <span class="fu">qda</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
-<span id="cb293-2"><a href="answers-2.html#cb293-2" tabindex="-1"></a></span>
-<span id="cb293-3"><a href="answers-2.html#cb293-3" tabindex="-1"></a>fit_qda</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="answers-2.html#cb292-1" tabindex="-1"></a>fit_qda <span class="ot">&lt;-</span> <span class="fu">qda</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
+<span id="cb292-2"><a href="answers-2.html#cb292-2" tabindex="-1"></a></span>
+<span id="cb292-3"><a href="answers-2.html#cb292-3" tabindex="-1"></a>fit_qda</span></code></pre></div>
 <pre><code>## Call:
 ## qda(y ~ x1 + x3, data = train)
 ## 
@@ -718,14 +718,14 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-2-13" class="section level4 unnumbered hasAnchor">
 <h4>Task 2<a href="answers-2.html#task-2-13" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Compute the predictions, the confusion matrix, and the fraction of correct predictions and explain what the results mean.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="answers-2.html#cb295-1" tabindex="-1"></a>pred_qda <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_qda, test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)<span class="sc">$</span>class</span>
-<span id="cb295-2"><a href="answers-2.html#cb295-2" tabindex="-1"></a></span>
-<span id="cb295-3"><a href="answers-2.html#cb295-3" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_qda, test<span class="sc">$</span>y))</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="answers-2.html#cb294-1" tabindex="-1"></a>pred_qda <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_qda, test, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)<span class="sc">$</span>class</span>
+<span id="cb294-2"><a href="answers-2.html#cb294-2" tabindex="-1"></a></span>
+<span id="cb294-3"><a href="answers-2.html#cb294-3" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_qda, test<span class="sc">$</span>y))</span></code></pre></div>
 <pre><code>##         
 ## pred_qda  0  1
 ##        0 11  6
 ##        1  0  5</code></pre>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="answers-2.html#cb297-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="answers-2.html#cb296-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.7272727</code></pre>
 <p>The fraction of correct predictions is lower (0.73) than that for logistic regression and for LDA (0.95). We therefore conclude that in this context, QDA does not perform well in comparison to the previous two approaches.</p>
 </div>
@@ -735,42 +735,42 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-1-14" class="section level4 unnumbered hasAnchor">
 <h4>Task 1<a href="answers-2.html#task-1-14" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Perform KNN regression on the same model as in the previous tasks.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="answers-2.html#cb299-1" tabindex="-1"></a>fit_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
-<span id="cb299-2"><a href="answers-2.html#cb299-2" tabindex="-1"></a>               test[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
-<span id="cb299-3"><a href="answers-2.html#cb299-3" tabindex="-1"></a>               train<span class="sc">$</span>y, </span>
-<span id="cb299-4"><a href="answers-2.html#cb299-4" tabindex="-1"></a>               <span class="at">k =</span> <span class="dv">1</span></span>
-<span id="cb299-5"><a href="answers-2.html#cb299-5" tabindex="-1"></a>               )</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="answers-2.html#cb298-1" tabindex="-1"></a>fit_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb298-2"><a href="answers-2.html#cb298-2" tabindex="-1"></a>               test[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb298-3"><a href="answers-2.html#cb298-3" tabindex="-1"></a>               train<span class="sc">$</span>y, </span>
+<span id="cb298-4"><a href="answers-2.html#cb298-4" tabindex="-1"></a>               <span class="at">k =</span> <span class="dv">1</span></span>
+<span id="cb298-5"><a href="answers-2.html#cb298-5" tabindex="-1"></a>               )</span></code></pre></div>
 </div>
 <div id="task-2-14" class="section level4 unnumbered hasAnchor">
 <h4>Task 2<a href="answers-2.html#task-2-14" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Produce a confusion matrix and compute the fraction of correct predictions. Comment on the results.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="answers-2.html#cb300-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(fit_knn, test<span class="sc">$</span>y))</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="answers-2.html#cb299-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(fit_knn, test<span class="sc">$</span>y))</span></code></pre></div>
 <pre><code>##        
 ## fit_knn  0  1
 ##       0 10  1
 ##       1  1 10</code></pre>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="answers-2.html#cb302-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="answers-2.html#cb301-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.9090909</code></pre>
 <p>Our overall fraction of correct predictions is 0.91. Therefore, the KNN classifier (<span class="math inline">\(k = 1\)</span>) performs better than QDA (0.73), but worse than logistic regression and and LDA (0.95).</p>
 </div>
 <div id="task-3-11" class="section level4 unnumbered hasAnchor">
 <h4>Task 3<a href="answers-2.html#task-3-11" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Fit KNN for up to <span class="math inline">\(k = 30\)</span> and then calculate the overall fraction of correct prediction.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="answers-2.html#cb304-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb304-2"><a href="answers-2.html#cb304-2" tabindex="-1"></a>knn_k <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="cf">function</span>(k) {</span>
-<span id="cb304-3"><a href="answers-2.html#cb304-3" tabindex="-1"></a>  fit_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
-<span id="cb304-4"><a href="answers-2.html#cb304-4" tabindex="-1"></a>                 test[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
-<span id="cb304-5"><a href="answers-2.html#cb304-5" tabindex="-1"></a>                 train<span class="sc">$</span>y, <span class="at">k =</span> k)</span>
-<span id="cb304-6"><a href="answers-2.html#cb304-6" tabindex="-1"></a>  <span class="fu">mean</span>(fit_knn <span class="sc">==</span> test<span class="sc">$</span>y)</span>
-<span id="cb304-7"><a href="answers-2.html#cb304-7" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="answers-2.html#cb303-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb303-2"><a href="answers-2.html#cb303-2" tabindex="-1"></a>knn_k <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb303-3"><a href="answers-2.html#cb303-3" tabindex="-1"></a>  fit_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb303-4"><a href="answers-2.html#cb303-4" tabindex="-1"></a>                 test[, <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>, <span class="st">&quot;x3&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb303-5"><a href="answers-2.html#cb303-5" tabindex="-1"></a>                 train<span class="sc">$</span>y, <span class="at">k =</span> k)</span>
+<span id="cb303-6"><a href="answers-2.html#cb303-6" tabindex="-1"></a>  <span class="fu">mean</span>(fit_knn <span class="sc">==</span> test<span class="sc">$</span>y)</span>
+<span id="cb303-7"><a href="answers-2.html#cb303-7" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 <div id="task-4-9" class="section level4 unnumbered hasAnchor">
 <h4>Task 4<a href="answers-2.html#task-4-9" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Create a plot to observe at what value for <code>k</code> the overall fraction of correct predictions is highest.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="answers-2.html#cb305-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, knn_k, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="answers-2.html#cb304-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, knn_k, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
 <p><img src="03-S03-ANS_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>As you can see, the highest fraction of correct predictions is when <span class="math inline">\(k = 1\)</span> (also confirmed by using <code>which.max</code>).</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="answers-2.html#cb306-1" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">which.max</span>(knn_k))</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="answers-2.html#cb305-1" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">which.max</span>(knn_k))</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The behaviour you observe results from several reasons, one of which is the size of the dataset.</p>
 </div>
@@ -780,9 +780,9 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-1-15" class="section level4 unnumbered hasAnchor">
 <h4>Task 1<a href="answers-2.html#task-1-15" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Build a Naive Bayes classifier for the model used previously and describe the output.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="answers-2.html#cb308-1" tabindex="-1"></a>fit_NBayes <span class="ot">&lt;-</span> <span class="fu">naiveBayes</span>(y<span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
-<span id="cb308-2"><a href="answers-2.html#cb308-2" tabindex="-1"></a></span>
-<span id="cb308-3"><a href="answers-2.html#cb308-3" tabindex="-1"></a>fit_NBayes</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="answers-2.html#cb307-1" tabindex="-1"></a>fit_NBayes <span class="ot">&lt;-</span> <span class="fu">naiveBayes</span>(y<span class="sc">~</span> x1 <span class="sc">+</span> x3, <span class="at">data =</span> train)</span>
+<span id="cb307-2"><a href="answers-2.html#cb307-2" tabindex="-1"></a></span>
+<span id="cb307-3"><a href="answers-2.html#cb307-3" tabindex="-1"></a>fit_NBayes</span></code></pre></div>
 <pre><code>## 
 ## Naive Bayes Classifier for Discrete Predictors
 ## 
@@ -813,15 +813,15 @@ Since <span class="math inline">\(G_{calc} = 68.82 &gt; G_{crit} = 7.81 ⇒ H1,\
 <div id="task-2-15" class="section level4 unnumbered hasAnchor">
 <h4>Task 2<a href="answers-2.html#task-2-15" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Compute the predictions, build a confusion matrix, calculate the fraction of correct predictions and interpret the results.</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="answers-2.html#cb310-1" tabindex="-1"></a>pred_NBayes <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_NBayes, test, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="answers-2.html#cb309-1" tabindex="-1"></a>pred_NBayes <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_NBayes, test, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
 <p>And finally, generate our confusion matrix.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="answers-2.html#cb311-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_NBayes, test<span class="sc">$</span>y))</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="answers-2.html#cb310-1" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(pred_NBayes, test<span class="sc">$</span>y))</span></code></pre></div>
 <pre><code>##            
 ## pred_NBayes  0  1
 ##           0 11  8
 ##           1  0  3</code></pre>
 <p>Our overall fraction of correct predictions is <span class="math inline">\(0.64\)</span>.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="answers-2.html#cb313-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="answers-2.html#cb312-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.6363636</code></pre>
 <p>Naive Bayes performs the worst out of all classifiers we have explored.</p>
 <p><em>Based on the approaches we have implemented in this demonstration, logistic regression and LDA perform best.</em></p>

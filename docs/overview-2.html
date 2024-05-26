@@ -371,8 +371,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="color: #333; font-size: 24px; font-style: italic; text-align: justify;">
 <p>Section 3: Classification</p>
 </div>
-<p>This section is comprised of two demonstrations adapted from the core textbook for this course:</p>
-<p>James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An Introduction to Statistical Learning with Applications in R</em>. 2nd ed. New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
+<p>This section is comprised of two demonstrations and one practical.</p>
+<p>The two demonstrations are adapted from the core textbook for this
+course:</p>
+<p>James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). <em>An
+Introduction to Statistical Learning with Applications in R</em>. 2nd ed.
+New York: Springer. <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></p>
+<p>The practical is adapted from a demonstration developed by Dr. Tatjana
+Kecojevic, Lecturer in Social Statistics.</p>
 <div class="ilos">
 <p><strong>Learning Outcomes:</strong></p>
 <ul>
@@ -383,19 +389,19 @@ learning;</p></li>
 accuracy;</p></li>
 <li><p>apply a variety of classification methods and appreciate their
 advantages and limitations;</p></li>
-<li><p>understand the differences between modelling count data using a linear versus a Poisson model;<br />
-</p></li>
+<li><p>understand the differences between modelling count data using a
+linear versus a Poisson model;</p></li>
 <li><p>interpret the results of a Poisson regression model.</p></li>
 </ul>
 </div>
 <p><strong>In this section, you will practice using the functions below. It is
 highly recommended that you explore these functions further using the
 Help tab in your RStudio console.</strong></p>
-<table style="width:83%;">
+<table style="width:96%;">
 <colgroup>
-<col width="27%" />
-<col width="27%" />
-<col width="27%" />
+<col width="25%" />
+<col width="45%" />
+<col width="25%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -407,61 +413,106 @@ Help tab in your RStudio console.</strong></p>
 <tbody>
 <tr class="odd">
 <td align="center"><code>str()</code></td>
-<td align="center">display structure
-of object</td>
-<td align="center">base R</td>
+<td align="center">display structure of object</td>
+<td align="center">utils</td>
+</tr>
+<tr class="even">
+<td align="center"><code>head()</code></td>
+<td align="center">return first part of a data
+object</td>
+<td align="center">utils</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>attach()</code></td>
+<td align="center">attach database to R search
+path (access simplified to
+providing names without
+indexing)</td>
+<td align="center">base</td>
+</tr>
+<tr class="even">
+<td align="center"><code>contrasts()</code></td>
+<td align="center">set/view contrasts of factor</td>
+<td align="center">stats</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>contr.sum()</code></td>
+<td align="center">return matrix of contrasts</td>
+<td align="center">stats</td>
+</tr>
+<tr class="even">
+<td align="center"><code>summary()</code></td>
+<td align="center">produce summary results of
+models</td>
+<td align="center">base</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>lm()</code></td>
+<td align="center">fit linear models</td>
+<td align="center">stats</td>
+</tr>
+<tr class="even">
+<td align="center"><code>coef()</code></td>
+<td align="center">extract model coefficients</td>
+<td align="center">stats</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>plot()</code></td>
+<td align="center">plotting objects</td>
+<td align="center">base</td>
+</tr>
+<tr class="even">
+<td align="center"><code>axis()</code></td>
+<td align="center">add axis to current plot
+(accompanies <code>plot()</code>)</td>
+<td align="center">graphics</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>abline()</code></td>
+<td align="center">add one or more straight lines
+to plot (accompanies <code>plot()</code>)</td>
+<td align="center">graphics</td>
 </tr>
 <tr class="even">
 <td align="center"><code>cor()</code></td>
-<td align="center">compute
-correlation</td>
-<td align="center">base R</td>
+<td align="center">compute correlation</td>
+<td align="center">stats</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>corrplot()</code></td>
-<td align="center"><p>plot correlation
-matrix</p>
-<p>arguments such as
-<code>type</code> and <code>diag</code>
-control the
-structure of the
-plot</p></td>
+<td align="center"><p>plot correlation matrix</p>
+<p>arguments such as <code>type</code> and
+<code>diag</code> control the structure
+of the plot</p></td>
 <td align="center">corrplot</td>
 </tr>
 <tr class="even">
 <td align="center"><code>glm()</code></td>
-<td align="center"><p>fit a generalised
-linear model</p>
-<p>arguments such as
-<code>family</code> control
-the distribution</p></td>
-<td align="center">base R</td>
+<td align="center"><p>fit a generalised linear model</p>
+<p>arguments such as <code>family</code>
+control the distribution</p></td>
+<td align="center">stats</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>predict()</code></td>
-<td align="center"><p>generic function
-for predictions
-from results of
+<td align="center"><p>generic function for
+predictions from results of
 models</p>
-<p>arguments such as
-<code>type</code> specify
-the type of
-predictions
-required</p></td>
-<td align="center">base R</td>
+<p>arguments such as <code>type</code>
+specify the type of
+predictions required</p></td>
+<td align="center">stats</td>
 </tr>
 <tr class="even">
 <td align="center"><code>diag()</code></td>
-<td align="center">extract/replace
-diagonal of a
+<td align="center">extract/replace diagonal of a
 matrix</td>
-<td align="center">base R</td>
+<td align="center">base</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>sum()</code></td>
-<td align="center">compute the sum
-of values</td>
-<td align="center">base R</td>
+<td align="center">compute the sum of values</td>
+<td align="center">base</td>
 </tr>
 <tr class="even">
 <td align="center"><code>lda()</code></td>
@@ -470,9 +521,8 @@ of values</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>table()</code></td>
-<td align="center">build contingency
-table</td>
-<td align="center">base R</td>
+<td align="center">build contingency table</td>
+<td align="center">base</td>
 </tr>
 <tr class="even">
 <td align="center"><code>qda()</code></td>
@@ -481,18 +531,15 @@ table</td>
 </tr>
 <tr class="odd">
 <td align="center"><code>knn()</code></td>
-<td align="center"><p>perform KNN
-classification</p>
-<p>arguments such as
-<code>k</code> control
-number of
-neighbours</p></td>
+<td align="center"><p>perform KNN classification</p>
+<p>arguments such as <code>k</code> control
+number of neighbours</p></td>
 <td align="center">class</td>
 </tr>
 <tr class="even">
 <td align="center"><code>naiveBayes()</code></td>
-<td align="center">apply the Naive
-Bayes classifier</td>
+<td align="center">apply the Naive Bayes
+classifier</td>
 <td align="center">e1071</td>
 </tr>
 </tbody>
