@@ -20,6 +20,11 @@ rmd_files:
 - 03-S03-D2.Rmd
 - 03-S03-P1.Rmd
 - 03-S03-ANS.Rmd
+- 04-S04-overview.Rmd
+- 04-S04-D1.Rmd
+- 04-S04-D2.Rmd
+- 04-S04-P1.Rmd
+- 04-S04-ANS.Rmd
 
 
 output_dir: docs

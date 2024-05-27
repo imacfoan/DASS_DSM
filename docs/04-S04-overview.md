@@ -12,10 +12,9 @@ editor_options:
 Section 4: Resampling Methods
 :::
 
-This section is comprised two demonstrations adapted from the core
-textbook for this course:
+This section is comprised of two demonstrations and a practical adapted from exercises from the core textbook for this course (James et. al 2019) and/or from material developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics. 
 
-James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to Statistical Learning with Applications in R*. 2nd ed.New York: Springer. <https://www.statlearning.com/>
+James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to Statistical Learning with Applications in R*. 2nd ed.New York: Springer. <https://www.statlearning.com/>. 
 
 ::: ilos
 **Learning Outcomes:**

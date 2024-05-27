@@ -8,8 +8,7 @@ editor_options:
 
 Loading the necessary packages: 
 
-
-```r
+```{r warning = FALSE, message = FALSE}
 library(ISLR2)
 library(boot)
 ```
@@ -45,8 +44,7 @@ Using the validation set approach, estimate the test error of this model followi
 
 #### 1. Split the sample set into a training set and a validation set (80/20) {-}
 
-
-```r
+```{r}
 set.seed(42)
 split_idx <- sample(nrow(Default), 8000)
 default_train <- Default[split_idx, ]
@@ -56,8 +54,7 @@ default_test <- Default[-split_idx, ]
 
 #### 2. Fit a multiple logistic regression model using only the training observations. {-}
 
-
-```r
+```{r}
 fit <- glm(default ~ income + balance, data = default_train, 
            family = "binomial")
 ```
@@ -65,30 +62,17 @@ fit <- glm(default ~ income + balance, data = default_train,
 
 #### 3. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the default category if the posterior probability is greater than 0.5. {-}
 
-
-```r
+```{r}
 pred <- ifelse(predict(fit, default_test, type = "response") > 0.5, "Yes", "No")
 
 table(pred, default_test$default)
 ```
 
-```
-##      
-## pred    No  Yes
-##   No  1932   44
-##   Yes    7   17
-```
-
 
 #### 4. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified. {-}
 
-
-```r
+```{r}
 mean(pred != default_test$default)
-```
-
-```
-## [1] 0.0255
 ```
 
 
@@ -96,8 +80,7 @@ mean(pred != default_test$default)
 
 Write a function that repeats the process above three times, using three different splits of the observations into a training set and a validation set. Comment on the results obtained. *Hint: use the base R function `replicate()`*.
 
-
-```r
+```{r}
 set.seed(42)
 replicate(3, {
   split_idx <- sample(nrow(Default), 8000)
@@ -112,10 +95,6 @@ replicate(3, {
 })
 ```
 
-```
-## [1] 0.0255 0.0310 0.0270
-```
-
 The results obtained vary (as expected) and depend on the samples allocated to training and the test dataset.
 
 
@@ -123,8 +102,7 @@ The results obtained vary (as expected) and depend on the samples allocated to t
 
 Write a similar function as in Task 2, but this time include the variable **student** in the model. Comment on whether or not including a dummy variable for student leads to a reduction in the test error rate.
 
-
-```r
+```{r}
 replicate(3, {
   split_idx <- sample(nrow(Default), 8000)
   default_train <- Default[split_idx, ]
@@ -136,10 +114,6 @@ replicate(3, {
   
   mean(pred != default_test$default)
 })
-```
-
-```
-## [1] 0.0265 0.0305 0.0275
 ```
 
 Including the **student** variable does not seem to make a substantial improvement to the test error.
@@ -165,8 +139,7 @@ We will use the validation set approach to estimate the test error of a logistic
 
 Fit a logistic regression model that predicts market movement using **Lag1** and **Lag2**
 
-
-```r
+```{r}
 fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-1, ], family = "binomial")
 ```
 
@@ -174,14 +147,8 @@ fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-1, ], family = "binomial")
 
 Use the model to predict the classification of the first observation. Was this observation correctly classified?
  
-
-```r
+```{r}
 predict(fit, newdata = Weekly[1, , drop = FALSE], type = "response") > 0.5
-```
-
-```
-##    1 
-## TRUE
 ```
  
 No, the observation was incorrectly classified.
@@ -196,8 +163,7 @@ Write a for loop that performs each of the steps below:
 4. Determine whether or not an error was made in predicting the direction for the $i^{th}$ observation. If an error was made, then indicate this as a 1, and otherwise indicate it as a 0.
 
 
-
-```r
+```{r}
 error <- numeric(nrow(Weekly))
 for (i in 1:nrow(Weekly)) {
   fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ], family = "binomial")
@@ -210,13 +176,8 @@ for (i in 1:nrow(Weekly)) {
 
 Obtain the LOOCV estimate for the test error. Comment on the results.
   
-
-```r
+```{r}
 mean(error)
-```
-
-```
-## [1] 0.4499541
 ```
   
 The LOOCV test error rate is 45% which implies that our predictions are marginally more often correct than not.
@@ -225,46 +186,17 @@ The LOOCV test error rate is 45% which implies that our predictions are marginal
 
 In this exercise, we return to our logistic regression model that predicts the probability of credit card **default** using **income** and **balance** and implement the bootstrap approach to compute estimates for the standard errors of the coefficients. 
 
-
-```r
+```{r}
 fit <- glm(default ~ income + balance, data = Default, family = "binomial")
 
 summary(fit)
-```
-
-```
-## 
-## Call:
-## glm(formula = default ~ income + balance, family = "binomial", 
-##     data = Default)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4725  -0.1444  -0.0574  -0.0211   3.7245  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -1.154e+01  4.348e-01 -26.545  < 2e-16 ***
-## income       2.081e-05  4.985e-06   4.174 2.99e-05 ***
-## balance      5.647e-03  2.274e-04  24.836  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 2920.6  on 9999  degrees of freedom
-## Residual deviance: 1579.0  on 9997  degrees of freedom
-## AIC: 1585
-## 
-## Number of Fisher Scoring iterations: 8
 ```
 
 ### Task 1 {-}
 
 Write a function called `boot.fn()`, that takes as input the Default data set as well as an index of the observations, and that outputs the coefficient estimates for income and balance in the multiple logistic regression model.
 
-
-```r
+```{r}
 boot.fn <- function(x, i) {
   fit <- glm(default ~ income + balance, data = x[i, ], family = "binomial")
   coef(fit)[-1]
@@ -275,25 +207,9 @@ boot.fn <- function(x, i) {
 
 Use the `boot()` function together with the new `boot.fn()` function to estimate the standard errors of the logistic regression coefficients for income and balance. Comment on the estimated standard errors obtained using the `glm()` function and using your own bootstrap function.
 
-
-```r
+```{r}
 set.seed(42)
 boot(Default, boot.fn, R = 1000)
-```
-
-```
-## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Default, statistic = boot.fn, R = 1000)
-## 
-## 
-## Bootstrap Statistics :
-##         original       bias     std. error
-## t1* 2.080898e-05 2.737444e-08 5.073444e-06
-## t2* 5.647103e-03 1.176249e-05 2.299133e-04
 ```
 
 The standard errors obtained by bootstrapping are similar to those estimated by `glm()`.
@@ -309,50 +225,24 @@ For the tasks below, you will require the **Boston** dataset. This dataset is pa
 
 Provide an estimate for the population mean of the **medv** variable which is the median value of owner-occupied homes. 
 
-
-```r
+```{r}
 (mu <- mean(Boston$medv))
-```
-
-```
-## [1] 22.53281
 ```
 
 ### Task 2 {-}
 
 Provide an estimate of the standard error of  $\hat{\mu}$ and interpret the result. **Hint: You can compute the standard error of the sample mean by dividing the sample standard deviation by the square root of the number of observations.**
  
-
-```r
+```{r}
 sd(Boston$medv) / sqrt(length(Boston$medv))
-```
-
-```
-## [1] 0.4088611
 ```
  
 ### Task 3 {-}
 Now estimate the standard error of  $\hat{\mu}$ using the bootstrap. How does this compare to your answer from Task 2?
   
-
-```r
+```{r}
 set.seed(42)
 (bs <- boot(Boston$medv, function(v, i) mean(v[i]), 10000))
-```
-
-```
-## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Boston$medv, statistic = function(v, i) mean(v[i]), 
-##     R = 10000)
-## 
-## 
-## Bootstrap Statistics :
-##     original      bias    std. error
-## t1* 22.53281 0.002175751   0.4029139
 ```
 
 The standard error using the bootstrap (0.403) is very close to that obtained from the formula above (0.409).
@@ -361,52 +251,26 @@ The standard error using the bootstrap (0.403) is very close to that obtained fr
 
 Based on your bootstrap estimate, provide a 95% confidence interval for the mean of medv. Compare it to the results obtained using `t.test(Boston$medv)`. Hint: You can approximate a 95% confidence interval using the formula  $[\hat{\mu}−2SE(\hat{\mu}),\hat{\mu} + 2SE(\hat{\mu})]$. 
 
-
-```r
+```{r}
 se <- sd(bs$t)
 c(mu - 2 * se, mu + 2 * se)
-```
-
-```
-## [1] 21.72698 23.33863
 ```
 
 ### Task 5 {-}
 
 Based on this data set, provide an estimate,  $\hat{\mu}_{med}$ for the median value of **medv** in the population.
  
-
-```r
+```{r}
 median(Boston$medv)
-```
-
-```
-## [1] 21.2
 ```
  
 ### Task 6 {-}
 
 Estimate the standard error of $\hat{\mu}_{med}$ using the bootstrap. Comment on your findings.
  
-
-```r
+```{r}
 set.seed(42)
 boot(Boston$medv, function(v, i) median(v[i]), 10000)
-```
-
-```
-## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Boston$medv, statistic = function(v, i) median(v[i]), 
-##     R = 10000)
-## 
-## 
-## Bootstrap Statistics :
-##     original   bias    std. error
-## t1*     21.2 -0.01331   0.3744634
 ```
  
 The estimated standard error of the median is 0.374. This is lower than the standard error of the mean.
@@ -415,38 +279,16 @@ The estimated standard error of the median is 0.374. This is lower than the stan
 
 Based on this data set, provide an estimate for the tenth percentile of medv in Boston census tracts. Call this quantity  $\hat{\mu}_{0.1}$. *Hint: you can use the `quantile()` function.*
  
-
-```r
+```{r}
 quantile(Boston$medv, 0.1)
-```
-
-```
-##   10% 
-## 12.75
 ```
 
 ### Task 8 {-}
 Use the bootstrap to estimate the standard error of  $\hat{\mu}_{0.1}$ and comment on your findings.
  
-
-```r
+```{r}
 set.seed(42)
 boot(Boston$medv, function(v, i) quantile(v[i], 0.1), 10000)
-```
-
-```
-## 
-## ORDINARY NONPARAMETRIC BOOTSTRAP
-## 
-## 
-## Call:
-## boot(data = Boston$medv, statistic = function(v, i) quantile(v[i], 
-##     0.1), R = 10000)
-## 
-## 
-## Bootstrap Statistics :
-##     original   bias    std. error
-## t1*    12.75 0.013405    0.497298
 ```
 
 We get a standard error of about 0.5. This is higher than the standard error of the median. Nevertheless the standard error is still quite small, thus we can be fairly confidence about the value of the 10th percentile.
