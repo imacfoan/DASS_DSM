@@ -37,7 +37,7 @@ highly recommended that you explore these functions further using the
 Help tab in your RStudio console.**
 
 |                    Function                    |                                              Description                                              |    Package     |
-|:----------------:|:--------------------------------------:|:-------------:|
+|:----------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:--------------:|
 |                   `kmeans()`                   |                              perform k-means clustering on a data matrix                              | base R (stats) |
 |                `fviz_cluster()`                |                                     visualise clustering results                                      |   factoextra   |
 |                  `map_dbl()`                   |                             apply a function to each element of a vector                              |     purrr      |

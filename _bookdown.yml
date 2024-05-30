@@ -25,6 +25,18 @@ rmd_files:
 - 04-S04-D2.Rmd
 - 04-S04-P1.Rmd
 - 04-S04-ANS.Rmd
+- 05-S05-overview.Rmd
+- 05-S05-P1.Rmd
+- 05-S05-P2.Rmd
+- 05-S05-D1.Rmd
+- 05-S05-D2.Rmd
+- 05-S05-ANS.Rmd
+- 07-S07-overview.Rmd
+- 07-S07-D1.Rmd
+- 07-S07-D2.Rmd
+- 08-S08-overview.Rmd
+- 08-S08-D1.Rmd
+
 
 
 output_dir: docs

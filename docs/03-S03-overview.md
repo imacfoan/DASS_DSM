@@ -48,75 +48,74 @@ Kecojevic, Lecturer in Social Statistics.
 highly recommended that you explore these functions further using the
 Help tab in your RStudio console.**
 
-+-----------------+--------------------------------+-----------------+
-| Function        | Description                    | Package         |
-+:===============:+:==============================:+:===============:+
-| `str()`         | display structure of object    | utils           |
-+-----------------+--------------------------------+-----------------+
-| `head()`        | return first part of a data    | utils           |
-|                 | object                         |                 |
-+-----------------+--------------------------------+-----------------+
-| `attach()`      | attach database to R search    | base            |
-|                 | path (access simplified to     |                 |
-|                 | providing names without        |                 |
-|                 | indexing)                      |                 |
-+-----------------+--------------------------------+-----------------+
-| `contrasts()`   | set/view contrasts of factor   | stats           |
-+-----------------+--------------------------------+-----------------+
-| `contr.sum()`   | return matrix of contrasts     | stats           |
-+-----------------+--------------------------------+-----------------+
-| `summary()`     | produce summary results of     | base            |
-|                 | models                         |                 |
-+-----------------+--------------------------------+-----------------+
-| `lm()`          | fit linear models              | stats           |
-+-----------------+--------------------------------+-----------------+
-| `coef()`        | extract model coefficients     | stats           |
-+-----------------+--------------------------------+-----------------+
-| `plot()`        | plotting objects               | base            |
-+-----------------+--------------------------------+-----------------+
-| `axis()`        | add axis to current plot       | graphics        |
-|                 | (accompanies `plot()`)         |                 |
-+-----------------+--------------------------------+-----------------+
-| `abline()`      | add one or more straight lines | graphics        |
-|                 | to plot (accompanies `plot()`) |                 |
-+-----------------+--------------------------------+-----------------+
-| `cor()`         | compute correlation            | stats           |
-+-----------------+--------------------------------+-----------------+
-| `corrplot()`    | plot correlation matrix        | corrplot        |
-|                 |                                |                 |
-|                 | arguments such as `type` and   |                 |
-|                 | `diag` control the structure   |                 |
-|                 | of the plot                    |                 |
-+-----------------+--------------------------------+-----------------+
-| `glm()`         | fit a generalised linear model | stats           |
-|                 |                                |                 |
-|                 | arguments such as `family`     |                 |
-|                 | control the distribution       |                 |
-+-----------------+--------------------------------+-----------------+
-| `predict()`     | generic function for           | stats           |
-|                 | predictions from results of    |                 |
-|                 | models                         |                 |
-|                 |                                |                 |
-|                 | arguments such as `type`       |                 |
-|                 | specify the type of            |                 |
-|                 | predictions required           |                 |
-+-----------------+--------------------------------+-----------------+
-| `diag()`        | extract/replace diagonal of a  | base            |
-|                 | matrix                         |                 |
-+-----------------+--------------------------------+-----------------+
-| `sum()`         | compute the sum of values      | base            |
-+-----------------+--------------------------------+-----------------+
-| `lda()`         | perform LDA                    | MASS            |
-+-----------------+--------------------------------+-----------------+
-| `table()`       | build contingency table        | base            |
-+-----------------+--------------------------------+-----------------+
-| `qda()`         | perform QDA                    | MASS            |
-+-----------------+--------------------------------+-----------------+
-| `knn()`         | perform KNN classification     | class           |
-|                 |                                |                 |
-|                 | arguments such as `k` control  |                 |
-|                 | number of neighbours           |                 |
-+-----------------+--------------------------------+-----------------+
-| `naiveBayes()`  | apply the Naive Bayes          | e1071           |
-|                 | classifier                     |                 |
-+-----------------+--------------------------------+-----------------+
++----------------+--------------------------------+----------------+
+| Function       | Description                    | Package        |
++:==============:+:==============================:+:==============:+
+| `str()`        | display structure of object    | utils          |
++----------------+--------------------------------+----------------+
+| `head()`       | return first part of a data    | utils          |
+|                | object                         |                |
++----------------+--------------------------------+----------------+
+| `attach()`     | attach database to R search    | base           |
+|                | path (access simplified to     |                |
+|                | providing names without        |                |
+|                | indexing)                      |                |
++----------------+--------------------------------+----------------+
+| `contrasts()`  | set/view contrasts of factor   | stats          |
++----------------+--------------------------------+----------------+
+| `contr.sum()`  | return matrix of contrasts     | stats          |
++----------------+--------------------------------+----------------+
+| `summary()`    | produce summary results        | base           |
++----------------+--------------------------------+----------------+
+| `lm()`         | fit linear models              | stats          |
++----------------+--------------------------------+----------------+
+| `coef()`       | extract model coefficients     | stats          |
++----------------+--------------------------------+----------------+
+| `plot()`       | plotting objects               | base           |
++----------------+--------------------------------+----------------+
+| `axis()`       | add axis to current plot       | graphics       |
+|                | (accompanies `plot()`)         |                |
++----------------+--------------------------------+----------------+
+| `abline()`     | add one or more straight lines | graphics       |
+|                | to plot (accompanies `plot()`) |                |
++----------------+--------------------------------+----------------+
+| `cor()`        | compute correlation            | stats          |
++----------------+--------------------------------+----------------+
+| `corrplot()`   | plot correlation matrix        | corrplot       |
+|                |                                |                |
+|                | arguments such as `type` and   |                |
+|                | `diag` control the structure   |                |
+|                | of the plot                    |                |
++----------------+--------------------------------+----------------+
+| `glm()`        | fit a generalised linear model | stats          |
+|                |                                |                |
+|                | arguments such as `family`     |                |
+|                | control the distribution       |                |
++----------------+--------------------------------+----------------+
+| `predict()`    | generic function for           | stats          |
+|                | predictions from results of    |                |
+|                | models                         |                |
+|                |                                |                |
+|                | arguments such as `type`       |                |
+|                | specify the type of            |                |
+|                | predictions required           |                |
++----------------+--------------------------------+----------------+
+| `diag()`       | extract/replace diagonal of a  | base           |
+|                | matrix                         |                |
++----------------+--------------------------------+----------------+
+| `sum()`        | compute the sum of values      | base           |
++----------------+--------------------------------+----------------+
+| `lda()`        | perform LDA                    | MASS           |
++----------------+--------------------------------+----------------+
+| `table()`      | build contingency table        | base           |
++----------------+--------------------------------+----------------+
+| `qda()`        | perform QDA                    | MASS           |
++----------------+--------------------------------+----------------+
+| `knn()`        | perform KNN classification     | class          |
+|                |                                |                |
+|                | arguments such as `k` control  |                |
+|                | number of neighbours           |                |
++----------------+--------------------------------+----------------+
+| `naiveBayes()` | apply the Naive Bayes          | e1071          |
+|                | classifier                     |                |
++----------------+--------------------------------+----------------+

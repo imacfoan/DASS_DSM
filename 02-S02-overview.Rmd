@@ -38,48 +38,45 @@ Kecojevic, Lecturer in Social Statistics.
 highly recommended that you explore these functions further using the
 Help tab in your RStudio console.**
 
-+------------------+----------------------------------+---------------+
-| Function         | Description                      | Package       |
-+:================:+:================================:+:=============:+
-| `lm()`           | fit linear models                | stats         |
-+------------------+----------------------------------+---------------+
-| `predict()`      | generic function for predictions | stats         |
-|                  | from results of different models |               |
-|                  | (e.g. `predict.lm()`)            |               |
-+------------------+----------------------------------+---------------+
-| `confint()`      | compute confidence intervals     | stats         |
-+------------------+----------------------------------+---------------+
-| `plot()`         | generic function for plotting    | base          |
-+------------------+----------------------------------+---------------+
-| `legend()`       | add legend (to `plot()`)         | graphics      |
-|                  |                                  |               |
-|                  | arguments such as `col`, `lty`,  |               |
-|                  | and `cex` control colour, line   |               |
-|                  | type, and font size respectively |               |
-+------------------+----------------------------------+---------------+
-| `abline()`       | adding one or more straight      | graphics      |
-|                  | lines to plot                    |               |
-+------------------+----------------------------------+---------------+
-| `cor()`          | computes correlation between     | stats         |
-|                  | variables                        |               |
-+------------------+----------------------------------+---------------+
-| `rnorm()`        | generates normal distribution    | stats         |
-+------------------+----------------------------------+---------------+
-| `poly()`         | returns or evaluates polynomials | stats         |
-+------------------+----------------------------------+---------------+
-| `par()`          | set graphical parameters (e.g.   | graphics      |
-|                  | `mfrow()` )                      |               |
-+------------------+----------------------------------+---------------+
-| `subset()`       | return subset of a data object   | base          |
-|                  | (vector, matrix, or dataframe)   |               |
-|                  | according to condition(s)        |               |
-+------------------+----------------------------------+---------------+
-| `anova()`        | compute analysis of variance for | stats         |
-+------------------+----------------------------------+---------------+
-| `rnorm()`        | density, distribution function,  | stats         |
-|                  | quantile function and random     |               |
-|                  | generation for the normal        |               |
-|                  | distribution                     |               |
-+------------------+----------------------------------+---------------+
-| `sqrt()`         | compute square root              | base          |
-+------------------+----------------------------------+---------------+
++-------------+-------------------------------------------+----------+
+| Function    | Description                               | Package  |
++:===========:+:=========================================:+:========:+
+| `lm()`      | fit linear models                         | stats    |
++-------------+-------------------------------------------+----------+
+| `predict()` | generic function for predictions from     | stats    |
+|             | results of different models (e.g.         |          |
+|             | `predict.lm()`)                           |          |
++-------------+-------------------------------------------+----------+
+| `confint()` | compute confidence intervals              | stats    |
++-------------+-------------------------------------------+----------+
+| `plot()`    | generic function for plotting             | base     |
++-------------+-------------------------------------------+----------+
+| `legend()`  | add legend (to `plot()`)                  | graphics |
+|             |                                           |          |
+|             | arguments such as `col`, `lty`, and `cex` |          |
+|             | control colour, line type, and font size  |          |
+|             | respectively                              |          |
++-------------+-------------------------------------------+----------+
+| `abline()`  | adding one or more straight lines to plot | graphics |
++-------------+-------------------------------------------+----------+
+| `cor()`     | computes correlation between variables    | stats    |
++-------------+-------------------------------------------+----------+
+| `rnorm()`   | generates normal distribution             | stats    |
++-------------+-------------------------------------------+----------+
+| `poly()`    | returns or evaluates polynomials          | stats    |
++-------------+-------------------------------------------+----------+
+| `par()`     | set graphical parameters (e.g. `mfrow()`  | graphics |
+|             | )                                         |          |
++-------------+-------------------------------------------+----------+
+| `subset()`  | return subset of a data object (vector,   | base     |
+|             | matrix, or dataframe) according to        |          |
+|             | condition(s)                              |          |
++-------------+-------------------------------------------+----------+
+| `anova()`   | compute analysis of variance for          | stats    |
++-------------+-------------------------------------------+----------+
+| `rnorm()`   | density, distribution function, quantile  | stats    |
+|             | function and random generation for the    |          |
+|             | normal distribution                       |          |
++-------------+-------------------------------------------+----------+
+| `sqrt()`    | compute square root                       | base     |
++-------------+-------------------------------------------+----------+

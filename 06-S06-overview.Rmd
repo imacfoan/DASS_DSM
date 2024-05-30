@@ -9,8 +9,17 @@ editor_options:
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 6
+Section 6: Linear Model Selection and Regularisation
 :::
+
+This section is comprised of two practicals and two demonstrations. 
+
+
+
+
+
+James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An Introduction to Statistical Learning with Applications in R*. 2nd ed.New York: Springer. <https://www.statlearning.com/>. 
+
 
 **In this section, we will cover the following functions:**
 

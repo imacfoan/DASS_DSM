@@ -1,5 +1,5 @@
 --- 
-title: "Data Science Modelling"
+title: "SOST70033 Data Science Modelling"
 author: "Dr. Ioana Macoveciuc"
 date: null
 site: bookdown::bookdown_site

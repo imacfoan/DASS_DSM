@@ -42,7 +42,7 @@ Using the validation set approach, estimate the test error of this model followi
 
 *Don't forget that it is important to set a random seed before splitting the data and running the analysis, to obtain consistent results.*
 
-#### 1. Split the sample set into a training set and a validation set (80/20) {-}
+**1. Split the sample set into a training set and a validation set (80/20)** {-}
 
 ```{r}
 set.seed(42)
@@ -52,7 +52,7 @@ default_test <- Default[-split_idx, ]
 ```
 
 
-#### 2. Fit a multiple logistic regression model using only the training observations. {-}
+**2. Fit a multiple logistic regression model using only the training observations.** {-}
 
 ```{r}
 fit <- glm(default ~ income + balance, data = default_train, 
@@ -60,7 +60,7 @@ fit <- glm(default ~ income + balance, data = default_train,
 ```
 
 
-#### 3. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the default category if the posterior probability is greater than 0.5. {-}
+**3. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the default category if the posterior probability is greater than 0.5.** {-}
 
 ```{r}
 pred <- ifelse(predict(fit, default_test, type = "response") > 0.5, "Yes", "No")
@@ -69,7 +69,7 @@ table(pred, default_test$default)
 ```
 
 
-#### 4. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified. {-}
+**4. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.** {-}
 
 ```{r}
 mean(pred != default_test$default)

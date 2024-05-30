@@ -223,9 +223,9 @@ regression.
 
 Nonetheless, the set of hypotheses we wish to test is the same:
 
-$H_0:\beta_i = 0$ (coefficient ii is not significant, thus Xi is not
+$H_0:\beta_i = 0$ (coefficient is not significant, thus $X_i$ is not
 important)\
-$H_1:\beta_i \ne 0$ (coefficient ii is significant, thus Xi is
+$H_1:\beta_i \ne 0$ (coefficient is significant, thus $X_i$ is
 important)
 
 **Decision Rule**: If the Wald’s z statistic lies between -2 and +2,
@@ -240,7 +240,8 @@ Rather than fitting individual models and doing a manual comparison we
 can make use of the anova function for comparing the nested model using
 the chi-square test.
 
-```{r}
+```{r warning = FALSE, message = FALSE}
+
 anova(fit, test="Chisq")
 ```
 

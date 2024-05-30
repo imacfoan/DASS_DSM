@@ -44,6 +44,33 @@ library(tidyverse)
 library(GGally)
 ```
 
+Once you load the `carData` package, the **Salaries** dataset will be
+'loaded' too and can be accessed without needing to assign it to a
+separate object.
+
+```{r}
+head(Salaries)
+```
+
+As usual, we can access variables within the dataset by indexing them.
+
+```{r}
+Salaries$salary
+```
+
+However, if we want to access variables within the dataset without
+needing to index them we can use the base R `attach()` function.
+
+```{r}
+attach(Salaries)
+```
+
+So now, we can call on the variables from the dataset directly.
+
+```{r}
+salary
+```
+
 ## Part I {-}
 
 ### Exploring the data {-}

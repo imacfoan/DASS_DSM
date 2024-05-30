@@ -1,6 +1,0 @@
----
-title: "Untitled"
-author: "Ioana Macoveciuc"
-date: "2024-05-23"
-output: html_document
----
