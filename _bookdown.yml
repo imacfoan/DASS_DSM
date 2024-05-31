@@ -31,12 +31,16 @@ rmd_files:
 - 05-S05-D1.Rmd
 - 05-S05-D2.Rmd
 - 05-S05-ANS.Rmd
+- 06-S06-overview.Rmd
+- 06-S06-D1.Rmd
+- 06-S06-D2.Rmd
+- 06-S06-D3.Rmd
+- 06-S06-D4.Rmd
 - 07-S07-overview.Rmd
 - 07-S07-D1.Rmd
 - 07-S07-D2.Rmd
 - 08-S08-overview.Rmd
 - 08-S08-D1.Rmd
-
 
 
 output_dir: docs

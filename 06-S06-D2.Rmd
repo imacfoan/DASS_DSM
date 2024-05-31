@@ -1,0 +1,218 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Demonstration 2: Regularisation {-}
+
+::: file
+For the tasks below, you require the **Hitters** dataset from the `ISRL2` package.
+
+You will also need the `glmnet` package; please make sure to install and load it before you begin the practical.
+:::
+
+The **Hitters** dataset contains Major League Baseball Data from the 1986 and 1987 season. It is a dataframe with 322 observations and 20 variables. To learn more about the variables, type `?Hitters` in your console. 
+
+The goal of this demonstration is to predict salary of major league players using ridge regression and lasso.
+
+Loading the required packages: 
+
+```{r warning = FALSE, message = FALSE}
+library(ISLR2)
+library(glmnet)
+```
+
+## Ridge Regression {-}
+
+Before we proceed, we must check whether the dataset has any missing values. 
+
+```{r}
+attach(Hitters)
+sum(is.na(Hitters$Salary))
+```
+
+We see that `Salary` is missing for $59$ players and so we must remove it before the analysis.
+
+```{r}
+Hitters <- na.omit(Hitters)
+sum(is.na(Hitters))
+```
+
+In R, we can use the `glmnet` package to perform ridge regression (amongst many other types of models, including lasso). This function works slightly differently to the other model fitting functions we have covered so far in the course. This is because the `glmnet()` function does not accept a formula-based specification (i.e. `y ~ x`) since it only takes numerical, quantitative inputs. Therefore, instead of a formula, it requires the predictors to be specified as a matrix `x` and the response as a separate object `y`.   
+
+Therefore, we need to prepare our data adequately before performing regularisation. The `model.matrix()` function from the built-in `stats` package is useful for creating our matrix `x`. This function produces a matrix of all predictors (in this case, 12) and automatically transforms any factor variables into dummy variables. 
+
+```{r}
+x <- model.matrix(Salary ~ ., Hitters)
+x
+```
+
+As you can see from the output, the function also adds an extra column called `intercept` to the **x** object. Since our data frame does not contain any values for the intercept, R automatically adds a 1 across all rows and so we need to drop the column before proceeding (hence the reason for `[, -1]`). For our **y** object, we only need the values of the response variable **Salary**. 
+
+```{r}
+x <- model.matrix(Salary ~ ., Hitters)[, -1]
+y <- Hitters$Salary
+```
+
+Also, by default the `glmnet()` function performs ridge regression for an automatically selected range of $\lambda$ values. However, here we have chosen to implement the function over a grid of values ranging from $\lambda=10^{10}$ to $\lambda=10^{-2}$, essentially covering the full range of scenarios from the null model containing only the intercept, to the least squares fit. We call this object **grid** and feed this range of values to the `glmnet()` argument for `lambda`. The `glmnet()` function also has an `alpha` argument that determines what type of model is fit. So, for a ridge regression model, we need to set `alpha` to `0`.  
+
+Also, tote that by default, the `glmnet()` function standardises the variables so that they are on the same scale (to override this, set the argument `standardize = FALSE`).
+
+
+```{r}
+grid <- 10^seq(10, -2, length = 100)
+
+ridge.mod <- glmnet(x, y, alpha = 0, lambda = grid)
+```
+
+Associated with each value of $\lambda$ is a vector of ridge regression coefficients, stored in a matrix that can be accessed using `coef()`. In this case, it is a $20 \times 100$ matrix, with $20$ rows (one for each predictor, plus an intercept) and $100$ columns (one for each value of $\lambda$).
+
+```{r}
+dim(coef(ridge.mod))
+```
+
+The resulting `ridge.mod` object has various values associated with it such as lambda which can be accessed using the $\$$ sign. So for example, the 50th value for lambda (midway) is $\lambda=11{,}498$
+
+```{r}
+ridge.mod$lambda[50]
+```
+
+We expect the coefficient estimates to be much smaller, in terms of $\ell_2$ norm, when a large value of $\lambda$ is used, as compared to when a small value of $\lambda$ is used. These are the coefficients when $\lambda=11{,}498$, along with their $\ell_2$ norm:
+
+```{r}
+coef(ridge.mod)[, 50]
+sqrt(sum(coef(ridge.mod)[-1, 50]^2))
+```
+
+In contrast, for smaller values of $\lambda$, the associated $\ell_2$ norm of the coefficients are much larger. 
+
+```{r}
+ridge.mod$lambda[60]
+coef(ridge.mod)[, 60]
+sqrt(sum(coef(ridge.mod)[-1, 60]^2))
+```
+
+We can also use the `predict()` function for a number of purposes. For instance, we can obtain the ridge regression coefficients for a new value of $\lambda$, for example, $50$.
+
+```{r}
+predict(ridge.mod, s = 50, type = "coefficients")
+```
+
+We now split the samples into a training set and a test set in order to estimate the test error of ridge regression. As you already know, there many ways to split datasets, one of which is to randomly choose a subset of numbers between $1$ and $n$; these can then be used as the indices for the training observations.  
+
+We first set a random seed so that the results obtained will be reproducible.
+
+```{r}
+set.seed(1)
+train <- sample(1:nrow(x), nrow(x) / 2)
+test <- (-train)
+y.test <- y[test]
+```
+
+Next we fit a ridge regression model on the training set.
+
+```{r}
+ridge.mod <- glmnet(x[train, ], y[train], alpha = 0,
+                    lambda = grid, thresh = 1e-12)
+```
+
+And then evaluate its MSE on the test set, using $\lambda = 4$. This time we get predictions for a test set, by replacing `type="coefficients"` with the `newx` argument. The test MSE is $142{,}199$
+
+```{r}
+ridge.pred <- predict(ridge.mod, s = 4, newx = x[test, ])
+mean((ridge.pred - y.test)^2)
+```
+
+We now check whether there is any benefit to performing ridge regression with $\lambda=4$ instead of just performing least squares regression.  
+
+Recall that least squares is simply ridge regression with $\lambda=0$. (In order for `glmnet()` to yield the exact least squares coefficients when $\lambda=0$, we use the argument `exact = T` when calling the `predict()` function. Otherwise, the `predict()` function will interpolate over the grid of $\lambda$ values used in fitting the `glmnet()` model, yielding approximate results. When we use `exact = T`, there remains a slight discrepancy in the third decimal place between the output of `glmnet()` when $\lambda = 0$ and the output of `lm()`; this  is due to numerical approximation on the part of `glmnet()`. 
+
+
+```{r}
+ridge.pred <- predict(ridge.mod, s = 0, newx = x[test, ],
+                      exact = T, x = x[train, ], y = y[train])
+
+mean((ridge.pred - y.test)^2)
+```
+
+We can see that the test MSE for the linear model is higher than for the ridge regression model.  
+
+
+Note that in general, if we want to fit a (unpenalized) least squares model, then we should use the `lm()` function, since that function provides more useful outputs, such as standard errors and p-values for the coefficients.  
+
+```{r}
+lm(y ~ x, subset = train)
+predict(ridge.mod, s = 0, exact = T, type = "coefficients",
+    x = x[train, ], y = y[train])
+```
+
+Also, instead of arbitrarily choosing $\lambda=4$, it would be better to use cross-validation to choose the tuning parameter $\lambda$. We can do this using the built-in cross-validation function, `cv.glmnet()`.  By default, the function performs ten-fold cross-validation, though this can be changed using the argument `nfolds`. 
+
+```{r}
+set.seed(1)
+cv.out <- cv.glmnet(x[train, ], y[train], alpha = 0)
+plot(cv.out)
+bestlam <- cv.out$lambda.min
+bestlam
+```
+
+Therefore, we see that the value of $\lambda$ that results in the smallest cross-validation error is $326$.     
+  
+Now let's find out the test MSE associated with this value of $\lambda$.
+
+```{r chunk}
+ridge.pred <- predict(ridge.mod, s = bestlam,
+    newx = x[test, ])
+mean((ridge.pred - y.test)^2)
+```
+
+This represents a further improvement over the test MSE that we got using $\lambda=4$. 
+
+
+Now we refit our ridge regression model on the full data set, using the value of $\lambda$ chosen by cross-validation, and examine the coefficient estimates, we can see that none of the coefficients are zero since ridge regression does not perform variable selection. 
+
+```{r}
+out <- glmnet(x, y, alpha = 0)
+predict(out, type = "coefficients", s = bestlam)
+```
+
+## The Lasso {-}
+
+We saw that ridge regression with a suitable choice of $\lambda$ can outperform least squares. 
+
+Let's now consider whether the lasso can yield either a more accurate or a more interpretable model than ridge regression. In order to fit a lasso model, we once again use the `glmnet()` function; however, this time we use the argument
+`alpha = 1`. 
+
+```{r}
+lasso.mod <- glmnet(x[train, ], y[train], alpha = 1, lambda = grid)
+plot(lasso.mod)
+```
+
+We can see from the coefficient plot that depending on the choice of tuning parameter, some of the coefficients will be exactly equal to zero. We now perform cross-validation and compute the associated test error.
+
+```{r}
+set.seed(1)
+cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1)
+plot(cv.out)
+bestlam <- cv.out$lambda.min
+lasso.pred <- predict(lasso.mod, s = bestlam,
+    newx = x[test, ])
+mean((lasso.pred - y.test)^2)
+```
+
+This is lower than the test set MSE of the least squares model, but slightly larger than the test MSE for ridge regression with $\lambda$ chosen by cross-validation.
+
+However, the lasso has a substantial advantage over ridge regression in that the resulting coefficient estimates are sparse. Here we see that 8 of the 19 coefficient estimates are exactly zero. So the lasso model with $\lambda$ chosen by cross-validation contains only eleven variables.
+
+```{r}
+out <- glmnet(x, y, alpha = 1, lambda = grid)
+lasso.coef <- predict(out, type = "coefficients", s = bestlam)[1:20, ]
+
+lasso.coef
+
+lasso.coef[lasso.coef != 0]
+```
+
+
+
