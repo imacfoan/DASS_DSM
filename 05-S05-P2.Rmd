@@ -1,0 +1,162 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Practical 2: Foreign Direct Investment (FDI) Study {-}
+
+*This practical has been developed by Dr. Tatjana Kecojevic, Lecturer in Social Statistics.*
+
+
+::: file
+For the tasks below, you will require the **FDI** dataset.  
+
+Click here to download the file:
+<a href="data/FDI.csv" download="FDI.csv"> FDI.csv </a>.
+
+Remember to place your data file in a separate subfolder within your R
+project working directory.
+:::
+
+A business consultancy firm is compiling a major report about
+globalisation. One aspect of this study concerns the determinants of FDI
+undertaken by multi-national enterprises. Relevant information from a
+sample of 60 multi-national companies that undertook significant
+investment in overseas projects was made available as follows:
+
++---------------+----------------------------------------------------+
+| Variable Name | Variable Description                               |
++:=============:+:==================================================:+
+| FDI           | Value of FDI undertaken, in £ millions, by          |
+|               | investing company                                  |
++---------------+----------------------------------------------------+
+| GDP_Cap       | GDP per capita, £000s, in the country receiving    |
+|               | the investment                                     |
++---------------+----------------------------------------------------+
+| Gr_rate       | The economic growth rate, in %-terms, in the       |
+|               | country receiving the investment                   |
++---------------+----------------------------------------------------+
+| ROC           | The average return on capital invested, in         |
+|               | %-terms, in the country receiving the investment   |
++---------------+----------------------------------------------------+
+| Stable        | The political stability of the country receiving   |
+|               | the investment as measured by the number of        |
+|               | changes in government over the past 25 years       |
++---------------+----------------------------------------------------+
+| Infra         | Infrastructure facilities (eg transport,           |
+|               | communications) in the country receiving the       |
+|               | investment                                         |
+|               |                                                    |
+|               | Coded: 1 = basic infrastructure 2 = good           |
+|               | infrastructure                                     |
++---------------+----------------------------------------------------+
+| Trade         | The openness to trade of the country receiving the |
+|               | investment                                         |
+|               |                                                    |
+|               | Coded: 1 = trade tightly controlled 2 = some       |
+|               | restrictions on trade 3 = free trade               |
++---------------+----------------------------------------------------+
+
+This is a multiple regression type of the problem; FDI is the key
+response variable as this study concerns the determinants of FDI
+undertaken by multi-national enterprises.
+
+The model is defined as $Y = b_0 + b_1x_1 + b_2x_2 + ... + b_kx_k + e$,
+for the general $k$ explanatory variable model and where e is also known
+as the error term $e ∼ N(0,\sigma^2)$, with the error term from a normal
+distribution with a mean of $0$, and a variance of $\sigma^2$.
+
+Based on prior knowledge, we make the assumption that GDP_Cap, Gr_rate,
+ROC, Infra, and Trade have positive relationships with FDI, whilst
+Stable has a negative relationship with FDI.
+
+We will use our best fit model to predict FDI for the following information:  *country X receiving the investment has GDP per capita of 11.1 and Gr_rate per capita of 3.05; The average return on capital invested is 20.5%; There were 11 changes of government over the past 25 years and country X has good infrastructure with some restrictions on trade.*
+
+First, let's load the required packages: 
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+# you should have already installed this package for Practical 2 (Section 5)
+library(GGally)
+```
+
+Let's import the data into R.
+
+```{r}
+mydataq1 <- read.csv("data/FDI.csv", header = T) 
+```
+
+Now let's get a glimpse of the data. As you know, there are many ways to
+do that, such as, for example, using the tidyverse `glimpse` function.
+This is quite a handy function because it also tells us more about the
+class of each variable. We can see that although **Infra** and **Trade**
+categorical, these are coded as integers.
+
+```{r}
+glimpse(mydataq1)
+```
+
+We therefore need to transform them into factors.
+
+```{r}
+mydataq1 <- mydataq1 %>%
+  mutate(Infra = as_factor(Infra),
+         Trade = as_factor(Trade)
+         )
+```
+
+We can then explore all variables in the dataset as pairs using a matrix
+of plots. Among many interesting features, we can note quite strong
+correlations among pairs of variables which suggest the presence of
+multicollinearity: GDP_Cap and ROC, Infra and GDP_Cap, Infra and ROC,
+and Infra and Gr_rate.
+
+```{r warning = FALSE, message = FALSE}
+GGally::ggpairs(mydataq1)
+```
+
+Ok, so our initial model is:
+
+$FDI = b_0 + b_1GDP\_Cap + b_2Gr\_rate + b_3ROC – b_4Stable + b_5Infra + b_6Trade + e$
+
+where **Infra** and **Stable** are dummy variables.
+
+We can have a look at how these two dummy variables are used in the
+model by using the `contrasts()` function from base R.
+
+The **Infra** variable is coded as *1 = basic infrastructure* and *2 =
+good infrastructure*. Since this is a binary variable, there will be one
+reference category and a single dummy variable.
+
+```{r}
+contrasts(mydataq1$Infra)
+```
+
+The **Trade** variable is coded as *1 = trade tightly* and *2 = some
+restrictions on trade* and *2 = some restrictions on trade*. Since this
+is variable with three categories, there will be one reference category
+and two dummy variables.
+
+```{r}
+contrasts(mydataq1$Trade)
+```
+
+Let's now fit our multiple regression model.
+
+```{r}
+m1 <- lm(FDI ~ GDP_Cap + Gr_rate + ROC + Stable + Infra + Trade, data = mydataq1)
+```
+
+And explore the results.
+
+```{r}
+summary(m1)
+```
+
+:::question
+What do the results indicate?   
+How do they compare with our initial assumptions?   
+How do you proceed with the analysis?
+:::
+

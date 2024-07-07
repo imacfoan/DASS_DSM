@@ -9,10 +9,21 @@ editor_options:
 # Overview {.unnumbered}
 
 ::: {style="color: #333; font-size: 24px; font-style: italic; text-align: justify;"}
-Section 1: 
+Section 1: Introduction to Data Science - The Basics of Statistical
+Learning
 :::
 
-This section is comprised of a 
+This section is comprised of a demonstration and two practicals.
+
+The two practicals are adapted from exercises from the core textbook for
+this course:
+
+James, G., Witten, D., Hastie, T. and Tibshirani, R. (2021). *An
+Introduction to Statistical Learning with Applications in R*. 2nd ed.
+New York: Springer. <https://www.statlearning.com/>
+
+The demonstration has been developed by Dr. Tatjana Kecojevic, Lecturer
+in Social Statistics.
 
 ::: ilos
 **Learning Outcomes:**

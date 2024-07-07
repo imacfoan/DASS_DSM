@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Answers | SOST70033 Data Science Modelling</title>
+  <meta name="description" content="Notebook hosting practical materials for SOST70033." />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Answers | SOST70033 Data Science Modelling" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Answers | SOST70033 Data Science Modelling" />
+  
+  <meta name="twitter:description" content="Notebook hosting practical materials for SOST70033." />
+  
+
+<meta name="author" content="Dr. Ioana Macoveciuc" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="practical-2.html"/>
+<link rel="next" href="overview-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/logos/uom_logo.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="part"><span><b>Section 1</b></span></li>
+<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><i class="fa fa-check"></i>Demonstration: A more in-depth consideration of model accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-a-more-in-depth-consideration-of-model-accuracy.html"><a href="demonstration-a-more-in-depth-consideration-of-model-accuracy.html#the-simulation"><i class="fa fa-check"></i>The Simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-9"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-10"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1.html"><a href="practical-1.html#task-11"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-2.html"><a href="practical-2.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-1-1"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-9-1"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-10-1"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-11-1"><i class="fa fa-check"></i>Task 11</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#practical-2-1"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers.html"><a href="answers.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 2</b></span></li>
+<li class="chapter" data-level="" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html"><i class="fa fa-check"></i>Demonstration 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-without-intercept"><i class="fa fa-check"></i>Simple Linear Models Without Intercept</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1.html"><a href="demonstration-1.html#simple-linear-models-with-intercept"><i class="fa fa-check"></i>Simple Linear Models with Intercept</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html"><i class="fa fa-check"></i>Demonstration 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#population-parameters-and-estimated-coefficients"><i class="fa fa-check"></i>Population Parameters and Estimated Coefficients</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-reduce-noise"><i class="fa fa-check"></i>What happens if we <em>reduce</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#what-happens-if-we-increase-noise"><i class="fa fa-check"></i>What happens if we <em>increase</em> noise?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2.html"><a href="demonstration-2.html#how-does-noise-affect-confidence-intervals-for-the-coefficients"><i class="fa fa-check"></i>How does noise affect confidence intervals for the coefficients?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-8-2"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-9-2"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-10-2"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-11-2"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-12"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-13"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-14"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-15"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="practical-1-2.html"><a href="practical-1-2.html#task-16"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical-2-2.html"><a href="practical-2-2.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-3-the-quality-of-red-bordeaux-vintages.html"><a href="practical-3-the-quality-of-red-bordeaux-vintages.html"><i class="fa fa-check"></i>Practical 3: The Quality of Red Bordeaux Vintages</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-1-3"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-8-3"><i class="fa fa-check"></i>Task 8</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-9-3"><i class="fa fa-check"></i>Task 9</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-10-3"><i class="fa fa-check"></i>Task 10</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-11-3"><i class="fa fa-check"></i>Task 11</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-12-1"><i class="fa fa-check"></i>Task 12</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-13-1"><i class="fa fa-check"></i>Task 13</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-14-1"><i class="fa fa-check"></i>Task 14</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-15-1"><i class="fa fa-check"></i>Task 15</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-16-1"><i class="fa fa-check"></i>Task 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-2-3"><i class="fa fa-check"></i>Practical 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-1.html"><a href="answers-1.html#practical-3-the-quality-of-red-bordeaux-vintages-1"><i class="fa fa-check"></i>Practical 3: The Quality of Red Bordeaux Vintages</a></li>
+</ul></li>
+<li class="part"><span><b>Section 3</b></span></li>
+<li class="chapter" data-level="" data-path="overview-2.html"><a href="overview-2.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html"><i class="fa fa-check"></i>Demonstration 1: Classification Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#dataset-and-variables"><i class="fa fa-check"></i>Dataset and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#correlation-matrix-and-plot"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#classic-logistic-regression"><i class="fa fa-check"></i>“Classic” Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#confusion-matrix"><i class="fa fa-check"></i>Confusion Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#logistic-regression-in-statistical-learning"><i class="fa fa-check"></i>Logistic Regression in Statistical Learning</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#linear-discriminant-analysis"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#quadratic-discriminant-analysis"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#k-nearest-neighbours"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-classification-problems.html"><a href="demonstration-1-classification-problems.html#naive-bayes"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html"><i class="fa fa-check"></i>Demonstration 2: Poisson versus Linear Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html#the-linear-model"><i class="fa fa-check"></i>The Linear Model</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html#approaches-to-variable-coding"><i class="fa fa-check"></i>Approaches to variable coding</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html#plotting-coefficient-estimates"><i class="fa fa-check"></i>Plotting Coefficient Estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html#the-poisson-model"><i class="fa fa-check"></i>The Poisson Model</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-poisson-versus-linear-regression.html"><a href="demonstration-2-poisson-versus-linear-regression.html#linear-versus-poisson-regression"><i class="fa fa-check"></i>Linear versus Poisson Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html"><i class="fa fa-check"></i>Practical: Predicting a company’s bankruptcy</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#data-and-variables"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#importing-the-data"><i class="fa fa-check"></i>Importing the data</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#loading-required-packages"><i class="fa fa-check"></i>Loading required packages</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#correlation-matrix-and-plot-1"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#explaining-the-logit"><i class="fa fa-check"></i>Explaining the Logit</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#tasks-linear-discriminant-analysis"><i class="fa fa-check"></i>Tasks: Linear Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-8"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-8"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-3-8"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#tasks-quadratic-discriminant-analysis"><i class="fa fa-check"></i>Tasks: Quadratic Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-9"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-9"><i class="fa fa-check"></i>Task 2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#tasks-k-nearest-neighbours"><i class="fa fa-check"></i>Tasks: <span class="math inline">\(K\)</span>-nearest neighbours</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-10"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-10"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-3-9"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-4-8"><i class="fa fa-check"></i>Task 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#tasks-naive-bayes"><i class="fa fa-check"></i>Tasks: Naive Bayes</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-1-11"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical-predicting-a-companys-bankruptcy.html"><a href="practical-predicting-a-companys-bankruptcy.html#task-2-11"><i class="fa fa-check"></i>Task 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#practical-predicting-a-companys-bankruptcy-1"><i class="fa fa-check"></i>Practical: Predicting a company’s bankruptcy</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#data-and-variables-1"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#importing-the-data-1"><i class="fa fa-check"></i>Importing the data</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#loading-required-packages-1"><i class="fa fa-check"></i>Loading required packages</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#correlation-matrix-and-plot-2"><i class="fa fa-check"></i>Correlation Matrix and Plot</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#logistic-regression-1"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#linear-discriminant-analysis-1"><i class="fa fa-check"></i>Linear Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#quadratic-discriminant-analysis-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#k-nearest-neighbours-1"><i class="fa fa-check"></i><span class="math inline">\(K\)</span>-nearest neighbours</a></li>
+<li class="chapter" data-level="" data-path="answers-2.html"><a href="answers-2.html#naive-bayes-1"><i class="fa fa-check"></i>Naive Bayes</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 4</b></span></li>
+<li class="chapter" data-level="" data-path="overview-3.html"><a href="overview-3.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html"><i class="fa fa-check"></i>Demonstration 1: Cross-validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#data-and-variables-2"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#the-validation-set-approach"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#leave-one-out-cross-validation"><i class="fa fa-check"></i>Leave-One-Out Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-cross-validation.html"><a href="demonstration-1-cross-validation.html#k-fold-cross-validation"><i class="fa fa-check"></i><span class="math inline">\(k\)</span>-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html"><i class="fa fa-check"></i>Demonstration 2: Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#data-and-variables-3"><i class="fa fa-check"></i>Data and Variables</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-statistic-of-interest"><i class="fa fa-check"></i>Estimating the Accuracy of a Statistic of Interest</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-bootstrapping.html"><a href="demonstration-2-bootstrapping.html#estimating-the-accuracy-of-a-linear-regression-model"><i class="fa fa-check"></i>Estimating the Accuracy of a Linear Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html"><i class="fa fa-check"></i>Practical</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#part-i-the-validation-set-approach"><i class="fa fa-check"></i>Part I: The Validation Set Approach</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-1-16"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-2-16"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-3-12"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#part-ii-leave-one-out-cross-validation"><i class="fa fa-check"></i>Part II: Leave-one-out Cross-validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-1-17"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-2-17"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-3-13"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-4-10"><i class="fa fa-check"></i>Task 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#part-iii-the-bootstrap"><i class="fa fa-check"></i>Part III: The Bootstrap</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-1-18"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-2-18"><i class="fa fa-check"></i>Task 2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#bonus"><i class="fa fa-check"></i>Bonus</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-1-19"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-2-19"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-3-14"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-4-11"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-5-8"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-6-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-7-4"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="practical.html"><a href="practical.html#task-8-4"><i class="fa fa-check"></i>Task 8</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#part-i-the-validation-set-approach-1"><i class="fa fa-check"></i>Part I: The Validation Set Approach</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-1-20"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-2-20"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-3-15"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#part-ii-leave-one-out-cross-validation-1"><i class="fa fa-check"></i>Part II: Leave-one-out Cross-validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-1-21"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-2-21"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-3-16"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-4-12"><i class="fa fa-check"></i>Task 4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#part-iii-the-bootstrap-1"><i class="fa fa-check"></i>Part III: The Bootstrap</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-1-22"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-2-22"><i class="fa fa-check"></i>Task 2</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#bonus-1"><i class="fa fa-check"></i>Bonus</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-1-23"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-2-23"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-3-17"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-4-13"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-5-9"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-6-7"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-7-5"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="answers-3.html"><a href="answers-3.html#task-8-5"><i class="fa fa-check"></i>Task 8</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Section 5</b></span></li>
+<li class="chapter" data-level="" data-path="overview-4.html"><a href="overview-4.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html"><i class="fa fa-check"></i>Practical 1: Academic Salary</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-i"><i class="fa fa-check"></i>Part I</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#exploring-the-data"><i class="fa fa-check"></i>Exploring the data</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-since-phd"><i class="fa fa-check"></i>Salary and Years since PhD</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#salary-and-years-of-service"><i class="fa fa-check"></i>Salary and Years of Service</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#the-model"><i class="fa fa-check"></i>The Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-a-does-the-fitted-model-make-sense"><i class="fa fa-check"></i>Test a): Does the fitted model make sense?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-b-overall-is-the-model-a-good-fit"><i class="fa fa-check"></i>Test b): Overall, is the model a good fit?</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#test-c-individually-are-the-explanatory-variables-important"><i class="fa fa-check"></i>Test c): Individually, are the explanatory variables important?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#part-ii"><i class="fa fa-check"></i>Part II</a>
+<ul>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#interpreting-coefficients-of-attribute-variables"><i class="fa fa-check"></i>Interpreting coefficients of attribute variables</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-a-multivariate-regression-model"><i class="fa fa-check"></i>Fitting a Multivariate Regression Model</a></li>
+<li class="chapter" data-level="" data-path="practical-1-academic-salary.html"><a href="practical-1-academic-salary.html#fitting-the-model"><i class="fa fa-check"></i>Fitting the Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-2-foreign-direct-investment-fdi-study.html"><a href="practical-2-foreign-direct-investment-fdi-study.html"><i class="fa fa-check"></i>Practical 2: Foreign Direct Investment (FDI) Study</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><i class="fa fa-check"></i>Demonstration 1: ProPublica’s Analysis of the COMPAS Tool</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#notes-on-the-data"><i class="fa fa-check"></i>Notes on the data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#setup"><i class="fa fa-check"></i>Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#load-packages"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#load-data"><i class="fa fa-check"></i>Load data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#inspect-data"><i class="fa fa-check"></i>Inspect data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#preprocess-data"><i class="fa fa-check"></i>Preprocess data</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#inspect-data-again"><i class="fa fa-check"></i>Inspect data again</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#exercise"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#risk-labels"><i class="fa fa-check"></i>Risk labels</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#bias-in-compas"><i class="fa fa-check"></i>Bias in COMPAS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#preprocess-data-for-logistic-regression"><i class="fa fa-check"></i>Preprocess data for logistic regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#estimate-the-logistic-regression-model"><i class="fa fa-check"></i>Estimate the logistic regression model</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#interpret-estimates"><i class="fa fa-check"></i>Interpret estimates</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#exercise-1"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#predictive-accuracy"><i class="fa fa-check"></i>Predictive Accuracy</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#exercise-2"><i class="fa fa-check"></i>👉 Exercise</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-propublicas-analysis-of-the-compas-tool.html"><a href="demonstration-1-propublicas-analysis-of-the-compas-tool.html#exercise-3"><i class="fa fa-check"></i>👉 Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><i class="fa fa-check"></i>Demonstration 2: The Basics of Decision Trees and Related Methods</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#decision-trees"><i class="fa fa-check"></i>Decision Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#ensemble-methods"><i class="fa fa-check"></i>Ensemble Methods</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-the-basics-of-decision-trees-and-related-methods.html"><a href="demonstration-2-the-basics-of-decision-trees-and-related-methods.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-4.html"><a href="answers-4.html"><i class="fa fa-check"></i>Answers</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-4.html"><a href="answers-4.html#practical-1-4"><i class="fa fa-check"></i>Practical 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="answers-4.html"><a href="answers-4.html#part-i-1"><i class="fa fa-check"></i>Part I</a></li>
+<li class="chapter" data-level="" data-path="answers-4.html"><a href="answers-4.html#part-ii-1"><i class="fa fa-check"></i>Part II</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="answers-4.html"><a href="answers-4.html#practical-2-4"><i class="fa fa-check"></i>Practical 2</a></li>
+</ul></li>
+<li class="part"><span><b>Section 6</b></span></li>
+<li class="chapter" data-level="" data-path="overview-5.html"><a href="overview-5.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html"><i class="fa fa-check"></i>Demonstration 1: Subset and Stepwise Selection</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html#stepwise-selection"><i class="fa fa-check"></i>Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html#choosing-among-models-using-the-validation-set-approach-and-cross-validation"><i class="fa fa-check"></i>Choosing Among Models Using the Validation-Set Approach and Cross-Validation</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html#the-validation-set-approach-1"><i class="fa fa-check"></i>The Validation Set Approach</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-subset-and-stepwise-selection.html"><a href="demonstration-1-subset-and-stepwise-selection.html#cross-validation"><i class="fa fa-check"></i>Cross-validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-regularisation.html"><a href="demonstration-2-regularisation.html"><i class="fa fa-check"></i>Demonstration 2: Regularisation</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-regularisation.html"><a href="demonstration-2-regularisation.html#ridge-regression"><i class="fa fa-check"></i>Ridge Regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-regularisation.html"><a href="demonstration-2-regularisation.html#the-lasso"><i class="fa fa-check"></i>The Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-3-pcr-and-pls-regression.html"><a href="demonstration-3-pcr-and-pls-regression.html"><i class="fa fa-check"></i>Demonstration 3: PCR and PLS Regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-3-pcr-and-pls-regression.html"><a href="demonstration-3-pcr-and-pls-regression.html#principal-components-regression"><i class="fa fa-check"></i>Principal Components Regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-3-pcr-and-pls-regression.html"><a href="demonstration-3-pcr-and-pls-regression.html#partial-least-squares"><i class="fa fa-check"></i>Partial Least Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html"><i class="fa fa-check"></i>Demonstration 4: Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html#polynomial-regression-and-step-functions"><i class="fa fa-check"></i>Polynomial Regression and Step Functions</a></li>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html#step-functions"><i class="fa fa-check"></i>Step Functions</a></li>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html#splines"><i class="fa fa-check"></i>Splines</a></li>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html#local-regression"><i class="fa fa-check"></i>Local Regression</a></li>
+<li class="chapter" data-level="" data-path="demonstration-4-beyond-linearity.html"><a href="demonstration-4-beyond-linearity.html#generalised-additive-models"><i class="fa fa-check"></i>Generalised Additive Models</a></li>
+</ul></li>
+<li class="part"><span><b>Section 7</b></span></li>
+<li class="chapter" data-level="" data-path="overview-6.html"><a href="overview-6.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html"><i class="fa fa-check"></i>Demonstration 1: K-means Clustering in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#loading-the-necessary-packages"><i class="fa fa-check"></i>Loading the necessary packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#profile-the-palmer-penguins-dataset"><i class="fa fa-check"></i>Profile the Palmer Penguins dataset</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#preprocess-the-data-for-clustering"><i class="fa fa-check"></i>Preprocess the data for clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#perform-k-means-clustering"><i class="fa fa-check"></i>Perform k-means clustering</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#visualise-the-clusters"><i class="fa fa-check"></i>Visualise the clusters</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#tasks"><i class="fa fa-check"></i>👉 TASKS</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-1-how-well-did-k-means-clustering-perform"><i class="fa fa-check"></i>TASK 1: How well did k-means clustering perform?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-2-how-many-clusters-should-we-use"><i class="fa fa-check"></i>TASK 2: How many clusters should we use?</a></li>
+<li class="chapter" data-level="" data-path="demonstration-1-k-means-clustering-in-r.html"><a href="demonstration-1-k-means-clustering-in-r.html#task-3-clustering-cars"><i class="fa fa-check"></i>TASK 3: Clustering cars</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html"><i class="fa fa-check"></i>Demonstration 2: Principal Component Analysis in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#load-packages-1"><i class="fa fa-check"></i>Load packages</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#preprocess-the-world-happiness-report-data"><i class="fa fa-check"></i>Preprocess the world happiness report data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#profile-the-happiness-data"><i class="fa fa-check"></i>Profile the happiness data</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-happiness-score-against-feature"><i class="fa fa-check"></i>Plot happiness score against feature</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#run-pca-using-five-features"><i class="fa fa-check"></i>Run PCA using five features</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#correlations-of-happiness-score-with-pc1-and-pc2"><i class="fa fa-check"></i>Correlations of happiness score with PC1 and PC2</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#plot-first-two-principal-components"><i class="fa fa-check"></i>Plot first two principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-the-five-indicators"><i class="fa fa-check"></i>Regress happiness on the five indicators</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#visualise-happiness-against-principal-components"><i class="fa fa-check"></i>Visualise happiness against principal components</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#regress-happiness-on-first-principal-component"><i class="fa fa-check"></i>Regress happiness on first principal component</a></li>
+<li class="chapter" data-level="" data-path="demonstration-2-principal-component-analysis-in-r.html"><a href="demonstration-2-principal-component-analysis-in-r.html#task"><i class="fa fa-check"></i>👉 TASK</a></li>
+</ul></li>
+<li class="part"><span><b>Section 8</b></span></li>
+<li class="chapter" data-level="" data-path="overview-7.html"><a href="overview-7.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html"><i class="fa fa-check"></i>Demonstration</a>
+<ul>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-set"><i class="fa fa-check"></i>Data Set</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#project-planning-setting-the-stage-for-success"><i class="fa fa-check"></i>Project Planning: Setting the Stage for Success</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#data-preprocessing"><i class="fa fa-check"></i>Data Preprocessing</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#exploratory-data-analysis-eda"><i class="fa fa-check"></i>Exploratory Data Analysis (EDA)</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-selection-and-model-training"><i class="fa fa-check"></i>Model Selection and Model Training</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-evaluation"><i class="fa fa-check"></i>Model Evaluation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#model-interpretation"><i class="fa fa-check"></i>Model Interpretation</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#report-conclusion"><i class="fa fa-check"></i>Report Conclusion</a></li>
+<li class="chapter" data-level="" data-path="demonstration.html"><a href="demonstration.html#key-insights"><i class="fa fa-check"></i>Key Insights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="your-turn.html"><a href="your-turn.html"><i class="fa fa-check"></i>👉 Your Turn!</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SOST70033 Data Science Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<hr>
+<center> 
+  <div class="header">
+   <img src="images/banners/DSM_banner.png" alt="Trulli">
+  </div>
+</center>
+<div id="answers" class="section level1 unnumbered hasAnchor">
+<h1>Answers<a href="answers.html#answers" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="practical-1-1" class="section level2 unnumbered hasAnchor">
+<h2>Practical 1<a href="answers.html#practical-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="file">
+<p>For the tasks below, you will require the <strong>College</strong> dataset from the
+core textbook (James et. al 2021).</p>
+<p>Click here to download the file:
+<a href="data/College.csv" download="College.csv"> College.csv </a>.</p>
+<p><em>Remember to place your data file in a separate subfolder within your R
+project working directory.</em></p>
+</div>
+<p>This data file contains 18 variables for 777 different universities and
+colleges in the United States. The variables are:</p>
+<ul>
+<li>Private : Public/private indicator</li>
+<li>Apps : Number of applications received</li>
+<li>Accept : Number of applicants accepted</li>
+<li>Enroll : Number of new students enrolled</li>
+<li>Top10perc : New students from top 10% of high school class</li>
+<li>Top25perc : New students from top 25% of high school class</li>
+<li>F.Undergrad : Number of full-time undergraduates</li>
+<li>P.Undergrad : Number of part-time undergraduates</li>
+<li>Outstate : Out-of-state tuition</li>
+<li>Room.Board : Room and board costs</li>
+<li>Books : Estimated book costs</li>
+<li>Personal : Estimated personal spending</li>
+<li>PhD : Percent of faculty with Ph.D.’s</li>
+<li>Terminal : Percent of faculty with terminal degree</li>
+<li>S.F.Ratio: Student/faculty ratio</li>
+<li>perc.alumni : Percent of alumni who donate</li>
+<li>Expend : Instructional expenditure per student</li>
+<li>Grad.Rate : Graduation rate</li>
+</ul>
+<div id="task-1-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 1<a href="answers.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Import the dataset in an object called <strong>college</strong> using the tidyverse <code>read_csv()</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="answers.html#cb7-1" tabindex="-1"></a><span class="co"># Remember to load tidyverse first</span></span>
+<span id="cb7-2"><a href="answers.html#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="answers.html#cb7-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-4"><a href="answers.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="answers.html#cb7-5" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/College.csv&quot;</span>)</span></code></pre></div>
+<p>If you have a look at the contents of the data object using <code>View()</code>,
+you will notice that the first column contains the names of all of the
+universities in the dataset. You will also notice that it has a strange
+name.</p>
+<p><img src="images/snips/college-view.png"/></p>
+<p>Actually, these data should not be treated as a variable (column) since
+it is just a list of university names.</p>
+</div>
+<div id="task-2-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 2<a href="answers.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Keeping the list of names in the data object, transform this column such
+that the university names in the column become row names. Hint: use the
+<code>column_to_rownames()</code> function from <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="answers.html#cb8-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span> <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;...1&quot;</span>) </span></code></pre></div>
+<div class="question">
+<p>How would have your approach to this task differed if you would have
+imported the dataset using base R? Try it!</p>
+</div>
+<div class="answers">
+<p>The data file could have instead been imported using <code>read.csv()</code>:</p>
+<p><code>college &lt;- read.csv("data/College.csv")</code></p>
+<p>Using the base R approach, the first column containing the university
+names would have been named “X”, as shown below using <code>View()</code>.</p>
+<p><img src="images/snips/college-base-view.png" style="width: 60%;"/></p>
+<p>Now, how would be go about transforming the contents of the first column
+into row names?</p>
+<p>This would require two steps.</p>
+<p>First, we assign the column contents to rows names.</p>
+<p><code>rownames(college) &lt;- college[, 1]</code></p>
+<p>If you have another look at the data object, you will see that the rows
+have now been renamed using the university names in the “X” column, but
+the column is still part of the dataset. We therefore need to tell R to
+delete the column.</p>
+<p><code>college &lt;- college[, -1]</code></p>
+</div>
+</div>
+<div id="task-3-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 3<a href="answers.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Produce summary statistics for all variables in the data object.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="answers.html#cb9-1" tabindex="-1"></a><span class="fu">summary</span>(college)</span></code></pre></div>
+<pre><code>##    Private               Apps           Accept          Enroll    
+##  Length:777         Min.   :   81   Min.   :   72   Min.   :  35  
+##  Class :character   1st Qu.:  776   1st Qu.:  604   1st Qu.: 242  
+##  Mode  :character   Median : 1558   Median : 1110   Median : 434  
+##                     Mean   : 3002   Mean   : 2019   Mean   : 780  
+##                     3rd Qu.: 3624   3rd Qu.: 2424   3rd Qu.: 902  
+##                     Max.   :48094   Max.   :26330   Max.   :6392  
+##    Top10perc       Top25perc      F.Undergrad     P.Undergrad     
+##  Min.   : 1.00   Min.   :  9.0   Min.   :  139   Min.   :    1.0  
+##  1st Qu.:15.00   1st Qu.: 41.0   1st Qu.:  992   1st Qu.:   95.0  
+##  Median :23.00   Median : 54.0   Median : 1707   Median :  353.0  
+##  Mean   :27.56   Mean   : 55.8   Mean   : 3700   Mean   :  855.3  
+##  3rd Qu.:35.00   3rd Qu.: 69.0   3rd Qu.: 4005   3rd Qu.:  967.0  
+##  Max.   :96.00   Max.   :100.0   Max.   :31643   Max.   :21836.0  
+##     Outstate       Room.Board       Books           Personal   
+##  Min.   : 2340   Min.   :1780   Min.   :  96.0   Min.   : 250  
+##  1st Qu.: 7320   1st Qu.:3597   1st Qu.: 470.0   1st Qu.: 850  
+##  Median : 9990   Median :4200   Median : 500.0   Median :1200  
+##  Mean   :10441   Mean   :4358   Mean   : 549.4   Mean   :1341  
+##  3rd Qu.:12925   3rd Qu.:5050   3rd Qu.: 600.0   3rd Qu.:1700  
+##  Max.   :21700   Max.   :8124   Max.   :2340.0   Max.   :6800  
+##       PhD            Terminal       S.F.Ratio      perc.alumni   
+##  Min.   :  8.00   Min.   : 24.0   Min.   : 2.50   Min.   : 0.00  
+##  1st Qu.: 62.00   1st Qu.: 71.0   1st Qu.:11.50   1st Qu.:13.00  
+##  Median : 75.00   Median : 82.0   Median :13.60   Median :21.00  
+##  Mean   : 72.66   Mean   : 79.7   Mean   :14.09   Mean   :22.74  
+##  3rd Qu.: 85.00   3rd Qu.: 92.0   3rd Qu.:16.50   3rd Qu.:31.00  
+##  Max.   :103.00   Max.   :100.0   Max.   :39.80   Max.   :64.00  
+##      Expend        Grad.Rate     
+##  Min.   : 3186   Min.   : 10.00  
+##  1st Qu.: 6751   1st Qu.: 53.00  
+##  Median : 8377   Median : 65.00  
+##  Mean   : 9660   Mean   : 65.46  
+##  3rd Qu.:10830   3rd Qu.: 78.00  
+##  Max.   :56233   Max.   :118.00</code></pre>
+</div>
+<div id="task-4-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 4<a href="answers.html#task-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a scatterplot matrix of the first three numeric variables.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="answers.html#cb11-1" tabindex="-1"></a><span class="fu">pairs</span>(college[,<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
+<p><img src="01-S01-ANS_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="task-5-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 5<a href="answers.html#task-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Produce side by side box plots of <code>Outstate</code> versus <code>Private</code> using base
+R.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="answers.html#cb12-1" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Private, college<span class="sc">$</span>Outstate, <span class="at">xlab =</span> <span class="st">&quot;Private&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
+<div class="question">
+<p>Did this work? Why?</p>
+</div>
+<div class="answers">
+<p>Using the <code>plot()</code> base R function to produce a box plot would produce
+an error since the <code>Private</code> variable is of class character. Most
+statistical functions will not work with character vectors.</p>
+<p><code>Error in plot.window(...) : need finite 'xlim' values</code><br />
+<code>In addition: Warning messages:</code><br />
+<code>1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion</code><br />
+<code>2: In min(x) : no non-missing arguments to min; returning Inf</code><br />
+<code>3: In max(x) : no non-missing arguments to max; returning -Inf</code></p>
+<p>Creating a box plot with <code>tidyverse</code> would work.</p>
+<p><code>college %&gt;%       ggplot(aes(x = Private, y = Outstate)) +        geom_boxplot()</code></p>
+<p><img src="images/snips/private.png" style="width: 60%;"/></p>
+<p>However, it is important to note that if a variable is not of the right
+class, then this might have unintended consequences for example, when
+building models. In this case, the <code>Private</code> variable must be
+transformed into a factor.</p>
+</div>
+</div>
+<div id="task-6-2" class="section level3 unnumbered hasAnchor">
+<h3>Task 6<a href="answers.html#task-6-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>Top10perc</code> variable, create a new categorical variable called
+<code>Elite</code> such that universities are divided into two groups based on
+whether or not the proportion of students coming from the top 10% of
+their high school classes exceeds 50%. Hint: use a combination of
+<code>mutate()</code> and <code>if_else()</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="answers.html#cb13-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="answers.html#cb13-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Elite =</span> <span class="fu">if_else</span>(Top10perc <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>),</span>
+<span id="cb13-3"><a href="answers.html#cb13-3" tabindex="-1"></a>         <span class="at">Elite =</span> <span class="fu">as_factor</span>(Elite))</span>
+<span id="cb13-4"><a href="answers.html#cb13-4" tabindex="-1"></a><span class="co">#do not forget the factor transformation step (categorical variables are factors in R)</span></span></code></pre></div>
+</div>
+<div id="task-7-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 7<a href="answers.html#task-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Produce side by side box plots of the new <code>Elite</code> variable and
+<code>Outstate</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="answers.html#cb14-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span>  </span>
+<span id="cb14-2"><a href="answers.html#cb14-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Elite, <span class="at">y =</span> Outstate)) <span class="sc">+</span>   </span>
+<span id="cb14-3"><a href="answers.html#cb14-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="01-S01-ANS_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="question">
+<p>How would you produce a similar plot using base R?</p>
+</div>
+<div class="answers">
+<p><code>plot(college$Elite, college$Outstate,  xlab = "Elite", ylab = "Outstate")</code></p>
+</div>
+</div>
+<div id="task-8-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 8<a href="answers.html#task-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use base R to produce a multipanel plot that displays histograms of the
+following variables: <code>Apps</code>, <code>perc.alumni</code>, <code>S.F.Ratio</code>, <code>Expend</code>. Hint:
+use <code>par(mfrow=c(2,2))</code> to set up a 2x2 panel. Try to adjust the
+specifications (e.g. breaks).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="answers.html#cb15-1" tabindex="-1"></a><span class="co"># An example is shown below. Note that the purpose of the mfrow parameter is </span></span>
+<span id="cb15-2"><a href="answers.html#cb15-2" tabindex="-1"></a><span class="co"># to change the default way in which R displays plots.</span></span>
+<span id="cb15-3"><a href="answers.html#cb15-3" tabindex="-1"></a><span class="co"># Once applied, all plots you create later will also be displayed in a 2x2 grid. </span></span>
+<span id="cb15-4"><a href="answers.html#cb15-4" tabindex="-1"></a><span class="co"># To revert back, you need to enter par(mfrow=c(1,1)) into the console.</span></span>
+<span id="cb15-5"><a href="answers.html#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="answers.html#cb15-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb15-7"><a href="answers.html#cb15-7" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Apps)</span>
+<span id="cb15-8"><a href="answers.html#cb15-8" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>perc.alumni, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb15-9"><a href="answers.html#cb15-9" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>S.F.Ratio, <span class="at">col=</span><span class="dv">3</span>, <span class="at">breaks=</span><span class="dv">10</span>)</span>
+<span id="cb15-10"><a href="answers.html#cb15-10" tabindex="-1"></a><span class="fu">hist</span>(college<span class="sc">$</span>Expend, <span class="at">breaks=</span><span class="dv">100</span>)</span></code></pre></div>
+<p><img src="01-S01-ANS_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="task-9-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 9<a href="answers.html#task-9-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using <code>Accept</code> and <code>Apps</code>, create a new variable that describes
+acceptance rate. Name this variable <code>acceptance_rate</code>. Hint: use
+<code>mutate()</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="answers.html#cb16-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="answers.html#cb16-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">acceptance_rate =</span> Accept <span class="sc">/</span> Apps)</span></code></pre></div>
+</div>
+<div id="task-10-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 10<a href="answers.html#task-10-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>acceptance_rate</code> variable, find out which university has the
+lowest acceptance rate. Hint: for a <code>tidyverse</code> approach, you can use
+<code>slice_min()</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="answers.html#cb17-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="answers.html#cb17-2" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> acceptance_rate, <span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##                      Private  Apps Accept Enroll Top10perc Top25perc
+## Princeton University     Yes 13218   2042   1153        90        98
+##                      F.Undergrad P.Undergrad Outstate Room.Board Books Personal
+## Princeton University        4540         146    19900       5910   675     1575
+##                      PhD Terminal S.F.Ratio perc.alumni Expend Grad.Rate Elite
+## Princeton University  91       96       8.4          54  28320        99   Yes
+##                      acceptance_rate
+## Princeton University       0.1544863</code></pre>
+</div>
+<div id="task-11-1" class="section level3 unnumbered hasAnchor">
+<h3>Task 11<a href="answers.html#task-11-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the <code>acceptance_rate</code> variable, find out which university has the
+highest acceptance rate.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="answers.html#cb19-1" tabindex="-1"></a>college <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="answers.html#cb19-2" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> acceptance_rate, <span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##                                  Private Apps Accept Enroll Top10perc Top25perc
+## Emporia State University              No 1256   1256    853        43        79
+## Mayville State University             No  233    233    153         5        12
+## MidAmerica Nazarene College          Yes  331    331    225        15        36
+## Southwest Baptist University         Yes 1093   1093    642        12        32
+## University of Wisconsin-Superior      No  910    910    342        14        53
+## Wayne State College                   No 1373   1373    724         6        21
+##                                  F.Undergrad P.Undergrad Outstate Room.Board
+## Emporia State University                3957         588     5401       3144
+## Mayville State University                658          58     4486       2516
+## MidAmerica Nazarene College             1100         166     6840       3720
+## Southwest Baptist University            1770         967     7070       2500
+## University of Wisconsin-Superior        1434         417     7032       2780
+## Wayne State College                     2754         474     2700       2660
+##                                  Books Personal PhD Terminal S.F.Ratio
+## Emporia State University           450     1888  72       75      19.3
+## Mayville State University          600     1900  68       68      15.7
+## MidAmerica Nazarene College       1100     4913  33       33      15.4
+## Southwest Baptist University       400     1000  52       54      15.9
+## University of Wisconsin-Superior   550     1960  75       81      15.2
+## Wayne State College                540     1660  60       68      20.3
+##                                  perc.alumni Expend Grad.Rate Elite
+## Emporia State University                   4   5527        50    No
+## Mayville State University                 11   6971        51    No
+## MidAmerica Nazarene College               20   5524        49    No
+## Southwest Baptist University              13   4718        71    No
+## University of Wisconsin-Superior          15   6490        36    No
+## Wayne State College                       29   4550        52    No
+##                                  acceptance_rate
+## Emporia State University                       1
+## Mayville State University                      1
+## MidAmerica Nazarene College                    1
+## Southwest Baptist University                   1
+## University of Wisconsin-Superior               1
+## Wayne State College                            1</code></pre>
+</div>
+</div>
+<div id="practical-2-1" class="section level2 unnumbered hasAnchor">
+<h2>Practical 2<a href="answers.html#practical-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="file">
+<p>For the tasks below, you will require the <strong>Boston</strong> dataset. This
+dataset is part of the <code>MASS</code> R package.</p>
+<p>To access the dataset, load the <code>MASS</code> package (install the package
+first, if you have not done so previously).</p>
+</div>
+<div id="task-1-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 1<a href="answers.html#task-1-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Install and load the <code>MASS</code> package. You will also require <code>tidyverse</code>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="answers.html#cb21-1" tabindex="-1"></a><span class="co"># if you haven&#39;t already, install the MASS package before loading</span></span>
+<span id="cb21-2"><a href="answers.html#cb21-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
+<span id="cb21-3"><a href="answers.html#cb21-3" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb21-4"><a href="answers.html#cb21-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="question">
+<p>Does R provide any message when loading <code>MASS</code>? Why does this matter?</p>
+</div>
+<div class="answers">
+<p>One important message that R provides when loading <code>MASS</code> is that this
+package masks the <code>select()</code> function from <code>tidyverse</code>.</p>
+<p><code>Attaching package: ‘MASS’</code></p>
+<p><code>The following object is masked from ‘package:dplyr’:</code></p>
+<pre><code>`select`  </code></pre>
+<p>When masking occurs, this means that both packages contain the same
+function. If you were to use the <code>select()</code> function, R will call the
+function from the <code>MASS</code> package, rather than from <code>tidyverse (dplyr)</code>
+package. This is because the <code>MASS</code> package is the one masking the
+function. If you intend to use the <code>select()</code> function as defined by the
+<code>tidyverse</code> package, it may not work as intended and/or you may be
+prompted by an error message such as:</p>
+<p><code>Error in select(...): unused argument (...)</code></p>
+<p>To avoid such issues, you must ‘call’ on the package from which you want
+R to use the masked function (e.g. <code>dplyr::select()</code>). This is why it is
+important to read through all warnings and messages provided in the
+console.</p>
+</div>
+</div>
+<div id="task-2-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 2<a href="answers.html#task-2-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Find out more about the <code>Boston</code> dataset variables by accessing the R
+Documentation.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="answers.html#cb23-1" tabindex="-1"></a>?Boston</span></code></pre></div>
+<p>To explore the <code>Boston</code> dataset, simply type the name of the data object
+into the console or use <code>View()</code></p>
+<div class="question">
+<p>What type of data structure is the <code>Boston</code> dataset? What are its
+dimensions? How many categorical and quantitative variables are there?</p>
+</div>
+<div class="answers">
+<p>The <code>Boston</code> dataset is a data frame with 506 rows (observations) and 14
+columns (variables). There is one categorical variable (<code>chas</code>), and 13
+quantitative variables.</p>
+</div>
+</div>
+<div id="task-3-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 3<a href="answers.html#task-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Find the class of all 14 variables. Hint: use <code>sapply</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="answers.html#cb24-1" tabindex="-1"></a><span class="fu">sapply</span>(Boston, class)</span></code></pre></div>
+<pre><code>##      crim        zn     indus      chas       nox        rm       age       dis 
+## &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;integer&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; 
+##       rad       tax   ptratio     black     lstat      medv 
+## &quot;integer&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot; &quot;numeric&quot;</code></pre>
+</div>
+<div id="task-4-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 4<a href="answers.html#task-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using a <code>tidyverse</code> approach, calculate the mean, median, and standard
+deviation of all variables of class <em>numeric</em>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="answers.html#cb26-1" tabindex="-1"></a>Boston <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="answers.html#cb26-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(dplyr<span class="sc">::</span><span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="answers.html#cb26-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="answers.html#cb26-4" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="answers.html#cb26-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb26-6"><a href="answers.html#cb26-6" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb26-7"><a href="answers.html#cb26-7" tabindex="-1"></a>            <span class="at">Median =</span> <span class="fu">median</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 4
+##    name        Mean      SD  Median
+##    &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 age      68.6     28.1    77.5  
+##  2 black   357.      91.3   391.   
+##  3 chas      0.0692   0.254   0    
+##  4 crim      3.61     8.60    0.257
+##  5 dis       3.80     2.11    3.21 
+##  6 indus    11.1      6.86    9.69 
+##  7 lstat    12.7      7.14   11.4  
+##  8 medv     22.5      9.20   21.2  
+##  9 nox       0.555    0.116   0.538
+## 10 ptratio  18.5      2.16   19.0  
+## 11 rad       9.55     8.71    5    
+## 12 rm        6.28     0.703   6.21 
+## 13 tax     408.     169.    330    
+## 14 zn       11.4     23.3     0</code></pre>
+<div class="question">
+<p>What is the mean pupil-teacher ratio? What is the median and mean per
+capita crime rate? Which value do you think is more suitable to describe
+per capita crime rate?</p>
+</div>
+<div class="answers">
+<p>The mean pupil-teacher ratio is about 19. The median crime rate is 0.257
+whilst the mean is larger at 3.61. Given the difference between the
+median and the mean, a skewed distribution is expected, therefore, the
+median may be a more a suitable summary statistic to describe crime rate
+(a histogram would be needed).</p>
+</div>
+</div>
+<div id="task-5-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 5<a href="answers.html#task-5-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using a base R approach, create a 2x2 multipanel plot of <code>crim</code> versus
+<code>age</code>, <code>dis</code>, <code>rad</code>, <code>tax</code> and <code>ptratio</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="answers.html#cb28-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb28-2"><a href="answers.html#cb28-2" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>age, Boston<span class="sc">$</span>crim)</span>
+<span id="cb28-3"><a href="answers.html#cb28-3" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>dis, Boston<span class="sc">$</span>crim)</span>
+<span id="cb28-4"><a href="answers.html#cb28-4" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>rad, Boston<span class="sc">$</span>crim)</span>
+<span id="cb28-5"><a href="answers.html#cb28-5" tabindex="-1"></a><span class="fu">plot</span>(Boston<span class="sc">$</span>tax, Boston<span class="sc">$</span>crim)</span></code></pre></div>
+<p><img src="01-S01-ANS_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="question">
+<p>What can you say about the relationships between <code>age</code>, <code>dis</code>, <code>rad</code>,
+<code>tax</code>, and <code>crim</code>?</p>
+</div>
+<div class="answers">
+<p>As the age of the home increases (<code>age</code>), crime also increases. There is
+also higher crime around employment centers (<code>dis</code>). With very high
+index of accessibility to radial highways (<code>rad</code>), and tax rates (<code>tax</code>)
+there also appears to be high crime rates.</p>
+</div>
+</div>
+<div id="task-6-3" class="section level3 unnumbered hasAnchor">
+<h3>Task 6<a href="answers.html#task-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using a base R approach, create and display histograms of <code>crim</code>, <code>tax</code>
+and <code>ptratio</code> in a 1x2 multipanel plot. Set the <code>breaks</code> argument to
+<strong>25</strong> .</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="answers.html#cb29-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb29-2"><a href="answers.html#cb29-2" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>crim, <span class="at">breaks=</span><span class="dv">25</span>)</span>
+<span id="cb29-3"><a href="answers.html#cb29-3" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>tax, <span class="at">breaks=</span><span class="dv">25</span>)</span></code></pre></div>
+<p><img src="01-S01-ANS_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="question">
+<p>What do these histograms indicate?</p>
+</div>
+<div class="answers">
+<p>Most areas have low crime rates, but there is a rather long tail showing
+high crime rates (although the frequency seems to be very low). Given
+the degree of skew, the mean would not be a good measure of central
+tendency. With respect to tax rates, there appears to be a large divide
+between low taxation and high taxation, with the highest peak at around
+670.</p>
+<p><em>Remember to revert back to single panel display.</em></p>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="practical-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="overview-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

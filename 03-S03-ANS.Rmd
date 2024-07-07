@@ -1,0 +1,380 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Answers {-}
+
+## Practical: Predicting a company’s bankruptcy {-}
+
+*This practical is adapted from a demonstration created by Dr. Tatjana Kecojevic, Lecturer in Social Statistics.*
+
+::: file
+For the tasks below, you will require the **four_ratios** dataset.  
+
+Click here to download the file:
+<a href="data/four_ratios.csv" download="four_ratios.csv"> four_ratios.csv </a>.
+
+Remember to place your data file in a separate subfolder within your R
+project working directory.
+:::
+
+### Data and Variables {-}
+
+In order to build a model to predict a company’s bankruptcy, an analyst has collected a sample of data as follows:  
+ 
+Four financial ratios (predictors):    
+
+- x1: Retained Earnings / Total Assets   
+- x2: Earnings Before Interest and Taxes / Total Assets   
+- x3: Sales / Total Assets   
+- x4: Cash Flow / Total Debt 
+
+And a binary response variable y:
+
+-   0 - if the company went bankrupt
+
+-   1 - if the company stayed solvent  
+
+### Importing the data {-}
+
+```{r}
+four_ratios <- read.csv("data/four_ratios.csv", header = TRUE)
+```
+
+### Loading required packages {-}
+
+```{r warning = FALSE, message = FALSE}
+library(MASS)
+library(class)
+library(tidyverse)
+library(corrplot)
+library(ISLR2)
+library(e1071)
+```
+
+We can see that the predictors are all of class double. The response is of class integer, despite this being a binary categorical variable. There are a total of 111 observations, so quite a small dataset.
+
+```{r}
+glimpse(four_ratios)
+```
+
+We therefore transform the response to a factor. 
+
+```{r}
+four_ratios$y <- as_factor(four_ratios$y)
+```
+
+### Correlation Matrix and Plot {-}
+
+Let's now produce a correlation plot between all pairs of variables in the dataset. 
+
+```{r}
+cor_matrix <- cor(four_ratios[,-5])
+
+corrplot(cor_matrix, type = "lower", diag = FALSE)
+```
+
+We observe a strong positive correlation between $X_1$ and $X_2$. The correlations between other variables are quite weak. 
+
+Before we consider the model, we split the data into training and test sets as we will later on assess model accuracy in correct prediction using the test data set. We consider a basic fixed split of 80:20. Since there are a total of 111 observations, we split at row 89
+
+```{r}
+set.seed(123)
+split_idx = sample(nrow(four_ratios), 89)
+train = four_ratios[split_idx, ]
+test = four_ratios[-split_idx, ]
+```
+
+### Logistic Regression {-}
+
+Now let's first consider logistic regression and build the model. Given the high correlation between $x_1$ and $x_2$ (this is to be expected, given what they measure), we have to reflect on how we want to address this. Assuming we have knowledge of important factors that can predict bankruptcy, we can decide to drop one of the two financial ratios. In this case, we drop $x_2$.
+
+```{r warning = FALSE, message = FALSE}
+fit <- glm(y ~ x1 + x3 + x4,
+           data = train, family = binomial)
+
+summary(fit)
+```
+
+We now need to make a proper assessment to check if the variables collectively contribute in explaining the logit. 
+
+Therefore, we calculate the G statistic. 
+
+```{r}
+G_calc <- fit$null.deviance - fit$deviance
+
+G_calc
+```
+
+Then the degrees of freedom of the predictors. 
+
+```{r}
+Gdf <- fit$df.null - fit$df.residual
+
+Gdf
+```
+
+We find the critical value for the G statistic. 
+
+```{r}
+qchisq(.95, df = Gdf) 
+```
+
+And finally, the p-value associated with the G statistic.
+```{r}
+1 - pchisq(G_calc, Gdf)
+```
+
+Now, we have to decide whether our model is a statistically valid one. 
+Since $G_{calc} = 68.82 > G_{crit} = 7.81 ⇒ H1,$ (and the p-value is much smaller than 0.05), we can conclude that this is a statistically valid model and that the variables collectively have explanatory power.   
+
+**However, do we need ALL three variables?**   
+
+
+Rather than fitting individual models and doing a manual comparison we can make use of the anova function for comparing the nested model using the chi-square test.
+
+```{r warning = FALSE, message = FALSE}
+anova(fit, test="Chisq")
+```
+
+Based on the output, we can remove $X_4$ ratio variable from the model and we update our model (we also know that $X_4$ is not statistically significant from the summary of the model results earlier).
+
+```{r warning = FALSE, message = FALSE}
+fit2 <- update(fit, ~. -x4, data = train)
+
+summary(fit2)
+```
+
+To compare the fit of the new model we will use the Akaike Information Criterion (AIC), which is an index of fit that takes account of parsimony of the model by penalising for the number of parameters. 
+
+
+```{r}
+summary(fit2)
+```
+
+The AIC of our initial model is 62.552 and of the new model 62.884 (very little difference). Checking the new model, we can see that it consists of the variables that all significantly contribute in explaining the logits. *So, in the spirit of parsimony we can choose the second model to be a better fit.* You will learn more about the AIC and other similar metrics later in the course.  
+
+
+To obtain the overall accuracy rate we need to find the predicted probabilities of the observations kept aside in the test subset.
+
+
+```{r}
+pred <- predict(fit2, test, type = "response") > 0.5
+```
+
+Now let's compute the confusion matrix such that we can compare our predictions on the test data against the actual values in our dataset. We can see that our model predicts one instance incorrectly (it predicts *bankrupt* when in fact it should predict *solvent*)
+
+```{r}
+(t <- table(ifelse(pred, "Solvent (pred)", "Bankrupt (pred)"), test$y))
+```
+
+If we then compute the overall fraction of correct predictions, we can see that this is extremely high (0.955) which means that our model is performing extremely well. *In practice*: Although the overall accuracy rate might be easy to compute and to interpret, it makes no distinction about the type of errors being made. Although we did remove one the variables due to high correlation, other variables do show some degree of correlation and so we must be cautious about the strength of the relationship and therefore, the overall predictive performance. 
+
+```{r}
+sum(diag(t)) / sum(t)
+```
+
+*Do note that if you performing any rounding of the probabilities prior to classification, values near the threshold of 0.5 may be classified differently than if you were not to round the probabilities.*  
+
+
+### Linear Discriminant Analysis {-}
+
+#### Task 1 {-}
+
+Build a LDA classifier for the final logistic model with two predictors and explain what the output means.
+
+```{r warning = FALSE, message = FALSE}
+fit_lda <- lda(y ~ x1 + x3, data = train)
+
+fit_lda
+```
+
+-  prior probabilities of groups: these tells us the way in which the two classes are distributed in our *training data* (i.e. 49.4 % of the observations correspond to bankruptcy whilst 50.6 % to solvency).  
+-  group means: the average of the two predictors within each class which are used by LDA as an estimate of $μ_{k}$.  
+-  coefficient(s) of linear discriminants: tells us how our predictor(s) influence the score that is used to classify the observations into one of the two categories. Here, the coefficients both predictors are positive and so this indicates that higher values for $x_1$ and $x_2$ will make the model more likely classify an observation as belonging to the **solvent** class; also, the larger the absolute value of the coefficient, the stronger the influence on the model. 
+
+```{r}
+fit_lda
+```
+
+
+#### Task 2 {-}
+
+Compute the predictions and explain what the results mean. 
+
+```{r}
+result_lda <- predict(fit_lda, test)
+```
+
+The `class` component is a factor that contains the predictions for bankruptcy status (solvent/bankrupt).
+
+```{r}
+result_lda$class
+```
+
+The `posterior` component is matrix that contains the posterior probability that the corresponding observation belongs to a given class.
+
+```{r}
+result_lda$posterior
+```
+
+The `x` component contains the linear discriminants.
+
+```{r}
+result_lda$x
+```
+
+To obtain our predictions, we can simply extract the `class` element. 
+
+```{r}
+pred_lda <- result_lda$class
+```
+
+#### Task 3 {-}
+
+Compute the confusion matrix for the LDA classifier and calculate the fraction of correct predictions. Explain the results.
+
+```{r}
+(t <- table(pred_lda, test$y))
+```
+
+And now the fraction of correct predictions which, we can see is identical to that obtained for logistic regression. 
+
+```{r}
+sum(diag(t)) / sum(t)
+```
+
+LDA performs identically to logistic regression. 
+
+### Quadratic Discriminant Analysis {-}
+
+#### Task 1 {-}
+
+Build a QDA clasifier and describe the output. 
+
+```{r warning = FALSE, message = FALSE}
+fit_qda <- qda(y ~ x1 + x3, data = train)
+
+fit_qda
+```
+
+In terms of prior probabilities and group means, the output is identical to that of linear discriminant analysis. However, the output does not include the coefficients of the *linear* discriminants for obvious reasons. 
+
+#### Task 2 {-}
+
+Compute the predictions, the confusion matrix, and the fraction of correct predictions and explain what the results mean. 
+
+```{r}
+pred_qda <- predict(fit_qda, test, type = "response")$class
+
+(t <- table(pred_qda, test$y))
+```
+
+
+```{r}
+sum(diag(t)) / sum(t)
+```
+
+The fraction of correct predictions is lower (0.73) than that for logistic regression and for LDA (0.95). We therefore conclude that in this context, QDA does not perform well in comparison to the previous two approaches.
+
+### $K$-nearest neighbours {-}
+
+#### Task 1 {-}
+
+Perform KNN regression on the same model as in the previous tasks.
+
+```{r}
+fit_knn <- knn(train[, c("x1", "x3"), drop = FALSE],
+               test[, c("x1", "x3"), drop = FALSE],
+               train$y, 
+               k = 1
+               )
+```
+
+#### Task 2 {-} 
+
+Produce a confusion matrix and compute the fraction of correct predictions. Comment on the results. 
+
+```{r}
+(t <- table(fit_knn, test$y))
+```
+
+
+```{r}
+sum(diag(t)) / sum(t)
+```
+
+Our overall fraction of correct predictions is 0.91. Therefore, the KNN classifier ($k = 1$) performs better than QDA (0.73), but worse than logistic regression and and LDA (0.95).
+
+#### Task 3 {-} 
+
+Fit KNN for up to $k = 30$ and then calculate the overall fraction of correct prediction. 
+
+```{r}
+set.seed(1)
+knn_k <- sapply(1:30, function(k) {
+  fit_knn <- knn(train[, c("x1", "x3"), drop = FALSE],
+                 test[, c("x1", "x3"), drop = FALSE],
+                 train$y, k = k)
+  mean(fit_knn == test$y)
+})
+```
+
+#### Task 4 {-} 
+
+Create a plot to observe at what value for `k` the overall fraction of correct predictions is highest. 
+
+```{r}
+plot(1:30, knn_k, type = "o", xlab = "k", ylab = "Fraction correct")
+```
+
+As you can see, the highest fraction of correct predictions is when $k = 1$ (also confirmed by using `which.max`). 
+
+```{r}
+(k <- which.max(knn_k))
+```
+
+The behaviour you observe results from several reasons, one of which is the size of the dataset.
+
+### Naive Bayes {-}
+
+#### Task 1 {-}
+
+Build a Naive Bayes classifier for the model used previously and describe the output. 
+
+```{r}
+fit_NBayes <- naiveBayes(y~ x1 + x3, data = train)
+
+fit_NBayes
+```
+
+- A-priori probabilities: i.e. prior probabilities (distribution of the classes for the response variable)  
+- Conditional probabilities: parameters of the model for each predictor by class. Since the predictors are numeric variables, the parameters shown are the mean `[,1]` and standard deviation `[,2]` for the predictor values in each class.  
+
+
+#### Task 2 {-}
+
+Compute the predictions, build a confusion matrix, calculate the fraction of correct predictions and interpret the results. 
+
+
+```{r}
+pred_NBayes <- predict(fit_NBayes, test, type = "class")
+```
+
+And finally, generate our confusion matrix. 
+
+```{r}
+(t <- table(pred_NBayes, test$y))
+```
+
+Our overall fraction of correct predictions is $0.64$. 
+
+```{r}
+sum(diag(t)) / sum(t)
+```
+
+Naive Bayes performs the worst out of all classifiers we have explored.
+
+*Based on the approaches we have implemented in this demonstration, logistic regression and LDA perform best.*

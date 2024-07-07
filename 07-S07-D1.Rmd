@@ -1,0 +1,204 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Demonstration 1: K-means Clustering in R {-}
+
+In this practical, you will learn how to implement k-means clustering using the Palmer Penguins dataset. You can read more about this data here:
+
+[Palmer Penguins Dataset](https://allisonhorst.github.io/palmerpenguins/articles/intro.html)
+
+The task in this practical is to cluster penguins based on their bill length and flipper length. We will then assess whether the predicted clusters map onto the actual species of penguin in the data. You can view this as an exercise in whether bill length and flipper length is sufficient to differentiate between species of penguin.
+
+![](images/penguins.png){fig-align="center"}
+
+(Artwork by \@allison_horst)
+
+You should modify and experiment with the below code. There is also a brief exercise for you complete at the end of the walk-through.  
+
+You will be required to install two new packages first: `palmerpenguins` and `factoextra`.
+
+## Loading the necessary packages {-}
+
+```{r, message = FALSE, warning = FALSE}
+library(palmerpenguins)
+library(tidyverse)
+library(factoextra)
+```
+
+## Profile the Palmer Penguins dataset {-}
+
+```{r}
+head(penguins)
+glimpse(penguins)
+```
+
+## Plot {-}
+
+```{r}
+penguins |>
+  ggplot(aes(bill_length_mm, flipper_length_mm, color = species)) +
+  geom_point()
+```
+
+## Preprocess the data for clustering {-}
+
+```{r}
+pengs <- 
+  penguins |>
+  drop_na()
+```
+
+## Perform k-means clustering {-}
+
+```{r}
+k2 <- 
+  pengs |>
+  select(bill_length_mm, flipper_length_mm) |>
+  kmeans(centers = 3, nstart = 25)
+```
+
+Let's add the predicted cluster to the `pengs` data frame:
+
+```{r}
+pengs <- pengs |> mutate(cluster = k2$cluster)
+```
+
+## Visualise the clusters {-}
+
+```{r}
+fviz_cluster(
+  k2,
+  data = pengs |> select(bill_length_mm, flipper_length_mm)
+)
+```
+
+```{r}
+pengs |>
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = factor(cluster),
+             shape = species)) +
+  geom_point() +
+  scale_color_discrete("cluster")
+```
+
+:::question
+To what extent do the clusters overlap with species?
+:::
+
+```{r}
+pred <- table(pengs$species, k2$cluster)
+pred
+
+overlap <- sum(diag(pred))
+differs <- sum(pred[upper.tri(pred)], pred[lower.tri(pred)])
+
+# proportion of penguins "correctly" classified according to species:
+overlap / sum(overlap, differs)
+```
+
+:::question
+How can we visualise the cluster-species overlap?
+:::
+
+```{r}
+pengs |>
+  mutate(
+    overlap = case_when(
+      species == "Adelie"    & cluster == 1 ~ "overlap",
+      species == "Chinstrap" & cluster == 2 ~ "overlap",
+      species == "Gentoo"    & cluster == 3 ~ "overlap",
+      TRUE ~ "differs"
+    )
+  ) |>
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = overlap,
+             shape = species)) +
+  geom_point()
+```
+
+## 👉 TASKS {-}
+
+### TASK 1: How well did k-means clustering perform?  {-}
+
+Suppose you randomly picked Adelie, Chinstrap, or Gentoo for each penguin. What proportion of penguins would you "correctly" classify?
+
+> Your code here
+
+Consider how this compares to the performance of the k-means clustering algorithm.
+
+### TASK 2: How many clusters should we use? {-}
+
+In the above example, we used three clusters because there are three species of penguin in our data. However, in practice, we may not know this "ground-truth" information. That is, we may not know how many species are of penguin are represented in the data.
+
+Additionally, we may wish to cluster the data based on other criteria, such as minimizing the intra-cluster variation. Recall that unsupervised learning is useful for *detecting patterns* in the data.
+
+One method we can use to determine the optimal number of clusters is the **elbow method**. This method involves plotting the within-cluster sum of squares (WSS; also known as within-cluster variation or intra-cluster variation) for a range values of *k* (recall that *k* is the number of clusters). We then look for the location of the "bend" in the in the plot, i.e., the elbow.
+
+Below, we use the elbow method to determine the optimal number of clusters of penguins using the `body_mass_g` and `bill_length_mm` features.
+
+```{r}
+# preprocess data
+pengs_mass_length <- 
+  pengs |>
+  select(body_mass_g, bill_length_mm)
+
+# compute total within-cluster sum of square 
+wss <- function(k) {
+  kmeans(
+    pengs_mass_length,
+    centers = k,
+    nstart = 10
+  )$tot.withinss
+}
+
+# Compute and plot WSS for k = 1 to k = 15
+k_values <- 1:10
+
+# plot the WSS values against k
+wss_values <- map_dbl(k_values, wss)
+
+tibble(
+  k_values,
+  wss_values
+) |>
+  ggplot(aes(k_values, wss_values)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous("Number of clusters, k", breaks = unique(k_values)) +
+  scale_y_continuous("Total within-clusters sum of squares")
+```
+
+The results here suggest that the optimal number of clusters is 3 (which neatly aligns with the number of penguin species in the data). Although, 4 also looks like a good choice. The elbow method is useful, but it isn't always clear where the elbow lies, which often simply reflects the reality of the data.
+
+The elbow method is implemented in `fviz_nbclust()` function from the `factoextra` package:
+
+```{r}
+fviz_nbclust(pengs_mass_length, kmeans, method = "wss")
+```
+
+### TASK 3: Clustering cars {-}
+
+Cluster the `mtcars` data using `kmeans()`.
+
+```{r}
+head(mtcars)
+```
+
+Use the `mpg` and `hp` features to group the cars into three clusters.  
+
+> Your code here
+
+How well do your predicted clusters map onto the `cyl` feature in the `mtcars` data? (Note that the `cyl` feature (cylinders) has three values: 4, 6, 8).   
+
+> Your code here
+
+Next, find the optimal number of clusters in the data using the elbow method. You should start by using the `mpg` and `hp` features, although feel free to experiment with using other features.  
+
+> Your code here
+
+

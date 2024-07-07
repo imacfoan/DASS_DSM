@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+li.part {
+    background-color: #f0e6ff; /* Light purple background */
+    padding: 10px 20px; /* Padding around the content */
+    margin: 15px 0; /* Margin above and below the element */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    opacity: 1; /* Ensure the element is fully opaque */
+
+    /* Style for the span and bold text within */
+    span {
+        color: #333; /* Dark grey color for the text */
+        font-size: 1.2em; /* Slightly larger font size */
+        opacity: 1; /* Ensure the text is fully opaque */
+    }
+
+    b {
+        font-weight: bold; /* Bold for emphasis */
+        opacity: 1; /* Ensure the bold text is fully opaque */
+    }
+}
+
+
+.book .book-summary .summary li a {
+    display: block; /* Display links as block elements */
+    white-space: nowrap; /* Keep text in a single line */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    padding-right: 10px; /* Optional padding to prevent ellipsis too close to the edge */
+}
+
+.book .book-summary ul.summary li span {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* Style for the <details> element */
+.chunk-details {
+    background-color: #f0e6ff; /* Light purple background */
+    border: 2px solid #d3d3d3; /* Light grey solid border */
+    padding: 10px; /* Padding around the content */
+    border-radius: 8px; /* Rounded corners for the box */
+    margin: 5px 0; /* Margin for top and bottom */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for a 3D effect */
+}
+
+/* Style for the <summary> element */
+.chunk-summary {
+    cursor: pointer; /* Changes cursor to a pointer to indicate it's clickable */
+    font-weight: bold; /* Makes the summary text bold */
+    color: #333; /* Dark grey color for the text */
+}
+
+/* Style for the <span> inside the <summary> */
+.chunk-summary-text {
+    display: inline-block; /* Ensures the span behaves as an inline block */
+    margin-right: 10px; /* Adds some space to the right of the span */
+}
+
+/* Additional style when <details> is open */
+.chunk-details[open] {
+    background-color: #f0e6ff; /* Changes background color when open to a slightly different shade of purple */
+}
+
+/* Style for the <pre> component */
+pre {
+    margin: 10px 0; /* Margin around the <pre> component */
+    padding: 10px; /* Padding inside the <pre> component */
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+    border-radius: 8px; /* Border radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    background-color: #f0e6ff; /* Background color to match the button */
+    box-sizing: border-box; /* Include padding and border in the element's size */
+}
+
+/* Updated Style for the .toggle-button */
+.toggle-button {
+    display: block;
+    width: 100%; /* Full width to align with <pre> component */
+    margin: 10px 0; /* Margin to separate from other elements */
+    padding: 10px; /* Padding to match <pre> component */
+    background-color: #6D009D; /* Background color */
+    color: white;
+    border: 2px solid #d3d3d3; /* Border to visually align with <pre> component */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: "Open Sans", sans-serif;
+    text-align: left;
+}
+
+pre {
+    max-height: 200px;  /* Maximum height before scrolling */
+    overflow: auto;     /* Enables scrolling */
+}
+
+/* Initially hide R output blocks */
+pre > code {
+    display: none;
+}
+
+
+/* Style for the <pre> component */
+pre {
+    margin: 10px 0; /* Margin around the <pre> component */
+    padding: 10px; /* Padding inside the <pre> component */
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+    border-radius: 8px; /* Border radius for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    background-color: #f0e6ff; /* Background color to match the button */
+    box-sizing: border-box; /* Include padding and border in the element's size */
+}
+
+/* Style for the toggle comment button */
+.toggle-comment-button {
+    display: block;
+    width: 100%; /* Full width of the container */
+    margin: 10px 0; /* Margin above and below the button */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9em; /* Font size */
+    font-family: "Open Sans", sans-serif; /* Font family */
+    text-align: center; /* Center-align the text */
+    transition: background-color 0.3s; /* Transition for hover effects */
+    position: relative; /* Relative positioning for the nested element */
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+}
+
+/* Wider white background for the toggle comment button */
+.toggle-comment-button .white-background {
+    position: absolute; /* Absolute positioning to cover the full width */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white; /* White background color */
+    z-index: -1; /* Place it behind the purple portion */
+}
+
+
+/* Style for the text container that appears when the toggle comment button is clicked */
+.r-comment {
+    margin: 10px 0; 
+    padding: 10px; 
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    background-color: white; /* Background color to match the button */
+    box-sizing: border-box; /* Include padding and border in the element's size */ effect */
+}
+
+/* Style for the toggle answers button */
+
+.toggle-answer-button {
+    display: block;
+    width: 100%; /* Full width of the container */
+    margin: 10px 0; /* Margin above and below the button */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.9em; /* Font size */
+    font-family: "Open Sans", sans-serif; /* Font family */
+    text-align: center; /* Center-align the text */
+    transition: background-color 0.3s; /* Transition for hover effects */
+    position: relative; /* Relative positioning for the nested element */
+    border: 2px solid #d3d3d3; /* Border to visually align with the button */
+}
+
+
+ /*------------- Body and header text---------------- */
+
+.book.font-family-1 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h1 {
+  font-size: 24px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h2 {
+  font-size: 22px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h3 {
+  font-size: 20px;
+}
+
+/*------------ TOC --------------*/
+
+.book .book-summary {
+  background: #FCF7FE;
+  border-right: double #6D009D;
+  border-top: double #6D009D;
+  border-left: double #6D009D;
+  border-bottom: double #6D009D;
+  max-width: 100%; /* Set maximum width to prevent overflow */
+}
+
+.summary{
+font-family: "Open Sans", sans-serif;
+}
+
+.summary a:hover {
+  color: #6D009D !important;
+} 
+
+.book .book-summary ul.summary li.active>a { /*active TOC links*/
+  color: #6D009D !important;
+  border-left: solid 6px;
+  border-color: #6D009D;
+  font-weight: bold;  /* Make the text bold */
+} 
+
+.author,.title{
+    display: none;
+}
+
+.copy {
+  width: inherit;
+  background-color: #e2e2e2 ;
+  border: none;
+  border-radius: 2px;
+  float: right;
+  font-size: 60%;
+  padding: 4px 4px 4px 4px;
+}
+
+
+/* -----------Sidebar div tips------------- */
+/* from r-pkgs.org*/
+
+div.question {
+    padding: 1em;
+    margin: 1em 0;
+    padding-left: 100px;
+    background-size: 50px 50px;  /* Set both width and height */
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    color: black;
+    background-color: white;
+    border: solid 5px #f0e6ff;
+    text-align: center;
+    background-image: url("images/boxes/question.png");
+}
+
+
+/* -----------Sidebar div tips------------- */
+/* from r-pkgs.org*/
+
+div.ilos {
+    padding: 1em;
+    margin: 1em 0;
+    padding-left: 100px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    min-height: 120px;
+    color: black;
+    background-color: #F8F3FF;
+    border: 5px dotted #6D009D; /* Dotted border */
+    text-align: left;
+    background-image: url("images/boxes/ilos.png");
+}
+
+/* -----------Sidebar div tips------------- */
+/* from r-pkgs.org*/
+div.folder {
+    padding: 1em;
+    margin: 1em 0;
+    padding-left: 100px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    color: #003258;
+    text-align: justify;
+    background-image: url("images/boxes/folder.png");
+}
+
+
+div.file {
+  padding: 1em;
+  margin: 1em 0;
+  padding-left: 100px;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  min-height: 120px;
+  color: black;
+  background-color: white;
+  border: 5px solid black; /* Changed to solid border */
+  text-align: left;
+  background-image: url("images/boxes/file.png");
+}
+
+/* -----------Sidebar div tips------------- */
+/* from r-pkgs.org*/
+
+  div.attention {
+    padding: 1em;
+    margin: 1em 0;
+    padding-left: 100px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    min-height: 120px;
+    color: black;
+    background-color: #FFF7DD;
+    text-align: justify;
+  }
+
+div.attention {
+  background-image: url("images/boxes/attention.png");
+}
+
+
+/* -----------Sidebar div tips------------- */
+/* from r-pkgs.org*/
+
+  div.reference {
+    padding: 1em;
+    margin: 1em 0;
+    color: black;
+    background-color: white;
+    text-align: justify;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #EAEAEA; /* This sets the border color to light grey */
+}
+
+div.answers {
+    padding: 1em;
+    margin: 1em 0;
+    color: black;
+    background-color: white;
+    text-align: justify;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #EAEAEA; /* This sets the border color to light grey */
+    font-size: 15px;
+    max-height: 200px; /* Maximum height before scrolling */
+    overflow: auto; /* Enables scrolling */
+}
+
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
