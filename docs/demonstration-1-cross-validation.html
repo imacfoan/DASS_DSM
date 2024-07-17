@@ -609,7 +609,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>the nature of the training set.</li>
 </ul>
-<p>We are dealing with a gap here: the gap between the need to reliably measure model performance and the process of splitting the data we have available.</p>
 <p>In this demonstration, you will learn more about how cross-validation provides us with ways to address this gap.</p>
 <div id="data-and-variables-2" class="section level2 unnumbered hasAnchor">
 <h2>Data and Variables<a href="demonstration-1-cross-validation.html#data-and-variables-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -638,33 +637,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="demonstration-1-cross-validation.html#cb314-1" tabindex="-1"></a>training_data <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">392</span>, <span class="dv">196</span>)</span>
 <span id="cb314-2"><a href="demonstration-1-cross-validation.html#cb314-2" tabindex="-1"></a></span>
 <span id="cb314-3"><a href="demonstration-1-cross-validation.html#cb314-3" tabindex="-1"></a>training_data</span></code></pre></div>
-<pre><code>##   [1] 355 349  69 173 216 186 133 275  86 315 218 363 248 156 132 139 287  14
-##  [19]  17 281 386 115  36 222  46 337 357 190 314  40  64  66 238 240 332 180
-##  [37]  22 390 241 324  78  44 143 176 199 138 265 367 381 326 169 147 227  82
-##  [55] 374 278 242 264 269 157 384 167  43 127  62 316 388 375 373 214  48 159
-##  [73] 376  19 356  56 185 158   8  26  88   7 250 284  76 362 341  29 195 178
-##  [91] 353 260  92 338 230  90  54  38 160 175 328 304 267 303  67 106 253 172
-## [109]  91 310 150 233 319 191 129 197 184 153 123 308  33 257 104 276 288  81
-## [127] 351 215 323 370 320  72  37 334 146 380 339  75 286 270 321 131 203 331
-## [145] 293 126 249 309 247 239 385 340  74 258 330 294 317   4 335  65 193 163
-## [163] 162 296 361  28 245 350 387 116  18 136   9 171 306 313 111 130 105  61
-## [181]  99 273 366 148  24 271 236 246 344 144   6  58 101 179 155  52</code></pre>
+<pre><code>##   [1] 108 173   4 125   3 283  67 322 299   1 358  73 121 212 186 120 210  81
+##  [19] 380 176 229  16 146 236 195  35 310 233 374 292 315 331 328 345 363  44
+##  [37]  93  32 364 189 248  63  96 285 330 320 366 314 106   9  19 326 305 343
+##  [55] 308 273 342  62  50 249  77 191 171 235 264 332 370  28 126 166 260 241
+##  [73]  45 113 381 290 383 382 202 219  39 100 378 111 178 338 246 376 160  75
+##  [91] 142 116 168 220 192  56 232 179 282 344 333 298 153 318  25 355 201 130
+## [109] 346 218  78 234  87 145 180 252 107 377 196 371 163 109 193 117 256  52
+## [127] 124  22  71 123 257 373  97 263 316 141 239 165 309  30 267 360  68 230
+## [145] 158 339 362 208 300 132  36 372  91  21 159 228 324  34 144  86  57 103
+## [163] 143  88 255 361 303 272 269 169  12  79 237  20 389  54 183  26 207 352
+## [181] 270 149 259 216 217  72 367 348 284  27  94  47 110  69 289 258</code></pre>
 <p>Now we need to tell R to fit a linear regression model using only the observations corresponding to the training set. We can do so by using the <code>subset</code> argument which tells R to only select the 196 observations that are indexed at the specific positions as defined by the <strong>training_data</strong> object. In this way, the model will be fitted using only the observations from <strong>Auto</strong> dataset that are defined by this vector of indices.</p>
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="demonstration-1-cross-validation.html#cb316-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> horsepower, <span class="at">data =</span> Auto, <span class="at">subset =</span> training_data)</span></code></pre></div>
 <p>Let’s now calculate the Mean Squared Error for the test dataset. We obtain the predictions using the<code>predict()</code> function with which you are already familiar.</p>
 <div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="demonstration-1-cross-validation.html#cb317-1" tabindex="-1"></a><span class="fu">mean</span>((Auto<span class="sc">$</span>mpg <span class="sc">-</span> <span class="fu">predict</span>(fit, Auto))[<span class="sc">-</span>training_data]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 20.82976</code></pre>
+<pre><code>## [1] 22.50177</code></pre>
 <p>Let’s try applying some transformations to our predictor <strong>horsepower</strong> using the <strong>poly()</strong> function and then calculate the test MSE values to observe how the MSE values change.</p>
 <p>We first fit a second-degree polynomial regression model:</p>
 <div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="demonstration-1-cross-validation.html#cb319-1" tabindex="-1"></a>lm.fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="fu">poly</span>(horsepower, <span class="dv">2</span>), <span class="at">data =</span> Auto, <span class="at">subset =</span> training_data)</span></code></pre></div>
 <p>Then calculate the test MSE:</p>
 <div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="demonstration-1-cross-validation.html#cb320-1" tabindex="-1"></a><span class="fu">mean</span>((Auto<span class="sc">$</span>mpg <span class="sc">-</span> <span class="fu">predict</span>(lm.fit2, Auto))[<span class="sc">-</span>training_data]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 17.24428</code></pre>
+<pre><code>## [1] 18.17912</code></pre>
 <p>Now we fit a third-degree polynomial regression model</p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="demonstration-1-cross-validation.html#cb322-1" tabindex="-1"></a>lm.fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="fu">poly</span>(horsepower, <span class="dv">3</span>), <span class="at">data =</span> Auto, <span class="at">subset =</span> training_data)</span></code></pre></div>
 <p>Then calculate the test MSE:</p>
 <div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="demonstration-1-cross-validation.html#cb323-1" tabindex="-1"></a><span class="fu">mean</span>((Auto<span class="sc">$</span>mpg <span class="sc">-</span> <span class="fu">predict</span>(lm.fit3, Auto))[<span class="sc">-</span>training_data]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 17.34759</code></pre>
+<pre><code>## [1] 18.15096</code></pre>
 <p>What would happen if we choose a different training dataset instead? We can try this out by setting the seed to 2, for example.</p>
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="demonstration-1-cross-validation.html#cb325-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)  </span>
 <span id="cb325-2"><a href="demonstration-1-cross-validation.html#cb325-2" tabindex="-1"></a>training_data2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">392</span>, <span class="dv">196</span>)</span></code></pre></div>
@@ -683,8 +682,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 20.38533</code></pre>
 <p>The results obtained using the second training dataset are consistent with the findings from the first training dataset whereby a model that predicts <strong>mpg</strong> using a quadratic function of <strong>horsepower</strong> performs better than a model that involves only a linear function of <strong>horsepower</strong>. Also, there is little evidence in favor of a model that uses a cubic function of <strong>horsepower</strong>.</p>
 <p>Overall, the main take-away point is that if we were to choose different training sets, we will obtain somewhat different errors on the validation set.</p>
-<p>This is an important point of reflection: if we implement the fixed split approach directly such that we fit our model once on our single training set and then immediately evaluate the predictive accuracy of that model once on our single test set,</p>
-<p>Nevertheless, the validation set approach still does not solve this challenge.</p>
 </div>
 <div id="leave-one-out-cross-validation" class="section level2 unnumbered hasAnchor">
 <h2>Leave-One-Out Cross-Validation<a href="demonstration-1-cross-validation.html#leave-one-out-cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -717,7 +714,7 @@ The main advantage of the LOOCV approach over a simple train and test validation
 </div>
 <div id="k-fold-cross-validation" class="section level2 unnumbered hasAnchor">
 <h2><span class="math inline">\(k\)</span>-Fold Cross-Validation<a href="demonstration-1-cross-validation.html#k-fold-cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Finally, let’s consider <span class="math inline">\(k\)</span>-fold cross-validation. This approach involves randomly dividing the set of observations into <span class="math inline">\(k\)</span> groups (known as folds) of approximately equal size. With cross-validation the test data is held out (approximately one fifth of data), and the remaining training data is randomly divided into <span class="math inline">\(k\)</span> groups. Several different portions of this training data are used for validation, and the remaining part of the data is used for training as shown in the diagram below. Hence, a fold is treated as a validation set, and the method is fit on to the remaining <span class="math inline">\(k−1\)</span> folds. The <span class="math inline">\(k\)</span> resampled estimates of performance are summarised and used for testing and model building.</p>
+<p>Finally, let’s consider <span class="math inline">\(k\)</span>-fold cross-validation. This approach involves randomly dividing the set of observations into <span class="math inline">\(k\)</span> groups (known as folds) of approximately equal size. With cross-validation, the test data is held out (approximately one fifth of data), and the remaining training data is randomly divided into <span class="math inline">\(k\)</span> groups. Several different portions of this training data are used for validation, and the remaining part of the data is used for training as shown in the diagram below. Hence, a fold is treated as a validation set, and the method is fit on to the remaining <span class="math inline">\(k−1\)</span> folds. The <span class="math inline">\(k\)</span> resampled estimates of performance are summarised and used for testing and model building.</p>
 <p><img src="images/k-fold.png" style="display: block; margin-left: auto; margin-right: auto;" /></p>
 <p>In this illustration, the non-holdout data is divided into five portions, and we therefore call this <em>5-fold cross-validation</em>. If there had been ten blocks, it would have been 10-fold cross-validation. The model that has been built using k-fold cross-validation is then tested on the originally held out test data subset. The <span class="math inline">\(k\)</span> resampled estimates of model’s performance are summarised commonly using the mean and standard error to develop a better reasoning of its effectiveness in relation to its tuning parameters. In fact, LOOCV is a special case of k-fold CV in which <span class="math inline">\(k\)</span> is equal to <span class="math inline">\(n\)</span>:</p>
 <p><span class="math display">\[CV_{(k)} = \frac{1}{k} \sum_{i=1}^{k} MSE_i\]</span>

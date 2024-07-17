@@ -683,15 +683,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb840-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb840-2" tabindex="-1"></a>pred</span></code></pre></div>
 <pre><code>##            
 ##               1   2   3
-##   Adelie    106  38   2
-##   Chinstrap   9  54   5
-##   Gentoo      0   2 117</code></pre>
+##   Adelie    106   2  38
+##   Chinstrap   9   5  54
+##   Gentoo      0 117   2</code></pre>
 <div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="demonstration-1-k-means-clustering-in-r.html#cb842-1" tabindex="-1"></a>overlap <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(pred))</span>
 <span id="cb842-2"><a href="demonstration-1-k-means-clustering-in-r.html#cb842-2" tabindex="-1"></a>differs <span class="ot">&lt;-</span> <span class="fu">sum</span>(pred[<span class="fu">upper.tri</span>(pred)], pred[<span class="fu">lower.tri</span>(pred)])</span>
 <span id="cb842-3"><a href="demonstration-1-k-means-clustering-in-r.html#cb842-3" tabindex="-1"></a></span>
 <span id="cb842-4"><a href="demonstration-1-k-means-clustering-in-r.html#cb842-4" tabindex="-1"></a><span class="co"># proportion of penguins &quot;correctly&quot; classified according to species:</span></span>
 <span id="cb842-5"><a href="demonstration-1-k-means-clustering-in-r.html#cb842-5" tabindex="-1"></a>overlap <span class="sc">/</span> <span class="fu">sum</span>(overlap, differs)</span></code></pre></div>
-<pre><code>## [1] 0.8318318</code></pre>
+<pre><code>## [1] 0.3393393</code></pre>
 <div class="question">
 <p>How can we visualise the cluster-species overlap?</p>
 </div>
