@@ -13,8 +13,6 @@ So far, we have established the importance of training and test data and you now
 -  the process of testing our model on just a single test set;    
 -  the nature of the training set.    
 
-We are dealing with a gap here: the gap between the need to reliably measure model performance and the process of splitting the data we have available.
-
 In this demonstration, you will learn more about how cross-validation provides us with ways to address this gap.  
 
 ## Data and Variables {-}
@@ -124,11 +122,7 @@ mean((Auto$mpg - predict(lm.fit3, Auto))[-training_data2]^2)
 
 The results obtained using the second training dataset are consistent with the findings from the first training dataset whereby a model that predicts **mpg** using a quadratic function of **horsepower** performs better than a model that involves only a linear function of **horsepower**. Also, there is little evidence in favor of a model that uses a cubic function of **horsepower**.  
 
-Overall, the main take-away point is that if we were to choose different training sets, we will obtain somewhat different errors on the validation set. 
-
-This is an important point of reflection: if we implement the fixed split approach directly such that we fit our model once on our single training set and then immediately evaluate the predictive accuracy of that model once on our single test set, 
-
-Nevertheless, the validation set approach still does not solve this challenge. 
+Overall, the main take-away point is that if we were to choose different training sets, we will obtain somewhat different errors on the validation set.  
 
 ## Leave-One-Out Cross-Validation {-}
 
@@ -185,7 +179,7 @@ We can see a sharp drop in the estimated test MSE between the linear and quadrat
 
 ## $k$-Fold Cross-Validation {-}
 
-Finally, let's consider $k$-fold cross-validation. This approach involves randomly dividing the set of observations into $k$ groups (known as folds) of approximately equal size. With cross-validation the test data is held out (approximately one fifth of data), and the remaining training data is randomly divided into $k$ groups. Several different portions of this training data are used for validation, and the remaining part of the data is used for training as shown in the diagram below. Hence, a fold is treated as a validation set, and the method is fit on to the remaining $k−1$ folds. The $k$ resampled estimates of performance are summarised and used for testing and model building.
+Finally, let's consider $k$-fold cross-validation. This approach involves randomly dividing the set of observations into $k$ groups (known as folds) of approximately equal size. With cross-validation, the test data is held out (approximately one fifth of data), and the remaining training data is randomly divided into $k$ groups. Several different portions of this training data are used for validation, and the remaining part of the data is used for training as shown in the diagram below. Hence, a fold is treated as a validation set, and the method is fit on to the remaining $k−1$ folds. The $k$ resampled estimates of performance are summarised and used for testing and model building.
 
 <img src="images/k-fold.png" style="display: block; margin-left: auto; margin-right: auto;" />
 
